@@ -25,6 +25,7 @@ import { StructureIndexColorTheme, StructureIndexColorThemeParams } from './stru
 import { ColorThemeCategory } from './categories';
 import { UnitIndexColorTheme, UnitIndexColorThemeParams } from './unit-index';
 import { UniformColorTheme, UniformColorThemeParams } from './uniform';
+import { AntibodyColoringResidueColorThemeParams, AntibodyColoringResidueColorTheme } from '../../custom/extensions/antibody-coloring-residues/color';
 
 // from Jmol http://jmol.sourceforge.net/jscolors/ (or 0xFFFFFF)
 export const ElementSymbolColors = ColorMap({
@@ -45,6 +46,7 @@ export const ElementSymbolColorThemeParams = {
         'model-index': PD.Group(ModelIndexColorThemeParams),
         'structure-index': PD.Group(StructureIndexColorThemeParams),
         'uniform': PD.Group(UniformColorThemeParams),
+        'antibody/TCR': PD.Group(AntibodyColoringResidueColorThemeParams),
         'element-symbol': PD.EmptyGroup(),
     }, { description: 'Use chain-id coloring for carbon atoms.' }),
     saturation: PD.Numeric(0, { min: -6, max: 6, step: 0.1 }),
@@ -76,6 +78,7 @@ function getCarbonTheme(ctx: ThemeDataContext, props: ElementSymbolColorThemePro
         case 'model-index': return ModelIndexColorTheme(ctx, props.params);
         case 'structure-index': return StructureIndexColorTheme(ctx, props.params);
         case 'uniform': return UniformColorTheme(ctx, props.params);
+        case 'antibody/TCR': return AntibodyColoringResidueColorTheme(ctx, props.params);
         case 'element-symbol': return undefined;
         default: assertUnreachable(props);
     }
