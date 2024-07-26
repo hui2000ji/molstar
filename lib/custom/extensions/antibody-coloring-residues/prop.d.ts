@@ -1,0 +1,26 @@
+import { Model } from '../../../mol-model/structure';
+import { StructureElement } from '../../../mol-model/structure/structure';
+import { ParamDefinition as PD } from '../../../mol-util/param-definition';
+import { CustomProperty } from '../../../mol-model-props/common/custom-property';
+import { CustomModelProperty } from '../../../mol-model-props/common/custom-model-property';
+import { SeqInfoModel } from '../../services/model/common.model';
+type SequenceList = (SeqInfoModel | null)[] | undefined;
+export declare function isApplicable(model?: Model): boolean;
+export declare function getSequenceArr(model: Model): string[];
+export declare function expandEntityToChainArray(list: SeqInfoModel[], model: Model): (SeqInfoModel | null)[];
+export declare function fromServer(ctx: CustomProperty.Context, model: Model, props: AntibodyColoringResidueProps): Promise<CustomProperty.Data<SequenceList>>;
+export declare const AntibodyColoringResidueParams: {
+    timeStamp: PD.Numeric;
+    'CDR def.': PD.Text<string>;
+    'VH/V\u03B1 FR': PD.Color;
+    'VL/V\u03B2 FR': PD.Color;
+    'VH/V\u03B1 CDR': PD.Color;
+    'VL/V\u03B2 CDR': PD.Color;
+    'Other polymer': PD.Color;
+    'Non-polymer': PD.Color;
+};
+export type Params = typeof AntibodyColoringResidueParams;
+export type AntibodyColoringResidueProps = PD.Values<Params>;
+export declare const AntibodyColoringResidueProvider: CustomModelProperty.Provider<Params, SequenceList>;
+export declare function getResidueInfo(e: StructureElement.Location): import("../../services/model/common.model").ResidueModel | undefined;
+export {};
