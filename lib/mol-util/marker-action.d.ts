@@ -46,4 +46,4 @@ export declare function getMarkerInfo(action: MarkerAction, currentStatus: Marke
  * Assumes the action is applied to a partial set that is
  * neither the empty set nor the full set.
  */
-export declare function getPartialMarkerAverage(action: MarkerAction, currentStatus: MarkerInfo['status']): 0 | 0.5 | -1;
+export declare function getPartialMarkerAverage(action: MarkerAction, currentStatus: MarkerInfo['status']): 0 | -1 | 0.5;

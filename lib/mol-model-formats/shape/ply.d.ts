@@ -12,12 +12,12 @@ import { Mesh } from '../../mol-geo/geometry/mesh/mesh';
 import { ParamDefinition as PD } from '../../mol-util/param-definition';
 export declare const PlyShapeParams: {
     coloring: PD.Mapped<PD.NamedParams<PD.Normalize<{
+        color: Color;
+    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         red: string;
         green: string;
         blue: string;
     }>, "material"> | PD.NamedParams<PD.Normalize<{
-        color: Color;
-    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         red: string;
         green: string;
         blue: string;
@@ -34,7 +34,7 @@ export declare const PlyShapeParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -55,12 +55,12 @@ export declare const PlyShapeParams: {
 export type PlyShapeParams = typeof PlyShapeParams;
 export declare function shapeFromPly(source: PlyFile, params?: {}): Task<ShapeProvider<PlyFile, Mesh, {
     coloring: PD.Mapped<PD.NamedParams<PD.Normalize<{
+        color: Color;
+    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         red: string;
         green: string;
         blue: string;
     }>, "material"> | PD.NamedParams<PD.Normalize<{
-        color: Color;
-    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         red: string;
         green: string;
         blue: string;
@@ -77,7 +77,7 @@ export declare function shapeFromPly(source: PlyFile, params?: {}): Task<ShapePr
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

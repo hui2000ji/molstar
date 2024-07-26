@@ -16,7 +16,7 @@ export declare function readCCD(): Promise<import("../../mol-data/db").DatabaseC
         name: import("../../mol-data/db/column").Column.Schema.Str;
         one_letter_code: import("../../mol-data/db/column").Column.Schema.Str;
         three_letter_code: import("../../mol-data/db/column").Column.Schema.Str;
-        type: import("../../mol-data/db/column").Column.Schema.Aliased<"saccharide" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "non-polymer" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking" | "other">;
+        type: import("../../mol-data/db/column").Column.Schema.Aliased<"other" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "saccharide" | "non-polymer" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking">;
         pdbx_synonyms: import("../../mol-data/db/column").Column.Schema.List<string>;
         pdbx_type: import("../../mol-data/db/column").Column.Schema.Str;
         pdbx_ambiguous_flag: import("../../mol-data/db/column").Column.Schema.Str;
@@ -57,7 +57,7 @@ export declare function readCCD(): Promise<import("../../mol-data/db").DatabaseC
         comp_id: import("../../mol-data/db/column").Column.Schema.Str;
         value_order: import("../../mol-data/db/column").Column.Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
         pdbx_ordinal: import("../../mol-data/db/column").Column.Schema.Int;
-        pdbx_stereo_config: import("../../mol-data/db/column").Column.Schema.Aliased<"n" | "e" | "z">;
+        pdbx_stereo_config: import("../../mol-data/db/column").Column.Schema.Aliased<"z" | "n" | "e">;
         pdbx_aromatic_flag: import("../../mol-data/db/column").Column.Schema.Aliased<"y" | "n">;
     };
     pdbx_chem_comp_descriptor: {
@@ -84,7 +84,7 @@ export declare function readPVCD(): Promise<import("../../mol-data/db").Database
         name: import("../../mol-data/db/column").Column.Schema.Str;
         one_letter_code: import("../../mol-data/db/column").Column.Schema.Str;
         three_letter_code: import("../../mol-data/db/column").Column.Schema.Str;
-        type: import("../../mol-data/db/column").Column.Schema.Aliased<"saccharide" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "non-polymer" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking" | "other">;
+        type: import("../../mol-data/db/column").Column.Schema.Aliased<"other" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "saccharide" | "non-polymer" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking">;
         pdbx_synonyms: import("../../mol-data/db/column").Column.Schema.List<string>;
         pdbx_type: import("../../mol-data/db/column").Column.Schema.Str;
         pdbx_ambiguous_flag: import("../../mol-data/db/column").Column.Schema.Str;
@@ -125,7 +125,7 @@ export declare function readPVCD(): Promise<import("../../mol-data/db").Database
         comp_id: import("../../mol-data/db/column").Column.Schema.Str;
         value_order: import("../../mol-data/db/column").Column.Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
         pdbx_ordinal: import("../../mol-data/db/column").Column.Schema.Int;
-        pdbx_stereo_config: import("../../mol-data/db/column").Column.Schema.Aliased<"n" | "e" | "z">;
+        pdbx_stereo_config: import("../../mol-data/db/column").Column.Schema.Aliased<"z" | "n" | "e">;
         pdbx_aromatic_flag: import("../../mol-data/db/column").Column.Schema.Aliased<"y" | "n">;
     };
     pdbx_chem_comp_descriptor: {

@@ -16,7 +16,7 @@ export declare const InterpolationTypes: {
     bspline: string;
 };
 export type InterpolationTypes = keyof typeof InterpolationTypes;
-export declare const InterpolationTypeNames: ("nearest" | "catmulrom" | "mitchell" | "bspline")[];
+export declare const InterpolationTypeNames: ("nearest" | "bspline" | "catmulrom" | "mitchell")[];
 export { Image };
 interface Image {
     readonly kind: 'image';
@@ -31,9 +31,9 @@ declare namespace Image {
     function create(imageTexture: TextureImage<Uint8Array>, corners: Float32Array, groupTexture: TextureImage<Uint8Array>, image?: Image): Image;
     function createEmpty(image?: Image): Image;
     const Params: {
-        interpolation: PD.Select<"nearest" | "catmulrom" | "mitchell" | "bspline">;
+        interpolation: PD.Select<"nearest" | "bspline" | "catmulrom" | "mitchell">;
         alpha: PD.Numeric;
-        quality: PD.Select<"auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest">;
+        quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
         material: PD.Group<PD.Normalize<{
             metalness: number;
             roughness: number;

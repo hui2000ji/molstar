@@ -104,14 +104,14 @@ declare const StructureFromModel: StateTransformer<SO.Molecule.Model, SO.Molecul
         id: any;
     }>, "assembly"> | PD.NamedParams<PD.Normalize<{
         dynamicBonds: any;
+        ijkMin: any;
+        ijkMax: any;
+    }>, "symmetry"> | PD.NamedParams<PD.Normalize<{
+        dynamicBonds: any;
     }>, "model"> | PD.NamedParams<PD.Normalize<{
         dynamicBonds: any;
         radius: any;
     }>, "symmetry-mates"> | PD.NamedParams<PD.Normalize<{
-        dynamicBonds: any;
-        ijkMin: any;
-        ijkMax: any;
-    }>, "symmetry"> | PD.NamedParams<PD.Normalize<{
         dynamicBonds: any;
         generators: any;
     }>, "symmetry-assembly">;
@@ -169,11 +169,11 @@ export declare const StructureComplexElementTypes: {
 export type StructureComplexElementTypes = keyof typeof StructureComplexElementTypes;
 type StructureComplexElement = typeof StructureComplexElement;
 declare const StructureComplexElement: StateTransformer<SO.Molecule.Structure, SO.Molecule.Structure, PD.Normalize<{
-    type: "spheres" | "water" | "protein" | "polymer" | "nucleic" | "branched" | "ligand" | "non-standard" | "coarse" | "atomic-sequence" | "atomic-het";
+    type: "spheres" | "polymer" | "water" | "branched" | "ligand" | "protein" | "nucleic" | "coarse" | "non-standard" | "atomic-sequence" | "atomic-het";
 }>>;
 type StructureComponent = typeof StructureComponent;
 declare const StructureComponent: StateTransformer<SO.Molecule.Structure, SO.Molecule.Structure, PD.Normalize<{
-    type: PD.NamedParams<"all" | "water" | "ion" | "protein" | "polymer" | "nucleic" | "branched" | "ligand" | "non-standard" | "coarse" | "lipid", "static"> | PD.NamedParams<Script, "script"> | PD.NamedParams<Expression, "expression"> | PD.NamedParams<StructureElement.Bundle, "bundle">;
+    type: PD.NamedParams<"all" | "polymer" | "water" | "branched" | "ligand" | "ion" | "lipid" | "protein" | "nucleic" | "coarse" | "non-standard", "static"> | PD.NamedParams<Script, "script"> | PD.NamedParams<Expression, "expression"> | PD.NamedParams<StructureElement.Bundle, "bundle">;
     nullIfEmpty: boolean | undefined;
     label: string;
 }>>;

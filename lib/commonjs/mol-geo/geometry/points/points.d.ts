@@ -40,7 +40,7 @@ export declare namespace Points {
         pointSizeAttenuation: PD.BooleanParam;
         pointStyle: PD.Select<"circle" | "square" | "fuzzy">;
         alpha: PD.Numeric;
-        quality: PD.Select<"auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest">;
+        quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
         material: PD.Group<PD.Normalize<{
             metalness: number; /** Number of vertices in the point cloud */
             roughness: number;

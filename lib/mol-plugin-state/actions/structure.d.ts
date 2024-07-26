@@ -12,7 +12,7 @@ export declare const PdbDownloadProvider: {
         encoding: "cif" | "bcif";
     }>>;
     pdbe: PD.Group<PD.Normalize<{
-        variant: "updated-bcif" | "updated" | "updtaed-bcif" | "archival";
+        variant: "updated" | "updated-bcif" | "updtaed-bcif" | "archival";
     }>>;
     pdbj: PD.Group<PD.Normalize<unknown>>;
 };
@@ -70,8 +70,8 @@ export declare const LoadTrajectory: StateAction<PluginStateObject.Root, void, P
     source: PD.NamedParams<PD.Normalize<{
         model: any;
         coordinates: any;
-    }>, "file"> | PD.NamedParams<PD.Normalize<{
+    }>, "url"> | PD.NamedParams<PD.Normalize<{
         model: any;
         coordinates: any;
-    }>, "url">;
+    }>, "file">;
 }>>;

@@ -38,7 +38,7 @@ export declare namespace Shape {
     function getTheme(shape: Shape): Theme;
     function groupIterator(shape: Shape): LocationIterator;
     function createTransform(transforms: Mat4[], transformData?: TransformData): TransformData;
-    function createRenderObject<G extends Geometry>(shape: Shape<G>, props: PD.Values<Geometry.Params<G>>): import("../../mol-gl/render-object").GraphicsRenderObject<"text" | "mesh" | "points" | "spheres" | "cylinders" | "image" | "lines" | "direct-volume" | "texture-mesh">;
+    function createRenderObject<G extends Geometry>(shape: Shape<G>, props: PD.Values<Geometry.Params<G>>): import("../../mol-gl/render-object").GraphicsRenderObject<"text" | "image" | "points" | "spheres" | "cylinders" | "lines" | "mesh" | "direct-volume" | "texture-mesh">;
     interface Loci {
         readonly kind: 'shape-loci';
         readonly shape: Shape;

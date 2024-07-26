@@ -15,9 +15,14 @@ export declare const BackgroundParams: {
         opacity: number;
         saturation: number;
         lightness: number;
-        source: PD.NamedParams<Asset.File | null, "file"> | PD.NamedParams<any, "url">;
+        source: PD.NamedParams<any, "url"> | PD.NamedParams<Asset.File | null, "file">;
         blur: number;
     }>, "image"> | PD.NamedParams<PD.Normalize<{
+        centerColor: Color;
+        edgeColor: Color;
+        ratio: number;
+        coverage: string;
+    }>, "radialGradient"> | PD.NamedParams<PD.Normalize<{
         opacity: number;
         saturation: number;
         lightness: number;
@@ -42,12 +47,7 @@ export declare const BackgroundParams: {
         bottomColor: Color;
         ratio: number;
         coverage: string;
-    }>, "horizontalGradient"> | PD.NamedParams<PD.Normalize<{
-        centerColor: Color;
-        edgeColor: Color;
-        ratio: number;
-        coverage: string;
-    }>, "radialGradient">>;
+    }>, "horizontalGradient">>;
 };
 export type BackgroundProps = PD.Values<typeof BackgroundParams>;
 export declare class BackgroundPass {

@@ -41,6 +41,6 @@ export declare function getReservedWords(properties: PropertyDict, keywords: Key
 export declare function atomNameSet(ids: string[]): Expression;
 export declare function asAtoms(e: Expression): Expression;
 export declare function wrapValue(property: any, value: any, sstrucDict?: any): any;
-export declare function testLevel(property: any): "residue-test" | "atom-test" | "entity-test" | "chain-test";
+export declare function testLevel(property: any): "atom-test" | "residue-test" | "chain-test" | "entity-test";
 export declare function valuesTest(property: any, values: any[]): Expression | undefined;
 export declare function resnameExpr(resnameList: string[]): Expression;

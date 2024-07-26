@@ -9,7 +9,7 @@ import { VolsegEntryData } from './entry-root';
 export declare const VOLUME_VISUAL_TAG = "volume-visual";
 export type VolumeVisualParams = ReturnType<typeof createVolumeRepresentationParams>;
 export declare const SimpleVolumeParams: {
-    volumeType: PD.Select<"direct-volume" | "off" | "isosurface">;
+    volumeType: PD.Select<"off" | "direct-volume" | "isosurface">;
     opacity: PD.Numeric;
 };
 export type SimpleVolumeParamValues = PD.Values<typeof SimpleVolumeParams>;

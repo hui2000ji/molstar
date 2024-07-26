@@ -14,7 +14,7 @@ export declare const VolsegEntryFromRoot: StateTransformer<PluginStateObject.Roo
     entryId: string;
 }>>;
 export declare const VolsegStateFromEntry: StateTransformer<VolsegEntry, VolsegState, import("../../mol-util/param-definition").ParamDefinition.Normalize<{
-    volumeType: "direct-volume" | "off" | "isosurface";
+    volumeType: "off" | "direct-volume" | "isosurface";
     volumeIsovalueKind: string;
     volumeIsovalueValue: number;
     volumeOpacity: number;

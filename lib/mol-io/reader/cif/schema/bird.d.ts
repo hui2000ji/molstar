@@ -91,7 +91,7 @@ export declare const BIRD_Schema: {
         /**
          * Defines the current PDB release status for this molecule definition.
          */
-        release_status: Schema.Aliased<"obs" | "wait" | "rel" | "hold">;
+        release_status: Schema.Aliased<"wait" | "rel" | "hold" | "obs">;
         /**
          * Assigns the identifier for the reference molecule which have been replaced
          * by this reference molecule.
@@ -253,7 +253,7 @@ export declare const BIRD_Schema: {
         /**
          * A code indicating the entity types involved in the linkage.
          */
-        link_class: Schema.Aliased<"NP" | "PP" | "PN" | "NN">;
+        link_class: Schema.Aliased<"PP" | "PN" | "NP" | "NN">;
     };
     /**
      * Data items in the PDBX_REFERENCE_ENTITY_POLY_LINK category give details about

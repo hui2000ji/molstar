@@ -18,7 +18,7 @@ import { WebGLTimer } from './timer';
 export declare function getGLContext(canvas: HTMLCanvasElement, attribs?: WebGLContextAttributes & {
     preferWebGl1?: boolean;
 }): GLRenderingContext | null;
-export declare function getErrorDescription(gl: GLRenderingContext, error: number): "context lost" | "no error" | "invalid enum" | "invalid value" | "invalid operation" | "invalid framebuffer operation" | "out of memory" | "unknown error";
+export declare function getErrorDescription(gl: GLRenderingContext, error: number): "no error" | "invalid enum" | "invalid value" | "invalid operation" | "invalid framebuffer operation" | "out of memory" | "context lost" | "unknown error";
 export declare function checkError(gl: GLRenderingContext): void;
 export declare function glEnumToString(gl: GLRenderingContext, value: number): string;
 export declare function readPixels(gl: GLRenderingContext, x: number, y: number, width: number, height: number, buffer: Uint8Array | Float32Array | Int32Array): void;

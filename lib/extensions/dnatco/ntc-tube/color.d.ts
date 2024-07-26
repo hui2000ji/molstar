@@ -9,7 +9,7 @@ import { ThemeDataContext } from '../../../mol-theme/theme';
 import { Color } from '../../../mol-util/color';
 import { ParamDefinition as PD } from '../../../mol-util/param-definition';
 export declare const NtCTubeColorThemeParams: {
-    colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+    colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<Color, "uniform"> | PD.NamedParams<PD.Normalize<{
         residueMarker: Color;
         stepBoundaryMarker: Color;
         NANT_Upr: Color;
@@ -206,13 +206,13 @@ export declare const NtCTubeColorThemeParams: {
         ZZS1_Lwr: Color;
         ZZS2_Upr: Color;
         ZZS2_Lwr: Color;
-    }>, "custom"> | PD.NamedParams<Color, "uniform">>;
+    }>, "custom">>;
     markResidueBoundaries: PD.BooleanParam;
     markSegmentBoundaries: PD.BooleanParam;
 };
 export type NtCTubeColorThemeParams = typeof NtCTubeColorThemeParams;
 export declare function getNtCTubeColorThemeParams(ctx: ThemeDataContext): {
-    colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+    colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<Color, "uniform"> | PD.NamedParams<PD.Normalize<{
         residueMarker: Color;
         stepBoundaryMarker: Color;
         NANT_Upr: Color;
@@ -409,7 +409,7 @@ export declare function getNtCTubeColorThemeParams(ctx: ThemeDataContext): {
         ZZS1_Lwr: Color;
         ZZS2_Upr: Color;
         ZZS2_Lwr: Color;
-    }>, "custom"> | PD.NamedParams<Color, "uniform">>;
+    }>, "custom">>;
     markResidueBoundaries: PD.BooleanParam;
     markSegmentBoundaries: PD.BooleanParam;
 };

@@ -54,56 +54,56 @@ declare namespace Loci {
     export function getPrincipalAxes(loci: Loci): PrincipalAxes | undefined;
     const Granularity: {
         element: (loci: Loci) => Loci;
-        residue: (loci: Loci) => Volume.Segment.Loci | Volume.Loci | Volume.Cell.Loci | {
-            kind: "empty-loci";
-        } | StructureElement.Loci | Structure.Loci | Bond.Loci | {
+        residue: (loci: Loci) => StructureElement.Loci | Structure.Loci | Bond.Loci | Volume.Loci | Volume.Isosurface.Loci | Volume.Cell.Loci | Volume.Segment.Loci | {
             kind: "every-loci";
-        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci | Volume.Isosurface.Loci;
-        chain: (loci: Loci) => Volume.Segment.Loci | Volume.Loci | Volume.Cell.Loci | {
+        } | {
             kind: "empty-loci";
-        } | StructureElement.Loci | Structure.Loci | Bond.Loci | {
+        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci;
+        chain: (loci: Loci) => StructureElement.Loci | Structure.Loci | Bond.Loci | Volume.Loci | Volume.Isosurface.Loci | Volume.Cell.Loci | Volume.Segment.Loci | {
             kind: "every-loci";
-        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci | Volume.Isosurface.Loci;
-        entity: (loci: Loci) => Volume.Segment.Loci | Volume.Loci | Volume.Cell.Loci | {
+        } | {
             kind: "empty-loci";
-        } | StructureElement.Loci | Structure.Loci | Bond.Loci | {
+        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci;
+        entity: (loci: Loci) => StructureElement.Loci | Structure.Loci | Bond.Loci | Volume.Loci | Volume.Isosurface.Loci | Volume.Cell.Loci | Volume.Segment.Loci | {
             kind: "every-loci";
-        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci | Volume.Isosurface.Loci;
-        model: (loci: Loci) => Volume.Segment.Loci | Volume.Loci | Volume.Cell.Loci | {
+        } | {
             kind: "empty-loci";
-        } | StructureElement.Loci | Structure.Loci | Bond.Loci | {
+        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci;
+        model: (loci: Loci) => StructureElement.Loci | Structure.Loci | Bond.Loci | Volume.Loci | Volume.Isosurface.Loci | Volume.Cell.Loci | Volume.Segment.Loci | {
             kind: "every-loci";
-        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci | Volume.Isosurface.Loci;
-        operator: (loci: Loci) => Volume.Segment.Loci | Volume.Loci | Volume.Cell.Loci | {
+        } | {
             kind: "empty-loci";
-        } | StructureElement.Loci | Structure.Loci | Bond.Loci | {
+        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci;
+        operator: (loci: Loci) => StructureElement.Loci | Structure.Loci | Bond.Loci | Volume.Loci | Volume.Isosurface.Loci | Volume.Cell.Loci | Volume.Segment.Loci | {
             kind: "every-loci";
-        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci | Volume.Isosurface.Loci;
-        structure: (loci: Loci) => Volume.Segment.Loci | Volume.Loci | {
+        } | {
             kind: "empty-loci";
-        } | StructureElement.Loci | Structure.Loci | Bond.Loci | {
+        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci;
+        structure: (loci: Loci) => StructureElement.Loci | Structure.Loci | Bond.Loci | Volume.Loci | Volume.Isosurface.Loci | Volume.Segment.Loci | {
             kind: "every-loci";
-        } | DataLoci<unknown, unknown> | Shape.Loci | Volume.Isosurface.Loci;
-        elementInstances: (loci: Loci) => Volume.Segment.Loci | Volume.Loci | Volume.Cell.Loci | {
+        } | {
             kind: "empty-loci";
-        } | StructureElement.Loci | Structure.Loci | Bond.Loci | {
+        } | DataLoci<unknown, unknown> | Shape.Loci;
+        elementInstances: (loci: Loci) => StructureElement.Loci | Structure.Loci | Bond.Loci | Volume.Loci | Volume.Isosurface.Loci | Volume.Cell.Loci | Volume.Segment.Loci | {
             kind: "every-loci";
-        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci | Volume.Isosurface.Loci;
-        residueInstances: (loci: Loci) => Volume.Segment.Loci | Volume.Loci | Volume.Cell.Loci | {
+        } | {
             kind: "empty-loci";
-        } | StructureElement.Loci | Structure.Loci | Bond.Loci | {
+        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci;
+        residueInstances: (loci: Loci) => StructureElement.Loci | Structure.Loci | Bond.Loci | Volume.Loci | Volume.Isosurface.Loci | Volume.Cell.Loci | Volume.Segment.Loci | {
             kind: "every-loci";
-        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci | Volume.Isosurface.Loci;
-        chainInstances: (loci: Loci) => Volume.Segment.Loci | Volume.Loci | Volume.Cell.Loci | {
+        } | {
             kind: "empty-loci";
-        } | StructureElement.Loci | Structure.Loci | Bond.Loci | {
+        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci;
+        chainInstances: (loci: Loci) => StructureElement.Loci | Structure.Loci | Bond.Loci | Volume.Loci | Volume.Isosurface.Loci | Volume.Cell.Loci | Volume.Segment.Loci | {
             kind: "every-loci";
-        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci | Volume.Isosurface.Loci;
+        } | {
+            kind: "empty-loci";
+        } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci;
     };
     export type Granularity = keyof typeof Granularity;
-    export const GranularityOptions: ["element" | "structure" | "model" | "residue" | "chain" | "entity" | "operator" | "elementInstances" | "residueInstances" | "chainInstances", string][];
+    export const GranularityOptions: ["element" | "operator" | "residue" | "entity" | "chain" | "model" | "structure" | "elementInstances" | "residueInstances" | "chainInstances", string][];
     /** Exclude `Instances` granularity kinds */
-    export function simpleGranularity(granularity: Granularity): "element" | "structure" | "model" | "residue" | "chain" | "entity" | "operator" | "elementInstances" | "residueInstances" | "chainInstances";
+    export function simpleGranularity(granularity: Granularity): "element" | "operator" | "residue" | "entity" | "chain" | "model" | "structure" | "elementInstances" | "residueInstances" | "chainInstances";
     export function applyGranularity(loci: Loci, granularity: Granularity): Loci;
     /**
      * Converts structure related loci to StructureElement.Loci and applies

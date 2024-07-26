@@ -33,7 +33,7 @@ export declare class MeasurementControls extends PurePluginUIComponent<{}, {
 }> {
     state: {
         isBusy: boolean;
-        action: "options" | "add" | undefined;
+        action: "add" | "options" | undefined;
     };
     componentDidMount(): void;
     componentWillUnmount(): void;

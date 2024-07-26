@@ -23,8 +23,8 @@ export interface TypedArrayBufferContext {
     valuesBuffer: Uint8Array;
     values: TypedArrayValueArray;
 }
-export declare function getElementByteSize(type: TypedArrayValueType): 1 | 4 | 2;
+export declare function getElementByteSize(type: TypedArrayValueType): 1 | 2 | 4;
 export declare function makeTypedArray(type: TypedArrayValueType, buffer: ArrayBuffer, byteOffset?: number, length?: number): TypedArrayValueArray;
-export declare function createTypedArray(type: TypedArrayValueType, size: number): Float32Array | Uint16Array | Int8Array | Int16Array;
+export declare function createTypedArray(type: TypedArrayValueType, size: number): Int8Array | Int16Array | Uint16Array | Float32Array;
 export declare function createTypedArrayBufferContext(size: number, type: TypedArrayValueType): TypedArrayBufferContext;
 export declare function readTypedArray(ctx: TypedArrayBufferContext, file: FileHandle, position: number, byteCount: number, valueByteOffset: number, littleEndian?: boolean): Promise<TypedArrayValueArray>;

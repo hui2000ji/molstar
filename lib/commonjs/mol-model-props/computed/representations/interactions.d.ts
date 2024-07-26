@@ -9,7 +9,7 @@ import { ThemeRegistryContext } from '../../../mol-theme/theme';
 import { Structure } from '../../../mol-model/structure';
 import { StructureRepresentation, StructureRepresentationProvider } from '../../../mol-repr/structure/representation';
 export declare const InteractionsParams: {
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     sizeFactor: PD.Numeric;
     visuals: PD.MultiSelect<"intra-unit" | "inter-unit">;
     dashCount: PD.Numeric;
@@ -36,7 +36,7 @@ export declare const InteractionsParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -56,7 +56,7 @@ export declare const InteractionsParams: {
 };
 export type InteractionsParams = typeof InteractionsParams;
 export declare function getInteractionParams(ctx: ThemeRegistryContext, structure: Structure): {
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     sizeFactor: PD.Numeric;
     visuals: PD.MultiSelect<"intra-unit" | "inter-unit">;
     dashCount: PD.Numeric;
@@ -83,7 +83,7 @@ export declare function getInteractionParams(ctx: ThemeRegistryContext, structur
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -104,7 +104,7 @@ export declare function getInteractionParams(ctx: ThemeRegistryContext, structur
 export type InteractionRepresentation = StructureRepresentation<InteractionsParams>;
 export declare function InteractionRepresentation(ctx: RepresentationContext, getParams: RepresentationParamsGetter<Structure, InteractionsParams>): InteractionRepresentation;
 export declare const InteractionsRepresentationProvider: StructureRepresentationProvider<{
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     sizeFactor: PD.Numeric;
     visuals: PD.MultiSelect<"intra-unit" | "inter-unit">;
     dashCount: PD.Numeric;
@@ -131,7 +131,7 @@ export declare const InteractionsRepresentationProvider: StructureRepresentation
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

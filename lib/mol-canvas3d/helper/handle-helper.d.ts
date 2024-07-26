@@ -27,7 +27,7 @@ export declare const HandleHelperParams: {
         transparentBackfaces: string;
         bumpFrequency: number;
         bumpAmplitude: number;
-        quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+        quality: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
         material: PD.Normalize<{
             metalness: number;
             roughness: number;

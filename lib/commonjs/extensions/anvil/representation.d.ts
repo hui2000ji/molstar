@@ -22,7 +22,7 @@ declare const BilayerPlanesParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -50,7 +50,7 @@ declare const BilayerRimsParams: {
     radiusFactor: PD.Numeric;
     sizeFactor: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -79,7 +79,7 @@ export declare const MembraneOrientationParams: {
     radiusFactor: PD.Numeric;
     sizeFactor: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -117,7 +117,7 @@ export declare function getMembraneOrientationParams(ctx: ThemeRegistryContext, 
     radiusFactor: PD.Numeric;
     sizeFactor: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -155,7 +155,7 @@ export declare const MembraneOrientationRepresentationProvider: StructureReprese
     radiusFactor: PD.Numeric;
     sizeFactor: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

@@ -93,7 +93,7 @@ export declare const CCD_Schema: {
          * linking monomers, monomers with some type of N-terminal (or 5')
          * cap and monomers with some type of C-terminal (or 3') cap.
          */
-        type: Schema.Aliased<"saccharide" | "non-polymer" | "other" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking">;
+        type: Schema.Aliased<"other" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "saccharide" | "non-polymer" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking">;
         /**
          * Synonym list for the component.
          */
@@ -269,7 +269,7 @@ export declare const CCD_Schema: {
         /**
          * The chiral configuration of the atom that is a chiral center.
          */
-        pdbx_stereo_config: Schema.Aliased<"r" | "s" | "n">;
+        pdbx_stereo_config: Schema.Aliased<"s" | "r" | "n">;
         /**
          * A flag indicating an aromatic atom.
          */
@@ -310,7 +310,7 @@ export declare const CCD_Schema: {
          * bond associated with the specified atoms, expressed as a bond
          * order.
          */
-        value_order: Schema.Aliased<"pi" | "sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo">;
+        value_order: Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
         /**
          * Ordinal index for the component bond list.
          */

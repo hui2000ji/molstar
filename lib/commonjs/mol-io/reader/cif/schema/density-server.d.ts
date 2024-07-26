@@ -10,8 +10,8 @@ export declare const DensityServer_Header_Schema: {
         server_version: Schema.Str;
         datetime_utc: Schema.Str;
         guid: Schema.Str;
-        is_empty: Schema.Aliased<"y" | "no" | "yes" | "n">;
-        has_error: Schema.Aliased<"y" | "no" | "yes" | "n">;
+        is_empty: Schema.Aliased<"y" | "yes" | "no" | "n">;
+        has_error: Schema.Aliased<"y" | "yes" | "no" | "n">;
         error: Schema.Str;
         query_source_id: Schema.Str;
         query_type: Schema.Aliased<"cell" | "box">;

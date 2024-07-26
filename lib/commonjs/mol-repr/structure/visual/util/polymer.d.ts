@@ -34,7 +34,7 @@ export declare function eachAtomicUnitTracedElement(offset: number, groupSize: n
 /** Mark a polymer element (e.g. part of a cartoon trace) */
 export declare function eachPolymerElement(loci: Loci, structureGroup: StructureGroup, apply: (interval: Interval) => boolean): boolean;
 /** Return a Loci for both directions of the polymer gap element. */
-export declare function getPolymerGapElementLoci(pickingId: PickingId, structureGroup: StructureGroup, id: number): {
+export declare function getPolymerGapElementLoci(pickingId: PickingId, structureGroup: StructureGroup, id: number): Bond.Loci | {
     kind: "empty-loci";
-} | Bond.Loci;
+};
 export declare function eachPolymerGapElement(loci: Loci, structureGroup: StructureGroup, apply: (interval: Interval) => boolean): boolean;

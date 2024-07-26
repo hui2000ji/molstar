@@ -24,8 +24,8 @@ export type DataTypeArrayType = {
 };
 export type ArrayType = ValueOf<DataTypeArrayType>;
 export type ArrayKind = keyof DataTypeArrayType;
-export declare function getUsageHint(gl: GLRenderingContext, usageHint: UsageHint): 35048 | 35044 | 35040;
-export declare function getDataType(gl: GLRenderingContext, dataType: DataType): 5120 | 5126 | 5124 | 5122 | 5121 | 5125 | 5123;
+export declare function getUsageHint(gl: GLRenderingContext, usageHint: UsageHint): 35044 | 35048 | 35040;
+export declare function getDataType(gl: GLRenderingContext, dataType: DataType): 5121 | 5120 | 5123 | 5122 | 5125 | 5124 | 5126;
 export declare function getBufferType(gl: GLRenderingContext, bufferType: BufferType): 34962 | 34963 | 35345;
 export interface Buffer {
     readonly id: number;
@@ -43,7 +43,7 @@ export interface Buffer {
 export declare function getBuffer(gl: GLRenderingContext): WebGLBuffer;
 export type AttributeItemSize = 1 | 2 | 3 | 4 | 16;
 export type AttributeKind = 'float32';
-export declare function getAttribType(gl: GLRenderingContext, kind: AttributeKind, itemSize: AttributeItemSize): 5126 | 35676 | 35664 | 35665 | 35666;
+export declare function getAttribType(gl: GLRenderingContext, kind: AttributeKind, itemSize: AttributeItemSize): 5126 | 35664 | 35665 | 35666 | 35676;
 export type AttributeDefs = {
     [k: string]: {
         kind: AttributeKind;

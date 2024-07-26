@@ -56,9 +56,9 @@ export declare class StructureSelectionManager extends StatefulPluginComponent<S
     private onUpdate;
     /** Removes all selections and returns them */
     clear(): StructureElement.Loci[];
-    getLoci(structure: Structure): {
+    getLoci(structure: Structure): StructureElement.Loci | {
         kind: "empty-loci";
-    } | StructureElement.Loci;
+    };
     getStructure(structure: Structure): Structure | undefined;
     structureHasSelection(structure: StructureRef): boolean;
     has(loci: Loci): boolean;

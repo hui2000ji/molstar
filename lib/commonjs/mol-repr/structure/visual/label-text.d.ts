@@ -12,13 +12,13 @@ export declare const LabelTextParams: {
     backgroundColor: PD.Color;
     backgroundOpacity: PD.Numeric;
     borderWidth: PD.Numeric;
-    level: PD.Select<"residue" | "chain" | "element">;
+    level: PD.Select<"element" | "residue" | "chain">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     chainScale: PD.Numeric;
     residueScale: PD.Numeric;
     elementScale: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     borderColor: PD.Color;
@@ -28,14 +28,14 @@ export declare const LabelTextParams: {
     tether: PD.BooleanParam;
     tetherLength: PD.Numeric;
     tetherBaseWidth: PD.Numeric;
-    attachment: PD.Select<"middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right">;
+    attachment: PD.Select<"bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-center" | "middle-right" | "top-left" | "top-center" | "top-right">;
     fontFamily: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontFamily>;
     fontQuality: PD.Select<number>;
     fontStyle: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontStyle>;
     fontVariant: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontVariant>;
     fontWeight: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontWeight>;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

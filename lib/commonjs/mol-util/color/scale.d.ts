@@ -21,7 +21,7 @@ export interface ColorScale {
 export declare const DefaultColorScaleProps: {
     domain: [number, number];
     reverse: boolean;
-    listOrName: "red-yellow-blue" | "orange-red" | "purple-blue" | "blue-purple" | "oranges" | "blue-green" | "yellow-orange-brown" | "yellow-green" | "reds" | "red-purple" | "greens" | "yellow-green-blue" | "purples" | "green-blue" | "greys" | "yellow-orange-red" | "purple-red" | "blues" | "purple-blue-green" | "spectral" | "red-yellow-green" | "red-blue" | "pink-yellow-green" | "purple-green" | "brown-white-green" | "red-grey" | "orange-purple" | "set-2" | "accent" | "set-1" | "set-3" | "dark-2" | "paired" | "pastel-2" | "pastel-1" | "many-distinct" | "magma" | "inferno" | "plasma" | "viridis" | "cividis" | "twilight" | "turbo" | "rainbow" | "red-white-blue" | ColorListEntry[];
+    listOrName: ColorListEntry[] | "orange-red" | "purple-blue" | "blue-purple" | "oranges" | "blue-green" | "yellow-orange-brown" | "yellow-green" | "reds" | "red-purple" | "greens" | "yellow-green-blue" | "purples" | "green-blue" | "greys" | "yellow-orange-red" | "purple-red" | "blues" | "purple-blue-green" | "spectral" | "red-yellow-green" | "red-blue" | "pink-yellow-green" | "purple-green" | "red-yellow-blue" | "brown-white-green" | "red-grey" | "orange-purple" | "set-2" | "accent" | "set-1" | "set-3" | "dark-2" | "paired" | "pastel-2" | "pastel-1" | "many-distinct" | "magma" | "inferno" | "plasma" | "viridis" | "cividis" | "twilight" | "turbo" | "rainbow" | "red-white-blue";
     minLabel: string | undefined;
     maxLabel: string | undefined;
 };

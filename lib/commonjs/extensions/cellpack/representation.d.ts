@@ -19,10 +19,10 @@ export declare const MBParams: {
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest";
+        defaultValue: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;

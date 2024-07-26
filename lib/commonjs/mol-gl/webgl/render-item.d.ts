@@ -9,7 +9,7 @@ import { ShaderCode } from '../shader-code';
 import { Program } from './program';
 import { RenderableSchema, RenderableValues } from '../renderable/schema';
 export type DrawMode = 'points' | 'lines' | 'line-strip' | 'line-loop' | 'triangles' | 'triangle-strip' | 'triangle-fan';
-export declare function getDrawMode(ctx: WebGLContext, drawMode: DrawMode): 0 | 1 | 4 | 2 | 3 | 5 | 6;
+export declare function getDrawMode(ctx: WebGLContext, drawMode: DrawMode): 0 | 1 | 2 | 3 | 6 | 5 | 4;
 export interface RenderItem<T extends string> {
     readonly id: number;
     readonly materialId: number;
@@ -27,17 +27,17 @@ declare const GraphicsRenderVariant: {
     marking: string;
 };
 export type GraphicsRenderVariant = keyof typeof GraphicsRenderVariant;
-export declare const GraphicsRenderVariants: ("depth" | "marking" | "colorBlended" | "colorWboit" | "colorDpoit" | "pick")[];
-export declare const GraphicsRenderVariantsBlended: ("depth" | "marking" | "colorBlended" | "colorWboit" | "colorDpoit" | "pick")[];
-export declare const GraphicsRenderVariantsWboit: ("depth" | "marking" | "colorBlended" | "colorWboit" | "colorDpoit" | "pick")[];
-export declare const GraphicsRenderVariantsDpoit: ("depth" | "marking" | "colorBlended" | "colorWboit" | "colorDpoit" | "pick")[];
+export declare const GraphicsRenderVariants: ("depth" | "colorBlended" | "colorWboit" | "colorDpoit" | "pick" | "marking")[];
+export declare const GraphicsRenderVariantsBlended: ("depth" | "colorBlended" | "colorWboit" | "colorDpoit" | "pick" | "marking")[];
+export declare const GraphicsRenderVariantsWboit: ("depth" | "colorBlended" | "colorWboit" | "colorDpoit" | "pick" | "marking")[];
+export declare const GraphicsRenderVariantsDpoit: ("depth" | "colorBlended" | "colorWboit" | "colorDpoit" | "pick" | "marking")[];
 declare const ComputeRenderVariant: {
     compute: string;
 };
 export type ComputeRenderVariant = keyof typeof ComputeRenderVariant;
 export declare const ComputeRenderVariants: "compute"[];
 export type GraphicsRenderItem = RenderItem<GraphicsRenderVariant>;
-export declare function createGraphicsRenderItem(ctx: WebGLContext, drawMode: DrawMode, shaderCode: ShaderCode, schema: RenderableSchema, values: RenderableValues, materialId: number, variants: GraphicsRenderVariant[]): RenderItem<"depth" | "marking" | "colorBlended" | "colorWboit" | "colorDpoit" | "pick">;
+export declare function createGraphicsRenderItem(ctx: WebGLContext, drawMode: DrawMode, shaderCode: ShaderCode, schema: RenderableSchema, values: RenderableValues, materialId: number, variants: GraphicsRenderVariant[]): RenderItem<"depth" | "colorBlended" | "colorWboit" | "colorDpoit" | "pick" | "marking">;
 export type ComputeRenderItem = RenderItem<ComputeRenderVariant>;
 export declare function createComputeRenderItem(ctx: WebGLContext, drawMode: DrawMode, shaderCode: ShaderCode, schema: RenderableSchema, values: RenderableValues, materialId?: number): RenderItem<"compute">;
 /**

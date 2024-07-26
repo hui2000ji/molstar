@@ -13,16 +13,16 @@ import { Loci } from '../../../../mol-model/loci';
 import { Interval } from '../../../../mol-data/int';
 import { StructureGroup } from './common';
 export declare const BondParams: {
-    includeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
-    excludeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
     multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
 };
 export declare const DefaultBondProps: PD.Values<{
-    includeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
-    excludeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -31,8 +31,8 @@ export declare const DefaultBondProps: PD.Values<{
 export type BondProps = typeof DefaultBondProps;
 export declare const BondCylinderParams: {
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
-    excludeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -51,8 +51,8 @@ export declare const BondCylinderParams: {
 };
 export declare const DefaultBondCylinderProps: PD.Values<{
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
-    excludeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -71,8 +71,8 @@ export declare const DefaultBondCylinderProps: PD.Values<{
 }>;
 export type BondCylinderProps = typeof DefaultBondCylinderProps;
 export declare const BondLineParams: {
-    includeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
-    excludeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -83,8 +83,8 @@ export declare const BondLineParams: {
     dashCount: PD.Numeric;
 };
 export declare const DefaultBondLineProps: PD.Values<{
-    includeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
-    excludeTypes: PD.MultiSelect<"computed" | "covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -102,11 +102,11 @@ export declare namespace BondIterator {
     function fromGroup(structureGroup: StructureGroup): LocationIterator;
     function fromStructure(structure: Structure): LocationIterator;
 }
-export declare function getIntraBondLoci(pickingId: PickingId, structureGroup: StructureGroup, id: number): {
+export declare function getIntraBondLoci(pickingId: PickingId, structureGroup: StructureGroup, id: number): Bond.Loci | {
     kind: "empty-loci";
-} | Bond.Loci;
+};
 export declare function eachIntraBond(loci: Loci, structureGroup: StructureGroup, apply: (interval: Interval) => boolean, isMarking: boolean): boolean;
-export declare function getInterBondLoci(pickingId: PickingId, structure: Structure, id: number): {
+export declare function getInterBondLoci(pickingId: PickingId, structure: Structure, id: number): Bond.Loci | {
     kind: "empty-loci";
-} | Bond.Loci;
+};
 export declare function eachInterBond(loci: Loci, structure: Structure, apply: (interval: Interval) => boolean, isMarking: boolean): boolean;

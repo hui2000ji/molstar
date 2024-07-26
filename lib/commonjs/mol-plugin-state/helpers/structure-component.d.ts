@@ -13,7 +13,7 @@ import { Script } from '../../mol-script/script';
 export declare const StaticStructureComponentTypes: readonly ["all", "polymer", "protein", "nucleic", "water", "ion", "lipid", "branched", "ligand", "non-standard", "coarse"];
 export type StaticStructureComponentType = (typeof StaticStructureComponentTypes)[number];
 export declare const StructureComponentParams: () => {
-    type: PD.Mapped<PD.NamedParams<"all" | "water" | "ion" | "protein" | "polymer" | "nucleic" | "branched" | "ligand" | "non-standard" | "coarse" | "lipid", "static"> | PD.NamedParams<Script, "script"> | PD.NamedParams<Expression, "expression"> | PD.NamedParams<StructureElement.Bundle, "bundle">>;
+    type: PD.Mapped<PD.NamedParams<"all" | "polymer" | "water" | "branched" | "ligand" | "ion" | "lipid" | "protein" | "nucleic" | "coarse" | "non-standard", "static"> | PD.NamedParams<Script, "script"> | PD.NamedParams<Expression, "expression"> | PD.NamedParams<StructureElement.Bundle, "bundle">>;
     nullIfEmpty: PD.Base<boolean | undefined>;
     label: PD.Text<string>;
 };
@@ -21,7 +21,7 @@ export type StructureComponentParams = PD.ValuesFor<ReturnType<typeof StructureC
 export declare function createStructureComponent(a: Structure, params: StructureComponentParams, cache: {
     source: Structure;
     entry?: StructureQueryHelper.CacheEntry;
-}): SO.Molecule.Structure | StateObject<any, any>;
+}): StateObject<any, any> | SO.Molecule.Structure;
 export declare function updateStructureComponent(a: Structure, b: SO.Molecule.Structure, oldParams: StructureComponentParams, newParams: StructureComponentParams, cache: {
     source: Structure;
     entry?: StructureQueryHelper.CacheEntry;

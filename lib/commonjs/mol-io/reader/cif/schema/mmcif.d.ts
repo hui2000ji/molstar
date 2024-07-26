@@ -500,7 +500,7 @@ export declare const mmCIF_Schema: {
          * _chem_comp.mon_nstd_parent, _chem_comp.mon_nstd_class and
          * _chem_comp.mon_nstd_details data items.
          */
-        mon_nstd_flag: Schema.Aliased<"y" | "no" | "yes" | "n">;
+        mon_nstd_flag: Schema.Aliased<"y" | "yes" | "no" | "n">;
         /**
          * The full name of the component.
          */
@@ -511,7 +511,7 @@ export declare const mmCIF_Schema: {
          * linking monomers, monomers with some type of N-terminal (or 5')
          * cap and monomers with some type of C-terminal (or 3') cap.
          */
-        type: Schema.Aliased<"saccharide" | "non-polymer" | "other" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking">;
+        type: Schema.Aliased<"other" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "saccharide" | "non-polymer" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking">;
         /**
          * Synonym list for the component.
          */
@@ -548,7 +548,7 @@ export declare const mmCIF_Schema: {
          * bond associated with the specified atoms, expressed as a bond
          * order.
          */
-        value_order: Schema.Aliased<"pi" | "sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo">;
+        value_order: Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
         /**
          * Ordinal index for the component bond list.
          */
@@ -692,7 +692,7 @@ export declare const mmCIF_Schema: {
         /**
          * An abbreviation that identifies the database.
          */
-        database_id: Schema.Aliased<"rcsb" | "pdbe" | "emdb" | "pdb" | "alphafolddb" | "modelarchive" | "cas" | "csd" | "icsd" | "mdf" | "modbase" | "ndb" | "nbs" | "pdf" | "swiss-model_repository" | "ebi" | "bmrb" | "wwpdb" | "pdb_acc">;
+        database_id: Schema.Aliased<"alphafolddb" | "cas" | "csd" | "emdb" | "icsd" | "modelarchive" | "mdf" | "modbase" | "ndb" | "nbs" | "pdb" | "pdf" | "rcsb" | "swiss-model_repository" | "ebi" | "pdbe" | "bmrb" | "wwpdb" | "pdb_acc">;
         /**
          * The code assigned by the database identified in
          * _database_2.database_id.
@@ -768,7 +768,7 @@ export declare const mmCIF_Schema: {
          * Water entities are not expected to have corresponding
          * entries in the ENTITY category.
          */
-        type: Schema.Aliased<"water" | "polymer" | "branched" | "non-polymer" | "macrolide">;
+        type: Schema.Aliased<"non-polymer" | "polymer" | "macrolide" | "water" | "branched">;
         /**
          * A description of the entity.
          *
@@ -808,12 +808,12 @@ export declare const mmCIF_Schema: {
          * one monomer-to-monomer link different from that implied by
          * _entity_poly.type.
          */
-        nstd_linkage: Schema.Aliased<"y" | "no" | "yes" | "n">;
+        nstd_linkage: Schema.Aliased<"y" | "yes" | "no" | "n">;
         /**
          * A flag to indicate whether the polymer contains at least
          * one monomer that is not considered standard.
          */
-        nstd_monomer: Schema.Aliased<"y" | "no" | "yes" | "n">;
+        nstd_monomer: Schema.Aliased<"y" | "yes" | "no" | "n">;
         /**
          * The type of the polymer.
          */
@@ -910,7 +910,7 @@ export declare const mmCIF_Schema: {
          * A flag to indicate whether this monomer in the polymer is
          * heterogeneous in sequence.
          */
-        hetero: Schema.Aliased<"y" | "no" | "yes" | "n">;
+        hetero: Schema.Aliased<"y" | "yes" | "no" | "n">;
         /**
          * This data item is a pointer to _chem_comp.id in the CHEM_COMP
          * category.
@@ -1048,7 +1048,7 @@ export declare const mmCIF_Schema: {
          * A flag indicating that this entity was originally labeled
          * with a blank PDB chain id.
          */
-        pdbx_blank_PDB_chainid_flag: Schema.Aliased<"Y" | "N">;
+        pdbx_blank_PDB_chainid_flag: Schema.Aliased<"N" | "Y">;
     };
     /**
      * Data items in the STRUCT_CONF category record details about
@@ -1110,7 +1110,7 @@ export declare const mmCIF_Schema: {
          * This data item is a pointer to _struct_conf_type.id in the
          * STRUCT_CONF_TYPE category.
          */
-        conf_type_id: Schema.Aliased<"bend" | "other" | "helx_p" | "helx_ot_p" | "helx_rh_p" | "helx_rh_ot_p" | "helx_rh_al_p" | "helx_rh_ga_p" | "helx_rh_om_p" | "helx_rh_pi_p" | "helx_rh_27_p" | "helx_rh_3t_p" | "helx_rh_pp_p" | "helx_lh_p" | "helx_lh_ot_p" | "helx_lh_al_p" | "helx_lh_ga_p" | "helx_lh_om_p" | "helx_lh_pi_p" | "helx_lh_27_p" | "helx_lh_3t_p" | "helx_lh_pp_p" | "helx_n" | "helx_ot_n" | "helx_rh_n" | "helx_rh_ot_n" | "helx_rh_a_n" | "helx_rh_b_n" | "helx_rh_z_n" | "helx_lh_n" | "helx_lh_ot_n" | "helx_lh_a_n" | "helx_lh_b_n" | "helx_lh_z_n" | "turn_p" | "turn_ot_p" | "turn_ty1_p" | "turn_ty1p_p" | "turn_ty2_p" | "turn_ty2p_p" | "turn_ty3_p" | "turn_ty3p_p" | "strn">;
+        conf_type_id: Schema.Aliased<"other" | "bend" | "helx_p" | "helx_ot_p" | "helx_rh_p" | "helx_rh_ot_p" | "helx_rh_al_p" | "helx_rh_ga_p" | "helx_rh_om_p" | "helx_rh_pi_p" | "helx_rh_27_p" | "helx_rh_3t_p" | "helx_rh_pp_p" | "helx_lh_p" | "helx_lh_ot_p" | "helx_lh_al_p" | "helx_lh_ga_p" | "helx_lh_om_p" | "helx_lh_pi_p" | "helx_lh_27_p" | "helx_lh_3t_p" | "helx_lh_pp_p" | "helx_n" | "helx_ot_n" | "helx_rh_n" | "helx_rh_ot_n" | "helx_rh_a_n" | "helx_rh_b_n" | "helx_rh_z_n" | "helx_lh_n" | "helx_lh_ot_n" | "helx_lh_a_n" | "helx_lh_b_n" | "helx_lh_z_n" | "turn_p" | "turn_ot_p" | "turn_ty1_p" | "turn_ty1p_p" | "turn_ty2_p" | "turn_ty2p_p" | "turn_ty3_p" | "turn_ty3p_p" | "strn">;
         /**
          * A description of special aspects of the conformation assignment.
          */
@@ -1487,7 +1487,7 @@ export declare const mmCIF_Schema: {
          * those that are given in the data block (in which case the value
          * of code is 'generate').
          */
-        code: Schema.Aliased<"generate" | "given">;
+        code: Schema.Aliased<"given" | "generate">;
         /**
          * A description of special aspects of the noncrystallographic
          * symmetry operator.
@@ -1988,7 +1988,7 @@ export declare const mmCIF_Schema: {
         /**
          * The provenance of this synonym.
          */
-        provenance: Schema.Aliased<"PDB" | "AUTHOR" | "DRUGBANK" | "CHEBI" | "CHEMBL" | "PUBCHEM">;
+        provenance: Schema.Aliased<"AUTHOR" | "DRUGBANK" | "CHEBI" | "CHEMBL" | "PDB" | "PUBCHEM">;
     };
     /**
      * Data items in the CHEM_COMP_IDENTIFIER category provide
@@ -2041,7 +2041,7 @@ export declare const mmCIF_Schema: {
          * The value of occupancy flag indicates whether the residue
          * is unobserved (= 1) or the coordinates have an occupancy of zero (=0)
          */
-        occupancy_flag: Schema.Aliased<"0" | "1">;
+        occupancy_flag: Schema.Aliased<"1" | "0">;
         /**
          * Part of the identifier for the unobserved or zero occupancy residue.
          *
@@ -2289,7 +2289,7 @@ export declare const mmCIF_Schema: {
         /**
          * Defines the polymer characteristic of the entity.
          */
-        type: Schema.Aliased<"polymer" | "branched" | "non-polymer" | "polymer-like">;
+        type: Schema.Aliased<"non-polymer" | "polymer" | "branched" | "polymer-like">;
         /**
          * Additional details about this entity.
          */
@@ -2384,7 +2384,7 @@ export declare const mmCIF_Schema: {
         /**
          * The bond order target for the chemical linkage.
          */
-        value_order: Schema.Aliased<"pi" | "sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo">;
+        value_order: Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
         /**
          * The entity component identifier for the first of two entities containing the linkage.
          */
@@ -2396,7 +2396,7 @@ export declare const mmCIF_Schema: {
         /**
          * A code indicating the entity types involved in the linkage.
          */
-        link_class: Schema.Aliased<"NP" | "PP" | "PN" | "NN">;
+        link_class: Schema.Aliased<"PP" | "PN" | "NP" | "NN">;
     };
     /**
      * Data items in the PDBX_REFERENCE_ENTITY_POLY_LINK category give details about
@@ -2470,7 +2470,7 @@ export declare const mmCIF_Schema: {
         /**
          * The bond order target for the non-standard linkage.
          */
-        value_order: Schema.Aliased<"pi" | "sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo">;
+        value_order: Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
     };
     /**
      * Data items in the PDBX_MOLECULE category identify reference molecules
@@ -2509,7 +2509,7 @@ export declare const mmCIF_Schema: {
         /**
          * Defines the structural classification of the molecule.
          */
-        type: Schema.Aliased<"unknown" | "non-polymer" | "oligosaccharide" | "peptide-like" | "macrolide" | "amino acid" | "aminoglycoside" | "anthracycline" | "anthraquinone" | "ansamycin" | "chalkophore" | "chromophore" | "glycopeptide" | "cyclic depsipeptide" | "cyclic lipopeptide" | "cyclic peptide" | "heterocyclic" | "imino sugar" | "keto acid" | "lipoglycopeptide" | "lipopeptide" | "nucleoside" | "oligopeptide" | "peptaibol" | "polycyclic" | "polypeptide" | "polysaccharide" | "quinolone" | "thiolactone" | "thiopeptide" | "siderophore" | "chalkophore, polypeptide">;
+        type: Schema.Aliased<"unknown" | "non-polymer" | "peptide-like" | "macrolide" | "amino acid" | "aminoglycoside" | "anthracycline" | "anthraquinone" | "ansamycin" | "chalkophore" | "chromophore" | "glycopeptide" | "cyclic depsipeptide" | "cyclic lipopeptide" | "cyclic peptide" | "heterocyclic" | "imino sugar" | "keto acid" | "lipoglycopeptide" | "lipopeptide" | "nucleoside" | "oligopeptide" | "oligosaccharide" | "peptaibol" | "polycyclic" | "polypeptide" | "polysaccharide" | "quinolone" | "thiolactone" | "thiopeptide" | "siderophore" | "chalkophore, polypeptide">;
         /**
          * A name of the molecule.
          */
@@ -2731,7 +2731,7 @@ export declare const mmCIF_Schema: {
          * A flag to indicate whether this monomer in the entity is
          * heterogeneous in sequence.
          */
-        hetero: Schema.Aliased<"y" | "no" | "yes" | "n">;
+        hetero: Schema.Aliased<"y" | "yes" | "no" | "n">;
         /**
          * This data item is a pointer to _chem_comp.id in the CHEM_COMP
          * category.
@@ -2803,7 +2803,7 @@ export declare const mmCIF_Schema: {
         /**
          * The chiral configuration of the first atom making the linkage.
          */
-        atom_stereo_config_1: Schema.Aliased<"r" | "s" | "n">;
+        atom_stereo_config_1: Schema.Aliased<"s" | "r" | "n">;
         /**
          * The atom identifier/name for the second atom making the linkage.
          */
@@ -2815,11 +2815,11 @@ export declare const mmCIF_Schema: {
         /**
          * The chiral configuration of the second atom making the linkage.
          */
-        atom_stereo_config_2: Schema.Aliased<"r" | "s" | "n">;
+        atom_stereo_config_2: Schema.Aliased<"s" | "r" | "n">;
         /**
          * The bond order target for the chemical linkage.
          */
-        value_order: Schema.Aliased<"pi" | "sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo">;
+        value_order: Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
     };
     /**
      * Data items in the PDBX_ENTITY_BRANCH category specify the list
@@ -2850,7 +2850,7 @@ export declare const mmCIF_Schema: {
          * A flag to indicate whether this monomer in the entity is
          * heterogeneous in sequence.
          */
-        hetero: Schema.Aliased<"y" | "no" | "yes" | "n">;
+        hetero: Schema.Aliased<"y" | "yes" | "no" | "n">;
         /**
          * Pointer to _atom_site.label_asym_id.
          */
@@ -3154,7 +3154,7 @@ export declare const mmCIF_Schema: {
         /**
          * The primitive object used to model this segment.
          */
-        model_object_primitive: Schema.Aliased<"sphere" | "gaussian" | "other" | "atomistic">;
+        model_object_primitive: Schema.Aliased<"other" | "sphere" | "atomistic" | "gaussian">;
         /**
          * The identifier for the starting structural model.
          * This data item is a pointer to _ihm_starting_model_details.starting_model_id
@@ -3323,15 +3323,15 @@ export declare const mmCIF_Schema: {
         /**
          * A flag to indicate if the modeling is multi scale.
          */
-        multi_scale_flag: Schema.Aliased<"no" | "yes">;
+        multi_scale_flag: Schema.Aliased<"yes" | "no">;
         /**
          * A flag to indicate if the modeling is multi state.
          */
-        multi_state_flag: Schema.Aliased<"no" | "yes">;
+        multi_state_flag: Schema.Aliased<"yes" | "no">;
         /**
          * A flag to indicate if the modeling involves an ensemble ordered by time or other order.
          */
-        ordered_flag: Schema.Aliased<"no" | "yes">;
+        ordered_flag: Schema.Aliased<"yes" | "no">;
         /**
          * The file id corresponding to the script used in the modeling protocol step.
          * This data item is a pointer to _ihm_external_files.id in the IHM_EXTERNAL_FILES category.
@@ -3620,7 +3620,7 @@ export declare const mmCIF_Schema: {
          * A flag that indicates whether the dataset is archived in
          * an IHM related database or elsewhere.
          */
-        database_hosted: Schema.Aliased<"no" | "yes">;
+        database_hosted: Schema.Aliased<"yes" | "no">;
     };
     /**
      * Category to define groups or collections of input datasets.
@@ -3637,7 +3637,7 @@ export declare const mmCIF_Schema: {
         /**
          * The application / utilization of the dataset group in modeling.
          */
-        application: Schema.Aliased<"filter" | "representation" | "other" | "validation" | "restraint" | "sampling">;
+        application: Schema.Aliased<"filter" | "other" | "validation" | "restraint" | "representation" | "sampling">;
         /**
          * Additional details regarding the dataset group.
          */
@@ -3697,7 +3697,7 @@ export declare const mmCIF_Schema: {
         /**
          * The name of the database containing the dataset entry.
          */
-        db_name: Schema.Aliased<"EMDB" | "PDB" | "PDB-Dev" | "BMRB" | "Other" | "EMPIAR" | "SASBDB" | "PRIDE" | "MODEL ARCHIVE" | "MASSIVE" | "BioGRID" | "ProXL" | "jPOSTrepo" | "iProX" | "AlphaFoldDB">;
+        db_name: Schema.Aliased<"BMRB" | "PDB" | "Other" | "PDB-Dev" | "EMDB" | "EMPIAR" | "SASBDB" | "PRIDE" | "MODEL ARCHIVE" | "MASSIVE" | "BioGRID" | "ProXL" | "jPOSTrepo" | "iProX" | "AlphaFoldDB">;
         /**
          * The accession code for the database entry.
          */
@@ -3747,7 +3747,7 @@ export declare const mmCIF_Schema: {
          * The type of object that the external reference points to, usually
          * a single file or an archive.
          */
-        refers_to: Schema.Aliased<"File" | "Other" | "Archive" | "Publication">;
+        refers_to: Schema.Aliased<"Other" | "File" | "Archive" | "Publication">;
         /**
          * The Uniform Resource Locator (URL) corresponding to the external reference (DOI).
          * This URL should link to the corresponding downloadable file or archive and is provided
@@ -4024,7 +4024,7 @@ export declare const mmCIF_Schema: {
         /**
          * The type of crosslinker used.
          */
-        linker_type: Schema.Aliased<"CYS" | "Other" | "EDC" | "DSS" | "EGS" | "BS3" | "BS2G" | "DST" | "sulfo-SDA" | "sulfo-SMCC" | "DSSO" | "DSG" | "BSP" | "BMSO" | "DHSO" | "SDA" | "DSA" | "BrdU" | "LCSDA" | "CDI" | "ADH" | "L-Photo-Leucine" | "KArGO" | "BrEtY" | "DSBU" | "DSPP" | "TBDSPP">;
+        linker_type: Schema.Aliased<"Other" | "EDC" | "DSS" | "EGS" | "BS3" | "BS2G" | "DST" | "sulfo-SDA" | "sulfo-SMCC" | "DSSO" | "DSG" | "BSP" | "BMSO" | "DHSO" | "CYS" | "SDA" | "DSA" | "BrdU" | "LCSDA" | "CDI" | "ADH" | "L-Photo-Leucine" | "KArGO" | "BrEtY" | "DSBU" | "DSPP" | "TBDSPP">;
         /**
          * Identifier to the crosslinking dataset.
          * This data item is a pointer to the _ihm_dataset_list.id in the
@@ -4227,7 +4227,7 @@ export declare const mmCIF_Schema: {
          * whether the whole image is used or only a portion of it is used (by masking
          * or by other means) as restraint in the modeling.
          */
-        image_segment_flag: Schema.Aliased<"no" | "yes">;
+        image_segment_flag: Schema.Aliased<"yes" | "no">;
         /**
          * Number of 2D projections of the model used in the fitting.
          */
@@ -4380,7 +4380,7 @@ export declare const mmCIF_Schema: {
          * whether the whole SAS profile is used or only a portion of it is used
          * (by masking or by other means) as restraint in the modeling.
          */
-        profile_segment_flag: Schema.Aliased<"no" | "yes">;
+        profile_segment_flag: Schema.Aliased<"yes" | "no">;
         /**
          * The type of atoms in the model fit to the SAS data.
          */
@@ -4662,11 +4662,11 @@ export declare const mmCIF_Schema: {
         /**
          * The type of feature.
          */
-        feature_type: Schema.Aliased<"ligand" | "residue" | "atom" | "residue range" | "pseudo site">;
+        feature_type: Schema.Aliased<"atom" | "residue" | "residue range" | "ligand" | "pseudo site">;
         /**
          * The type of entity.
          */
-        entity_type: Schema.Aliased<"water" | "polymer" | "non-polymer" | "other">;
+        entity_type: Schema.Aliased<"other" | "non-polymer" | "polymer" | "water">;
     };
     /**
      * Data items in the IHM_POLY_RESIDUE_FEATURE category provides the defintions
@@ -4875,7 +4875,7 @@ export declare const mmCIF_Schema: {
          * The name of the database containing reference information about
          * this entity or biological unit.
          */
-        db_name: Schema.Aliased<"Other" | "UNP" | "GB" | "OrthoDB" | "NCBI" | "JGI" | "Phytozyme">;
+        db_name: Schema.Aliased<"GB" | "Other" | "UNP" | "OrthoDB" | "NCBI" | "JGI" | "Phytozyme">;
         /**
          * The code for this entity or biological unit or for a closely
          * related entity or biological unit in the named database.

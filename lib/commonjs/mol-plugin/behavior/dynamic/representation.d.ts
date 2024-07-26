@@ -13,7 +13,7 @@ export declare const HighlightLoci: import("../../../mol-state/transformer").Sta
         hoverHighlightOnly: Binding;
         hoverHighlightOnlyExtend: Binding;
     }>;
-    ignore: PD.Value<("empty-loci" | "segment-loci" | "volume-loci" | "cell-loci" | "every-loci" | "element-loci" | "structure-loci" | "bond-loci" | "data-loci" | "shape-loci" | "group-loci" | "isosurface-loci")[]>;
+    ignore: PD.Value<("element-loci" | "structure-loci" | "bond-loci" | "volume-loci" | "isosurface-loci" | "cell-loci" | "segment-loci" | "every-loci" | "empty-loci" | "data-loci" | "shape-loci" | "group-loci")[]>;
     preferAtoms: PD.BooleanParam;
     mark: PD.BooleanParam;
 }>>;
@@ -34,7 +34,7 @@ export declare const SelectLoci: import("../../../mol-state/transformer").StateT
         clickDeselect: Binding;
         clickDeselectAllOnEmpty: Binding;
     }>;
-    ignore: PD.Value<("empty-loci" | "segment-loci" | "volume-loci" | "cell-loci" | "every-loci" | "element-loci" | "structure-loci" | "bond-loci" | "data-loci" | "shape-loci" | "group-loci" | "isosurface-loci")[]>;
+    ignore: PD.Value<("element-loci" | "structure-loci" | "bond-loci" | "volume-loci" | "isosurface-loci" | "cell-loci" | "segment-loci" | "every-loci" | "empty-loci" | "data-loci" | "shape-loci" | "group-loci")[]>;
     preferAtoms: PD.BooleanParam;
     mark: PD.BooleanParam;
 }>>;

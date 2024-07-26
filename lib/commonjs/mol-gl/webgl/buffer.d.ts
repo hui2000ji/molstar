@@ -25,7 +25,7 @@ export type DataTypeArrayType = {
 export type ArrayType = ValueOf<DataTypeArrayType>;
 export type ArrayKind = keyof DataTypeArrayType;
 export declare function getUsageHint(gl: GLRenderingContext, usageHint: UsageHint): 35044 | 35048 | 35040;
-export declare function getDataType(gl: GLRenderingContext, dataType: DataType): 5126 | 5121 | 5124 | 5125 | 5123 | 5120 | 5122;
+export declare function getDataType(gl: GLRenderingContext, dataType: DataType): 5121 | 5120 | 5123 | 5122 | 5125 | 5124 | 5126;
 export declare function getBufferType(gl: GLRenderingContext, bufferType: BufferType): 34962 | 34963 | 35345;
 export interface Buffer {
     readonly id: number;

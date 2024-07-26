@@ -50,7 +50,7 @@ export declare const BIRD_Schema: {
         /**
          * Defines the structural classification of the entity.
          */
-        type: Schema.Aliased<"unknown" | "non-polymer" | "oligosaccharide" | "peptide-like" | "macrolide" | "amino acid" | "aminoglycoside" | "anthracycline" | "anthraquinone" | "ansamycin" | "chalkophore" | "chromophore" | "glycopeptide" | "cyclic depsipeptide" | "cyclic lipopeptide" | "cyclic peptide" | "heterocyclic" | "imino sugar" | "keto acid" | "lipoglycopeptide" | "lipopeptide" | "nucleoside" | "oligopeptide" | "peptaibol" | "polycyclic" | "polypeptide" | "polysaccharide" | "quinolone" | "thiolactone" | "thiopeptide" | "siderophore" | "chalkophore, polypeptide">;
+        type: Schema.Aliased<"unknown" | "non-polymer" | "peptide-like" | "macrolide" | "amino acid" | "aminoglycoside" | "anthracycline" | "anthraquinone" | "ansamycin" | "chalkophore" | "chromophore" | "glycopeptide" | "cyclic depsipeptide" | "cyclic lipopeptide" | "cyclic peptide" | "heterocyclic" | "imino sugar" | "keto acid" | "lipoglycopeptide" | "lipopeptide" | "nucleoside" | "oligopeptide" | "oligosaccharide" | "peptaibol" | "polycyclic" | "polypeptide" | "polysaccharide" | "quinolone" | "thiolactone" | "thiopeptide" | "siderophore" | "chalkophore, polypeptide">;
         /**
          * Evidence for the assignment of _pdbx_reference_molecule.type
          */
@@ -121,7 +121,7 @@ export declare const BIRD_Schema: {
         /**
          * Defines the polymer characteristic of the entity.
          */
-        type: Schema.Aliased<"polymer" | "branched" | "non-polymer" | "polymer-like">;
+        type: Schema.Aliased<"non-polymer" | "polymer" | "branched" | "polymer-like">;
         /**
          * Additional details about this entity.
          */
@@ -241,7 +241,7 @@ export declare const BIRD_Schema: {
         /**
          * The bond order target for the chemical linkage.
          */
-        value_order: Schema.Aliased<"pi" | "sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo">;
+        value_order: Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
         /**
          * The entity component identifier for the first of two entities containing the linkage.
          */
@@ -253,7 +253,7 @@ export declare const BIRD_Schema: {
         /**
          * A code indicating the entity types involved in the linkage.
          */
-        link_class: Schema.Aliased<"NP" | "PP" | "PN" | "NN">;
+        link_class: Schema.Aliased<"PP" | "PN" | "NP" | "NN">;
     };
     /**
      * Data items in the PDBX_REFERENCE_ENTITY_POLY_LINK category give details about
@@ -327,7 +327,7 @@ export declare const BIRD_Schema: {
         /**
          * The bond order target for the non-standard linkage.
          */
-        value_order: Schema.Aliased<"pi" | "sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo">;
+        value_order: Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
     };
     /**
      * Data items in the PDBX_REFERENCE_ENTITY_POLY category record details about
@@ -348,7 +348,7 @@ export declare const BIRD_Schema: {
         /**
          * The type of the polymer.
          */
-        type: Schema.Aliased<"oligosaccharide" | "peptide-like" | "nucleic-acid-like" | "polysaccharide-like">;
+        type: Schema.Aliased<"peptide-like" | "oligosaccharide" | "nucleic-acid-like" | "polysaccharide-like">;
         /**
          * The database code for this source information
          */
@@ -419,7 +419,7 @@ export declare const BIRD_Schema: {
         /**
          * A flag to indicate a non-ribosomal entity.
          */
-        NRP_flag: Schema.Aliased<"Y" | "N">;
+        NRP_flag: Schema.Aliased<"N" | "Y">;
         /**
          * The one-letter-code sequence for this entity.  Non-standard monomers are represented as 'X'.
          */

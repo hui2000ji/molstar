@@ -14,8 +14,8 @@ export declare const DensityServer_Header_Schema: {
         has_error: Schema.Aliased<"y" | "yes" | "no" | "n">;
         error: Schema.Str;
         query_source_id: Schema.Str;
-        query_type: Schema.Aliased<"box" | "cell">;
-        query_box_type: Schema.Aliased<"fractional" | "cartesian">;
+        query_type: Schema.Aliased<"cell" | "box">;
+        query_box_type: Schema.Aliased<"cartesian" | "fractional">;
         query_box_a: Schema.Tensor;
         query_box_b: Schema.Tensor;
     };

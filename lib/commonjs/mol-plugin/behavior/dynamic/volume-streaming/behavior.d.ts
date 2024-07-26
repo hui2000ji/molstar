@@ -159,7 +159,7 @@ export declare namespace VolumeStreaming {
         private decideDetail;
         update(params: Params): Promise<boolean>;
         private createChannel;
-        getDescription(): "Camera" | "" | "Selection" | "Static Box" | "Cell";
+        getDescription(): "" | "Camera" | "Selection" | "Static Box" | "Cell";
         constructor(plugin: PluginContext, data: VolumeServerInfo.Data);
     }
 }

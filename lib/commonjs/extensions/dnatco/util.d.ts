@@ -17,7 +17,7 @@ export declare namespace DnatcoUtil {
     function getAtomIndex(loc: StructureElement.Location, residue: Residue, names: string[], altId: string, insCode: string): ElementIndex;
     function getStepIndices(data: DnatcoTypes.Steps, loc: StructureElement.Location, r: DnatcoUtil.Residue): number[];
     function residueAltIds(structure: Structure, unit: Unit, residue: Residue): string[];
-    function residueToLoci(asymId: string, seqId: number, altId: string | undefined, insCode: string, loci: StructureElement.Loci, source: 'label' | 'auth'): {
+    function residueToLoci(asymId: string, seqId: number, altId: string | undefined, insCode: string, loci: StructureElement.Loci, source: 'label' | 'auth'): StructureElement.Loci | {
         kind: "empty-loci";
-    } | StructureElement.Loci;
+    };
 }

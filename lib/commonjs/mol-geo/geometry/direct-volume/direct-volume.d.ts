@@ -39,7 +39,7 @@ export declare namespace DirectVolume {
         stepsPerCell: PD.Numeric;
         jumpLength: PD.Numeric;
         alpha: PD.Numeric;
-        quality: PD.Select<"auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest">;
+        quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
         material: PD.Group<PD.Normalize<{
             metalness: number;
             roughness: number;

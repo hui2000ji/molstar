@@ -10,19 +10,19 @@ import { ThemeRegistryContext } from '../../../mol-theme/theme';
 import { Structure } from '../../../mol-model/structure';
 export declare const BallAndStickParams: {
     includeParent: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     visuals: PD.MultiSelect<"element-sphere" | "intra-bond" | "inter-bond">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"off" | "symmetric" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -41,7 +41,7 @@ export declare const BallAndStickParams: {
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -70,19 +70,19 @@ export declare const BallAndStickParams: {
 export type BallAndStickParams = typeof BallAndStickParams;
 export declare function getBallAndStickParams(ctx: ThemeRegistryContext, structure: Structure): {
     includeParent: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     visuals: PD.MultiSelect<"element-sphere" | "intra-bond" | "inter-bond">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"off" | "symmetric" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -101,7 +101,7 @@ export declare function getBallAndStickParams(ctx: ThemeRegistryContext, structu
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -131,19 +131,19 @@ export type BallAndStickRepresentation = StructureRepresentation<BallAndStickPar
 export declare function BallAndStickRepresentation(ctx: RepresentationContext, getParams: RepresentationParamsGetter<Structure, BallAndStickParams>): BallAndStickRepresentation;
 export declare const BallAndStickRepresentationProvider: StructureRepresentationProvider<{
     includeParent: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     visuals: PD.MultiSelect<"element-sphere" | "intra-bond" | "inter-bond">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"off" | "symmetric" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -162,7 +162,7 @@ export declare const BallAndStickRepresentationProvider: StructureRepresentation
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

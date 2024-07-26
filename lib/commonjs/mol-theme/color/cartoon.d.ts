@@ -13,18 +13,6 @@ export declare const CartoonColorThemeParams: {
         saturation: number;
         lightness: number;
     }>, "uniform"> | PD.NamedParams<PD.Normalize<{
-        saturation: number;
-        lightness: number;
-        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
-            water: any;
-            ion: any;
-            protein: any;
-            RNA: any;
-            DNA: any;
-            PNA: any;
-            saccharide: any;
-        }>, "custom">;
-    }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -94,6 +82,18 @@ export declare const CartoonColorThemeParams: {
         saturation: number;
         lightness: number;
         colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+            water: any;
+            ion: any;
+            protein: any;
+            RNA: any;
+            DNA: any;
+            PNA: any;
+            saccharide: any;
+        }>, "custom">;
+    }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
+        saturation: number;
+        lightness: number;
+        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
             alphaHelix: any;
             threeTenHelix: any;
             piHelix: any;
@@ -112,55 +112,16 @@ export declare const CartoonColorThemeParams: {
         saturation: number;
         lightness: number;
     }>, "uniform"> | PD.NamedParams<PD.Normalize<{
-        saturation: number;
-        lightness: number;
-        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
-            ALA: any;
-            ARG: any;
-            ASN: any;
-            ASP: any;
-            CYS: any;
-            GLN: any;
-            GLU: any;
-            GLY: any;
-            HIS: any;
-            ILE: any;
-            LEU: any;
-            LYS: any;
-            MET: any;
-            PHE: any;
-            PRO: any;
-            SER: any;
-            THR: any;
-            TRP: any;
-            TYR: any;
-            VAL: any;
-            A: any;
-            G: any;
-            I: any;
-            C: any;
-            T: any;
-            U: any;
-            DA: any;
-            DG: any;
-            DI: any;
-            DC: any;
-            DT: any;
-            DU: any;
-            APN: any;
-            GPN: any;
-            CPN: any;
-            TPN: any;
-        }>, "custom">;
-    }>, "residue-name"> | PD.NamedParams<PD.Normalize<{
         carbonColor: PD.NamedParams<PD.Normalize<{
             value: any;
             saturation: any;
             lightness: any;
-        }>, "uniform"> | PD.NamedParams<PD.Normalize<{
+        }>, "uniform"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
             palette: any;
             asymId: any;
         }>, "chain-id"> | PD.NamedParams<PD.Normalize<{
+            palette: any;
+        }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
             palette: any;
         }>, "entity-id"> | PD.NamedParams<PD.Normalize<{
             palette: any;
@@ -168,11 +129,9 @@ export declare const CartoonColorThemeParams: {
             palette: any;
         }>, "model-index"> | PD.NamedParams<PD.Normalize<{
             palette: any;
-        }>, "structure-index"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
+        }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
             palette: any;
         }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
-            palette: any;
-        }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
             'CDR def.': any;
             'VH/V\u03B1 FR': any;
             'VL/V\u03B2 FR': any;
@@ -304,7 +263,48 @@ export declare const CartoonColorThemeParams: {
             LV: any;
             UUH: any;
         }>, "custom">;
-    }>, "element-symbol">>;
+    }>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
+        saturation: number;
+        lightness: number;
+        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+            ALA: any;
+            ARG: any;
+            ASN: any;
+            ASP: any;
+            CYS: any;
+            GLN: any;
+            GLU: any;
+            GLY: any;
+            HIS: any;
+            ILE: any;
+            LEU: any;
+            LYS: any;
+            MET: any;
+            PHE: any;
+            PRO: any;
+            SER: any;
+            THR: any;
+            TRP: any;
+            TYR: any;
+            VAL: any;
+            A: any;
+            G: any;
+            I: any;
+            C: any;
+            T: any;
+            U: any;
+            DA: any;
+            DG: any;
+            DI: any;
+            DC: any;
+            DT: any;
+            DU: any;
+            APN: any;
+            GPN: any;
+            CPN: any;
+            TPN: any;
+        }>, "custom">;
+    }>, "residue-name">>;
 };
 export type CartoonColorThemeParams = typeof CartoonColorThemeParams;
 export declare function getCartoonColorThemeParams(ctx: ThemeDataContext): {
@@ -313,18 +313,6 @@ export declare function getCartoonColorThemeParams(ctx: ThemeDataContext): {
         saturation: number;
         lightness: number;
     }>, "uniform"> | PD.NamedParams<PD.Normalize<{
-        saturation: number;
-        lightness: number;
-        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
-            water: any;
-            ion: any;
-            protein: any;
-            RNA: any;
-            DNA: any;
-            PNA: any;
-            saccharide: any;
-        }>, "custom">;
-    }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -394,6 +382,18 @@ export declare function getCartoonColorThemeParams(ctx: ThemeDataContext): {
         saturation: number;
         lightness: number;
         colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+            water: any;
+            ion: any;
+            protein: any;
+            RNA: any;
+            DNA: any;
+            PNA: any;
+            saccharide: any;
+        }>, "custom">;
+    }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
+        saturation: number;
+        lightness: number;
+        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
             alphaHelix: any;
             threeTenHelix: any;
             piHelix: any;
@@ -412,55 +412,16 @@ export declare function getCartoonColorThemeParams(ctx: ThemeDataContext): {
         saturation: number;
         lightness: number;
     }>, "uniform"> | PD.NamedParams<PD.Normalize<{
-        saturation: number;
-        lightness: number;
-        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
-            ALA: any;
-            ARG: any;
-            ASN: any;
-            ASP: any;
-            CYS: any;
-            GLN: any;
-            GLU: any;
-            GLY: any;
-            HIS: any;
-            ILE: any;
-            LEU: any;
-            LYS: any;
-            MET: any;
-            PHE: any;
-            PRO: any;
-            SER: any;
-            THR: any;
-            TRP: any;
-            TYR: any;
-            VAL: any;
-            A: any;
-            G: any;
-            I: any;
-            C: any;
-            T: any;
-            U: any;
-            DA: any;
-            DG: any;
-            DI: any;
-            DC: any;
-            DT: any;
-            DU: any;
-            APN: any;
-            GPN: any;
-            CPN: any;
-            TPN: any;
-        }>, "custom">;
-    }>, "residue-name"> | PD.NamedParams<PD.Normalize<{
         carbonColor: PD.NamedParams<PD.Normalize<{
             value: any;
             saturation: any;
             lightness: any;
-        }>, "uniform"> | PD.NamedParams<PD.Normalize<{
+        }>, "uniform"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
             palette: any;
             asymId: any;
         }>, "chain-id"> | PD.NamedParams<PD.Normalize<{
+            palette: any;
+        }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
             palette: any;
         }>, "entity-id"> | PD.NamedParams<PD.Normalize<{
             palette: any;
@@ -468,11 +429,9 @@ export declare function getCartoonColorThemeParams(ctx: ThemeDataContext): {
             palette: any;
         }>, "model-index"> | PD.NamedParams<PD.Normalize<{
             palette: any;
-        }>, "structure-index"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
+        }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
             palette: any;
         }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
-            palette: any;
-        }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
             'CDR def.': any;
             'VH/V\u03B1 FR': any;
             'VL/V\u03B2 FR': any;
@@ -604,7 +563,48 @@ export declare function getCartoonColorThemeParams(ctx: ThemeDataContext): {
             LV: any;
             UUH: any;
         }>, "custom">;
-    }>, "element-symbol">>;
+    }>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
+        saturation: number;
+        lightness: number;
+        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+            ALA: any;
+            ARG: any;
+            ASN: any;
+            ASP: any;
+            CYS: any;
+            GLN: any;
+            GLU: any;
+            GLY: any;
+            HIS: any;
+            ILE: any;
+            LEU: any;
+            LYS: any;
+            MET: any;
+            PHE: any;
+            PRO: any;
+            SER: any;
+            THR: any;
+            TRP: any;
+            TYR: any;
+            VAL: any;
+            A: any;
+            G: any;
+            I: any;
+            C: any;
+            T: any;
+            U: any;
+            DA: any;
+            DG: any;
+            DI: any;
+            DC: any;
+            DT: any;
+            DU: any;
+            APN: any;
+            GPN: any;
+            CPN: any;
+            TPN: any;
+        }>, "custom">;
+    }>, "residue-name">>;
 };
 export declare function CartoonColorTheme(ctx: ThemeDataContext, props: PD.Values<CartoonColorThemeParams>): ColorTheme<CartoonColorThemeParams>;
 export declare const CartoonColorThemeProvider: ColorTheme.Provider<CartoonColorThemeParams, 'cartoon'>;

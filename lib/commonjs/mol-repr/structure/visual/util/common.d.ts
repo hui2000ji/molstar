@@ -31,7 +31,7 @@ export declare const UnitKindInfo: {
     gaussians: {};
 };
 export type UnitKind = keyof typeof UnitKindInfo;
-export declare const UnitKindOptions: ["spheres" | "atomic" | "gaussians", string][];
+export declare const UnitKindOptions: ["spheres" | "gaussians" | "atomic", string][];
 export declare function includesUnitKind(unitKinds: UnitKind[], unit: Unit): boolean;
 export declare function getVolumeSliceInfo(box: Box3D, resolution: number, maxCells?: number): {
     area: number;
@@ -50,7 +50,7 @@ export declare function ensureReasonableResolution<T>(box: Box3D, props: {
 } & T & {
     resolution: number;
 };
-export declare function getConformation(unit: Unit): import("../../../../mol-model/structure/model/properties/coarse").CoarseSphereConformation | import("../../../../mol-model/structure/model/properties/coarse").CoarseGaussianConformation | import("../../../../mol-model/structure/model/properties/atomic").AtomicConformation;
+export declare function getConformation(unit: Unit): import("../../../../mol-model/structure/model/properties/atomic").AtomicConformation | import("../../../../mol-model/structure/model/properties/coarse").CoarseSphereConformation | import("../../../../mol-model/structure/model/properties/coarse").CoarseGaussianConformation;
 export declare const CommonSurfaceParams: {
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;

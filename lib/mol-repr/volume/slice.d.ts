@@ -15,10 +15,10 @@ export declare const SliceParams: {
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+        defaultValue: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -58,7 +58,7 @@ export declare const SliceParams: {
             relativeValue: number;
         }>, number>;
     }>;
-    interpolation: PD.Select<"nearest" | "catmulrom" | "mitchell" | "bspline">;
+    interpolation: PD.Select<"nearest" | "bspline" | "catmulrom" | "mitchell">;
     alpha: PD.Numeric;
     material: PD.Group<PD.Normalize<{
         metalness: number;
@@ -82,10 +82,10 @@ export declare function getSliceParams(ctx: ThemeRegistryContext, volume: Volume
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+        defaultValue: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -125,7 +125,7 @@ export declare function getSliceParams(ctx: ThemeRegistryContext, volume: Volume
             relativeValue: number;
         }>, number>;
     }>;
-    interpolation: PD.Select<"nearest" | "catmulrom" | "mitchell" | "bspline">;
+    interpolation: PD.Select<"nearest" | "bspline" | "catmulrom" | "mitchell">;
     alpha: PD.Numeric;
     material: PD.Group<PD.Normalize<{
         metalness: number;
@@ -150,10 +150,10 @@ export declare const SliceRepresentationProvider: VolumeRepresentationProvider<{
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+        defaultValue: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -193,7 +193,7 @@ export declare const SliceRepresentationProvider: VolumeRepresentationProvider<{
             relativeValue: number;
         }>, number>;
     }>;
-    interpolation: PD.Select<"nearest" | "catmulrom" | "mitchell" | "bspline">;
+    interpolation: PD.Select<"nearest" | "bspline" | "catmulrom" | "mitchell">;
     alpha: PD.Numeric;
     material: PD.Group<PD.Normalize<{
         metalness: number;

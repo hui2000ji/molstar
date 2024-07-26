@@ -10,7 +10,7 @@ export interface OrientationData {
     locis: StructureElement.Loci[];
 }
 export declare const OrientationParams: {
-    visuals: PD.MultiSelect<"axes" | "box" | "ellipsoid">;
+    visuals: PD.MultiSelect<"box" | "axes" | "ellipsoid">;
     color: PD.Color;
     scaleFactor: PD.Numeric;
     radiusScale: PD.Numeric;
@@ -23,7 +23,7 @@ export declare const OrientationParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "custom" | "highest" | "higher" | "high" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

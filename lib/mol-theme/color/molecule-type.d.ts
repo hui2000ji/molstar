@@ -21,7 +21,7 @@ export type MoleculeTypeColors = typeof MoleculeTypeColors;
 export declare const MoleculeTypeColorThemeParams: {
     saturation: PD.Numeric;
     lightness: PD.Numeric;
-    colors: PD.Mapped<PD.NamedParams<PD.Normalize<{
+    colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
         water: Color;
         ion: Color;
         protein: Color;
@@ -29,13 +29,13 @@ export declare const MoleculeTypeColorThemeParams: {
         DNA: Color;
         PNA: Color;
         saccharide: Color;
-    }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "default">>;
+    }>, "custom">>;
 };
 export type MoleculeTypeColorThemeParams = typeof MoleculeTypeColorThemeParams;
 export declare function getMoleculeTypeColorThemeParams(ctx: ThemeDataContext): {
     saturation: PD.Numeric;
     lightness: PD.Numeric;
-    colors: PD.Mapped<PD.NamedParams<PD.Normalize<{
+    colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
         water: Color;
         ion: Color;
         protein: Color;
@@ -43,7 +43,7 @@ export declare function getMoleculeTypeColorThemeParams(ctx: ThemeDataContext): 
         DNA: Color;
         PNA: Color;
         saccharide: Color;
-    }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "default">>;
+    }>, "custom">>;
 };
 export declare function moleculeTypeColor(colorMap: MoleculeTypeColors, unit: Unit, element: ElementIndex): Color;
 export declare function MoleculeTypeColorTheme(ctx: ThemeDataContext, props: PD.Values<MoleculeTypeColorThemeParams>): ColorTheme<MoleculeTypeColorThemeParams>;

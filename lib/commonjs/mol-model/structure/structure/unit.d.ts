@@ -190,10 +190,10 @@ declare namespace Unit {
     export function areOperatorsEqual(a: Unit, b: Unit): boolean;
     export function areConformationsEqual(a: Unit, b: Unit): boolean;
     export function isSameConformation(u: Unit, model: Model): boolean;
-    export function getModelConformationOfKind(kind: Unit.Kind, model: Model): CoarseSphereConformation | CoarseGaussianConformation | import("../model/properties/atomic").AtomicConformation;
-    export function getConformation(u: Unit): CoarseSphereConformation | CoarseGaussianConformation | import("../model/properties/atomic").AtomicConformation;
-    export function getModelHierarchyOfKind(kind: Unit.Kind, model: Model): CoarseElements | import("../model/properties/atomic").AtomicHierarchy;
-    export function getHierarchy(u: Unit): CoarseElements | import("../model/properties/atomic").AtomicHierarchy;
+    export function getModelConformationOfKind(kind: Unit.Kind, model: Model): import("../model/properties/atomic").AtomicConformation | CoarseSphereConformation | CoarseGaussianConformation;
+    export function getConformation(u: Unit): import("../model/properties/atomic").AtomicConformation | CoarseSphereConformation | CoarseGaussianConformation;
+    export function getModelHierarchyOfKind(kind: Unit.Kind, model: Model): import("../model/properties/atomic").AtomicHierarchy | CoarseElements;
+    export function getHierarchy(u: Unit): import("../model/properties/atomic").AtomicHierarchy | CoarseElements;
     export {};
 }
 export { Unit };

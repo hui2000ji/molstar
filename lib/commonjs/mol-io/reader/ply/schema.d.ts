@@ -24,7 +24,7 @@ export declare const PlyTypeByteLength: {
 };
 export type PlyType = keyof typeof PlyTypeByteLength;
 export declare const PlyTypes: Set<string>;
-export declare function PlyType(str: string): "double" | "float" | "uint8" | "float32" | "ushort" | "int" | "uint32" | "uint16" | "int32" | "int8" | "int16" | "char" | "uchar" | "short" | "uint" | "float64";
+export declare function PlyType(str: string): "double" | "float" | "char" | "int" | "uint8" | "int8" | "uint16" | "int16" | "uint32" | "int32" | "float32" | "ushort" | "uchar" | "short" | "uint" | "float64";
 export interface PlyFile {
     readonly comments: ReadonlyArray<string>;
     readonly elementNames: ReadonlyArray<string>;

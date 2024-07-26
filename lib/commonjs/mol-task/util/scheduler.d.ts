@@ -3,6 +3,7 @@
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  */
+/// <reference types="node" />
 declare const Scheduler: {
     setImmediate: typeof setImmediate | ((callback: (...args: any[]) => void, ...args: any[]) => number);
     clearImmediate: typeof clearImmediate | ((handle: number) => void);

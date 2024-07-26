@@ -31,13 +31,13 @@ export type ElementSphereImpostorProps = {
 } & ElementProps;
 export declare function createElementSphereImpostor(ctx: VisualContext, unit: Unit, structure: Structure, theme: Theme, props: ElementSphereImpostorProps, spheres?: Spheres): Spheres;
 export declare function eachElement(loci: Loci, structureGroup: StructureGroup, apply: (interval: Interval) => boolean): boolean;
-export declare function getElementLoci(pickingId: PickingId, structureGroup: StructureGroup, id: number): {
+export declare function getElementLoci(pickingId: PickingId, structureGroup: StructureGroup, id: number): StructureElement.Loci | {
     kind: "empty-loci";
-} | StructureElement.Loci;
+};
 export declare function eachSerialElement(loci: Loci, structure: Structure, apply: (interval: Interval) => boolean): boolean;
-export declare function getSerialElementLoci(pickingId: PickingId, structure: Structure, id: number): {
+export declare function getSerialElementLoci(pickingId: PickingId, structure: Structure, id: number): StructureElement.Loci | {
     kind: "empty-loci";
-} | StructureElement.Loci;
+};
 export declare namespace ElementIterator {
     function fromGroup(structureGroup: StructureGroup): LocationIterator;
     function fromStructure(structure: Structure): LocationIterator;

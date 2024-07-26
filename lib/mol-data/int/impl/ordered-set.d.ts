@@ -31,9 +31,9 @@ export declare function findPredecessorIndex(set: OrderedSetImpl, x: number): nu
 export declare function findPredecessorIndexInInterval(set: OrderedSetImpl, x: number, bounds: I): number;
 export declare function findRange(set: OrderedSetImpl, min: number, max: number): I<number>;
 export declare function intersectionSize(a: OrderedSetImpl, b: OrderedSetImpl): number;
-export declare function union(a: OrderedSetImpl, b: OrderedSetImpl): S<number> | I<number>;
-export declare function intersect(a: OrderedSetImpl, b: OrderedSetImpl): S<number> | I<number>;
-export declare function subtract(a: OrderedSetImpl, b: OrderedSetImpl): S<number> | I<number>;
+export declare function union(a: OrderedSetImpl, b: OrderedSetImpl): I<number> | S<number>;
+export declare function intersect(a: OrderedSetImpl, b: OrderedSetImpl): I<number> | S<number>;
+export declare function subtract(a: OrderedSetImpl, b: OrderedSetImpl): I<number> | S<number>;
 export declare function forEach(set: OrderedSetImpl, f: (value: number, i: number, ctx: any) => void, ctx: any): any;
 export declare function forEachSegment(set: OrderedSetImpl, segment: (v: number) => number, f: (value: number, segIndex: number, ctx: any) => void, ctx: any): any;
 export declare function indexedIntersect(idxA: OrderedSetImpl, a: S, b: S): OrderedSetImpl;

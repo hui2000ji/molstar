@@ -47,13 +47,13 @@ declare const ExplodeStructureRepresentation3D: StateTransformer<SO.Molecule.Str
 type SpinStructureRepresentation3D = typeof SpinStructureRepresentation3D;
 declare const SpinStructureRepresentation3D: StateTransformer<SO.Molecule.Structure.Representation3D, SO.Molecule.Structure.Representation3DState, PD.Normalize<{
     axis: PD.NamedParams<PD.Normalize<{
-        vector: any;
-    }>, "custom"> | PD.NamedParams<PD.Normalize<{
         principalAxis: any;
-    }>, "structure">;
-    origin: PD.NamedParams<PD.Normalize<{
+    }>, "structure"> | PD.NamedParams<PD.Normalize<{
         vector: any;
-    }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "structure">;
+    }>, "custom">;
+    origin: PD.NamedParams<PD.Normalize<unknown>, "structure"> | PD.NamedParams<PD.Normalize<{
+        vector: any;
+    }>, "custom">;
     t: number;
 }>>;
 type OverpaintStructureRepresentation3DFromScript = typeof OverpaintStructureRepresentation3DFromScript;
@@ -149,7 +149,7 @@ type ModelUnitcell3D = typeof ModelUnitcell3D;
 declare const ModelUnitcell3D: StateTransformer<SO.Molecule.Model, SO.Shape.Representation3D, PD.Normalize<{
     cellColor: Color;
     cellScale: number;
-    ref: "model" | "origin";
+    ref: "origin" | "model";
     attachment: "center" | "corner";
     doubleSided: boolean;
     flipSided: boolean;
@@ -160,7 +160,7 @@ declare const ModelUnitcell3D: StateTransformer<SO.Molecule.Model, SO.Shape.Repr
     bumpFrequency: number;
     bumpAmplitude: number;
     alpha: number;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+    quality: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
     material: PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -184,7 +184,7 @@ declare const StructureBoundingBox3D: StateTransformer<SO.Molecule.Structure, SO
     bumpFrequency: number;
     bumpAmplitude: number;
     alpha: number;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+    quality: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
     material: PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -219,14 +219,14 @@ declare const StructureSelectionsDistance3D: StateTransformer<SO.Molecule.Struct
     tether: boolean;
     tetherLength: number;
     tetherBaseWidth: number;
-    attachment: "middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right";
+    attachment: "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-center" | "middle-right" | "top-left" | "top-center" | "top-right";
     fontFamily: import("../../mol-geo/geometry/text/font-atlas").FontFamily;
     fontQuality: number;
     fontStyle: import("../../mol-geo/geometry/text/font-atlas").FontStyle;
     fontVariant: import("../../mol-geo/geometry/text/font-atlas").FontVariant;
     fontWeight: import("../../mol-geo/geometry/text/font-atlas").FontWeight;
     alpha: number;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+    quality: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
     material: PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -245,7 +245,7 @@ declare const StructureSelectionsDistance3D: StateTransformer<SO.Molecule.Struct
 export { StructureSelectionsAngle3D };
 type StructureSelectionsAngle3D = typeof StructureSelectionsAngle3D;
 declare const StructureSelectionsAngle3D: StateTransformer<SO.Molecule.Structure.Selections, SO.Shape.Representation3D, PD.Normalize<{
-    visuals: ("text" | "arc" | "vectors" | "sector")[];
+    visuals: ("text" | "vectors" | "sector" | "arc")[];
     borderWidth: number;
     customText: string;
     textColor: Color;
@@ -262,14 +262,14 @@ declare const StructureSelectionsAngle3D: StateTransformer<SO.Molecule.Structure
     tether: boolean;
     tetherLength: number;
     tetherBaseWidth: number;
-    attachment: "middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right";
+    attachment: "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-center" | "middle-right" | "top-left" | "top-center" | "top-right";
     fontFamily: import("../../mol-geo/geometry/text/font-atlas").FontFamily;
     fontQuality: number;
     fontStyle: import("../../mol-geo/geometry/text/font-atlas").FontStyle;
     fontVariant: import("../../mol-geo/geometry/text/font-atlas").FontVariant;
     fontWeight: import("../../mol-geo/geometry/text/font-atlas").FontWeight;
     alpha: number;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+    quality: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
     material: PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -298,7 +298,7 @@ declare const StructureSelectionsAngle3D: StateTransformer<SO.Molecule.Structure
 export { StructureSelectionsDihedral3D };
 type StructureSelectionsDihedral3D = typeof StructureSelectionsDihedral3D;
 declare const StructureSelectionsDihedral3D: StateTransformer<SO.Molecule.Structure.Selections, SO.Shape.Representation3D, PD.Normalize<{
-    visuals: ("text" | "arc" | "vectors" | "sector" | "extenders" | "arms" | "connector")[];
+    visuals: ("text" | "vectors" | "sector" | "arc" | "extenders" | "arms" | "connector")[];
     borderWidth: number;
     customText: string;
     textColor: Color;
@@ -315,14 +315,14 @@ declare const StructureSelectionsDihedral3D: StateTransformer<SO.Molecule.Struct
     tether: boolean;
     tetherLength: number;
     tetherBaseWidth: number;
-    attachment: "middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right";
+    attachment: "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-center" | "middle-right" | "top-left" | "top-center" | "top-right";
     fontFamily: import("../../mol-geo/geometry/text/font-atlas").FontFamily;
     fontQuality: number;
     fontStyle: import("../../mol-geo/geometry/text/font-atlas").FontStyle;
     fontVariant: import("../../mol-geo/geometry/text/font-atlas").FontVariant;
     fontWeight: import("../../mol-geo/geometry/text/font-atlas").FontWeight;
     alpha: number;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+    quality: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
     material: PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -369,14 +369,14 @@ declare const StructureSelectionsLabel3D: StateTransformer<SO.Molecule.Structure
     tether: boolean;
     tetherLength: number;
     tetherBaseWidth: number;
-    attachment: "middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right";
+    attachment: "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-center" | "middle-right" | "top-left" | "top-center" | "top-right";
     fontFamily: import("../../mol-geo/geometry/text/font-atlas").FontFamily;
     fontQuality: number;
     fontStyle: import("../../mol-geo/geometry/text/font-atlas").FontStyle;
     fontVariant: import("../../mol-geo/geometry/text/font-atlas").FontVariant;
     fontWeight: import("../../mol-geo/geometry/text/font-atlas").FontWeight;
     alpha: number;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+    quality: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
     material: PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -391,7 +391,7 @@ declare const StructureSelectionsLabel3D: StateTransformer<SO.Molecule.Structure
 export { StructureSelectionsOrientation3D };
 type StructureSelectionsOrientation3D = typeof StructureSelectionsOrientation3D;
 declare const StructureSelectionsOrientation3D: StateTransformer<SO.Molecule.Structure.Selections, SO.Shape.Representation3D, PD.Normalize<{
-    visuals: ("axes" | "box" | "ellipsoid")[];
+    visuals: ("box" | "axes" | "ellipsoid")[];
     color: Color;
     scaleFactor: number;
     radiusScale: number;
@@ -404,7 +404,7 @@ declare const StructureSelectionsOrientation3D: StateTransformer<SO.Molecule.Str
     bumpFrequency: number;
     bumpAmplitude: number;
     alpha: number;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+    quality: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
     material: PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -431,7 +431,7 @@ declare const StructureSelectionsPlane3D: StateTransformer<SO.Molecule.Structure
     bumpFrequency: number;
     bumpAmplitude: number;
     alpha: number;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+    quality: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
     material: PD.Normalize<{
         metalness: number;
         roughness: number;
