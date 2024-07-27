@@ -163,7 +163,7 @@ export declare namespace StructureRepresentationPresetProvider {
                 'VL/V\u03B2 CDR': import("../../../mol-util/color").Color;
                 'Other polymer': import("../../../mol-util/color").Color;
                 'Non-polymer': import("../../../mol-util/color").Color;
-            }>, "antibody/TCR">>;
+            }>, "antibody-coloring-residue">>;
             saturation: PD.Numeric;
             lightness: PD.Numeric;
             colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{

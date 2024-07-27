@@ -139,7 +139,7 @@ export declare const CartoonColorThemeParams: {
             'VL/V\u03B2 CDR': any;
             'Other polymer': any;
             'Non-polymer': any;
-        }>, "antibody/TCR">;
+        }>, "antibody-coloring-residue">;
         saturation: number;
         lightness: number;
         colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
@@ -439,7 +439,7 @@ export declare function getCartoonColorThemeParams(ctx: ThemeDataContext): {
             'VL/V\u03B2 CDR': any;
             'Other polymer': any;
             'Non-polymer': any;
-        }>, "antibody/TCR">;
+        }>, "antibody-coloring-residue">;
         saturation: number;
         lightness: number;
         colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{

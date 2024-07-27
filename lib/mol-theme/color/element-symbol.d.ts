@@ -236,7 +236,7 @@ export declare const ElementSymbolColorThemeParams: {
         'VL/V\u03B2 CDR': Color;
         'Other polymer': Color;
         'Non-polymer': Color;
-    }>, "antibody/TCR">>;
+    }>, "antibody-coloring-residue">>;
     saturation: PD.Numeric;
     lightness: PD.Numeric;
     colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
@@ -467,7 +467,7 @@ export declare function getElementSymbolColorThemeParams(ctx: ThemeDataContext):
         'VL/V\u03B2 CDR': Color;
         'Other polymer': Color;
         'Non-polymer': Color;
-    }>, "antibody/TCR">>;
+    }>, "antibody-coloring-residue">>;
     saturation: PD.Numeric;
     lightness: PD.Numeric;
     colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{

@@ -220,7 +220,7 @@ declare namespace ColorTheme {
                     'VL/V\u03B2 CDR': any;
                     'Other polymer': any;
                     'Non-polymer': any;
-                }>, "antibody/TCR">;
+                }>, "antibody-coloring-residue">;
                 saturation: number;
                 lightness: number;
                 colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
@@ -527,7 +527,7 @@ declare namespace ColorTheme {
                 'VL/V\u03B2 CDR': Color;
                 'Other polymer': Color;
                 'Non-polymer': Color;
-            }>, "antibody/TCR">>;
+            }>, "antibody-coloring-residue">>;
             saturation: PD.Numeric;
             lightness: PD.Numeric;
             colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
