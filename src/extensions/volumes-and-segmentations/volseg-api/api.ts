@@ -52,8 +52,13 @@ export class VolumeApiV2 {
     }
 
     public async getEntryList(maxEntries: number, keyword?: string): Promise<{ [source: string]: string[] }> {
-        const response = await fetch(this.entryListUrl(maxEntries, keyword));
-        return await response.json();
+        try {
+            const response = await fetch(this.entryListUrl(maxEntries, keyword));
+            return await response.json();
+        } catch (e) {
+            console.error(e);
+            return {};
+        }
     }
 
     public async getMetadata(source: string, entryId: string): Promise<Metadata> {
