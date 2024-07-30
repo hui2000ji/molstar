@@ -59,8 +59,8 @@ namespace Theme {
     }
 
     export function releaseDependencies(theme: ThemeRegistryContext, data: ThemeDataContext, props: Props) {
-        theme.colorThemeRegistry.get(props.colorTheme.name).ensureCustomProperties?.detach(data);
-        theme.sizeThemeRegistry.get(props.sizeTheme.name).ensureCustomProperties?.detach(data);
+        theme.colorThemeRegistry.get(props.colorTheme.name).ensureCustomProperties?.detach(data, props.colorTheme.params);
+        theme.sizeThemeRegistry.get(props.sizeTheme.name).ensureCustomProperties?.detach(data, props.sizeTheme.params);
     }
 }
 
@@ -75,8 +75,8 @@ export interface ThemeProvider<T extends ColorTheme<P, G> | SizeTheme<P>, P exte
     readonly defaultValues: PD.Values<P>
     readonly isApplicable: (ctx: ThemeDataContext) => boolean
     readonly ensureCustomProperties?: {
-        attach: (ctx: CustomProperty.Context, data: ThemeDataContext, props?: PD.Values<P>) => Promise<void>,
-        detach: (data: ThemeDataContext) => void
+        attach: (ctx: CustomProperty.Context, data: ThemeDataContext, props: PD.Values<P>) => Promise<void>,
+        detach: (data: ThemeDataContext, props: PD.Values<P>) => void
     }
 }
 

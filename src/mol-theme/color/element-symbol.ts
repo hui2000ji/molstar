@@ -25,7 +25,9 @@ import { StructureIndexColorTheme, StructureIndexColorThemeParams } from './stru
 import { ColorThemeCategory } from './categories';
 import { UnitIndexColorTheme, UnitIndexColorThemeParams } from './unit-index';
 import { UniformColorTheme, UniformColorThemeParams } from './uniform';
-import { AntibodyColoringResidueColorThemeParams, AntibodyColoringResidueColorTheme } from '../../custom/extensions/antibody-coloring-residues/color';
+import { AntibodyColoringResidueColorThemeParams, AntibodyColoringResidueColorTheme, AntibodyColoringResidueColorThemeProvider } from '../../custom/extensions/antibody-coloring-residues/color';
+import { CustomProperty } from '../../mol-model-props/common/custom-property';
+
 
 // from Jmol http://jmol.sourceforge.net/jscolors/ (or 0xFFFFFF)
 export const ElementSymbolColors = ColorMap({
@@ -133,5 +135,19 @@ export const ElementSymbolColorThemeProvider: ColorTheme.Provider<ElementSymbolC
     factory: ElementSymbolColorTheme,
     getParams: getElementSymbolColorThemeParams,
     defaultValues: PD.getDefaultValues(ElementSymbolColorThemeParams),
-    isApplicable: (ctx: ThemeDataContext) => !!ctx.structure
+    isApplicable: (ctx: ThemeDataContext) => !!ctx.structure,
+    ensureCustomProperties: {
+        attach: (ctx: CustomProperty.Context, data: ThemeDataContext, prop) => {
+            if (prop?.carbonColor.name === 'antibody-coloring-residue' && AntibodyColoringResidueColorThemeProvider.ensureCustomProperties) {
+                return AntibodyColoringResidueColorThemeProvider.ensureCustomProperties.attach(ctx, data, prop.carbonColor.params);
+            } else {
+                return Promise.resolve();
+            }
+        },
+        detach: (data, props) => {
+            if (props?.carbonColor.name === 'antibody-coloring-residue' && AntibodyColoringResidueColorThemeProvider.ensureCustomProperties) {
+                AntibodyColoringResidueColorThemeProvider.ensureCustomProperties.detach(data, props.carbonColor.params);
+            }
+        }
+    }
 };
