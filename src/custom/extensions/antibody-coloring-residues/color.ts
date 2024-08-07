@@ -1,8 +1,3 @@
-import {
-    isApplicable,
-    getResidueInfo,
-    AntibodyColoringResidueProvider,
-} from './prop';
 import type { Location } from '../../../mol-model/location';
 import { Bond, StructureElement } from '../../../mol-model/structure';
 import { ColorTheme } from '../../../mol-theme/color';
@@ -14,6 +9,13 @@ import { CustomProperty } from '../../../mol-model-props/common/custom-property'
 import { ResidueModel } from '../../services/model/common.model';
 import { isPolymer } from '../../../mol-model/structure/model/types';
 import { ColorThemeCategory } from '../../../mol-theme/color/categories';
+import { isApplicable, getResidueInfo } from './util';
+import { AntibodyColoringResidueKabatProvider } from './provider/kabat-prop';
+import { AntibodyColoringResidueChothiaProvider } from './provider/chothia-prop';
+import { AntibodyColoringResidueImgtProvider } from './provider/imgt-prop';
+import { AntibodyColoringResidueNorthProvider } from './provider/north-prop';
+import { CustomPropertyDescriptor } from '../../../mol-model/custom-property';
+import { CifExportContext } from '../../../mol-model/structure/export/mmcif';
 
 const ResidueColors = [
     Color.fromRgb(0, 0, 255), // blue
@@ -96,8 +98,6 @@ export const AntibodyColoringResidueColorThemeParams = {
 
 type Params = typeof AntibodyColoringResidueColorThemeParams;
 
-let preVal = '';
-
 export function AntibodyColoringResidueColorTheme(
     ctx: ThemeDataContext,
     props: PD.Values<Params>
@@ -106,18 +106,28 @@ export function AntibodyColoringResidueColorTheme(
 
     const other = props['Other polymer'];
     const nonPolymer = props['Non-polymer'];
+    const cdr_definition = props['CDR def.'];
+
+    let descriptor: CustomPropertyDescriptor<CifExportContext, {}>;
+    if (cdr_definition === 'kabat') {
+        descriptor = AntibodyColoringResidueKabatProvider.descriptor;
+    } else if (cdr_definition === 'imgt') {
+        descriptor = AntibodyColoringResidueImgtProvider.descriptor;
+    } else if (cdr_definition === 'chothia') {
+        descriptor = AntibodyColoringResidueChothiaProvider.descriptor;
+    } else {
+        descriptor = AntibodyColoringResidueNorthProvider.descriptor;
+    }
 
     if (
         ctx.structure &&
     !ctx.structure.isEmpty &&
     ctx.structure.models[0].customProperties.has(
-        AntibodyColoringResidueProvider.descriptor
+        descriptor
     )
     ) {
         const l = StructureElement.Location.create(ctx.structure);
-
         const model = ctx.structure.model;
-
         color = (location: Location) => {
             if (StructureElement.Location.is(location)) {
                 const moleculeType =
@@ -126,14 +136,14 @@ export function AntibodyColoringResidueColorTheme(
           ];
 
                 if (isPolymer(moleculeType)) {
-                    return residueMapColor(props, getResidueInfo(location));
+                    return residueMapColor(props, getResidueInfo(location, props['CDR def.']));
                 } else {
                     return Color(nonPolymer);
                 }
             } else if (Bond.isLocation(location)) {
                 l.unit = location.aUnit;
                 l.element = location.aUnit.elements[location.aIndex];
-                return residueMapColor(props, getResidueInfo(l));
+                return residueMapColor(props, getResidueInfo(l, props['CDR def.']));
             }
 
             return Color(other);
@@ -171,14 +181,38 @@ Params,
     ensureCustomProperties: {
         attach: (ctx: CustomProperty.Context, data: ThemeDataContext, prop) => {
             if (data.structure && prop) {
-                if (preVal !== prop['CDR def.']) {
-                    preVal = prop['CDR def.'];
-                    return AntibodyColoringResidueProvider.attach(
-                        ctx,
-                        data.structure.models[0],
-                        { timeStamp: Date.now(), 'CDR def.': prop['CDR def.'] },
-                        true
-                    );
+                const cdr_definition = prop['CDR def.'];
+                if (cdr_definition) {
+                    if (cdr_definition === 'kabat') {
+                        return AntibodyColoringResidueKabatProvider.attach(
+                            ctx,
+                            data.structure.models[0],
+                            void 0,
+                            true
+                        );
+                    } else if (cdr_definition === 'imgt') {
+                        return AntibodyColoringResidueImgtProvider.attach(
+                            ctx,
+                            data.structure.models[0],
+                            void 0,
+                            true
+                        );
+                    } else if (cdr_definition === 'chothia') {
+                        return AntibodyColoringResidueChothiaProvider.attach(
+                            ctx,
+                            data.structure.models[0],
+                            void 0,
+                            true
+                        );
+                    } else {
+                        return AntibodyColoringResidueNorthProvider.attach(
+                            ctx,
+                            data.structure.models[0],
+                            void 0,
+                            true
+                        );
+
+                    }
                 } else {
                     return Promise.resolve();
                 }
@@ -189,10 +223,12 @@ Params,
 
         },
         detach: (data) => {
-            return (
-                data.structure &&
-        AntibodyColoringResidueProvider.ref(data.structure.models[0], false)
-            );
+            if (data.structure) {
+                AntibodyColoringResidueKabatProvider.ref(data.structure.models[0], false);
+                AntibodyColoringResidueChothiaProvider.ref(data.structure.models[0], false);
+                AntibodyColoringResidueImgtProvider.ref(data.structure.models[0], false);
+                AntibodyColoringResidueNorthProvider.ref(data.structure.models[0], false);
+            }
         },
     },
 };

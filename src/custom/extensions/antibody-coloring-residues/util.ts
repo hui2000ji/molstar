@@ -1,15 +1,12 @@
 import { Model } from '../../../mol-model/structure';
-import { StructureElement } from '../../../mol-model/structure/structure';
-import { ParamDefinition as PD } from '../../../mol-util/param-definition';
-import { CustomProperty } from '../../../mol-model-props/common/custom-property';
-import { CustomModelProperty } from '../../../mol-model-props/common/custom-model-property';
-import { CustomPropertyDescriptor } from '../../../mol-model/custom-property';
-import { batchGetSeqInfoApi } from '../../services/backend.api';
 import { SeqInfoModel } from '../../services/model/common.model';
-import { AntibodyColoringResidueColorThemeParams } from './color';
+import { StructureElement } from '../../../mol-model/structure/structure';
+import { AntibodyColoringResidueKabatProvider } from './provider/kabat-prop';
+import { AntibodyColoringResidueChothiaProvider } from './provider/chothia-prop';
+import { AntibodyColoringResidueImgtProvider } from './provider/imgt-prop';
+import { AntibodyColoringResidueNorthProvider } from './provider/north-prop';
 
-type SequenceList = (SeqInfoModel | null)[] | undefined;
-
+export type SequenceList = (SeqInfoModel | null)[] | undefined;
 export function isApplicable(model?: Model): boolean {
     return !!model;
 }
@@ -70,61 +67,7 @@ export function expandEntityToChainArray(
     return expandedArr;
 }
 
-export async function fromServer(
-    ctx: CustomProperty.Context,
-    model: Model,
-    props: AntibodyColoringResidueProps
-): Promise<CustomProperty.Data<SequenceList>> {
-    const seqs = getSequenceArr(model);
-    const { data } = await batchGetSeqInfoApi({
-        sequences: seqs,
-        cdr_definition: props['CDR def.'],
-    });
-    const res = expandEntityToChainArray(data.list, model);
-    return { value: res };
-}
-
-export const AntibodyColoringResidueParams = {
-    ...AntibodyColoringResidueColorThemeParams,
-    timeStamp: PD.Numeric(0),
-    'CDR def.': PD.Text('')
-};
-
-
-export type Params = typeof AntibodyColoringResidueParams;
-export type AntibodyColoringResidueProps = PD.Values<Params>;
-
-export const AntibodyColoringResidueProvider: CustomModelProperty.Provider<
-Params,
-SequenceList
-> = CustomModelProperty.createProvider({
-    label: 'Antibody/TCR',
-    descriptor: CustomPropertyDescriptor({
-        name: 'antibody_coloring_residue',
-    }),
-    type: 'static',
-    defaultParams: AntibodyColoringResidueParams,
-    getParams: (data: Model) => {
-        return AntibodyColoringResidueParams;
-    },
-    isApplicable: (data: Model) => isApplicable(data),
-    obtain: async (
-        ctx: CustomProperty.Context,
-        data: Model,
-        props: Partial<AntibodyColoringResidueProps>
-    ) => {
-        const p = {
-            ...PD.getDefaultValues(AntibodyColoringResidueParams),
-            ...props,
-        };
-
-        const res = await fromServer(ctx, data, p);
-
-        return res;
-    },
-});
-
-export function getResidueInfo(e: StructureElement.Location) {
+export function getResidueInfo(e: StructureElement.Location, cdr_definition: string) {
     const model = e.structure.model;
     const { residueAtomSegments, chainAtomSegments } = model.atomicHierarchy;
     // 寻找当前原子所在 residue 的 index
@@ -136,10 +79,24 @@ export function getResidueInfo(e: StructureElement.Location) {
     const cStartIndex = chainAtomSegments.offsets[cIndex];
     const rStart = residueAtomSegments.index[cStartIndex];
     const index = rIndex - rStart;
-    const prop = AntibodyColoringResidueProvider.get(e.unit.model).value;
+
+    let prop: SequenceList;
+
+    if (cdr_definition === 'kabat') {
+        prop = AntibodyColoringResidueKabatProvider.get(e.unit.model).value;
+    } else if (cdr_definition === 'imgt') {
+        prop = AntibodyColoringResidueImgtProvider.get(e.unit.model).value;
+    } else if (cdr_definition === 'chothia') {
+        prop = AntibodyColoringResidueChothiaProvider.get(e.unit.model).value;
+    } else if (cdr_definition === 'north') {
+        prop = AntibodyColoringResidueNorthProvider.get(e.unit.model).value;
+    }
+
     if (!prop) {
         return undefined;
     }
     const item = prop[cIndex];
     return item ? item.aa_list[index] : undefined;
 }
+
+
