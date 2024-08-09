@@ -11,7 +11,7 @@ export declare class VolumeRepresentationRegistry extends RepresentationRegistry
 export declare namespace VolumeRepresentationRegistry {
     export const BuiltIn: {
         isosurface: import("./representation").VolumeRepresentationProvider<{
-            visuals: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"solid" | "wireframe">;
+            visuals: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"wireframe" | "solid">;
             bumpFrequency: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             quality: {
                 isEssential: boolean;

@@ -34,12 +34,12 @@ export declare class TrajectoryHierarchyBuilder {
             dynamicBonds: any;
         }>, "model"> | PD.NamedParams<PD.Normalize<{
             dynamicBonds: any;
+            id: any;
+        }>, "assembly"> | PD.NamedParams<PD.Normalize<{
+            dynamicBonds: any;
             ijkMin: any;
             ijkMax: any;
         }>, "symmetry"> | PD.NamedParams<PD.Normalize<{
-            dynamicBonds: any;
-            id: any;
-        }>, "assembly"> | PD.NamedParams<PD.Normalize<{
             dynamicBonds: any;
             radius: any;
         }>, "symmetry-mates"> | PD.NamedParams<PD.Normalize<{

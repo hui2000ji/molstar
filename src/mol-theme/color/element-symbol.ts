@@ -39,7 +39,7 @@ const DefaultElementSymbolColor = Color(0xFFFFFF);
 const Description = 'Assigns a color to every atom according to its chemical element.';
 
 export const ElementSymbolColorThemeParams = {
-    carbonColor: PD.MappedStatic('chain-id', {
+    carbonColor: PD.MappedStatic('antibody-coloring-residue', {
         'chain-id': PD.Group(ChainIdColorThemeParams),
         'unit-index': PD.Group(UnitIndexColorThemeParams, { label: 'Chain Instance' }),
         'entity-id': PD.Group(EntityIdColorThemeParams),

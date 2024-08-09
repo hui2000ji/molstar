@@ -40,7 +40,7 @@ interface ComplexVisualGeometryBuilder<P extends StructureParams, G extends Geom
 }
 export declare function ComplexVisual<G extends Geometry, P extends StructureParams & Geometry.Params<G>>(builder: ComplexVisualGeometryBuilder<P, G>, materialId: number): ComplexVisual<P>;
 export declare const ComplexMeshParams: {
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -74,7 +74,7 @@ export interface ComplexMeshVisualBuilder<P extends ComplexMeshParams> extends C
 }
 export declare function ComplexMeshVisual<P extends ComplexMeshParams>(builder: ComplexMeshVisualBuilder<P>, materialId: number): ComplexVisual<P>;
 export declare const ComplexCylindersParams: {
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
@@ -109,7 +109,7 @@ export interface ComplexCylindersVisualBuilder<P extends ComplexCylindersParams>
 }
 export declare function ComplexCylindersVisual<P extends ComplexCylindersParams>(builder: ComplexCylindersVisualBuilder<P>, materialId: number): ComplexVisual<P>;
 export declare const ComplexLinesParams: {
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     lineSizeAttenuation: PD.BooleanParam;
@@ -137,7 +137,7 @@ export interface ComplexLinesVisualBuilder<P extends ComplexLinesParams> extends
 }
 export declare function ComplexLinesVisual<P extends ComplexLinesParams>(builder: ComplexLinesVisualBuilder<P>, materialId: number): ComplexVisual<P>;
 export declare const ComplexTextParams: {
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     borderWidth: PD.Numeric;
@@ -182,7 +182,7 @@ export interface ComplexTextVisualBuilder<P extends ComplexTextParams> extends C
 }
 export declare function ComplexTextVisual<P extends ComplexTextParams>(builder: ComplexTextVisualBuilder<P>, materialId: number): ComplexVisual<P>;
 export declare const ComplexDirectVolumeParams: {
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
     xrayShaded: PD.Select<boolean | "inverted">;
@@ -213,7 +213,7 @@ export interface ComplexDirectVolumeVisualBuilder<P extends ComplexDirectVolumeP
 }
 export declare function ComplexDirectVolumeVisual<P extends ComplexDirectVolumeParams>(builder: ComplexDirectVolumeVisualBuilder<P>, materialId: number): ComplexVisual<P>;
 export declare const ComplexTextureMeshParams: {
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

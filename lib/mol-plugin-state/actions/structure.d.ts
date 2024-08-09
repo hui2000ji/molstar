@@ -47,7 +47,7 @@ declare const DownloadStructure: StateAction<PluginStateObject.Root, void, PD.No
     }>, "pubchem">;
 }>>;
 export declare const UpdateTrajectory: StateAction<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, void, PD.Normalize<{
-    action: "advance" | "reset";
+    action: "reset" | "advance";
     by: number | undefined;
 }>>;
 export declare const EnableModelCustomProps: StateAction<PluginStateObject.Molecule.Model, Promise<import("../../mol-state").StateObjectSelector<PluginStateObject.Molecule.Model, StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>, PD.Normalize<{

@@ -12,10 +12,10 @@ export declare const AnimateModelIndex: PluginStateAnimation<{
         direction: any;
     }>, "once">;
     duration: PD.NamedParams<PD.Normalize<{
-        durationInS: any;
-    }>, "fixed"> | PD.NamedParams<PD.Normalize<{
         maxFps: any;
     }>, "sequential"> | PD.NamedParams<PD.Normalize<{
+        durationInS: any;
+    }>, "fixed"> | PD.NamedParams<PD.Normalize<{
         targetFps: any;
     }>, "computed">;
 }, {

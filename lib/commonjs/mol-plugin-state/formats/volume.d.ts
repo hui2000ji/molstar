@@ -21,7 +21,7 @@ export declare const Ccp4Provider: {
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>, params?: Params) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>, params?: Params) => Promise<{
         format: StateObjectSelector<PluginStateObject.Format.Ccp4, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Data.Binary, PluginStateObject.Format.Ccp4, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         volume: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Format.Ccp4, PluginStateObject.Volume.Data, import("../../mol-util/param-definition").ParamDefinition.Normalize<{
             voxelSize: import("../../mol-math/linear-algebra/3d/vec3").Vec3;
@@ -36,7 +36,7 @@ export declare const Dsn6Provider: {
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>, params?: Params) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>, params?: Params) => Promise<{
         format: StateObjectSelector<PluginStateObject.Format.Dsn6, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Data.Binary, PluginStateObject.Format.Dsn6, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         volume: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Format.Dsn6, PluginStateObject.Volume.Data, import("../../mol-util/param-definition").ParamDefinition.Normalize<{
             voxelSize: import("../../mol-math/linear-algebra/3d/vec3").Vec3;
@@ -51,7 +51,7 @@ export declare const DxProvider: {
     category: string;
     stringExtensions: string[];
     binaryExtensions: string[];
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>, params?: Params) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>, params?: Params) => Promise<{
         volume: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Format.Dx, PluginStateObject.Volume.Data, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
     }>;
     visuals: typeof defaultVisuals;
@@ -61,7 +61,7 @@ export declare const CubeProvider: {
     description: string;
     category: string;
     stringExtensions: string[];
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>, params?: Params) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>, params?: Params) => Promise<{
         format: StateObjectSelector<PluginStateObject.Format.Cube, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Data.String, PluginStateObject.Format.Cube, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         volume: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Format.Cube, PluginStateObject.Volume.Data, import("../../mol-util/param-definition").ParamDefinition.Normalize<{
             dataIndex: number;
@@ -74,12 +74,12 @@ export declare const CubeProvider: {
                 dynamicBonds: any;
             }>, "model"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
+                id: any;
+            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
+                dynamicBonds: any;
                 ijkMin: any;
                 ijkMax: any;
             }>, "symmetry"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
-                dynamicBonds: any;
-                id: any;
-            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
                 radius: any;
             }>, "symmetry-mates"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
@@ -103,7 +103,7 @@ export declare const DscifProvider: {
     stringExtensions: string[];
     binaryExtensions: string[];
     isApplicable: (info: import("../../mol-util/file-info").FileNameInfo, data: string | Uint8Array) => boolean;
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>, params?: DsCifParams) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>, params?: DsCifParams) => Promise<{
         volumes: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>[];
     }>;
     visuals: (plugin: PluginContext, data: {
@@ -117,7 +117,7 @@ export declare const SegcifProvider: {
     stringExtensions: string[];
     binaryExtensions: string[];
     isApplicable: (info: import("../../mol-util/file-info").FileNameInfo, data: string | Uint8Array) => boolean;
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>) => Promise<{
         volumes: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>[];
     }>;
     visuals: (plugin: PluginContext, data: {
@@ -129,7 +129,7 @@ export declare const BuiltInVolumeFormats: readonly [readonly ["ccp4", {
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>, params?: Params) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>, params?: Params) => Promise<{
         format: StateObjectSelector<PluginStateObject.Format.Ccp4, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Data.Binary, PluginStateObject.Format.Ccp4, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         volume: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Format.Ccp4, PluginStateObject.Volume.Data, import("../../mol-util/param-definition").ParamDefinition.Normalize<{
             voxelSize: import("../../mol-math/linear-algebra/3d/vec3").Vec3;
@@ -143,7 +143,7 @@ export declare const BuiltInVolumeFormats: readonly [readonly ["ccp4", {
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>, params?: Params) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>, params?: Params) => Promise<{
         format: StateObjectSelector<PluginStateObject.Format.Dsn6, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Data.Binary, PluginStateObject.Format.Dsn6, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         volume: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Format.Dsn6, PluginStateObject.Volume.Data, import("../../mol-util/param-definition").ParamDefinition.Normalize<{
             voxelSize: import("../../mol-math/linear-algebra/3d/vec3").Vec3;
@@ -156,7 +156,7 @@ export declare const BuiltInVolumeFormats: readonly [readonly ["ccp4", {
     description: string;
     category: string;
     stringExtensions: string[];
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>, params?: Params) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>, params?: Params) => Promise<{
         format: StateObjectSelector<PluginStateObject.Format.Cube, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Data.String, PluginStateObject.Format.Cube, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         volume: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Format.Cube, PluginStateObject.Volume.Data, import("../../mol-util/param-definition").ParamDefinition.Normalize<{
             dataIndex: number;
@@ -169,12 +169,12 @@ export declare const BuiltInVolumeFormats: readonly [readonly ["ccp4", {
                 dynamicBonds: any;
             }>, "model"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
+                id: any;
+            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
+                dynamicBonds: any;
                 ijkMin: any;
                 ijkMax: any;
             }>, "symmetry"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
-                dynamicBonds: any;
-                id: any;
-            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
                 radius: any;
             }>, "symmetry-mates"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
@@ -193,7 +193,7 @@ export declare const BuiltInVolumeFormats: readonly [readonly ["ccp4", {
     category: string;
     stringExtensions: string[];
     binaryExtensions: string[];
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>, params?: Params) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>, params?: Params) => Promise<{
         volume: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Format.Dx, PluginStateObject.Volume.Data, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
     }>;
     visuals: typeof defaultVisuals;
@@ -204,7 +204,7 @@ export declare const BuiltInVolumeFormats: readonly [readonly ["ccp4", {
     stringExtensions: string[];
     binaryExtensions: string[];
     isApplicable: (info: import("../../mol-util/file-info").FileNameInfo, data: string | Uint8Array) => boolean;
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>, params?: DsCifParams) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>, params?: DsCifParams) => Promise<{
         volumes: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>[];
     }>;
     visuals: (plugin: PluginContext, data: {
@@ -217,7 +217,7 @@ export declare const BuiltInVolumeFormats: readonly [readonly ["ccp4", {
     stringExtensions: string[];
     binaryExtensions: string[];
     isApplicable: (info: import("../../mol-util/file-info").FileNameInfo, data: string | Uint8Array) => boolean;
-    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>) => Promise<{
+    parse: (plugin: PluginContext, data: import("../../mol-state").StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>) => Promise<{
         volumes: StateObjectSelector<PluginStateObject.Volume.Data, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>[];
     }>;
     visuals: (plugin: PluginContext, data: {

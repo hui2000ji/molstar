@@ -67,7 +67,7 @@ export declare const CreateOrbitalDensityVolume: StateTransformer<BasisAndOrbita
 }>>;
 export declare const CreateOrbitalRepresentation3D: StateTransformer<PluginStateObject.Volume.Data, PluginStateObject.Volume.Representation3D, PD.Normalize<{
     relativeIsovalue: number;
-    kind: "positive" | "negative";
+    kind: "negative" | "positive";
     color: import("../../mol-util/color").Color;
     alpha: number;
     xrayShaded: boolean;

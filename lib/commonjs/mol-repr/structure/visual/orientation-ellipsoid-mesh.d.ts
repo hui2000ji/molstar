@@ -12,7 +12,7 @@ import { Mesh } from '../../../mol-geo/geometry/mesh/mesh';
 export declare const OrientationEllipsoidMeshParams: {
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

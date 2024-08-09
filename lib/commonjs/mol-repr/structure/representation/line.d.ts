@@ -13,7 +13,7 @@ export declare const LineParams: {
     multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "element-point" | "element-cross">;
     lineSizeAttenuation: PD.BooleanParam;
     ignoreHydrogens: PD.BooleanParam;
@@ -41,8 +41,8 @@ export declare const LineParams: {
     instanceGranularity: PD.BooleanParam;
     pointSizeAttenuation: PD.BooleanParam;
     stride: PD.Numeric;
-    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     aromaticBonds: PD.BooleanParam;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
@@ -55,7 +55,7 @@ export declare function getLineParams(ctx: ThemeRegistryContext, structure: Stru
     multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "element-point" | "element-cross">;
     lineSizeAttenuation: PD.BooleanParam;
     ignoreHydrogens: PD.BooleanParam;
@@ -83,8 +83,8 @@ export declare function getLineParams(ctx: ThemeRegistryContext, structure: Stru
     instanceGranularity: PD.BooleanParam;
     pointSizeAttenuation: PD.BooleanParam;
     stride: PD.Numeric;
-    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     aromaticBonds: PD.BooleanParam;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
@@ -98,7 +98,7 @@ export declare const LineRepresentationProvider: StructureRepresentationProvider
     multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "element-point" | "element-cross">;
     lineSizeAttenuation: PD.BooleanParam;
     ignoreHydrogens: PD.BooleanParam;
@@ -126,8 +126,8 @@ export declare const LineRepresentationProvider: StructureRepresentationProvider
     instanceGranularity: PD.BooleanParam;
     pointSizeAttenuation: PD.BooleanParam;
     stride: PD.Numeric;
-    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     aromaticBonds: PD.BooleanParam;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;

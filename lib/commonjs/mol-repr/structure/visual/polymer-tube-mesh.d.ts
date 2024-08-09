@@ -23,7 +23,7 @@ export declare const PolymerTubeParams: {
     detail: PD.Numeric;
     linearSegments: PD.Numeric;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

@@ -16,7 +16,7 @@ export declare const ElementCrossParams: {
     traceOnly: PD.BooleanParam;
     crosses: PD.Select<"all" | "lone">;
     crossSize: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     alpha: PD.Numeric;

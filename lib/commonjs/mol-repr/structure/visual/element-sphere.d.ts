@@ -16,7 +16,7 @@ export declare const ElementSphereParams: {
     traceOnly: PD.BooleanParam;
     tryUseImpostor: PD.BooleanParam;
     stride: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
@@ -58,7 +58,7 @@ export declare function ElementSphereVisual(materialId: number, structure: Struc
     traceOnly: PD.BooleanParam;
     tryUseImpostor: PD.BooleanParam;
     stride: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;

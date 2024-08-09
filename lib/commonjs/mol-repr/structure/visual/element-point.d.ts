@@ -16,7 +16,7 @@ export declare const ElementPointParams: {
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     traceOnly: PD.BooleanParam;
     stride: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;

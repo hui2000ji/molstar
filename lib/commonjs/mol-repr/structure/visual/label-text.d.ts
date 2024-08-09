@@ -12,13 +12,13 @@ export declare const LabelTextParams: {
     backgroundColor: PD.Color;
     backgroundOpacity: PD.Numeric;
     borderWidth: PD.Numeric;
-    level: PD.Select<"residue" | "chain" | "element">;
+    level: PD.Select<"residue" | "element" | "chain">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     chainScale: PD.Numeric;
     residueScale: PD.Numeric;
     elementScale: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     borderColor: PD.Color;

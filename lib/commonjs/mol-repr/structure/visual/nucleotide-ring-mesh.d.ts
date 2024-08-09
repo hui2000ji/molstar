@@ -20,7 +20,7 @@ export declare const NucleotideRingParams: {
     sizeFactor: PD.Numeric;
     radialSegments: PD.Numeric;
     detail: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

@@ -14,7 +14,7 @@ export declare const MolecularSurfaceWireframeParams: {
     probeRadius: PD.Numeric;
     resolution: PD.Numeric;
     probePositions: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     lineSizeAttenuation: PD.BooleanParam;
     alpha: PD.Numeric;
     quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;

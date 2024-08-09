@@ -15,7 +15,7 @@ export declare const GaussianWireframeParams: {
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
     smoothness: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     alpha: PD.Numeric;
     quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{

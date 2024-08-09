@@ -11,7 +11,7 @@ export declare const PolymerBackboneCylinderParams: {
     sizeFactor: PD.Numeric;
     radialSegments: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeAspectRatio: PD.Numeric;
     doubleSided: PD.BooleanParam;
@@ -47,7 +47,7 @@ export declare function PolymerBackboneCylinderVisual(materialId: number, struct
     sizeFactor: PD.Numeric;
     radialSegments: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeAspectRatio: PD.Numeric;
     doubleSided: PD.BooleanParam;

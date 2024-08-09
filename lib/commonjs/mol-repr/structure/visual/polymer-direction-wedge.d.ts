@@ -14,7 +14,7 @@ export declare const DefaultPolymerDirectionWedgeProps: PD.Values<{
 export type PolymerDirectionWedgeProps = typeof DefaultPolymerDirectionWedgeProps;
 export declare const PolymerDirectionParams: {
     sizeFactor: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

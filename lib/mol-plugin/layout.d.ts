@@ -12,10 +12,10 @@ export declare const PluginLayoutStateParams: {
     isExpanded: PD.BooleanParam;
     showControls: PD.BooleanParam;
     regionState: PD.Group<PD.Normalize<{
-        left: "hidden" | "full" | "collapsed";
-        top: "hidden" | "full";
-        right: "hidden" | "full";
-        bottom: "hidden" | "full";
+        left: "full" | "collapsed" | "hidden";
+        top: "full" | "hidden";
+        right: "full" | "hidden";
+        bottom: "full" | "hidden";
     }>>;
     controlsDisplay: PD.Value<PluginLayoutControlsDisplay>;
 };

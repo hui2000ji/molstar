@@ -13,15 +13,15 @@ export declare const GaussianSurfaceMeshParams: {
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     tryUseGpu: PD.BooleanParam;
     includeParent: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     traceOnly: PD.BooleanParam;
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
     smoothness: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -55,15 +55,15 @@ export declare const StructureGaussianSurfaceMeshParams: {
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     tryUseGpu: PD.BooleanParam;
     includeParent: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     traceOnly: PD.BooleanParam;
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
     smoothness: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -97,15 +97,15 @@ export declare function GaussianSurfaceVisual(materialId: number, structure: Str
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     tryUseGpu: PD.BooleanParam;
     includeParent: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     traceOnly: PD.BooleanParam;
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
     smoothness: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -138,15 +138,15 @@ export declare function StructureGaussianSurfaceVisual(materialId: number, struc
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     tryUseGpu: PD.BooleanParam;
     includeParent: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     traceOnly: PD.BooleanParam;
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
     smoothness: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;

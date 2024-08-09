@@ -262,7 +262,7 @@ export declare const IsosurfaceWireframeParams: {
 export type IsosurfaceWireframeParams = typeof IsosurfaceWireframeParams;
 export declare function IsosurfaceWireframeVisual(materialId: number): VolumeVisual<IsosurfaceWireframeParams>;
 export declare const IsosurfaceParams: {
-    visuals: PD.MultiSelect<"solid" | "wireframe">;
+    visuals: PD.MultiSelect<"wireframe" | "solid">;
     bumpFrequency: PD.Numeric;
     quality: {
         isEssential: boolean;
@@ -339,7 +339,7 @@ export declare const IsosurfaceParams: {
 };
 export type IsosurfaceParams = typeof IsosurfaceParams;
 export declare function getIsosurfaceParams(ctx: ThemeRegistryContext, volume: Volume): {
-    visuals: PD.MultiSelect<"solid" | "wireframe">;
+    visuals: PD.MultiSelect<"wireframe" | "solid">;
     bumpFrequency: PD.Numeric;
     quality: {
         isEssential: boolean;
@@ -417,7 +417,7 @@ export declare function getIsosurfaceParams(ctx: ThemeRegistryContext, volume: V
 export type IsosurfaceRepresentation = VolumeRepresentation<IsosurfaceParams>;
 export declare function IsosurfaceRepresentation(ctx: RepresentationContext, getParams: RepresentationParamsGetter<Volume, IsosurfaceParams>): IsosurfaceRepresentation;
 export declare const IsosurfaceRepresentationProvider: VolumeRepresentationProvider<{
-    visuals: PD.MultiSelect<"solid" | "wireframe">;
+    visuals: PD.MultiSelect<"wireframe" | "solid">;
     bumpFrequency: PD.Numeric;
     quality: {
         isEssential: boolean;

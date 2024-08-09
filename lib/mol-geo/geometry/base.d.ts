@@ -23,13 +23,13 @@ export declare const VisualQualityInfo: {
     lowest: {};
 };
 export type VisualQuality = keyof typeof VisualQualityInfo;
-export declare const VisualQualityNames: ("auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest")[];
-export declare const VisualQualityOptions: ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string][];
+export declare const VisualQualityNames: ("custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest")[];
+export declare const VisualQualityOptions: ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string][];
 export declare const ColorSmoothingParams: {
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
+    }>, "on">>;
 };
 export type ColorSmoothingParams = typeof ColorSmoothingParams;
 export declare function hasColorSmoothingProp(props: PD.Values<any>): props is PD.Values<ColorSmoothingParams>;
@@ -43,7 +43,7 @@ export declare namespace BaseGeometry {
     const CustomQualityParamInfo: PD.Info;
     const Params: {
         alpha: PD.Numeric;
-        quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+        quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
         material: PD.Group<PD.Normalize<{
             metalness: number;
             roughness: number;

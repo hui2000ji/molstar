@@ -11,7 +11,7 @@ export declare class VolumeRepresentationRegistry extends RepresentationRegistry
 export declare namespace VolumeRepresentationRegistry {
     export const BuiltIn: {
         isosurface: import("./representation").VolumeRepresentationProvider<{
-            visuals: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"solid" | "wireframe">;
+            visuals: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"wireframe" | "solid">;
             bumpFrequency: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             quality: {
                 isEssential: boolean;
@@ -110,7 +110,7 @@ export declare namespace VolumeRepresentationRegistry {
                     legend?: import("../../mol-util/legend").Legend | undefined;
                 }) | undefined;
             };
-            dimension: import("../../mol-util/param-definition").ParamDefinition.Mapped<import("../../mol-util/param-definition").ParamDefinition.NamedParams<number, "y"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<number, "z"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<number, "x">>;
+            dimension: import("../../mol-util/param-definition").ParamDefinition.Mapped<import("../../mol-util/param-definition").ParamDefinition.NamedParams<number, "x"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<number, "y"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<number, "z">>;
             isoValue: import("../../mol-util/param-definition").ParamDefinition.Conditioned<Readonly<{
                 kind: "absolute";
                 absoluteValue: number;

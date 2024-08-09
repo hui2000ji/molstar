@@ -34,7 +34,7 @@ export declare function createProteopediaCustomTheme(colors: number[]): {
         readonly preferSmoothing?: boolean | undefined;
         readonly contextHash?: number | undefined;
         readonly description?: string | undefined;
-        readonly legend?: Readonly<import("../../mol-util/legend").TableLegend | import("../../mol-util/legend").ScaleLegend> | undefined;
+        readonly legend?: Readonly<import("../../mol-util/legend").ScaleLegend | import("../../mol-util/legend").TableLegend> | undefined;
     };
     getParams: (ctx: ThemeDataContext) => {
         colors: PD.ObjectList<PD.Normalize<{

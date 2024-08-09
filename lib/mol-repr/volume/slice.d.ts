@@ -35,7 +35,7 @@ export declare const SliceParams: {
             legend?: import("../../mol-util/legend").Legend | undefined;
         }) | undefined;
     };
-    dimension: PD.Mapped<PD.NamedParams<number, "y"> | PD.NamedParams<number, "z"> | PD.NamedParams<number, "x">>;
+    dimension: PD.Mapped<PD.NamedParams<number, "x"> | PD.NamedParams<number, "y"> | PD.NamedParams<number, "z">>;
     isoValue: PD.Conditioned<Readonly<{
         kind: "absolute";
         absoluteValue: number;
@@ -102,7 +102,7 @@ export declare function getSliceParams(ctx: ThemeRegistryContext, volume: Volume
             legend?: import("../../mol-util/legend").Legend | undefined;
         }) | undefined;
     };
-    dimension: PD.Mapped<PD.NamedParams<number, "y"> | PD.NamedParams<number, "z"> | PD.NamedParams<number, "x">>;
+    dimension: PD.Mapped<PD.NamedParams<number, "x"> | PD.NamedParams<number, "y"> | PD.NamedParams<number, "z">>;
     isoValue: PD.Conditioned<Readonly<{
         kind: "absolute";
         absoluteValue: number;
@@ -170,7 +170,7 @@ export declare const SliceRepresentationProvider: VolumeRepresentationProvider<{
             legend?: import("../../mol-util/legend").Legend | undefined;
         }) | undefined;
     };
-    dimension: PD.Mapped<PD.NamedParams<number, "y"> | PD.NamedParams<number, "z"> | PD.NamedParams<number, "x">>;
+    dimension: PD.Mapped<PD.NamedParams<number, "x"> | PD.NamedParams<number, "y"> | PD.NamedParams<number, "z">>;
     isoValue: PD.Conditioned<Readonly<{
         kind: "absolute";
         absoluteValue: number;

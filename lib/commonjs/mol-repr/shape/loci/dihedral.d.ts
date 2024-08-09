@@ -27,14 +27,14 @@ export declare const DihedralParams: {
     tether: PD.BooleanParam;
     tetherLength: PD.Numeric;
     tetherBaseWidth: PD.Numeric;
-    attachment: PD.Select<"bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-center" | "middle-right" | "top-left" | "top-center" | "top-right">;
+    attachment: PD.Select<"middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right">;
     fontFamily: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontFamily>;
     fontQuality: PD.Select<number>;
     fontStyle: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontStyle>;
     fontVariant: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontVariant>;
     fontWeight: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontWeight>;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

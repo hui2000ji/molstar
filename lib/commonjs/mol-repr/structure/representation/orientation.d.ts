@@ -13,7 +13,7 @@ export declare const OrientationParams: {
     bumpFrequency: PD.Numeric;
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -47,7 +47,7 @@ export declare function getOrientationParams(ctx: ThemeRegistryContext, structur
     bumpFrequency: PD.Numeric;
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -82,7 +82,7 @@ export declare const OrientationRepresentationProvider: StructureRepresentationP
     bumpFrequency: PD.Numeric;
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
-    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
