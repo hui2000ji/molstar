@@ -12,7 +12,7 @@ export declare const PdbDownloadProvider: {
         encoding: "cif" | "bcif";
     }>>;
     pdbe: PD.Group<PD.Normalize<{
-        variant: "updated" | "updated-bcif" | "updtaed-bcif" | "archival";
+        variant: "updated-bcif" | "updated" | "updtaed-bcif" | "archival";
     }>>;
     pdbj: PD.Group<PD.Normalize<unknown>>;
 };
@@ -47,7 +47,7 @@ declare const DownloadStructure: StateAction<PluginStateObject.Root, void, PD.No
     }>, "pubchem">;
 }>>;
 export declare const UpdateTrajectory: StateAction<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, void, PD.Normalize<{
-    action: "reset" | "advance";
+    action: "advance" | "reset";
     by: number | undefined;
 }>>;
 export declare const EnableModelCustomProps: StateAction<PluginStateObject.Molecule.Model, Promise<import("../../mol-state").StateObjectSelector<PluginStateObject.Molecule.Model, StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>, PD.Normalize<{
@@ -70,8 +70,8 @@ export declare const LoadTrajectory: StateAction<PluginStateObject.Root, void, P
     source: PD.NamedParams<PD.Normalize<{
         model: any;
         coordinates: any;
-    }>, "url"> | PD.NamedParams<PD.Normalize<{
+    }>, "file"> | PD.NamedParams<PD.Normalize<{
         model: any;
         coordinates: any;
-    }>, "file">;
+    }>, "url">;
 }>>;

@@ -11,7 +11,7 @@ export declare const PolymerBackboneCylinderParams: {
     sizeFactor: PD.Numeric;
     radialSegments: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeAspectRatio: PD.Numeric;
     doubleSided: PD.BooleanParam;
@@ -22,7 +22,7 @@ export declare const PolymerBackboneCylinderParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -47,7 +47,7 @@ export declare function PolymerBackboneCylinderVisual(materialId: number, struct
     sizeFactor: PD.Numeric;
     radialSegments: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeAspectRatio: PD.Numeric;
     doubleSided: PD.BooleanParam;
@@ -58,7 +58,7 @@ export declare function PolymerBackboneCylinderVisual(materialId: number, struct
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

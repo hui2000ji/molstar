@@ -60,7 +60,7 @@ declare class StructureComponentManager extends StatefulPluginComponent<Structur
 declare namespace StructureComponentManager {
     const OptionsParams: {
         hydrogens: PD.Select<"all" | "hide-all" | "only-polar">;
-        visualQuality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+        visualQuality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
         ignoreLight: PD.BooleanParam;
         materialStyle: PD.Group<PD.Normalize<{
             metalness: number;

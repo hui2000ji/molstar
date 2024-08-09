@@ -44,7 +44,7 @@ interface UnitsVisualGeometryBuilder<P extends StructureParams, G extends Geomet
 }
 export declare function UnitsVisual<G extends Geometry, P extends StructureParams & Geometry.Params<G>>(builder: UnitsVisualGeometryBuilder<P, G>, materialId: number): UnitsVisual<P>;
 export declare const UnitsMeshParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -55,7 +55,7 @@ export declare const UnitsMeshParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -78,7 +78,7 @@ export interface UnitsMeshVisualBuilder<P extends UnitsMeshParams> extends Units
 }
 export declare function UnitsMeshVisual<P extends UnitsMeshParams>(builder: UnitsMeshVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsSpheresParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     doubleSided: PD.BooleanParam;
@@ -92,7 +92,7 @@ export declare const UnitsSpheresParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -115,7 +115,7 @@ export interface UnitsSpheresVisualBuilder<P extends UnitsSpheresParams> extends
 }
 export declare function UnitsSpheresVisual<P extends UnitsSpheresParams>(builder: UnitsSpheresVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsCylindersParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
@@ -127,7 +127,7 @@ export declare const UnitsCylindersParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -150,13 +150,13 @@ export interface UnitsCylindersVisualBuilder<P extends UnitsCylindersParams> ext
 }
 export declare function UnitsCylindersVisual<P extends UnitsCylindersParams>(builder: UnitsCylindersVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsPointsParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     pointSizeAttenuation: PD.BooleanParam;
-    pointStyle: PD.Select<"circle" | "square" | "fuzzy">;
+    pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -179,12 +179,12 @@ export interface UnitsPointVisualBuilder<P extends UnitsPointsParams> extends Un
 }
 export declare function UnitsPointsVisual<P extends UnitsPointsParams>(builder: UnitsPointVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsLinesParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     lineSizeAttenuation: PD.BooleanParam;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -207,7 +207,7 @@ export interface UnitsLinesVisualBuilder<P extends UnitsLinesParams> extends Uni
 }
 export declare function UnitsLinesVisual<P extends UnitsLinesParams>(builder: UnitsLinesVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsTextParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     borderWidth: PD.Numeric;
@@ -222,14 +222,14 @@ export declare const UnitsTextParams: {
     tether: PD.BooleanParam;
     tetherLength: PD.Numeric;
     tetherBaseWidth: PD.Numeric;
-    attachment: PD.Select<"bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-center" | "middle-right" | "top-left" | "top-center" | "top-right">;
+    attachment: PD.Select<"middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right">;
     fontFamily: PD.Select<import("../../mol-geo/geometry/text/font-atlas").FontFamily>;
     fontQuality: PD.Select<number>;
     fontStyle: PD.Select<import("../../mol-geo/geometry/text/font-atlas").FontStyle>;
     fontVariant: PD.Select<import("../../mol-geo/geometry/text/font-atlas").FontVariant>;
     fontWeight: PD.Select<import("../../mol-geo/geometry/text/font-atlas").FontWeight>;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -252,7 +252,7 @@ export interface UnitsTextVisualBuilder<P extends UnitsTextParams> extends Units
 }
 export declare function UnitsTextVisual<P extends UnitsTextParams>(builder: UnitsTextVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsDirectVolumeParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
     xrayShaded: PD.Select<boolean | "inverted">;
@@ -260,7 +260,7 @@ export declare const UnitsDirectVolumeParams: {
     stepsPerCell: PD.Numeric;
     jumpLength: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -283,7 +283,7 @@ export interface UnitsDirectVolumeVisualBuilder<P extends UnitsDirectVolumeParam
 }
 export declare function UnitsDirectVolumeVisual<P extends UnitsDirectVolumeParams>(builder: UnitsDirectVolumeVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsTextureMeshParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -294,7 +294,7 @@ export declare const UnitsTextureMeshParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

@@ -13,7 +13,7 @@ export declare const ModelIndexColorThemeParams: {
         hue: [number, number];
         chroma: [number, number];
         luminance: [number, number];
-        sort: "none" | "contrast";
+        sort: "contrast" | "none";
         clusteringStepCount: number;
         minSampleCount: number;
         sampleCountFactor: number;
@@ -31,7 +31,7 @@ export declare function getModelIndexColorThemeParams(ctx: ThemeDataContext): {
         hue: [number, number];
         chroma: [number, number];
         luminance: [number, number];
-        sort: "none" | "contrast";
+        sort: "contrast" | "none";
         clusteringStepCount: number;
         minSampleCount: number;
         sampleCountFactor: number;

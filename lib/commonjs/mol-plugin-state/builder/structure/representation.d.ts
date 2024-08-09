@@ -19,7 +19,7 @@ export declare class StructureRepresentationBuilder {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest" | undefined;
+        quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;

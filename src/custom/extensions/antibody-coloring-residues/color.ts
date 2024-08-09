@@ -16,6 +16,16 @@ import { AntibodyColoringResidueImgtProvider } from './provider/imgt-prop';
 import { AntibodyColoringResidueNorthProvider } from './provider/north-prop';
 import { CustomPropertyDescriptor } from '../../../mol-model/custom-property';
 import { CifExportContext } from '../../../mol-model/structure/export/mmcif';
+import { ChainIdColorTheme, ChainIdColorThemeParams } from '../../../mol-theme/color/chain-id';
+import { UnitIndexColorTheme, UnitIndexColorThemeParams } from '../../../mol-theme/color/unit-index';
+import { EntityIdColorTheme, EntityIdColorThemeParams } from '../../../mol-theme/color/entity-id';
+import { EntitySourceColorTheme, EntitySourceColorThemeParams } from '../../../mol-theme/color/entity-source';
+import { OperatorNameColorThemeParams, OperatorNameColorTheme } from '../../../mol-theme/color/operator-name';
+import { ModelIndexColorTheme, ModelIndexColorThemeParams } from '../../../mol-theme/color/model-index';
+import { StructureIndexColorTheme, StructureIndexColorThemeParams } from '../../../mol-theme/color/structure-index';
+import { UniformColorTheme, UniformColorThemeParams } from '../../../mol-theme/color/uniform';
+
+const DefaultColor = Color(0xFFFFFF);
 
 const ResidueColors = [
     Color.fromRgb(0, 0, 255), // blue
@@ -26,17 +36,20 @@ const ResidueColors = [
     Color.fromRgb(255, 255, 255), // white
 ];
 
-function residueMapColor(props: PD.Values<Params>, data?: ResidueModel) {
+function residueMapColor(ctx: ThemeDataContext, location: Location, props: PD.Values<Params>, data?: ResidueModel) {
     const hChain = props['VH/Vα FR'];
     const lChain = props['VL/Vβ FR'];
     const hCdr = props['VH/Vα CDR'];
     const lCdr = props['VL/Vβ CDR'];
-    const other = props['Other polymer'];
+    // const other = props['Other polymer'];
+    const otherPolymerColor = getOhterPolymerTheme(ctx, props['Other polymer'])?.color;
 
     if (!data) {
-        return Color(other);
+        // return Color(other);
+        return otherPolymerColor(location, false);
     } else if (data.chain_type === null) {
-        return Color(other);
+        // return Color(other);
+        return otherPolymerColor(location, false);
     } else if (
         (data.chain_type === 'H' || data.chain_type === 'A') &&
     data.is_cdr
@@ -58,7 +71,8 @@ function residueMapColor(props: PD.Values<Params>, data?: ResidueModel) {
     ) {
         return Color(lChain);
     } else {
-        return Color(other);
+        // return Color(other);
+        return otherPolymerColor(location, false);
     }
 }
 
@@ -86,10 +100,20 @@ export const AntibodyColoringResidueColorThemeParams = {
         label: 'VL/Vβ CDR',
         description: 'light chain CDR color',
     }),
-    'Other polymer': PD.Color(ResidueColors[4], {
-        label: 'Other polymer',
-        description: 'other-polymer color',
-    }),
+    // 'Other polymer': PD.Color(ResidueColors[4], {
+    //     label: 'Other polymer',
+    //     description: 'other-polymer color',
+    // }),
+    'Other polymer': PD.MappedStatic('chain-id', {
+        'chain-id': PD.Group(ChainIdColorThemeParams),
+        'unit-index': PD.Group(UnitIndexColorThemeParams, { label: 'Chain Instance' }),
+        'entity-id': PD.Group(EntityIdColorThemeParams),
+        'entity-source': PD.Group(EntitySourceColorThemeParams),
+        'operator-name': PD.Group(OperatorNameColorThemeParams),
+        'model-index': PD.Group(ModelIndexColorThemeParams),
+        'structure-index': PD.Group(StructureIndexColorThemeParams),
+        'uniform': PD.Group(UniformColorThemeParams),
+    }, { description: 'Use chain-id coloring for antibody atoms.' }),
     'Non-polymer': PD.Color(ResidueColors[5], {
         label: 'Non-polymer',
         description: 'non-polymer color',
@@ -98,15 +122,30 @@ export const AntibodyColoringResidueColorThemeParams = {
 
 type Params = typeof AntibodyColoringResidueColorThemeParams;
 
+function getOhterPolymerTheme(ctx: ThemeDataContext, props: PD.Values<Params>['Other polymer']) {
+    switch (props.name) {
+        case 'chain-id': return ChainIdColorTheme(ctx, props.params);
+        case 'unit-index': return UnitIndexColorTheme(ctx, props.params);
+        case 'entity-id': return EntityIdColorTheme(ctx, props.params);
+        case 'entity-source': return EntitySourceColorTheme(ctx, props.params);
+        case 'operator-name': return OperatorNameColorTheme(ctx, props.params);
+        case 'model-index': return ModelIndexColorTheme(ctx, props.params);
+        case 'structure-index': return StructureIndexColorTheme(ctx, props.params);
+        case 'uniform': return UniformColorTheme(ctx, props.params);
+    }
+}
+
 export function AntibodyColoringResidueColorTheme(
     ctx: ThemeDataContext,
     props: PD.Values<Params>
 ): ColorTheme<Params> {
     let color: LocationColor;
 
-    const other = props['Other polymer'];
+    // const other = props['Other polymer'];
     const nonPolymer = props['Non-polymer'];
     const cdr_definition = props['CDR def.'];
+
+    const otherPolymerColor = getOhterPolymerTheme(ctx, props['Other polymer'])?.color;
 
     let descriptor: CustomPropertyDescriptor<CifExportContext, {}>;
     if (cdr_definition === 'kabat') {
@@ -136,20 +175,21 @@ export function AntibodyColoringResidueColorTheme(
           ];
 
                 if (isPolymer(moleculeType)) {
-                    return residueMapColor(props, getResidueInfo(location, props['CDR def.']));
+                    return residueMapColor(ctx, location, props, getResidueInfo(location, props['CDR def.']));
                 } else {
                     return Color(nonPolymer);
                 }
             } else if (Bond.isLocation(location)) {
                 l.unit = location.aUnit;
                 l.element = location.aUnit.elements[location.aIndex];
-                return residueMapColor(props, getResidueInfo(l, props['CDR def.']));
+                return residueMapColor(ctx, location, props, getResidueInfo(l, props['CDR def.']));
             }
 
-            return Color(other);
+            // return Color(other);
+            return otherPolymerColor(location, false);
         };
     } else {
-        color = () => Color(other);
+        color = () => Color(DefaultColor);
     }
 
     return {

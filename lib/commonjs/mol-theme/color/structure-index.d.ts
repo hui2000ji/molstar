@@ -12,7 +12,7 @@ export declare const StructureIndexColorThemeParams: {
         hue: [number, number];
         chroma: [number, number];
         luminance: [number, number];
-        sort: "none" | "contrast";
+        sort: "contrast" | "none";
         clusteringStepCount: number;
         minSampleCount: number;
         sampleCountFactor: number;
@@ -30,7 +30,7 @@ export declare function getStructureIndexColorThemeParams(ctx: ThemeDataContext)
         hue: [number, number];
         chroma: [number, number];
         luminance: [number, number];
-        sort: "none" | "contrast";
+        sort: "contrast" | "none";
         clusteringStepCount: number;
         minSampleCount: number;
         sampleCountFactor: number;

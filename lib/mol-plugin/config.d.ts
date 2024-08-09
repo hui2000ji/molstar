@@ -74,14 +74,9 @@ export declare const PluginConfig: {
                 opacity: number;
                 saturation: number;
                 lightness: number;
-                source: import("../mol-util/param-definition").ParamDefinition.NamedParams<any, "url"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/assets").Asset.File | null, "file">;
+                source: import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/assets").Asset.File | null, "file"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<any, "url">;
                 blur: number;
             }>, "image"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
-                centerColor: import("../mol-util/color").Color;
-                edgeColor: import("../mol-util/color").Color;
-                ratio: number;
-                coverage: string;
-            }>, "radialGradient"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
                 opacity: number;
                 saturation: number;
                 lightness: number;
@@ -106,7 +101,12 @@ export declare const PluginConfig: {
                 bottomColor: import("../mol-util/color").Color;
                 ratio: number;
                 coverage: string;
-            }>, "horizontalGradient">>;
+            }>, "horizontalGradient"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
+                centerColor: import("../mol-util/color").Color;
+                edgeColor: import("../mol-util/color").Color;
+                ratio: number;
+                coverage: string;
+            }>, "radialGradient">>;
         }>, string][]>;
     };
 };

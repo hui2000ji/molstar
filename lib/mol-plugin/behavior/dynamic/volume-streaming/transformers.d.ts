@@ -45,7 +45,7 @@ declare const CreateVolumeStreamingBehavior: StateTransformer<VolumeServerInfo, 
             isSelection: any;
             bottomLeft: any;
             topRight: any;
-        }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
+        }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{
             bottomLeft: any;
             topRight: any;
         }>, "box"> | PD.NamedParams<PD.Normalize<{
