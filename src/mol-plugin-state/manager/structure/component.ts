@@ -26,7 +26,7 @@ import { setStructureOverpaint } from '../../helpers/structure-overpaint';
 import { createStructureColorThemeParams, createStructureSizeThemeParams } from '../../helpers/structure-representation-params';
 import { StructureSelectionQueries, StructureSelectionQuery } from '../../helpers/structure-selection-query';
 import { StructureRepresentation3D } from '../../transforms/representation';
-import { StructureHierarchyRef, StructureComponentRef, StructureRef, StructureRepresentationRef } from './hierarchy-state';
+import { StructureHierarchyRef, StructureComponentRef, StructureRef, StructureRepresentationRef, isStructureComponentRef } from './hierarchy-state';
 import { Clipping } from '../../../mol-theme/clipping';
 import { setStructureClipping } from '../../helpers/structure-clipping';
 import { setStructureTransparency } from '../../helpers/structure-transparency';
@@ -34,6 +34,7 @@ import { StructureFocusRepresentation } from '../../../mol-plugin/behavior/dynam
 import { setStructureSubstance } from '../../helpers/structure-substance';
 import { Material } from '../../../mol-util/material';
 import { Clip } from '../../../mol-util/clip';
+import { StructureHierarchyManager } from './hierarchy';
 
 export { StructureComponentManager };
 
@@ -193,6 +194,24 @@ class StructureComponentManager extends StatefulPluginComponent<StructureCompone
             const loci = Structure.toSubStructureElementLoci(c.structure.cell.obj!.data, c.cell.obj?.data!);
             mng.fromLoci('set', loci);
         }
+        this.plugin.selectionMode = true;
+    }
+
+    focusThis(components: ReadonlyArray<StructureComponentRef>) {
+        this.plugin.managers.camera.focusSpheres(components, r => {
+            if (r.cell.state.isHidden) return;
+            return r.cell.obj?.data.boundary.sphere;
+        });
+        this.plugin.selectionMode = false;
+    }
+
+    isNonNestedComponent(ref: StructureHierarchyRef) {
+        const isComponentTransform = this.plugin.builders.structure.isComponentTransform;
+        const parentCell = this.plugin.state.data.cells.get(ref.cell.transform.parent);
+        return (
+            isComponentTransform(ref.cell) &&
+            (!parentCell || !isComponentTransform(parentCell))
+        );
     }
 
     canBeModified(ref: StructureHierarchyRef) {
@@ -355,7 +374,8 @@ class StructureComponentManager extends StatefulPluginComponent<StructureCompone
 
     async add(params: StructureComponentManager.AddParams, structures?: ReadonlyArray<StructureRef>) {
         return this.plugin.dataTransaction(async () => {
-            const xs = structures || this.currentStructures;
+            // const xs = structures || this.currentStructures;
+            const xs = params.options.parent ? [params.options.parent] : (structures || this.currentStructures);
             if (xs.length === 0) return;
 
             const { hydrogens, visualQuality: quality, ignoreLight, materialStyle: material, clipObjects: clip } = this.state.options;
@@ -367,7 +387,7 @@ class StructureComponentManager extends StatefulPluginComponent<StructureCompone
             for (const s of xs) {
                 let component: StateObjectRef | undefined = void 0;
 
-                if (params.options.checkExisting) {
+                if (params.options.checkExisting && !isStructureComponentRef(s)) {
                     component = await this.tryFindComponent(s, params.selection);
                 }
 
@@ -484,6 +504,18 @@ namespace StructureComponentManager {
 
     export function getAddParams(plugin: PluginContext, params?: { pivot?: StructureRef, allowNone: boolean, hideSelection?: boolean, checkExisting?: boolean }) {
         const { options } = plugin.query.structure.registry;
+
+        const componentGroups = StructureHierarchyManager.getComponentGroups(plugin.managers.structure.hierarchy.current.structures);
+        const components: StructureComponentRef[] = [];
+        for (const componentGroup of componentGroups) {
+            components.push(...componentGroup);
+        }
+        const componentOptions = components.map(c => {
+            const trajectoryLabel = c.structure.model?.trajectory?.cell.obj?.label || '';
+            return [c, trajectoryLabel + ' | ' + (c.cell.obj?.label || '')];
+        }) as [StructureComponentRef | undefined, string][];
+        componentOptions.unshift([void 0, 'Root structure(s)']);
+
         params = {
             pivot: plugin.managers.structure.component.pivotStructure,
             allowNone: true,
@@ -496,11 +528,16 @@ namespace StructureComponentManager {
             representation: getRepresentationTypesSelect(plugin, params?.pivot, params?.allowNone ? [['none', '< Create Later >']] : []),
             options: PD.Group({
                 label: PD.Text(''),
+                parent: PD.Select(
+                    void 0,
+                    componentOptions,
+                    { isHidden: params?.hideSelection, description: 'Parent component for the new component. If not specified, the new component will be added to the root structure(s).' }
+                ),
                 checkExisting: PD.Boolean(!!params?.checkExisting, { help: () => ({ description: 'Checks if a selection with the specifield elements already exists to avoid creating duplicate components.' }) }),
             })
         };
     }
-    export type AddParams = { selection: StructureSelectionQuery, options: { checkExisting: boolean, label: string }, representation: string }
+    export type AddParams = { selection: StructureSelectionQuery, options: { checkExisting: boolean, label: string, parent?: StructureComponentRef, }, representation: string }
 
     export function getThemeParams(plugin: PluginContext, pivot: StructureRef | StructureComponentRef | undefined) {
         const { options } = plugin.query.structure.registry;

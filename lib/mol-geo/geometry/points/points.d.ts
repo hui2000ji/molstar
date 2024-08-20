@@ -34,13 +34,13 @@ export declare namespace Points {
         fuzzy: string;
     };
     type StyleTypes = keyof typeof StyleTypes;
-    const StyleTypeNames: ("square" | "circle" | "fuzzy")[];
+    const StyleTypeNames: ("circle" | "square" | "fuzzy")[];
     const Params: {
         sizeFactor: PD.Numeric;
         pointSizeAttenuation: PD.BooleanParam;
-        pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
+        pointStyle: PD.Select<"circle" | "square" | "fuzzy">;
         alpha: PD.Numeric;
-        quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+        quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
         material: PD.Group<PD.Normalize<{
             metalness: number; /** Number of vertices in the point cloud */
             roughness: number;

@@ -11,15 +11,15 @@ export declare class VolumeRepresentationRegistry extends RepresentationRegistry
 export declare namespace VolumeRepresentationRegistry {
     export const BuiltIn: {
         isosurface: import("./representation").VolumeRepresentationProvider<{
-            visuals: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"wireframe" | "solid">;
+            visuals: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"solid" | "wireframe">;
             bumpFrequency: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             quality: {
                 isEssential: boolean;
                 type: "select";
-                options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
+                options: readonly (readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string, string | undefined])[];
                 cycle?: boolean | undefined;
                 isOptional?: boolean | undefined;
-                defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+                defaultValue: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
                 label?: string | undefined;
                 description?: string | undefined;
                 legend?: import("../../mol-util/legend").Legend | undefined;
@@ -90,10 +90,10 @@ export declare namespace VolumeRepresentationRegistry {
             quality: {
                 isEssential: boolean;
                 type: "select";
-                options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
+                options: readonly (readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string, string | undefined])[];
                 cycle?: boolean | undefined;
                 isOptional?: boolean | undefined;
-                defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+                defaultValue: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
                 label?: string | undefined;
                 description?: string | undefined;
                 legend?: import("../../mol-util/legend").Legend | undefined;
@@ -156,10 +156,10 @@ export declare namespace VolumeRepresentationRegistry {
             quality: {
                 isEssential: boolean;
                 type: "select";
-                options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
+                options: readonly (readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string, string | undefined])[];
                 cycle?: boolean | undefined;
                 isOptional?: boolean | undefined;
-                defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+                defaultValue: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
                 label?: string | undefined;
                 description?: string | undefined;
                 legend?: import("../../mol-util/legend").Legend | undefined;
@@ -205,10 +205,10 @@ export declare namespace VolumeRepresentationRegistry {
             quality: {
                 isEssential: boolean;
                 type: "select";
-                options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
+                options: readonly (readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string, string | undefined])[];
                 cycle?: boolean | undefined;
                 isOptional?: boolean | undefined;
-                defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+                defaultValue: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
                 label?: string | undefined;
                 description?: string | undefined;
                 legend?: import("../../mol-util/legend").Legend | undefined;

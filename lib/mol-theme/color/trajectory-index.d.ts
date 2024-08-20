@@ -12,7 +12,7 @@ export declare const TrajectoryIndexColorThemeParams: {
         hue: [number, number];
         chroma: [number, number];
         luminance: [number, number];
-        sort: "contrast" | "none";
+        sort: "none" | "contrast";
         clusteringStepCount: number;
         minSampleCount: number;
         sampleCountFactor: number;
@@ -30,7 +30,7 @@ export declare function getTrajectoryIndexColorThemeParams(ctx: ThemeDataContext
         hue: [number, number];
         chroma: [number, number];
         luminance: [number, number];
-        sort: "contrast" | "none";
+        sort: "none" | "contrast";
         clusteringStepCount: number;
         minSampleCount: number;
         sampleCountFactor: number;

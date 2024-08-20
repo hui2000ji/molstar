@@ -71,4 +71,5 @@ export interface StructureRepresentationRef extends RefBase<'structure-represent
 export interface GenericRepresentationRef extends RefBase<'generic-representation', SO.Any> {
     parent: StructureHierarchyRef;
 }
+export declare function isStructureComponentRef(obj: any): obj is StructureComponentRef;
 export {};

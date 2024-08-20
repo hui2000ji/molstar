@@ -18,7 +18,7 @@ export declare const BondParams: {
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
 };
 export declare const DefaultBondProps: PD.Values<{
     includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
@@ -26,7 +26,7 @@ export declare const DefaultBondProps: PD.Values<{
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
 }>;
 export type BondProps = typeof DefaultBondProps;
 export declare const BondCylinderParams: {
@@ -36,7 +36,7 @@ export declare const BondCylinderParams: {
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -56,7 +56,7 @@ export declare const DefaultBondCylinderProps: PD.Values<{
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -76,7 +76,7 @@ export declare const BondLineParams: {
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     aromaticDashCount: PD.Numeric;
@@ -88,7 +88,7 @@ export declare const DefaultBondLineProps: PD.Values<{
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     aromaticDashCount: PD.Numeric;

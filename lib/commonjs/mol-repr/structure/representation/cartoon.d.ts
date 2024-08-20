@@ -12,7 +12,7 @@ export declare const CartoonParams: {
     sizeFactor: PD.Numeric;
     visuals: PD.MultiSelect<"polymer-trace" | "polymer-gap" | "nucleotide-ring" | "nucleotide-block" | "direction-wedge">;
     bumpFrequency: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -22,7 +22,7 @@ export declare const CartoonParams: {
     transparentBackfaces: PD.Select<string>;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -53,7 +53,7 @@ export declare function getCartoonParams(ctx: ThemeRegistryContext, structure: S
     sizeFactor: PD.Numeric;
     visuals: PD.MultiSelect<"polymer-trace" | "polymer-gap" | "nucleotide-ring" | "nucleotide-block" | "direction-wedge">;
     bumpFrequency: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -63,7 +63,7 @@ export declare function getCartoonParams(ctx: ThemeRegistryContext, structure: S
     transparentBackfaces: PD.Select<string>;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -95,7 +95,7 @@ export declare const CartoonRepresentationProvider: StructureRepresentationProvi
     sizeFactor: PD.Numeric;
     visuals: PD.MultiSelect<"polymer-trace" | "polymer-gap" | "nucleotide-ring" | "nucleotide-block" | "direction-wedge">;
     bumpFrequency: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -105,7 +105,7 @@ export declare const CartoonRepresentationProvider: StructureRepresentationProvi
     transparentBackfaces: PD.Select<string>;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

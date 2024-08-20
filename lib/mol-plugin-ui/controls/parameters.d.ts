@@ -23,7 +23,7 @@ export interface ParameterControlsProps<P extends PD.Params = PD.Params> {
 }
 export declare class ParameterControls<P extends PD.Params> extends React.PureComponent<ParameterControlsProps<P>> {
     onChange: ParamOnChange;
-    renderGroup(group: ParamInfo[]): JSX.Element[] | null;
+    renderGroup(group: ParamInfo[]): import("react/jsx-runtime").JSX.Element[] | null;
     renderPart(groups: ParamInfo[][]): JSX.Element[] | null;
     paramGroups: (params: PD.Params) => {
         essentials: ParamInfo[][];

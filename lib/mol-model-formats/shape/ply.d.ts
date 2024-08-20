@@ -17,14 +17,14 @@ export declare const PlyShapeParams: {
         red: string;
         green: string;
         blue: string;
-    }>, "vertex"> | PD.NamedParams<PD.Normalize<{
+    }>, "material"> | PD.NamedParams<PD.Normalize<{
         red: string;
         green: string;
         blue: string;
-    }>, "material">>;
-    grouping: PD.Mapped<PD.NamedParams<PD.Normalize<{
+    }>, "vertex">>;
+    grouping: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "none"> | PD.NamedParams<PD.Normalize<{
         group: string;
-    }>, "vertex"> | PD.NamedParams<PD.Normalize<unknown>, "none">>;
+    }>, "vertex">>;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -34,7 +34,7 @@ export declare const PlyShapeParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -60,14 +60,14 @@ export declare function shapeFromPly(source: PlyFile, params?: {}): Task<ShapePr
         red: string;
         green: string;
         blue: string;
-    }>, "vertex"> | PD.NamedParams<PD.Normalize<{
+    }>, "material"> | PD.NamedParams<PD.Normalize<{
         red: string;
         green: string;
         blue: string;
-    }>, "material">>;
-    grouping: PD.Mapped<PD.NamedParams<PD.Normalize<{
+    }>, "vertex">>;
+    grouping: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "none"> | PD.NamedParams<PD.Normalize<{
         group: string;
-    }>, "vertex"> | PD.NamedParams<PD.Normalize<unknown>, "none">>;
+    }>, "vertex">>;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -77,7 +77,7 @@ export declare function shapeFromPly(source: PlyFile, params?: {}): Task<ShapePr
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

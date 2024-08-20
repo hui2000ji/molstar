@@ -9,13 +9,13 @@ import { ParamDefinition as PD } from '../../mol-util/param-definition';
 export declare const CellpackPackingPresetParams: {
     traceOnly: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
-    representation: PD.Select<"gaussian-surface" | "orientation" | "point" | "spacefill">;
+    representation: PD.Select<"orientation" | "spacefill" | "gaussian-surface" | "point">;
 };
 export type CellpackPackingPresetParams = PD.ValuesFor<typeof CellpackPackingPresetParams>;
 export declare const CellpackPackingPreset: StructureRepresentationPresetProvider<{
     traceOnly: boolean;
     ignoreLight: boolean;
-    representation: "gaussian-surface" | "orientation" | "point" | "spacefill";
+    representation: "orientation" | "spacefill" | "gaussian-surface" | "point";
 }, {
     components?: undefined;
     representations?: undefined;
@@ -29,12 +29,12 @@ export declare const CellpackPackingPreset: StructureRepresentationPresetProvide
 }>;
 export declare const CellpackMembranePresetParams: {
     ignoreLight: PD.BooleanParam;
-    representation: PD.Select<"gaussian-surface" | "orientation" | "point" | "spacefill">;
+    representation: PD.Select<"orientation" | "spacefill" | "gaussian-surface" | "point">;
 };
 export type CellpackMembranePresetParams = PD.ValuesFor<typeof CellpackMembranePresetParams>;
 export declare const CellpackMembranePreset: StructureRepresentationPresetProvider<{
     ignoreLight: boolean;
-    representation: "gaussian-surface" | "orientation" | "point" | "spacefill";
+    representation: "orientation" | "spacefill" | "gaussian-surface" | "point";
 }, {
     components?: undefined;
     representations?: undefined;

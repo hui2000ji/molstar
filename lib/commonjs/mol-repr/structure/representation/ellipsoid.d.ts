@@ -11,7 +11,7 @@ import { StructureRepresentation, StructureRepresentationProvider } from '../../
 export declare const EllipsoidParams: {
     includeParent: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -23,7 +23,7 @@ export declare const EllipsoidParams: {
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     aromaticScale: PD.Numeric;
@@ -41,7 +41,7 @@ export declare const EllipsoidParams: {
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -66,7 +66,7 @@ export type EllipsoidParams = typeof EllipsoidParams;
 export declare function getEllipsoidParams(ctx: ThemeRegistryContext, structure: Structure): {
     includeParent: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -78,7 +78,7 @@ export declare function getEllipsoidParams(ctx: ThemeRegistryContext, structure:
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     aromaticScale: PD.Numeric;
@@ -96,7 +96,7 @@ export declare function getEllipsoidParams(ctx: ThemeRegistryContext, structure:
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -122,7 +122,7 @@ export declare function EllipsoidRepresentation(ctx: RepresentationContext, getP
 export declare const EllipsoidRepresentationProvider: StructureRepresentationProvider<{
     includeParent: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -134,7 +134,7 @@ export declare const EllipsoidRepresentationProvider: StructureRepresentationPro
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
+    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     aromaticScale: PD.Numeric;
@@ -152,7 +152,7 @@ export declare const EllipsoidRepresentationProvider: StructureRepresentationPro
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

@@ -16,14 +16,14 @@ export declare namespace RootStructureDefinition {
             dynamicBonds: boolean | undefined;
         }>, "auto"> | PD.NamedParams<PD.Normalize<{
             dynamicBonds: boolean | undefined;
-        }>, "model"> | PD.NamedParams<PD.Normalize<{
-            dynamicBonds: boolean | undefined;
             id: string | undefined;
         }>, "assembly"> | PD.NamedParams<PD.Normalize<{
             dynamicBonds: boolean | undefined;
             ijkMin: Vec3;
             ijkMax: Vec3;
         }>, "symmetry"> | PD.NamedParams<PD.Normalize<{
+            dynamicBonds: boolean | undefined;
+        }>, "model"> | PD.NamedParams<PD.Normalize<{
             dynamicBonds: boolean | undefined;
             radius: number;
         }>, "symmetry-mates"> | PD.NamedParams<PD.Normalize<{

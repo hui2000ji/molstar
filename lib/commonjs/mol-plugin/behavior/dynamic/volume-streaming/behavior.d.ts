@@ -50,10 +50,10 @@ export declare namespace VolumeStreaming {
                 isSelection: boolean;
                 bottomLeft: Vec3;
                 topRight: Vec3;
-            }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
+            }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
                 bottomLeft: Vec3;
                 topRight: Vec3;
-            }>, "box"> | PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{
+            }>, "box"> | PD.NamedParams<PD.Normalize<{
                 radius: number;
                 bottomLeft: Vec3;
                 topRight: Vec3;
@@ -87,10 +87,10 @@ export declare namespace VolumeStreaming {
             isSelection: boolean;
             bottomLeft: Vec3;
             topRight: Vec3;
-        }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
+        }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
             bottomLeft: Vec3;
             topRight: Vec3;
-        }>, "box"> | PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{
+        }>, "box"> | PD.NamedParams<PD.Normalize<{
             radius: number;
             bottomLeft: Vec3;
             topRight: Vec3;

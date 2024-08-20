@@ -62,6 +62,11 @@ export declare const PostprocessingParams: {
             source: any;
             blur: any;
         }>, "image"> | PD.NamedParams<PD.Normalize<{
+            centerColor: any;
+            edgeColor: any;
+            ratio: any;
+            coverage: any;
+        }>, "radialGradient"> | PD.NamedParams<PD.Normalize<{
             opacity: any;
             saturation: any;
             lightness: any;
@@ -72,12 +77,7 @@ export declare const PostprocessingParams: {
             bottomColor: any;
             ratio: any;
             coverage: any;
-        }>, "horizontalGradient"> | PD.NamedParams<PD.Normalize<{
-            centerColor: any;
-            edgeColor: any;
-            ratio: any;
-            coverage: any;
-        }>, "radialGradient">;
+        }>, "horizontalGradient">;
     }>>;
 };
 export type PostprocessingProps = PD.Values<typeof PostprocessingParams>;

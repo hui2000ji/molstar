@@ -12,7 +12,7 @@ export declare const SIFTSMappingColorThemeParams: {
         hue: [number, number];
         chroma: [number, number];
         luminance: [number, number];
-        sort: "contrast" | "none";
+        sort: "none" | "contrast";
         clusteringStepCount: number;
         minSampleCount: number;
         sampleCountFactor: number;
@@ -30,7 +30,7 @@ export declare function getSIFTSMappingColorThemeParams(ctx: ThemeDataContext): 
         hue: [number, number];
         chroma: [number, number];
         luminance: [number, number];
-        sort: "contrast" | "none";
+        sort: "none" | "contrast";
         clusteringStepCount: number;
         minSampleCount: number;
         sampleCountFactor: number;

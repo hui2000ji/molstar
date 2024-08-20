@@ -13,18 +13,6 @@ export declare const IllustrativeColorThemeParams: {
         saturation: number;
         lightness: number;
     }>, "uniform"> | PD.NamedParams<PD.Normalize<{
-        saturation: number;
-        lightness: number;
-        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
-            water: any;
-            ion: any;
-            protein: any;
-            RNA: any;
-            DNA: any;
-            PNA: any;
-            saccharide: any;
-        }>, "custom">;
-    }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -37,7 +25,7 @@ export declare const IllustrativeColorThemeParams: {
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
-        asymId: "auth" | "label";
+        asymId: "label" | "auth";
     }>, "chain-id"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
@@ -90,7 +78,19 @@ export declare const IllustrativeColorThemeParams: {
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
-    }>, "structure-index">>;
+    }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
+        saturation: number;
+        lightness: number;
+        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+            water: any;
+            ion: any;
+            protein: any;
+            RNA: any;
+            DNA: any;
+            PNA: any;
+            saccharide: any;
+        }>, "custom">;
+    }>, "molecule-type">>;
     carbonLightness: PD.Numeric;
 };
 export type IllustrativeColorThemeParams = typeof IllustrativeColorThemeParams;
@@ -100,18 +100,6 @@ export declare function getIllustrativeColorThemeParams(ctx: ThemeDataContext): 
         saturation: number;
         lightness: number;
     }>, "uniform"> | PD.NamedParams<PD.Normalize<{
-        saturation: number;
-        lightness: number;
-        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
-            water: any;
-            ion: any;
-            protein: any;
-            RNA: any;
-            DNA: any;
-            PNA: any;
-            saccharide: any;
-        }>, "custom">;
-    }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -124,7 +112,7 @@ export declare function getIllustrativeColorThemeParams(ctx: ThemeDataContext): 
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
-        asymId: "auth" | "label";
+        asymId: "label" | "auth";
     }>, "chain-id"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
@@ -177,7 +165,19 @@ export declare function getIllustrativeColorThemeParams(ctx: ThemeDataContext): 
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
-    }>, "structure-index">>;
+    }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
+        saturation: number;
+        lightness: number;
+        colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+            water: any;
+            ion: any;
+            protein: any;
+            RNA: any;
+            DNA: any;
+            PNA: any;
+            saccharide: any;
+        }>, "custom">;
+    }>, "molecule-type">>;
     carbonLightness: PD.Numeric;
 };
 export declare function IllustrativeColorTheme(ctx: ThemeDataContext, props: PD.Values<IllustrativeColorThemeParams>): ColorTheme<IllustrativeColorThemeParams>;

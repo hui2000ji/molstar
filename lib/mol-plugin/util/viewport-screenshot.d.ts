@@ -21,10 +21,10 @@ declare class ViewportScreenshotHelper extends PluginComponent {
     private createParams;
     private _params;
     get params(): {
-        resolution: PD.Mapped<PD.NamedParams<PD.Normalize<{
+        resolution: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "viewport"> | PD.NamedParams<PD.Normalize<{
             width: number;
             height: number;
-        }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "viewport"> | PD.NamedParams<PD.Normalize<unknown>, "hd"> | PD.NamedParams<PD.Normalize<unknown>, "full-hd"> | PD.NamedParams<PD.Normalize<unknown>, "ultra-hd">>;
+        }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "hd"> | PD.NamedParams<PD.Normalize<unknown>, "full-hd"> | PD.NamedParams<PD.Normalize<unknown>, "ultra-hd">>;
         transparent: PD.BooleanParam;
         axes: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<{
             alpha: number;
