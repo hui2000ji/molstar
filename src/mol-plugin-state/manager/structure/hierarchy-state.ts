@@ -117,6 +117,7 @@ function StructureVolumeStreamingRef(cell: StateObjectCell<VolumeStreaming>, str
 
 export interface StructureComponentRef extends RefBase<'structure-component', SO.Molecule.Structure, StateTransforms['Model']['StructureComponent']> {
     structure: StructureRef,
+    component?: StructureComponentRef,
     key?: string,
     representations: StructureRepresentationRef[],
     genericRepresentations?: GenericRepresentationRef[]
@@ -127,8 +128,8 @@ function componentKey(cell: StateObjectCell<SO.Molecule.Structure>) {
     return [...cell.transform.tags].sort().join();
 }
 
-function StructureComponentRef(cell: StateObjectCell<SO.Molecule.Structure>, structure: StructureRef): StructureComponentRef {
-    return { kind: 'structure-component', cell, version: cell.transform.version, structure, key: componentKey(cell), representations: [] };
+function StructureComponentRef(cell: StateObjectCell<SO.Molecule.Structure>, structure: StructureRef, component?: StructureComponentRef): StructureComponentRef {
+    return { kind: 'structure-component', cell, version: cell.transform.version, structure, component, key: componentKey(cell), representations: [] };
 }
 
 export interface StructureRepresentationRef extends RefBase<'structure-representation', SO.Molecule.Structure.Representation3D, StateTransforms['Representation']['StructureRepresentation3D']> {
@@ -274,7 +275,7 @@ const Mapping: [TestCell, ApplyRef, LeaveRef][] = [
                 }
                 state.parentComponents.push(state.currentComponent);
             }
-            state.currentComponent = createOrUpdateRefList(state, cell, state.currentStructure.components, StructureComponentRef, cell, state.currentStructure);
+            state.currentComponent = createOrUpdateRefList(state, cell, state.currentStructure.components, StructureComponentRef, cell, state.currentStructure, state.currentComponent);
         }
     }, state => {
         if (state.parentComponents && state.parentComponents.length > 0) {

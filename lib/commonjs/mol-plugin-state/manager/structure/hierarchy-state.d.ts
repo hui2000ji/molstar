@@ -61,6 +61,7 @@ export interface StructureVolumeStreamingRef extends RefBase<'structure-volume-s
 }
 export interface StructureComponentRef extends RefBase<'structure-component', SO.Molecule.Structure, StateTransforms['Model']['StructureComponent']> {
     structure: StructureRef;
+    component?: StructureComponentRef;
     key?: string;
     representations: StructureRepresentationRef[];
     genericRepresentations?: GenericRepresentationRef[];

@@ -39,13 +39,13 @@ export { CreateVolumeStreamingBehavior };
 type CreateVolumeStreamingBehavior = typeof CreateVolumeStreamingBehavior;
 declare const CreateVolumeStreamingBehavior: StateTransformer<VolumeServerInfo, VolumeStreaming, PD.Normalize<{
     entry: PD.NamedParams<PD.Values<{
-        view: PD.Mapped<PD.NamedParams<PD.Normalize<{
+        view: PD.Mapped<PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{
             radius: any;
             selectionDetailLevel: any;
             isSelection: any;
             bottomLeft: any;
             topRight: any;
-        }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
+        }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
             bottomLeft: any;
             topRight: any;
         }>, "box"> | PD.NamedParams<PD.Normalize<{

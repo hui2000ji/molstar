@@ -103,6 +103,7 @@ export function updateStructureComponent(a: Structure, b: SO.Molecule.Structure,
     if (oldParams.type.name !== newParams.type.name) return StateTransformer.UpdateResult.Recreate;
 
     let updated = false;
+    const labelChanged = oldParams.label !== newParams.label;
 
     switch (newParams.type.name) {
         case 'static': {
@@ -112,7 +113,14 @@ export function updateStructureComponent(a: Structure, b: SO.Molecule.Structure,
             if (!Structure.areEquivalent(a, cache.source)) {
                 return StateTransformer.UpdateResult.Recreate;
             }
-            if (b.data.model === a.model) return StateTransformer.UpdateResult.Unchanged;
+            if (b.data.model === a.model) {
+                if (labelChanged) {
+                    b.label = `${newParams.label || b.label}`;
+                    return StateTransformer.UpdateResult.Updated;
+                }
+                return StateTransformer.UpdateResult.Unchanged;
+            }
+            // if (b.data.model === a.model) return StateTransformer.UpdateResult.Unchanged;
             if (!Model.areHierarchiesEqual(a.model, b.data.model)) return StateTransformer.UpdateResult.Recreate;
 
             b.data = b.data.remapModel(a.model);
@@ -161,7 +169,8 @@ export function updateStructureComponent(a: Structure, b: SO.Molecule.Structure,
         b.description = Structure.elementDescription(b.data);
     }
 
-    if (oldParams.label !== newParams.label) {
+    // if (oldParams.label !== newParams.label) {
+    if (labelChanged) {
         updated = true;
         b.label = `${newParams.label || b.label}`;
     }

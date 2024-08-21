@@ -19,11 +19,11 @@ export declare class VolsegVolumeData {
     constructor(rootData: VolsegEntryData);
     loadVolume(): Promise<{
         isovalue: Readonly<{
-            kind: "absolute";
-            absoluteValue: number;
-        }> | Readonly<{
             kind: "relative";
             relativeValue: number;
+        }> | Readonly<{
+            kind: "absolute";
+            absoluteValue: number;
         }>;
     } | undefined>;
     setVolumeVisual(type: 'isosurface' | 'direct-volume' | 'off'): Promise<void>;

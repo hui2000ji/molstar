@@ -12,7 +12,7 @@ export declare const PdbDownloadProvider: {
         encoding: "cif" | "bcif";
     }>>;
     pdbe: PD.Group<PD.Normalize<{
-        variant: "updated" | "updated-bcif" | "updtaed-bcif" | "archival";
+        variant: "updated-bcif" | "updated" | "updtaed-bcif" | "archival";
     }>>;
     pdbj: PD.Group<PD.Normalize<unknown>>;
 };
@@ -27,12 +27,6 @@ declare const DownloadStructure: StateAction<PluginStateObject.Root, void, PD.No
         label: any;
         options: any;
     }>, "url"> | PD.NamedParams<PD.Normalize<{
-        id: any;
-        options: any;
-    }>, "alphafolddb"> | PD.NamedParams<PD.Normalize<{
-        id: any;
-        options: any;
-    }>, "modelarchive"> | PD.NamedParams<PD.Normalize<{
         provider: any;
         options: any;
     }>, "pdb"> | PD.NamedParams<PD.Normalize<{
@@ -42,6 +36,12 @@ declare const DownloadStructure: StateAction<PluginStateObject.Root, void, PD.No
         id: any;
         options: any;
     }>, "swissmodel"> | PD.NamedParams<PD.Normalize<{
+        id: any;
+        options: any;
+    }>, "alphafolddb"> | PD.NamedParams<PD.Normalize<{
+        id: any;
+        options: any;
+    }>, "modelarchive"> | PD.NamedParams<PD.Normalize<{
         id: any;
         options: any;
     }>, "pubchem">;
@@ -70,8 +70,8 @@ export declare const LoadTrajectory: StateAction<PluginStateObject.Root, void, P
     source: PD.NamedParams<PD.Normalize<{
         model: any;
         coordinates: any;
-    }>, "url"> | PD.NamedParams<PD.Normalize<{
+    }>, "file"> | PD.NamedParams<PD.Normalize<{
         model: any;
         coordinates: any;
-    }>, "file">;
+    }>, "url">;
 }>>;

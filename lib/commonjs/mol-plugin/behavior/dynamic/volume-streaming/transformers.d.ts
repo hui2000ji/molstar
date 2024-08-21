@@ -30,9 +30,9 @@ declare const CreateVolumeStreamingInfo: StateTransformer<SO.Molecule.Structure,
     serverUrl: string;
     entries: PD.Normalize<PD.Values<{
         dataId: PD.Text<string>;
-        source: PD.Mapped<PD.NamedParams<PD.Normalize<{
+        source: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "x-ray"> | PD.NamedParams<PD.Normalize<{
             isoValue: any;
-        }>, "em"> | PD.NamedParams<PD.Normalize<unknown>, "x-ray">>;
+        }>, "em">>;
     }>>[];
 }>>;
 export { CreateVolumeStreamingBehavior };
@@ -45,7 +45,7 @@ declare const CreateVolumeStreamingBehavior: StateTransformer<VolumeServerInfo, 
             isSelection: any;
             bottomLeft: any;
             topRight: any;
-        }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
+        }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{
             bottomLeft: any;
             topRight: any;
         }>, "box"> | PD.NamedParams<PD.Normalize<{

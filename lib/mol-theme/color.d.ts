@@ -68,7 +68,7 @@ declare namespace ColorTheme {
     }
     export const EmptyProvider: Provider<{}>;
     export type Registry = ThemeRegistry<ColorTheme<any, any>>;
-    export function createRegistry(): ThemeRegistry<ColorThemeLocation<{}> | ColorThemeDirect<{}> | ColorThemeGrid<{}>>;
+    export function createRegistry(): ThemeRegistry<ColorThemeLocation<{}> | ColorThemeGrid<{}> | ColorThemeDirect<{}>>;
     export const BuiltIn: {
         'atom-id': Provider<{
             palette: PD.Mapped<PD.NamedParams<PD.Normalize<{
@@ -94,6 +94,18 @@ declare namespace ColorTheme {
                 saturation: number;
                 lightness: number;
             }>, "uniform"> | PD.NamedParams<PD.Normalize<{
+                saturation: number;
+                lightness: number;
+                colors: PD.NamedParams<PD.Normalize<{
+                    water: any;
+                    ion: any;
+                    protein: any;
+                    RNA: any;
+                    DNA: any;
+                    PNA: any;
+                    saccharide: any;
+                }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "default">;
+            }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
                 palette: PD.NamedParams<PD.Normalize<{
                     maxCount: any;
                     hue: any;
@@ -163,18 +175,6 @@ declare namespace ColorTheme {
                 saturation: number;
                 lightness: number;
                 colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
-                    water: any;
-                    ion: any;
-                    protein: any;
-                    RNA: any;
-                    DNA: any;
-                    PNA: any;
-                    saccharide: any;
-                }>, "custom">;
-            }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
-                saturation: number;
-                lightness: number;
-                colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
                     alphaHelix: any;
                     threeTenHelix: any;
                     piHelix: any;
@@ -193,6 +193,47 @@ declare namespace ColorTheme {
                 saturation: number;
                 lightness: number;
             }>, "uniform"> | PD.NamedParams<PD.Normalize<{
+                saturation: number;
+                lightness: number;
+                colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+                    ALA: any;
+                    ARG: any;
+                    ASN: any;
+                    ASP: any;
+                    CYS: any;
+                    GLN: any;
+                    GLU: any;
+                    GLY: any;
+                    HIS: any;
+                    ILE: any;
+                    LEU: any;
+                    LYS: any;
+                    MET: any;
+                    PHE: any;
+                    PRO: any;
+                    SER: any;
+                    THR: any;
+                    TRP: any;
+                    TYR: any;
+                    VAL: any;
+                    A: any;
+                    G: any;
+                    I: any;
+                    C: any;
+                    T: any;
+                    U: any;
+                    DA: any;
+                    DG: any;
+                    DI: any;
+                    DC: any;
+                    DT: any;
+                    DU: any;
+                    APN: any;
+                    GPN: any;
+                    CPN: any;
+                    TPN: any;
+                }>, "custom">;
+            }>, "residue-name"> | PD.NamedParams<PD.Normalize<{
                 carbonColor: PD.NamedParams<PD.Normalize<{
                     value: any;
                     saturation: any;
@@ -202,8 +243,6 @@ declare namespace ColorTheme {
                     asymId: any;
                 }>, "chain-id"> | PD.NamedParams<PD.Normalize<{
                     palette: any;
-                }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
-                    palette: any;
                 }>, "entity-id"> | PD.NamedParams<PD.Normalize<{
                     palette: any;
                 }>, "entity-source"> | PD.NamedParams<PD.Normalize<{
@@ -212,7 +251,9 @@ declare namespace ColorTheme {
                     palette: any;
                 }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
                     palette: any;
-                }>, "unit-index"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
+                }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
+                    palette: any;
+                }>, "operator-name"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
                     'CDR def.': any;
                     'VH/V\u03B1 FR': any;
                     'VL/V\u03B2 FR': any;
@@ -344,48 +385,7 @@ declare namespace ColorTheme {
                     LV: any;
                     UUH: any;
                 }>, "custom">;
-            }>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
-                saturation: number;
-                lightness: number;
-                colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
-                    ALA: any;
-                    ARG: any;
-                    ASN: any;
-                    ASP: any;
-                    CYS: any;
-                    GLN: any;
-                    GLU: any;
-                    GLY: any;
-                    HIS: any;
-                    ILE: any;
-                    LEU: any;
-                    LYS: any;
-                    MET: any;
-                    PHE: any;
-                    PRO: any;
-                    SER: any;
-                    THR: any;
-                    TRP: any;
-                    TYR: any;
-                    VAL: any;
-                    A: any;
-                    G: any;
-                    I: any;
-                    C: any;
-                    T: any;
-                    U: any;
-                    DA: any;
-                    DG: any;
-                    DI: any;
-                    DC: any;
-                    DT: any;
-                    DU: any;
-                    APN: any;
-                    GPN: any;
-                    CPN: any;
-                    TPN: any;
-                }>, "custom">;
-            }>, "residue-name">>;
+            }>, "element-symbol">>;
         }, "cartoon", ColorType>;
         'chain-id': Provider<{
             palette: PD.Mapped<PD.NamedParams<PD.Normalize<{
@@ -454,19 +454,6 @@ declare namespace ColorTheme {
                 }>, "generate"> | PD.NamedParams<PD.Normalize<{
                     list: any;
                 }>, "colors">;
-            }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
-                palette: PD.NamedParams<PD.Normalize<{
-                    maxCount: any;
-                    hue: any;
-                    chroma: any;
-                    luminance: any;
-                    sort: any;
-                    clusteringStepCount: any;
-                    minSampleCount: any;
-                    sampleCountFactor: any;
-                }>, "generate"> | PD.NamedParams<PD.Normalize<{
-                    list: any;
-                }>, "colors">;
             }>, "entity-id"> | PD.NamedParams<PD.Normalize<{
                 palette: PD.NamedParams<PD.Normalize<{
                     maxCount: any;
@@ -519,7 +506,20 @@ declare namespace ColorTheme {
                 }>, "generate"> | PD.NamedParams<PD.Normalize<{
                     list: any;
                 }>, "colors">;
-            }>, "unit-index"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
+            }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
+                palette: PD.NamedParams<PD.Normalize<{
+                    maxCount: any;
+                    hue: any;
+                    chroma: any;
+                    luminance: any;
+                    sort: any;
+                    clusteringStepCount: any;
+                    minSampleCount: any;
+                    sampleCountFactor: any;
+                }>, "generate"> | PD.NamedParams<PD.Normalize<{
+                    list: any;
+                }>, "colors">;
+            }>, "operator-name"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
                 'CDR def.': string;
                 'VH/V\u03B1 FR': Color;
                 'VL/V\u03B2 FR': Color;
@@ -534,8 +534,6 @@ declare namespace ColorTheme {
                     asymId: any;
                 }>, "chain-id"> | PD.NamedParams<PD.Normalize<{
                     palette: any;
-                }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
-                    palette: any;
                 }>, "entity-id"> | PD.NamedParams<PD.Normalize<{
                     palette: any;
                 }>, "entity-source"> | PD.NamedParams<PD.Normalize<{
@@ -544,7 +542,9 @@ declare namespace ColorTheme {
                     palette: any;
                 }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
                     palette: any;
-                }>, "unit-index">;
+                }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
+                    palette: any;
+                }>, "operator-name">;
                 'Non-polymer': Color;
             }>, "antibody-coloring-residue">>;
             saturation: PD.Numeric;
@@ -715,6 +715,18 @@ declare namespace ColorTheme {
                 saturation: number;
                 lightness: number;
             }>, "uniform"> | PD.NamedParams<PD.Normalize<{
+                saturation: number;
+                lightness: number;
+                colors: PD.NamedParams<PD.Normalize<{
+                    water: any;
+                    ion: any;
+                    protein: any;
+                    RNA: any;
+                    DNA: any;
+                    PNA: any;
+                    saccharide: any;
+                }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "default">;
+            }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
                 palette: PD.NamedParams<PD.Normalize<{
                     maxCount: any;
                     hue: any;
@@ -780,19 +792,7 @@ declare namespace ColorTheme {
                 }>, "generate"> | PD.NamedParams<PD.Normalize<{
                     list: any;
                 }>, "colors">;
-            }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
-                saturation: number;
-                lightness: number;
-                colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
-                    water: any;
-                    ion: any;
-                    protein: any;
-                    RNA: any;
-                    DNA: any;
-                    PNA: any;
-                    saccharide: any;
-                }>, "custom">;
-            }>, "molecule-type">>;
+            }>, "structure-index">>;
             carbonLightness: PD.Numeric;
         }, "illustrative", ColorType>;
         'model-index': Provider<{
@@ -815,7 +815,7 @@ declare namespace ColorTheme {
         'molecule-type': Provider<{
             saturation: PD.Numeric;
             lightness: PD.Numeric;
-            colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+            colors: PD.Mapped<PD.NamedParams<PD.Normalize<{
                 water: Color;
                 ion: Color;
                 protein: Color;
@@ -823,7 +823,7 @@ declare namespace ColorTheme {
                 DNA: Color;
                 PNA: Color;
                 saccharide: Color;
-            }>, "custom">>;
+            }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "default">>;
         }, "molecule-type", ColorType>;
         occupancy: Provider<{
             domain: PD.Interval;

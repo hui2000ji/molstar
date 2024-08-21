@@ -9,10 +9,10 @@ import { ParamDefinition as PD } from '../../mol-util/param-definition';
 import { PluginStateObject } from '../objects';
 export declare const PdbDownloadProvider: {
     rcsb: PD.Group<PD.Normalize<{
-        encoding: "cif" | "bcif";
+        encoding: "bcif" | "cif";
     }>>;
     pdbe: PD.Group<PD.Normalize<{
-        variant: "updated" | "updated-bcif" | "updtaed-bcif" | "archival";
+        variant: "updated-bcif" | "updated" | "updtaed-bcif" | "archival";
     }>>;
     pdbj: PD.Group<PD.Normalize<unknown>>;
 };
@@ -70,8 +70,8 @@ export declare const LoadTrajectory: StateAction<PluginStateObject.Root, void, P
     source: PD.NamedParams<PD.Normalize<{
         model: any;
         coordinates: any;
-    }>, "url"> | PD.NamedParams<PD.Normalize<{
+    }>, "file"> | PD.NamedParams<PD.Normalize<{
         model: any;
         coordinates: any;
-    }>, "file">;
+    }>, "url">;
 }>>;

@@ -237,7 +237,7 @@ export declare const ViewerAutoPreset: StructureRepresentationPresetProvider<{
     ignoreHydrogens: boolean | undefined;
     ignoreHydrogensVariant: "all" | "non-polar" | undefined;
     ignoreLight: boolean | undefined;
-    quality: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest" | undefined;
+    quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
     theme: import("../../mol-util/param-definition").ParamDefinition.Normalize<{
         globalName: any;
         globalColorParams: any;

@@ -68,7 +68,7 @@ export declare class VolsegEntryData extends PluginBehavior.WithSubscribers<Vols
     private highlightRequest;
     private getStateNode;
     currentState: BehaviorSubject<ParamDefinition.Values<{
-        volumeType: ParamDefinition.Select<"off" | "direct-volume" | "isosurface">;
+        volumeType: ParamDefinition.Select<"direct-volume" | "off" | "isosurface">;
         volumeIsovalueKind: ParamDefinition.Select<string>;
         volumeIsovalueValue: ParamDefinition.Numeric;
         volumeOpacity: ParamDefinition.Numeric;

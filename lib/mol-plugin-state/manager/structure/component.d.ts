@@ -35,7 +35,6 @@ declare class StructureComponentManager extends StatefulPluginComponent<Structur
     clear(structures: ReadonlyArray<StructureRef>): Promise<void>;
     selectThis(components: ReadonlyArray<StructureComponentRef>): void;
     focusThis(components: ReadonlyArray<StructureComponentRef>): void;
-    isNonNestedComponent(ref: StructureHierarchyRef): boolean;
     canBeModified(ref: StructureHierarchyRef): boolean;
     modifyByCurrentSelection(components: ReadonlyArray<StructureComponentRef>, action: StructureComponentManager.ModifyAction): Promise<void>;
     toggleVisibility(components: ReadonlyArray<StructureComponentRef>, reprPivot?: StructureRepresentationRef): void;
@@ -62,7 +61,7 @@ declare class StructureComponentManager extends StatefulPluginComponent<Structur
 declare namespace StructureComponentManager {
     const OptionsParams: {
         hydrogens: PD.Select<"all" | "hide-all" | "only-polar">;
-        visualQuality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+        visualQuality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
         ignoreLight: PD.BooleanParam;
         materialStyle: PD.Group<PD.Normalize<{
             metalness: number;

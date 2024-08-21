@@ -44,13 +44,13 @@ export declare namespace VolumeStreaming {
         channelParams?: DefaultChannelParams;
     }): {
         entry: PD.Mapped<PD.NamedParams<PD.Values<{
-            view: PD.Mapped<PD.NamedParams<PD.Normalize<{
+            view: PD.Mapped<PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{
                 radius: number;
                 selectionDetailLevel: number;
                 isSelection: boolean;
                 bottomLeft: Vec3;
                 topRight: Vec3;
-            }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
+            }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
                 bottomLeft: Vec3;
                 topRight: Vec3;
             }>, "box"> | PD.NamedParams<PD.Normalize<{
@@ -81,13 +81,13 @@ export declare namespace VolumeStreaming {
         structure?: Structure;
         channelParams?: DefaultChannelParams;
     }): {
-        view: PD.Mapped<PD.NamedParams<PD.Normalize<{
+        view: PD.Mapped<PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{
             radius: number;
             selectionDetailLevel: number;
             isSelection: boolean;
             bottomLeft: Vec3;
             topRight: Vec3;
-        }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "cell"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
+        }>, "auto"> | PD.NamedParams<PD.Normalize<{}>, "off"> | PD.NamedParams<PD.Normalize<{
             bottomLeft: Vec3;
             topRight: Vec3;
         }>, "box"> | PD.NamedParams<PD.Normalize<{

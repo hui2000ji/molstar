@@ -205,15 +205,6 @@ class StructureComponentManager extends StatefulPluginComponent<StructureCompone
         this.plugin.selectionMode = false;
     }
 
-    isNonNestedComponent(ref: StructureHierarchyRef) {
-        const isComponentTransform = this.plugin.builders.structure.isComponentTransform;
-        const parentCell = this.plugin.state.data.cells.get(ref.cell.transform.parent);
-        return (
-            isComponentTransform(ref.cell) &&
-            (!parentCell || !isComponentTransform(parentCell))
-        );
-    }
-
     canBeModified(ref: StructureHierarchyRef) {
         return this.plugin.builders.structure.isComponentTransform(ref.cell);
     }
@@ -354,7 +345,9 @@ class StructureComponentManager extends StatefulPluginComponent<StructureCompone
         }, { canUndo: 'Add Representation' });
     }
 
-    private tryFindComponent(structure: StructureRef, selection: StructureSelectionQuery) {
+    private tryFindComponent(structureOrComponent: StructureRef | StructureComponentRef, selection: StructureSelectionQuery) {
+        const structure: StructureRef = isStructureComponentRef(structureOrComponent) ? structureOrComponent.structure : structureOrComponent;
+
         if (structure.components.length === 0) return;
 
         return this.plugin.runTask(Task.create('Find Component', async taskCtx => {
@@ -387,7 +380,7 @@ class StructureComponentManager extends StatefulPluginComponent<StructureCompone
             for (const s of xs) {
                 let component: StateObjectRef | undefined = void 0;
 
-                if (params.options.checkExisting && !isStructureComponentRef(s)) {
+                if (params.options.checkExisting) {
                     component = await this.tryFindComponent(s, params.selection);
                 }
 
@@ -439,7 +432,8 @@ class StructureComponentManager extends StatefulPluginComponent<StructureCompone
         if (!structure) return;
         if ((action === 'subtract' || action === 'intersect') && !structureAreIntersecting(structure, by)) return;
 
-        const parent = component.structure.cell.obj?.data!;
+        // const parent = component.structure.cell.obj?.data!;
+        const parent: Structure = component.component ? component.component.cell.obj?.data! : component.structure.cell.obj?.data!;
         const modified = action === 'union'
             ? structureUnion(parent, [structure, by])
             : action === 'intersect'
