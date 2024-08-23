@@ -72,17 +72,17 @@ export declare const CubeProvider: {
                 dynamicBonds: any;
             }>, "auto"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
+                id: any;
+            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
+                dynamicBonds: any;
             }>, "model"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
+                dynamicBonds: any;
+                radius: any;
+            }>, "symmetry-mates"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
                 ijkMin: any;
                 ijkMax: any;
             }>, "symmetry"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
-                dynamicBonds: any;
-                id: any;
-            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
-                dynamicBonds: any;
-                radius: any;
-            }>, "symmetry-mates"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
                 generators: any;
             }>, "symmetry-assembly">;
@@ -91,7 +91,7 @@ export declare const CubeProvider: {
     visuals: (plugin: PluginContext, data: {
         volume: StateObjectSelector<PluginStateObject.Volume.Data>;
         structure: StateObjectSelector<PluginStateObject.Molecule.Structure>;
-    }) => Promise<(StateObjectSelector<PluginStateObject.Molecule.Structure.Representation3D, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>> | StateObjectSelector<PluginStateObject.Volume.Representation3D, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>)[]>;
+    }) => Promise<(StateObjectSelector<PluginStateObject.Volume.Representation3D, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>> | StateObjectSelector<PluginStateObject.Molecule.Structure.Representation3D, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>)[]>;
 };
 type DsCifParams = {
     entryId?: string | string[];
@@ -167,17 +167,17 @@ export declare const BuiltInVolumeFormats: readonly [readonly ["ccp4", {
                 dynamicBonds: any;
             }>, "auto"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
+                id: any;
+            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
+                dynamicBonds: any;
             }>, "model"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
+                dynamicBonds: any;
+                radius: any;
+            }>, "symmetry-mates"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
                 ijkMin: any;
                 ijkMax: any;
             }>, "symmetry"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
-                dynamicBonds: any;
-                id: any;
-            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
-                dynamicBonds: any;
-                radius: any;
-            }>, "symmetry-mates"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
                 generators: any;
             }>, "symmetry-assembly">;
@@ -186,7 +186,7 @@ export declare const BuiltInVolumeFormats: readonly [readonly ["ccp4", {
     visuals: (plugin: PluginContext, data: {
         volume: StateObjectSelector<PluginStateObject.Volume.Data>;
         structure: StateObjectSelector<PluginStateObject.Molecule.Structure>;
-    }) => Promise<(StateObjectSelector<PluginStateObject.Molecule.Structure.Representation3D, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>> | StateObjectSelector<PluginStateObject.Volume.Representation3D, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>)[]>;
+    }) => Promise<(StateObjectSelector<PluginStateObject.Volume.Representation3D, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>> | StateObjectSelector<PluginStateObject.Molecule.Structure.Representation3D, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>)[]>;
 }], readonly ["dx", {
     label: string;
     description: string;

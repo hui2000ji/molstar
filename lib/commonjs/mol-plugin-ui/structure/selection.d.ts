@@ -29,7 +29,7 @@ interface StructureSelectionActionsControlsState {
 }
 export declare class StructureSelectionActionsControls extends PluginUIComponent<{}, StructureSelectionActionsControlsState> {
     state: {
-        action: StructureSelectionModifier | "theme" | "help" | "add-component" | undefined;
+        action: "help" | "theme" | StructureSelectionModifier | "add-component" | undefined;
         helper: "residue-list" | undefined;
         isEmpty: boolean;
         isBusy: boolean;

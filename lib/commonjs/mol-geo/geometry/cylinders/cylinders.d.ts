@@ -48,7 +48,7 @@ export declare namespace Cylinders {
         bumpFrequency: PD.Numeric;
         bumpAmplitude: PD.Numeric;
         alpha: PD.Numeric;
-        quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+        quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
         material: PD.Group<PD.Normalize<{
             metalness: number;
             roughness: number;

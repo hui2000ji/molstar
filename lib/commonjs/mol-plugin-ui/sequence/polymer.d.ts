@@ -17,7 +17,7 @@ export declare class PolymerSequenceWrapper extends SequenceWrapper<StructureUni
     private seqId;
     residueLabel(seqIdx: number): string;
     residueColor(seqIdx: number): import("../../mol-util/color").Color;
-    residueClass(seqIdx: number): "msp-sequence-missing" | "msp-sequence-present";
+    residueClass(seqIdx: number): "msp-sequence-present" | "msp-sequence-missing";
     mark(loci: Loci, action: MarkerAction): boolean;
     getLoci(seqIdx: number): StructureElement.Loci;
     constructor(data: StructureUnit);

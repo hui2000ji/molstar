@@ -10,15 +10,15 @@ import { ThemeRegistryContext } from '../../../mol-theme/theme';
 import { Structure } from '../../../mol-model/structure';
 export declare const BallAndStickParams: {
     includeParent: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     visuals: PD.MultiSelect<"element-sphere" | "intra-bond" | "inter-bond">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -41,7 +41,7 @@ export declare const BallAndStickParams: {
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -70,15 +70,15 @@ export declare const BallAndStickParams: {
 export type BallAndStickParams = typeof BallAndStickParams;
 export declare function getBallAndStickParams(ctx: ThemeRegistryContext, structure: Structure): {
     includeParent: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     visuals: PD.MultiSelect<"element-sphere" | "intra-bond" | "inter-bond">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -101,7 +101,7 @@ export declare function getBallAndStickParams(ctx: ThemeRegistryContext, structu
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -131,15 +131,15 @@ export type BallAndStickRepresentation = StructureRepresentation<BallAndStickPar
 export declare function BallAndStickRepresentation(ctx: RepresentationContext, getParams: RepresentationParamsGetter<Structure, BallAndStickParams>): BallAndStickRepresentation;
 export declare const BallAndStickRepresentationProvider: StructureRepresentationProvider<{
     includeParent: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     visuals: PD.MultiSelect<"element-sphere" | "intra-bond" | "inter-bond">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -162,7 +162,7 @@ export declare const BallAndStickRepresentationProvider: StructureRepresentation
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

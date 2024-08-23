@@ -12,7 +12,7 @@ export declare const InteractionsIntraUnitParams: {
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     includeParent: PD.BooleanParam;
-    parentDisplay: PD.Select<"stub" | "full" | "between">;
+    parentDisplay: PD.Select<"full" | "stub" | "between">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -22,7 +22,7 @@ export declare const InteractionsIntraUnitParams: {
     dashCap: PD.BooleanParam;
     stubCap: PD.BooleanParam;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -32,7 +32,7 @@ export declare const InteractionsIntraUnitParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

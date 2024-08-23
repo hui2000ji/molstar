@@ -58,9 +58,9 @@ export declare const PluginCommands: {
                     canvas3d: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                     interactivity: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                     camera: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
-                    cameraTransition: import("../mol-util/param-definition").ParamDefinition.Mapped<import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
+                    cameraTransition: import("../mol-util/param-definition").ParamDefinition.Mapped<import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "instant"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
                         durationInMs: number;
-                    }>, "animate"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "instant">>;
+                    }>, "animate">>;
                     image: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                 }>> | undefined;
             }>;
@@ -77,9 +77,9 @@ export declare const PluginCommands: {
                     canvas3d: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                     interactivity: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                     camera: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
-                    cameraTransition: import("../mol-util/param-definition").ParamDefinition.Mapped<import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
+                    cameraTransition: import("../mol-util/param-definition").ParamDefinition.Mapped<import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "instant"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
                         durationInMs: number;
-                    }>, "animate"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "instant">>;
+                    }>, "animate">>;
                     image: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                 }>> | undefined;
             }>;
@@ -110,9 +110,9 @@ export declare const PluginCommands: {
                     canvas3d: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                     interactivity: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                     camera: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
-                    cameraTransition: import("../mol-util/param-definition").ParamDefinition.Mapped<import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
+                    cameraTransition: import("../mol-util/param-definition").ParamDefinition.Mapped<import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "instant"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
                         durationInMs: number;
-                    }>, "animate"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "instant">>;
+                    }>, "animate">>;
                     image: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                 }>> | undefined;
             }>;
@@ -133,9 +133,9 @@ export declare const PluginCommands: {
                     canvas3d: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                     interactivity: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                     camera: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
-                    cameraTransition: import("../mol-util/param-definition").ParamDefinition.Mapped<import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
+                    cameraTransition: import("../mol-util/param-definition").ParamDefinition.Mapped<import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "instant"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
                         durationInMs: number;
-                    }>, "animate"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "instant">>;
+                    }>, "animate">>;
                     image: import("../mol-util/param-definition").ParamDefinition.BooleanParam;
                 }>> | undefined;
             }>;

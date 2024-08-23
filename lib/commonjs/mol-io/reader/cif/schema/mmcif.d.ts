@@ -511,7 +511,7 @@ export declare const mmCIF_Schema: {
          * linking monomers, monomers with some type of N-terminal (or 5')
          * cap and monomers with some type of C-terminal (or 3') cap.
          */
-        type: Schema.Aliased<"other" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "saccharide" | "non-polymer" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking">;
+        type: Schema.Aliased<"other" | "saccharide" | "non-polymer" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking">;
         /**
          * Synonym list for the component.
          */
@@ -548,7 +548,7 @@ export declare const mmCIF_Schema: {
          * bond associated with the specified atoms, expressed as a bond
          * order.
          */
-        value_order: Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
+        value_order: Schema.Aliased<"pi" | "sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo">;
         /**
          * Ordinal index for the component bond list.
          */
@@ -692,7 +692,7 @@ export declare const mmCIF_Schema: {
         /**
          * An abbreviation that identifies the database.
          */
-        database_id: Schema.Aliased<"alphafolddb" | "cas" | "csd" | "emdb" | "icsd" | "modelarchive" | "mdf" | "modbase" | "ndb" | "nbs" | "pdb" | "pdf" | "rcsb" | "swiss-model_repository" | "ebi" | "pdbe" | "bmrb" | "wwpdb" | "pdb_acc">;
+        database_id: Schema.Aliased<"cas" | "rcsb" | "pdbe" | "pdb" | "alphafolddb" | "modelarchive" | "emdb" | "csd" | "icsd" | "mdf" | "modbase" | "ndb" | "nbs" | "pdf" | "swiss-model_repository" | "ebi" | "bmrb" | "wwpdb" | "pdb_acc">;
         /**
          * The code assigned by the database identified in
          * _database_2.database_id.
@@ -768,7 +768,7 @@ export declare const mmCIF_Schema: {
          * Water entities are not expected to have corresponding
          * entries in the ENTITY category.
          */
-        type: Schema.Aliased<"non-polymer" | "polymer" | "macrolide" | "water" | "branched">;
+        type: Schema.Aliased<"water" | "polymer" | "branched" | "non-polymer" | "macrolide">;
         /**
          * A description of the entity.
          *
@@ -1048,7 +1048,7 @@ export declare const mmCIF_Schema: {
          * A flag indicating that this entity was originally labeled
          * with a blank PDB chain id.
          */
-        pdbx_blank_PDB_chainid_flag: Schema.Aliased<"N" | "Y">;
+        pdbx_blank_PDB_chainid_flag: Schema.Aliased<"Y" | "N">;
     };
     /**
      * Data items in the STRUCT_CONF category record details about
@@ -1487,7 +1487,7 @@ export declare const mmCIF_Schema: {
          * those that are given in the data block (in which case the value
          * of code is 'generate').
          */
-        code: Schema.Aliased<"given" | "generate">;
+        code: Schema.Aliased<"generate" | "given">;
         /**
          * A description of special aspects of the noncrystallographic
          * symmetry operator.
@@ -1863,11 +1863,11 @@ export declare const mmCIF_Schema: {
         /**
          * The site where the file was deposited.
          */
-        deposit_site: Schema.Aliased<"NDB" | "RCSB" | "PDBE" | "PDBJ" | "BMRB" | "BNL" | "PDBC">;
+        deposit_site: Schema.Aliased<"RCSB" | "NDB" | "PDBE" | "PDBJ" | "BMRB" | "BNL" | "PDBC">;
         /**
          * The site where the file was deposited.
          */
-        process_site: Schema.Aliased<"NDB" | "RCSB" | "PDBE" | "PDBJ" | "BNL" | "PDBC">;
+        process_site: Schema.Aliased<"RCSB" | "NDB" | "PDBE" | "PDBJ" | "BNL" | "PDBC">;
         /**
          * Code for status of chemical shift data file.
          */
@@ -1953,7 +1953,7 @@ export declare const mmCIF_Schema: {
         /**
          * The identifying content type of the related entry.
          */
-        content_type: Schema.Aliased<"split" | "other" | "minimized average structure" | "representative structure" | "ensemble" | "derivative structure" | "native structure" | "associated EM volume" | "other EM volume" | "associated NMR restraints" | "associated structure factors" | "associated SAS data" | "protein target sequence and/or protocol data" | "re-refinement" | "complete structure" | "unspecified">;
+        content_type: Schema.Aliased<"split" | "unspecified" | "other" | "minimized average structure" | "representative structure" | "ensemble" | "derivative structure" | "native structure" | "associated EM volume" | "other EM volume" | "associated NMR restraints" | "associated structure factors" | "associated SAS data" | "protein target sequence and/or protocol data" | "re-refinement" | "complete structure">;
     };
     /**
      * The PDBX_ENTITY_NONPOLY category provides a mapping between
@@ -1988,7 +1988,7 @@ export declare const mmCIF_Schema: {
         /**
          * The provenance of this synonym.
          */
-        provenance: Schema.Aliased<"AUTHOR" | "DRUGBANK" | "CHEBI" | "CHEMBL" | "PDB" | "PUBCHEM">;
+        provenance: Schema.Aliased<"PDB" | "AUTHOR" | "DRUGBANK" | "CHEBI" | "CHEMBL" | "PUBCHEM">;
     };
     /**
      * Data items in the CHEM_COMP_IDENTIFIER category provide
@@ -2041,7 +2041,7 @@ export declare const mmCIF_Schema: {
          * The value of occupancy flag indicates whether the residue
          * is unobserved (= 1) or the coordinates have an occupancy of zero (=0)
          */
-        occupancy_flag: Schema.Aliased<"1" | "0">;
+        occupancy_flag: Schema.Aliased<"0" | "1">;
         /**
          * Part of the identifier for the unobserved or zero occupancy residue.
          *
@@ -2289,7 +2289,7 @@ export declare const mmCIF_Schema: {
         /**
          * Defines the polymer characteristic of the entity.
          */
-        type: Schema.Aliased<"non-polymer" | "polymer" | "branched" | "polymer-like">;
+        type: Schema.Aliased<"polymer" | "branched" | "non-polymer" | "polymer-like">;
         /**
          * Additional details about this entity.
          */
@@ -2384,7 +2384,7 @@ export declare const mmCIF_Schema: {
         /**
          * The bond order target for the chemical linkage.
          */
-        value_order: Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
+        value_order: Schema.Aliased<"pi" | "sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo">;
         /**
          * The entity component identifier for the first of two entities containing the linkage.
          */
@@ -2396,7 +2396,7 @@ export declare const mmCIF_Schema: {
         /**
          * A code indicating the entity types involved in the linkage.
          */
-        link_class: Schema.Aliased<"PP" | "PN" | "NP" | "NN">;
+        link_class: Schema.Aliased<"NP" | "PP" | "PN" | "NN">;
     };
     /**
      * Data items in the PDBX_REFERENCE_ENTITY_POLY_LINK category give details about
@@ -2470,7 +2470,7 @@ export declare const mmCIF_Schema: {
         /**
          * The bond order target for the non-standard linkage.
          */
-        value_order: Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
+        value_order: Schema.Aliased<"pi" | "sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo">;
     };
     /**
      * Data items in the PDBX_MOLECULE category identify reference molecules
@@ -2509,7 +2509,7 @@ export declare const mmCIF_Schema: {
         /**
          * Defines the structural classification of the molecule.
          */
-        type: Schema.Aliased<"unknown" | "non-polymer" | "peptide-like" | "macrolide" | "amino acid" | "aminoglycoside" | "anthracycline" | "anthraquinone" | "ansamycin" | "chalkophore" | "chromophore" | "glycopeptide" | "cyclic depsipeptide" | "cyclic lipopeptide" | "cyclic peptide" | "heterocyclic" | "imino sugar" | "keto acid" | "lipoglycopeptide" | "lipopeptide" | "nucleoside" | "oligopeptide" | "oligosaccharide" | "peptaibol" | "polycyclic" | "polypeptide" | "polysaccharide" | "quinolone" | "thiolactone" | "thiopeptide" | "siderophore" | "chalkophore, polypeptide">;
+        type: Schema.Aliased<"unknown" | "non-polymer" | "oligosaccharide" | "peptide-like" | "macrolide" | "amino acid" | "aminoglycoside" | "anthracycline" | "anthraquinone" | "ansamycin" | "chalkophore" | "chromophore" | "glycopeptide" | "cyclic depsipeptide" | "cyclic lipopeptide" | "cyclic peptide" | "heterocyclic" | "imino sugar" | "keto acid" | "lipoglycopeptide" | "lipopeptide" | "nucleoside" | "oligopeptide" | "peptaibol" | "polycyclic" | "polypeptide" | "polysaccharide" | "quinolone" | "thiolactone" | "thiopeptide" | "siderophore" | "chalkophore, polypeptide">;
         /**
          * A name of the molecule.
          */
@@ -2819,7 +2819,7 @@ export declare const mmCIF_Schema: {
         /**
          * The bond order target for the chemical linkage.
          */
-        value_order: Schema.Aliased<"sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo" | "pi">;
+        value_order: Schema.Aliased<"pi" | "sing" | "doub" | "trip" | "quad" | "arom" | "poly" | "delo">;
     };
     /**
      * Data items in the PDBX_ENTITY_BRANCH category specify the list
@@ -3154,7 +3154,7 @@ export declare const mmCIF_Schema: {
         /**
          * The primitive object used to model this segment.
          */
-        model_object_primitive: Schema.Aliased<"other" | "sphere" | "atomistic" | "gaussian">;
+        model_object_primitive: Schema.Aliased<"other" | "sphere" | "gaussian" | "atomistic">;
         /**
          * The identifier for the starting structural model.
          * This data item is a pointer to _ihm_starting_model_details.starting_model_id
@@ -3414,7 +3414,7 @@ export declare const mmCIF_Schema: {
         /**
          * The type of post modeling analysis being carried out.
          */
-        type: Schema.Aliased<"none" | "filter" | "other" | "cluster" | "rescore" | "validation">;
+        type: Schema.Aliased<"filter" | "none" | "other" | "cluster" | "rescore" | "validation">;
         /**
          * The parameter/feature used in the post modeling analysis.
          */
@@ -3637,7 +3637,7 @@ export declare const mmCIF_Schema: {
         /**
          * The application / utilization of the dataset group in modeling.
          */
-        application: Schema.Aliased<"filter" | "other" | "validation" | "restraint" | "representation" | "sampling">;
+        application: Schema.Aliased<"filter" | "other" | "representation" | "validation" | "restraint" | "sampling">;
         /**
          * Additional details regarding the dataset group.
          */
@@ -3697,7 +3697,7 @@ export declare const mmCIF_Schema: {
         /**
          * The name of the database containing the dataset entry.
          */
-        db_name: Schema.Aliased<"BMRB" | "PDB" | "Other" | "PDB-Dev" | "EMDB" | "EMPIAR" | "SASBDB" | "PRIDE" | "MODEL ARCHIVE" | "MASSIVE" | "BioGRID" | "ProXL" | "jPOSTrepo" | "iProX" | "AlphaFoldDB">;
+        db_name: Schema.Aliased<"PDB" | "PDB-Dev" | "EMDB" | "EMPIAR" | "BMRB" | "Other" | "SASBDB" | "PRIDE" | "MODEL ARCHIVE" | "MASSIVE" | "BioGRID" | "ProXL" | "jPOSTrepo" | "iProX" | "AlphaFoldDB">;
         /**
          * The accession code for the database entry.
          */
@@ -4024,7 +4024,7 @@ export declare const mmCIF_Schema: {
         /**
          * The type of crosslinker used.
          */
-        linker_type: Schema.Aliased<"Other" | "EDC" | "DSS" | "EGS" | "BS3" | "BS2G" | "DST" | "sulfo-SDA" | "sulfo-SMCC" | "DSSO" | "DSG" | "BSP" | "BMSO" | "DHSO" | "CYS" | "SDA" | "DSA" | "BrdU" | "LCSDA" | "CDI" | "ADH" | "L-Photo-Leucine" | "KArGO" | "BrEtY" | "DSBU" | "DSPP" | "TBDSPP">;
+        linker_type: Schema.Aliased<"CYS" | "Other" | "EDC" | "DSS" | "EGS" | "BS3" | "BS2G" | "DST" | "sulfo-SDA" | "sulfo-SMCC" | "DSSO" | "DSG" | "BSP" | "BMSO" | "DHSO" | "SDA" | "DSA" | "BrdU" | "LCSDA" | "CDI" | "ADH" | "L-Photo-Leucine" | "KArGO" | "BrEtY" | "DSBU" | "DSPP" | "TBDSPP">;
         /**
          * Identifier to the crosslinking dataset.
          * This data item is a pointer to the _ihm_dataset_list.id in the
@@ -4662,11 +4662,11 @@ export declare const mmCIF_Schema: {
         /**
          * The type of feature.
          */
-        feature_type: Schema.Aliased<"atom" | "residue" | "residue range" | "ligand" | "pseudo site">;
+        feature_type: Schema.Aliased<"residue" | "ligand" | "atom" | "residue range" | "pseudo site">;
         /**
          * The type of entity.
          */
-        entity_type: Schema.Aliased<"other" | "non-polymer" | "polymer" | "water">;
+        entity_type: Schema.Aliased<"other" | "water" | "polymer" | "non-polymer">;
     };
     /**
      * Data items in the IHM_POLY_RESIDUE_FEATURE category provides the defintions
@@ -4974,11 +4974,11 @@ export declare const mmCIF_Schema: {
         /**
          * The type of QA metric.
          */
-        type: Schema.Aliased<"other" | "zscore" | "energy" | "distance" | "normalized score" | "pLDDT" | "pLDDT in [0,1]" | "pLDDT all-atom" | "pLDDT all-atom in [0,1]" | "PAE" | "pTM" | "ipTM" | "contact probability">;
+        type: Schema.Aliased<"other" | "pLDDT" | "zscore" | "energy" | "distance" | "normalized score" | "pLDDT in [0,1]" | "pLDDT all-atom" | "pLDDT all-atom in [0,1]" | "PAE" | "pTM" | "ipTM" | "contact probability">;
         /**
          * The mode of calculation of the QA metric.
          */
-        mode: Schema.Aliased<"local" | "global" | "local-pairwise">;
+        mode: Schema.Aliased<"global" | "local" | "local-pairwise">;
         /**
          * Identifier to the set of software used to calculate the QA metric.
          * This data item is a pointer to the _ma_software_group.group_id in the

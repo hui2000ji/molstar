@@ -13,7 +13,7 @@ export declare const OrientationParams: {
     bumpFrequency: PD.Numeric;
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -23,7 +23,7 @@ export declare const OrientationParams: {
     transparentBackfaces: PD.Select<string>;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -47,7 +47,7 @@ export declare function getOrientationParams(ctx: ThemeRegistryContext, structur
     bumpFrequency: PD.Numeric;
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -57,7 +57,7 @@ export declare function getOrientationParams(ctx: ThemeRegistryContext, structur
     transparentBackfaces: PD.Select<string>;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -82,7 +82,7 @@ export declare const OrientationRepresentationProvider: StructureRepresentationP
     bumpFrequency: PD.Numeric;
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -92,7 +92,7 @@ export declare const OrientationRepresentationProvider: StructureRepresentationP
     transparentBackfaces: PD.Select<string>;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

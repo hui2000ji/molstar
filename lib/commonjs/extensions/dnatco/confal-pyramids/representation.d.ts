@@ -10,7 +10,7 @@ import { StructureRepresentation, StructureRepresentationProvider } from '../../
 import { ParamDefinition as PD } from '../../../mol-util/param-definition';
 import { ThemeRegistryContext } from '../../../mol-theme/theme';
 export declare const ConfalPyramidsParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -21,7 +21,7 @@ export declare const ConfalPyramidsParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -41,7 +41,7 @@ export declare const ConfalPyramidsParams: {
 };
 export type ConfalPyramidsParams = typeof ConfalPyramidsParams;
 export declare function getConfalPyramidsParams(ctx: ThemeRegistryContext, structure: Structure): {
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -52,7 +52,7 @@ export declare function getConfalPyramidsParams(ctx: ThemeRegistryContext, struc
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -73,7 +73,7 @@ export declare function getConfalPyramidsParams(ctx: ThemeRegistryContext, struc
 export type ConfalPyramidsRepresentation = StructureRepresentation<ConfalPyramidsParams>;
 export declare function ConfalPyramidsRepresentation(ctx: RepresentationContext, getParams: RepresentationParamsGetter<Structure, ConfalPyramidsParams>): ConfalPyramidsRepresentation;
 export declare const ConfalPyramidsRepresentationProvider: StructureRepresentationProvider<{
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -84,7 +84,7 @@ export declare const ConfalPyramidsRepresentationProvider: StructureRepresentati
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

@@ -11,7 +11,7 @@ export declare const PolymerBackboneSphereParams: {
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
@@ -24,7 +24,7 @@ export declare const PolymerBackboneSphereParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -49,7 +49,7 @@ export declare function PolymerBackboneSphereVisual(materialId: number, structur
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
@@ -62,7 +62,7 @@ export declare function PolymerBackboneSphereVisual(materialId: number, structur
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

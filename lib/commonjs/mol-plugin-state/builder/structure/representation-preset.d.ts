@@ -31,7 +31,7 @@ export declare namespace StructureRepresentationPresetProvider {
         ignoreHydrogens: PD.Base<boolean | undefined>;
         ignoreHydrogensVariant: PD.Base<"all" | "non-polar" | undefined>;
         ignoreLight: PD.Base<boolean | undefined>;
-        quality: PD.Base<"auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined>;
+        quality: PD.Base<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest" | undefined>;
         theme: PD.Base<PD.Normalize<{
             globalName: "uniform" | "atom-id" | "carbohydrate-symbol" | "molecule-type" | "chain-id" | "entity-id" | "entity-source" | "model-index" | "structure-index" | "secondary-structure" | "residue-name" | "element-symbol" | "unit-index" | "operator-name" | "cartoon" | "element-index" | "hydrophobicity" | "illustrative" | "occupancy" | "operator-hkl" | "partial-charge" | "polymer-id" | "polymer-index" | "sequence-id" | "shape-group" | "trajectory-index" | "uncertainty" | "volume-segment" | "volume-value" | "external-volume" | undefined;
             globalColorParams: any;
@@ -53,7 +53,7 @@ export declare namespace StructureRepresentationPresetProvider {
         symmetryColorParams: any;
         globalColorParams: any;
         typeParams: {
-            quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+            quality: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
             ignoreHydrogens: boolean;
             ignoreHydrogensVariant: "all" | "non-polar";
             ignoreLight: boolean;
@@ -325,7 +325,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -358,7 +358,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -383,7 +383,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -407,7 +407,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -446,7 +446,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -472,7 +472,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -499,7 +499,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;

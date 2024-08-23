@@ -60,9 +60,9 @@ declare class PluginState extends PluginComponent {
         canvas3d: PD.BooleanParam;
         interactivity: PD.BooleanParam;
         camera: PD.BooleanParam;
-        cameraTransition: PD.Mapped<PD.NamedParams<PD.Normalize<{
+        cameraTransition: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "instant"> | PD.NamedParams<PD.Normalize<{
             durationInMs: number;
-        }>, "animate"> | PD.NamedParams<PD.Normalize<unknown>, "instant">>;
+        }>, "animate">>;
         image: PD.BooleanParam;
     }>>>;
     setSnapshotParams: (params?: PluginState.SnapshotParams) => void;
@@ -87,9 +87,9 @@ declare namespace PluginState {
         canvas3d: PD.BooleanParam;
         interactivity: PD.BooleanParam;
         camera: PD.BooleanParam;
-        cameraTransition: PD.Mapped<PD.NamedParams<PD.Normalize<{
+        cameraTransition: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "instant"> | PD.NamedParams<PD.Normalize<{
             durationInMs: number;
-        }>, "animate"> | PD.NamedParams<PD.Normalize<unknown>, "instant">>;
+        }>, "animate">>;
         image: PD.BooleanParam;
     };
     type SnapshotParams = Partial<PD.Values<typeof SnapshotParams>>;
@@ -104,9 +104,9 @@ declare namespace PluginState {
         canvas3d: PD.BooleanParam;
         interactivity: PD.BooleanParam;
         camera: PD.BooleanParam;
-        cameraTransition: PD.Mapped<PD.NamedParams<PD.Normalize<{
+        cameraTransition: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "instant"> | PD.NamedParams<PD.Normalize<{
             durationInMs: number;
-        }>, "animate"> | PD.NamedParams<PD.Normalize<unknown>, "instant">>;
+        }>, "animate">>;
         image: PD.BooleanParam;
     }>;
     interface Snapshot {

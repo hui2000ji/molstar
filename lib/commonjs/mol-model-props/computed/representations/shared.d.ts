@@ -12,6 +12,6 @@ export declare const InteractionsSharedParams: {
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     includeParent: PD.BooleanParam;
-    parentDisplay: PD.Select<"stub" | "full" | "between">;
+    parentDisplay: PD.Select<"full" | "stub" | "between">;
 };
 export type InteractionsSharedParams = typeof InteractionsSharedParams;

@@ -16,12 +16,12 @@ export declare const ElementPointParams: {
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     traceOnly: PD.BooleanParam;
     stride: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
-    pointStyle: PD.Select<"circle" | "square" | "fuzzy">;
+    pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

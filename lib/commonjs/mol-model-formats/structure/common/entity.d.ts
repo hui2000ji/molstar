@@ -28,7 +28,7 @@ export declare class EntityBuilder {
         formula_weight: Column.Schema.Float;
         id: Column.Schema.Str;
         src_method: Column.Schema.Aliased<"nat" | "man" | "syn">;
-        type: Column.Schema.Aliased<"non-polymer" | "polymer" | "macrolide" | "water" | "branched">;
+        type: Column.Schema.Aliased<"water" | "polymer" | "branched" | "non-polymer" | "macrolide">;
         pdbx_description: Column.Schema.List<string>;
         pdbx_number_of_molecules: Column.Schema.Int;
         pdbx_mutation: Column.Schema.Str;

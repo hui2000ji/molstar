@@ -39,19 +39,6 @@ export declare const AntibodyColoringResidueColorThemeParams: {
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
-    }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
-        palette: PD.NamedParams<PD.Normalize<{
-            maxCount: any;
-            hue: any;
-            chroma: any;
-            luminance: any;
-            sort: any;
-            clusteringStepCount: any;
-            minSampleCount: any;
-            sampleCountFactor: any;
-        }>, "generate"> | PD.NamedParams<PD.Normalize<{
-            list: any;
-        }>, "colors">;
     }>, "entity-id"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
@@ -104,7 +91,20 @@ export declare const AntibodyColoringResidueColorThemeParams: {
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
-    }>, "unit-index">>;
+    }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
+        palette: PD.NamedParams<PD.Normalize<{
+            maxCount: any;
+            hue: any;
+            chroma: any;
+            luminance: any;
+            sort: any;
+            clusteringStepCount: any;
+            minSampleCount: any;
+            sampleCountFactor: any;
+        }>, "generate"> | PD.NamedParams<PD.Normalize<{
+            list: any;
+        }>, "colors">;
+    }>, "operator-name">>;
     'Non-polymer': PD.Color;
 };
 type Params = typeof AntibodyColoringResidueColorThemeParams;

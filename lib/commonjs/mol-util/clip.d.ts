@@ -32,7 +32,7 @@ export declare namespace Clip {
     const Params: {
         variant: PD.Select<Variant>;
         objects: PD.ObjectList<PD.Normalize<{
-            type: "none" | "sphere" | "cube" | "plane" | "cylinder" | "infiniteCone";
+            type: "none" | "sphere" | "plane" | "cube" | "cylinder" | "infiniteCone";
             invert: boolean;
             position: Vec3;
             rotation: PD.Normalize<{

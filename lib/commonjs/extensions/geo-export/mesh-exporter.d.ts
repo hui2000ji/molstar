@@ -88,7 +88,7 @@ export declare abstract class MeshExporter<D extends RenderObjectExportData> imp
         includeHidden: boolean;
         linesAsTriangles: boolean;
         pointsAsTriangles: boolean;
-        primitivesQuality: "auto" | "medium" | "high" | "low";
+        primitivesQuality: "auto" | "high" | "low" | "medium";
     };
     abstract getData(ctx: RuntimeContext): Promise<D>;
     abstract getBlob(ctx: RuntimeContext): Promise<Blob>;

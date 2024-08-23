@@ -19,10 +19,10 @@ export declare const MolecularSurfaceParams: {
     probeRadius: PD.Numeric;
     resolution: PD.Numeric;
     probePositions: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     lineSizeAttenuation: PD.BooleanParam;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -39,10 +39,10 @@ export declare const MolecularSurfaceParams: {
         }>[];
     }>>;
     instanceGranularity: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
+    }>, "on">>;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -63,10 +63,10 @@ export declare function getMolecularSurfaceParams(ctx: ThemeRegistryContext, str
     probeRadius: PD.Numeric;
     resolution: PD.Numeric;
     probePositions: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     lineSizeAttenuation: PD.BooleanParam;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -83,10 +83,10 @@ export declare function getMolecularSurfaceParams(ctx: ThemeRegistryContext, str
         }>[];
     }>>;
     instanceGranularity: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
+    }>, "on">>;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -108,10 +108,10 @@ export declare const MolecularSurfaceRepresentationProvider: StructureRepresenta
     probeRadius: PD.Numeric;
     resolution: PD.Numeric;
     probePositions: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     lineSizeAttenuation: PD.BooleanParam;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -128,10 +128,10 @@ export declare const MolecularSurfaceRepresentationProvider: StructureRepresenta
         }>[];
     }>>;
     instanceGranularity: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
+    }>, "on">>;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;

@@ -15,7 +15,7 @@ export declare const BackgroundParams: {
         opacity: number;
         saturation: number;
         lightness: number;
-        source: PD.NamedParams<any, "url"> | PD.NamedParams<Asset.File | null, "file">;
+        source: PD.NamedParams<Asset.File | null, "file"> | PD.NamedParams<any, "url">;
         blur: number;
     }>, "image"> | PD.NamedParams<PD.Normalize<{
         centerColor: Color;

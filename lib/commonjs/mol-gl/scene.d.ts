@@ -38,6 +38,6 @@ declare namespace Scene {
     interface Group extends Object3D {
         readonly renderables: ReadonlyArray<GraphicsRenderable>;
     }
-    function create(ctx: WebGLContext, variants?: ("depth" | "colorBlended" | "colorWboit" | "colorDpoit" | "pick" | "marking")[]): Scene;
+    function create(ctx: WebGLContext, variants?: ("colorBlended" | "colorWboit" | "colorDpoit" | "pick" | "depth" | "marking")[]): Scene;
 }
 export { Scene };

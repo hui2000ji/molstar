@@ -163,14 +163,14 @@ function getProvidersParams(defaultOn: string[] = []) {
     return params;
 }
 export const ContactProviderParams = getProvidersParams([
-    // 'ionic',
+    'ionic',
     'cation-pi',
     'pi-stacking',
     'hydrogen-bonds',
     'halogen-bonds',
-    // 'hydrophobic',
+    'hydrophobic',
     'metal-coordination',
-    // 'weak-hydrogen-bonds',
+    'weak-hydrogen-bonds',
 ]);
 
 export const InteractionsParams = {

@@ -41,7 +41,7 @@ declare const StructureProperties: {
         microheterogeneityCompIds: StructureElement.Property<string[]>;
         secondary_structure_type: StructureElement.Property<SecondaryStructureType>;
         secondary_structure_key: StructureElement.Property<number>;
-        chem_comp_type: StructureElement.Property<"other" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "saccharide" | "non-polymer" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking" | "ion" | "lipid">;
+        chem_comp_type: StructureElement.Property<"other" | "ion" | "saccharide" | "lipid" | "non-polymer" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking">;
     };
     chain: {
         key: StructureElement.Property<import("../model").ChainIndex>;
@@ -52,7 +52,7 @@ declare const StructureProperties: {
     entity: {
         key: StructureElement.Property<import("../model").EntityIndex>;
         id: StructureElement.Property<string>;
-        type: StructureElement.Property<"non-polymer" | "polymer" | "macrolide" | "water" | "branched">;
+        type: StructureElement.Property<"water" | "polymer" | "branched" | "non-polymer" | "macrolide">;
         src_method: StructureElement.Property<"nat" | "man" | "syn">;
         pdbx_description: StructureElement.Property<string[]>;
         formula_weight: StructureElement.Property<number>;
@@ -68,7 +68,7 @@ declare const StructureProperties: {
         id: StructureElement.Property<number>;
         chainGroupId: StructureElement.Property<number>;
         multiChain: StructureElement.Property<boolean>;
-        object_primitive: StructureElement.Property<"sphere" | "atomistic" | "gaussian">;
+        object_primitive: StructureElement.Property<"sphere" | "gaussian" | "atomistic">;
         operator_name: StructureElement.Property<string>;
         operator_key: StructureElement.Property<number>;
         model_index: StructureElement.Property<number>;

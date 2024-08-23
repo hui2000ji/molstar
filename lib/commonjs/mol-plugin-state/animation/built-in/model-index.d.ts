@@ -8,16 +8,16 @@ import { PluginStateAnimation } from '../model';
 export declare const AnimateModelIndex: PluginStateAnimation<{
     mode: PD.NamedParams<PD.Normalize<{
         direction: any;
-    }>, "loop"> | PD.NamedParams<PD.Normalize<unknown>, "palindrome"> | PD.NamedParams<PD.Normalize<{
+    }>, "once"> | PD.NamedParams<PD.Normalize<{
         direction: any;
-    }>, "once">;
+    }>, "loop"> | PD.NamedParams<PD.Normalize<unknown>, "palindrome">;
     duration: PD.NamedParams<PD.Normalize<{
-        targetFps: any;
-    }>, "computed"> | PD.NamedParams<PD.Normalize<{
+        durationInS: any;
+    }>, "fixed"> | PD.NamedParams<PD.Normalize<{
         maxFps: any;
     }>, "sequential"> | PD.NamedParams<PD.Normalize<{
-        durationInS: any;
-    }>, "fixed">;
+        targetFps: any;
+    }>, "computed">;
 }, {
     palindromeDirections?: {
         [id: string]: 1 | -1 | undefined;

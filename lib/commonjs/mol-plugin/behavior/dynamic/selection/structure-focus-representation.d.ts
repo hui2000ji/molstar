@@ -19,7 +19,7 @@ declare const StructureFocusRepresentationParams: (plugin: PluginContext) => {
     nciParams: PD.Group<PD.Normalize<{
         [x: string]: any;
     }>>;
-    components: PD.MultiSelect<"interactions" | "target" | "surroundings">;
+    components: PD.MultiSelect<"target" | "interactions" | "surroundings">;
     excludeTargetFromSurroundings: PD.BooleanParam;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;

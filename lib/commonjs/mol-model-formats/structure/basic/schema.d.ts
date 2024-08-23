@@ -37,7 +37,7 @@ export declare const BasicSchema: {
         entity_id: import("../../../mol-data/db/column").Column.Schema.Str;
         id: import("../../../mol-data/db/column").Column.Schema.Str;
         pdbx_modified: import("../../../mol-data/db/column").Column.Schema.Str;
-        pdbx_blank_PDB_chainid_flag: import("../../../mol-data/db/column").Column.Schema.Aliased<"N" | "Y">;
+        pdbx_blank_PDB_chainid_flag: import("../../../mol-data/db/column").Column.Schema.Aliased<"Y" | "N">;
     };
     ihm_model_list: {
         model_id: import("../../../mol-data/db/column").Column.Schema.Int;
@@ -60,7 +60,7 @@ export declare const BasicSchema: {
         formula_weight: import("../../../mol-data/db/column").Column.Schema.Float;
         id: import("../../../mol-data/db/column").Column.Schema.Str;
         src_method: import("../../../mol-data/db/column").Column.Schema.Aliased<"nat" | "man" | "syn">;
-        type: import("../../../mol-data/db/column").Column.Schema.Aliased<"non-polymer" | "polymer" | "macrolide" | "water" | "branched">;
+        type: import("../../../mol-data/db/column").Column.Schema.Aliased<"water" | "polymer" | "branched" | "non-polymer" | "macrolide">;
         pdbx_description: import("../../../mol-data/db/column").Column.Schema.List<string>;
         pdbx_number_of_molecules: import("../../../mol-data/db/column").Column.Schema.Int;
         pdbx_mutation: import("../../../mol-data/db/column").Column.Schema.Str;
@@ -88,7 +88,7 @@ export declare const BasicSchema: {
         type: import("../../../mol-data/db/column").Column.Schema.Aliased<"oligosaccharide">;
     };
     chem_comp: {
-        type: import("../../../mol-data/db/column").Column.Schema.Aliased<"other" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "saccharide" | "non-polymer" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking" | "ion" | "lipid">;
+        type: import("../../../mol-data/db/column").Column.Schema.Aliased<"other" | "ion" | "saccharide" | "lipid" | "non-polymer" | "d-peptide linking" | "l-peptide linking" | "d-peptide nh3 amino terminus" | "l-peptide nh3 amino terminus" | "d-peptide cooh carboxy terminus" | "l-peptide cooh carboxy terminus" | "dna linking" | "rna linking" | "l-rna linking" | "l-dna linking" | "dna oh 5 prime terminus" | "rna oh 5 prime terminus" | "dna oh 3 prime terminus" | "rna oh 3 prime terminus" | "d-saccharide, beta linking" | "d-saccharide, alpha linking" | "l-saccharide, beta linking" | "l-saccharide, alpha linking" | "l-saccharide" | "d-saccharide" | "peptide linking" | "peptide-like" | "l-gamma-peptide, c-delta linking" | "d-gamma-peptide, c-delta linking" | "l-beta-peptide, c-gamma linking" | "d-beta-peptide, c-gamma linking">;
         formula: import("../../../mol-data/db/column").Column.Schema.Str;
         formula_weight: import("../../../mol-data/db/column").Column.Schema.Float;
         id: import("../../../mol-data/db/column").Column.Schema.Str;
@@ -161,7 +161,7 @@ export declare const BasicSchema: {
     pdbx_unobs_or_zero_occ_residues: {
         id: import("../../../mol-data/db/column").Column.Schema.Int;
         polymer_flag: import("../../../mol-data/db/column").Column.Schema.Aliased<"y" | "n">;
-        occupancy_flag: import("../../../mol-data/db/column").Column.Schema.Aliased<"1" | "0">;
+        occupancy_flag: import("../../../mol-data/db/column").Column.Schema.Aliased<"0" | "1">;
         PDB_model_num: import("../../../mol-data/db/column").Column.Schema.Int;
         auth_asym_id: import("../../../mol-data/db/column").Column.Schema.Str;
         auth_comp_id: import("../../../mol-data/db/column").Column.Schema.Str;

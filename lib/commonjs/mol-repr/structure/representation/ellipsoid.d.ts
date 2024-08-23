@@ -11,15 +11,15 @@ import { StructureRepresentation, StructureRepresentationProvider } from '../../
 export declare const EllipsoidParams: {
     includeParent: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     linkCap: PD.BooleanParam;
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "ellipsoid-mesh">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -41,7 +41,7 @@ export declare const EllipsoidParams: {
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -66,15 +66,15 @@ export type EllipsoidParams = typeof EllipsoidParams;
 export declare function getEllipsoidParams(ctx: ThemeRegistryContext, structure: Structure): {
     includeParent: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     linkCap: PD.BooleanParam;
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "ellipsoid-mesh">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -96,7 +96,7 @@ export declare function getEllipsoidParams(ctx: ThemeRegistryContext, structure:
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -122,15 +122,15 @@ export declare function EllipsoidRepresentation(ctx: RepresentationContext, getP
 export declare const EllipsoidRepresentationProvider: StructureRepresentationProvider<{
     includeParent: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     linkCap: PD.BooleanParam;
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "ellipsoid-mesh">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -152,7 +152,7 @@ export declare const EllipsoidRepresentationProvider: StructureRepresentationPro
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

@@ -18,18 +18,18 @@ import { PickingId } from '../../mol-geo/geometry/picking';
 export declare function createDirectVolume2d(ctx: RuntimeContext, webgl: WebGLContext, volume: Volume, directVolume?: DirectVolume): DirectVolume;
 export declare function createDirectVolume3d(ctx: RuntimeContext, webgl: WebGLContext, volume: Volume, directVolume?: DirectVolume): DirectVolume;
 export declare function createDirectVolume(ctx: VisualContext, volume: Volume, key: number, theme: Theme, props: PD.Values<DirectVolumeParams>, directVolume?: DirectVolume): Promise<DirectVolume>;
-export declare function getDirectVolumeLoci(pickingId: PickingId, volume: Volume, key: number, props: DirectVolumeProps, id: number): Volume.Cell.Loci | {
+export declare function getDirectVolumeLoci(pickingId: PickingId, volume: Volume, key: number, props: DirectVolumeProps, id: number): {
     kind: "empty-loci";
-};
+} | Volume.Cell.Loci;
 export declare function eachDirectVolume(loci: Loci, volume: Volume, key: number, props: DirectVolumeProps, apply: (interval: Interval) => boolean): boolean;
 export declare const DirectVolumeParams: {
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
+        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -74,10 +74,10 @@ export declare function getDirectVolumeParams(ctx: ThemeRegistryContext, volume:
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
+        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -124,10 +124,10 @@ export declare const DirectVolumeRepresentationProvider: VolumeRepresentationPro
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string] | readonly ["auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest";
+        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;

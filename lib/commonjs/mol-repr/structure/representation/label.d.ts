@@ -21,7 +21,7 @@ export declare const LabelParams: {
     chainScale: PD.Numeric;
     residueScale: PD.Numeric;
     elementScale: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     borderColor: PD.Color;
@@ -31,14 +31,14 @@ export declare const LabelParams: {
     tether: PD.BooleanParam;
     tetherLength: PD.Numeric;
     tetherBaseWidth: PD.Numeric;
-    attachment: PD.Select<"bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-center" | "middle-right" | "top-left" | "top-center" | "top-right">;
+    attachment: PD.Select<"bottom-left" | "bottom-right" | "top-left" | "top-right" | "middle-center" | "bottom-center" | "middle-left" | "middle-right" | "top-center">;
     fontFamily: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontFamily>;
     fontQuality: PD.Select<number>;
     fontStyle: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontStyle>;
     fontVariant: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontVariant>;
     fontWeight: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontWeight>;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -70,7 +70,7 @@ export declare function getLabelParams(ctx: ThemeRegistryContext, structure: Str
     chainScale: PD.Numeric;
     residueScale: PD.Numeric;
     elementScale: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     borderColor: PD.Color;
@@ -80,14 +80,14 @@ export declare function getLabelParams(ctx: ThemeRegistryContext, structure: Str
     tether: PD.BooleanParam;
     tetherLength: PD.Numeric;
     tetherBaseWidth: PD.Numeric;
-    attachment: PD.Select<"bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-center" | "middle-right" | "top-left" | "top-center" | "top-right">;
+    attachment: PD.Select<"bottom-left" | "bottom-right" | "top-left" | "top-right" | "middle-center" | "bottom-center" | "middle-left" | "middle-right" | "top-center">;
     fontFamily: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontFamily>;
     fontQuality: PD.Select<number>;
     fontStyle: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontStyle>;
     fontVariant: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontVariant>;
     fontWeight: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontWeight>;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -120,7 +120,7 @@ export declare const LabelRepresentationProvider: StructureRepresentationProvide
     chainScale: PD.Numeric;
     residueScale: PD.Numeric;
     elementScale: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     borderColor: PD.Color;
@@ -130,14 +130,14 @@ export declare const LabelRepresentationProvider: StructureRepresentationProvide
     tether: PD.BooleanParam;
     tetherLength: PD.Numeric;
     tetherBaseWidth: PD.Numeric;
-    attachment: PD.Select<"bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-center" | "middle-right" | "top-left" | "top-center" | "top-right">;
+    attachment: PD.Select<"bottom-left" | "bottom-right" | "top-left" | "top-right" | "middle-center" | "bottom-center" | "middle-left" | "middle-right" | "top-center">;
     fontFamily: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontFamily>;
     fontQuality: PD.Select<number>;
     fontStyle: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontStyle>;
     fontVariant: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontVariant>;
     fontWeight: PD.Select<import("../../../mol-geo/geometry/text/font-atlas").FontWeight>;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

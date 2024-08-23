@@ -40,7 +40,7 @@ export type UniformValues = {
     [k: string]: ValueCell<UniformType>;
 };
 export type UniformsList = [string, ValueCell<UniformType>][];
-export declare function getUniformType(gl: GLRenderingContext, kind: UniformKind): 5124 | 5126 | 35664 | 35665 | 35666 | 35676 | 35670 | 35667 | 35668 | 35669 | 35675 | undefined;
+export declare function getUniformType(gl: GLRenderingContext, kind: UniformKind): 5124 | 5126 | 35664 | 35665 | 35666 | 35667 | 35668 | 35669 | 35670 | 35675 | 35676 | undefined;
 export declare function isArrayUniform(kind: UniformKind): boolean;
 export type UniformSetter = (gl: GLRenderingContext, location: number, value: any) => void;
 export type UniformSetters = {

@@ -44,7 +44,7 @@ declare const DownloadBlob: StateTransformer<SO.Root, SO.Data.Blob, PD.Normalize
 }>>;
 type RawData = typeof RawData;
 declare const RawData: StateTransformer<SO.Root, SO.Data.String | SO.Data.Binary, PD.Normalize<{
-    data: string | number[] | Uint8Array | ArrayBuffer;
+    data: string | number[] | ArrayBuffer | Uint8Array;
     label: string | undefined;
 }>>;
 type ReadFile = typeof ReadFile;

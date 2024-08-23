@@ -13,13 +13,13 @@ export declare function unwindStructureAssembly(structure: Structure, unitTransf
 export declare function explodeStructure(structure: Structure, unitTransforms: StructureUnitTransforms, t: number, sphere: Sphere3D): void;
 export declare const SpinStructureParams: {
     axis: PD.Mapped<PD.NamedParams<PD.Normalize<{
+        vector: Vec3;
+    }>, "custom"> | PD.NamedParams<PD.Normalize<{
         principalAxis: "dirA" | "dirB" | "dirC";
-    }>, "structure"> | PD.NamedParams<PD.Normalize<{
+    }>, "structure">>;
+    origin: PD.Mapped<PD.NamedParams<PD.Normalize<{
         vector: Vec3;
-    }>, "custom">>;
-    origin: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "structure"> | PD.NamedParams<PD.Normalize<{
-        vector: Vec3;
-    }>, "custom">>;
+    }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "structure">>;
 };
 export type SpinStructureProps = PD.Values<typeof SpinStructureParams>;
 export declare function getSpinStructureAxisAndOrigin(structure: Structure, props: SpinStructureProps): {

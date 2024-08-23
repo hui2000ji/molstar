@@ -26,7 +26,7 @@ declare const MembraneOrientation3D: StateTransformer<PluginStateObject.Molecule
     radiusFactor: number;
     sizeFactor: number;
     alpha: number;
-    quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+    quality: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
     material: PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -51,7 +51,7 @@ export declare const MembraneOrientationPreset: StructureRepresentationPresetPro
     ignoreHydrogens: boolean | undefined;
     ignoreHydrogensVariant: "all" | "non-polar" | undefined;
     ignoreLight: boolean | undefined;
-    quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+    quality: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest" | undefined;
     theme: PD.Normalize<{
         globalName: any;
         globalColorParams: any;
