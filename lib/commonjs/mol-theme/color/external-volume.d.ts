@@ -10,9 +10,9 @@ import { Volume } from '../../mol-model/volume';
 export declare const ExternalVolumeColorThemeParams: {
     volume: PD.ValueRef<Volume>;
     coloring: PD.Mapped<PD.NamedParams<PD.Normalize<{
-        domain: PD.NamedParams<PD.Normalize<{
+        domain: PD.NamedParams<[number, number], "custom"> | PD.NamedParams<PD.Normalize<{
             symmetric: any;
-        }>, "auto"> | PD.NamedParams<[number, number], "custom">;
+        }>, "auto">;
         list: {
             kind: "set" | "interpolate";
             colors: import("../../mol-util/color/color").ColorListEntry[];

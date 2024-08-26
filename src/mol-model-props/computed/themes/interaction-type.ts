@@ -20,14 +20,14 @@ const DefaultColor = Color(0xCCCCCC);
 const Description = 'Assigns colors according the interaction type of a link.';
 
 const InteractionTypeColors = ColorMap({
-    HydrogenBond: 0x2B83BA,
-    Hydrophobic: 0x808080,
-    HalogenBond: 0x40FFBF,
-    Ionic: 0xF0C814,
-    MetalCoordination: 0x8C4099,
-    CationPi: 0xFF8000,
-    PiStacking: 0x8CB366,
-    WeakHydrogenBond: 0xC5DDEC,
+    HydrogenBond: 0x0077FA,
+    Hydrophobic: 0x8F959E,
+    HalogenBond: 0x7F3BF5,
+    Ionic: 0x2EA121,
+    MetalCoordination: 0xF54A45,
+    CationPi: 0xF80,
+    PiStacking: 0xF0C814,
+    WeakHydrogenBond: 0x98CDFD,
 });
 
 const InteractionTypeColorTable: [string, Color][] = [

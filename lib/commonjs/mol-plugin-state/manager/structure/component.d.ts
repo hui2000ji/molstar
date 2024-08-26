@@ -4,8 +4,9 @@
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
+import { Structure } from '../../../mol-model/structure';
 import { PluginContext } from '../../../mol-plugin/context';
-import { StateTransformer } from '../../../mol-state';
+import { StateBuilder, StateTransformer } from '../../../mol-state';
 import { ColorTheme } from '../../../mol-theme/color';
 import { SizeTheme } from '../../../mol-theme/size';
 import { ParamDefinition as PD } from '../../../mol-util/param-definition';
@@ -52,7 +53,7 @@ declare class StructureComponentManager extends StatefulPluginComponent<Structur
     private tryFindComponent;
     add(params: StructureComponentManager.AddParams, structures?: ReadonlyArray<StructureRef>): Promise<void>;
     applyTheme(params: StructureComponentManager.ThemeParams, structures?: ReadonlyArray<StructureRef>): Promise<void>;
-    private modifyComponent;
+    modifyComponent(builder: StateBuilder.Root, component: StructureComponentRef, by: Structure, action: StructureComponentManager.ModifyAction): void;
     updateLabel(component: StructureComponentRef, label: string): void;
     private get dataState();
     private clearComponents;
@@ -61,7 +62,7 @@ declare class StructureComponentManager extends StatefulPluginComponent<Structur
 declare namespace StructureComponentManager {
     const OptionsParams: {
         hydrogens: PD.Select<"all" | "hide-all" | "only-polar">;
-        visualQuality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+        visualQuality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
         ignoreLight: PD.BooleanParam;
         materialStyle: PD.Group<PD.Normalize<{
             metalness: number;

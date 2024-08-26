@@ -17,7 +17,7 @@ export declare const ChemicalCompontentTrajectoryHierarchyPreset: TrajectoryHier
         autoAttach: any;
         properties: any;
     }>> | undefined;
-    representationPreset: "auto" | "empty" | "illustrative" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
+    representationPreset: "auto" | "illustrative" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
     representationPresetParams: PD.Normalize<{
         ignoreHydrogens: any;
         ignoreHydrogensVariant: any;
@@ -26,7 +26,7 @@ export declare const ChemicalCompontentTrajectoryHierarchyPreset: TrajectoryHier
         theme: any;
     }> | undefined;
     showOriginalCoordinates: boolean | undefined;
-    shownCoordinateType: "ideal" | "both" | "model";
+    shownCoordinateType: "model" | "ideal" | "both";
     aromaticBonds: boolean;
 }, {
     models?: undefined;
@@ -42,7 +42,7 @@ export declare const ChemicalComponentPreset: StructureRepresentationPresetProvi
     ignoreHydrogens: boolean | undefined;
     ignoreHydrogensVariant: "all" | "non-polar" | undefined;
     ignoreLight: boolean | undefined;
-    quality: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest" | undefined;
+    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
     theme: PD.Normalize<{
         globalName: any;
         globalColorParams: any;

@@ -68,7 +68,7 @@ declare namespace ColorTheme {
     }
     export const EmptyProvider: Provider<{}>;
     export type Registry = ThemeRegistry<ColorTheme<any, any>>;
-    export function createRegistry(): ThemeRegistry<ColorThemeDirect<{}> | ColorThemeLocation<{}> | ColorThemeGrid<{}>>;
+    export function createRegistry(): ThemeRegistry<ColorThemeLocation<{}> | ColorThemeGrid<{}> | ColorThemeDirect<{}>>;
     export const BuiltIn: {
         'atom-id': Provider<{
             palette: PD.Mapped<PD.NamedParams<PD.Normalize<{
@@ -96,7 +96,7 @@ declare namespace ColorTheme {
             }>, "uniform"> | PD.NamedParams<PD.Normalize<{
                 saturation: number;
                 lightness: number;
-                colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+                colors: PD.NamedParams<PD.Normalize<{
                     water: any;
                     ion: any;
                     protein: any;
@@ -104,7 +104,7 @@ declare namespace ColorTheme {
                     DNA: any;
                     PNA: any;
                     saccharide: any;
-                }>, "custom">;
+                }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "default">;
             }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
                 palette: PD.NamedParams<PD.Normalize<{
                     maxCount: any;
@@ -717,7 +717,7 @@ declare namespace ColorTheme {
             }>, "uniform"> | PD.NamedParams<PD.Normalize<{
                 saturation: number;
                 lightness: number;
-                colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+                colors: PD.NamedParams<PD.Normalize<{
                     water: any;
                     ion: any;
                     protein: any;
@@ -725,7 +725,7 @@ declare namespace ColorTheme {
                     DNA: any;
                     PNA: any;
                     saccharide: any;
-                }>, "custom">;
+                }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "default">;
             }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
                 palette: PD.NamedParams<PD.Normalize<{
                     maxCount: any;
@@ -815,7 +815,7 @@ declare namespace ColorTheme {
         'molecule-type': Provider<{
             saturation: PD.Numeric;
             lightness: PD.Numeric;
-            colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
+            colors: PD.Mapped<PD.NamedParams<PD.Normalize<{
                 water: Color;
                 ion: Color;
                 protein: Color;
@@ -823,7 +823,7 @@ declare namespace ColorTheme {
                 DNA: Color;
                 PNA: Color;
                 saccharide: Color;
-            }>, "custom">>;
+            }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "default">>;
         }, "molecule-type", ColorType>;
         occupancy: Provider<{
             domain: PD.Interval;

@@ -9,7 +9,7 @@ import { ParamDefinition as PD } from '../../mol-util/param-definition';
 import { PluginStateObject } from '../objects';
 export declare const PdbDownloadProvider: {
     rcsb: PD.Group<PD.Normalize<{
-        encoding: "bcif" | "cif";
+        encoding: "cif" | "bcif";
     }>>;
     pdbe: PD.Group<PD.Normalize<{
         variant: "updated-bcif" | "updated" | "updtaed-bcif" | "archival";

@@ -101,17 +101,17 @@ declare const StructureFromModel: StateTransformer<SO.Molecule.Model, SO.Molecul
         dynamicBonds: any;
     }>, "auto"> | PD.NamedParams<PD.Normalize<{
         dynamicBonds: any;
-        id: any;
-    }>, "assembly"> | PD.NamedParams<PD.Normalize<{
-        dynamicBonds: any;
     }>, "model"> | PD.NamedParams<PD.Normalize<{
         dynamicBonds: any;
-        radius: any;
-    }>, "symmetry-mates"> | PD.NamedParams<PD.Normalize<{
+        id: any;
+    }>, "assembly"> | PD.NamedParams<PD.Normalize<{
         dynamicBonds: any;
         ijkMin: any;
         ijkMax: any;
     }>, "symmetry"> | PD.NamedParams<PD.Normalize<{
+        dynamicBonds: any;
+        radius: any;
+    }>, "symmetry-mates"> | PD.NamedParams<PD.Normalize<{
         dynamicBonds: any;
         generators: any;
     }>, "symmetry-assembly">;
@@ -169,11 +169,11 @@ export declare const StructureComplexElementTypes: {
 export type StructureComplexElementTypes = keyof typeof StructureComplexElementTypes;
 type StructureComplexElement = typeof StructureComplexElement;
 declare const StructureComplexElement: StateTransformer<SO.Molecule.Structure, SO.Molecule.Structure, PD.Normalize<{
-    type: "spheres" | "water" | "protein" | "polymer" | "nucleic" | "branched" | "ligand" | "non-standard" | "coarse" | "atomic-sequence" | "atomic-het";
+    type: "polymer" | "protein" | "nucleic" | "water" | "branched" | "ligand" | "non-standard" | "coarse" | "spheres" | "atomic-sequence" | "atomic-het";
 }>>;
 type StructureComponent = typeof StructureComponent;
 declare const StructureComponent: StateTransformer<SO.Molecule.Structure, SO.Molecule.Structure, PD.Normalize<{
-    type: PD.NamedParams<Script, "script"> | PD.NamedParams<"all" | "water" | "ion" | "protein" | "polymer" | "nucleic" | "lipid" | "branched" | "ligand" | "non-standard" | "coarse", "static"> | PD.NamedParams<Expression, "expression"> | PD.NamedParams<StructureElement.Bundle, "bundle">;
+    type: PD.NamedParams<"all" | "polymer" | "protein" | "nucleic" | "water" | "ion" | "lipid" | "branched" | "ligand" | "non-standard" | "coarse", "static"> | PD.NamedParams<Expression, "expression"> | PD.NamedParams<StructureElement.Bundle, "bundle"> | PD.NamedParams<Script, "script">;
     nullIfEmpty: boolean | undefined;
     label: string;
 }>>;

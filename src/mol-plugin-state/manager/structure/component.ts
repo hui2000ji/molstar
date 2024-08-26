@@ -427,7 +427,7 @@ class StructureComponentManager extends StatefulPluginComponent<StructureCompone
         }, { canUndo: 'Apply Theme' });
     }
 
-    private modifyComponent(builder: StateBuilder.Root, component: StructureComponentRef, by: Structure, action: StructureComponentManager.ModifyAction) {
+    modifyComponent(builder: StateBuilder.Root, component: StructureComponentRef, by: Structure, action: StructureComponentManager.ModifyAction) {
         const structure = component.cell.obj?.data;
         if (!structure) return;
         if ((action === 'subtract' || action === 'intersect') && !structureAreIntersecting(structure, by)) return;
