@@ -104,6 +104,9 @@ namespace AccessibleSurfaceArea {
 
     /** Get relative area for a given component id */
     export function normalize(compId: string, asa: number) {
+        if (typeof MaxAsa[compId] === 'undefined') {
+            return -1;
+        }
         const maxAsa = MaxAsa[compId] || DefaultMaxAsa;
         return asa / maxAsa;
     }
