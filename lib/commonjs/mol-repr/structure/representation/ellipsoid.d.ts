@@ -18,12 +18,12 @@ export declare const EllipsoidParams: {
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "ellipsoid-mesh">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
+    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     aromaticScale: PD.Numeric;
@@ -41,7 +41,7 @@ export declare const EllipsoidParams: {
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -73,12 +73,12 @@ export declare function getEllipsoidParams(ctx: ThemeRegistryContext, structure:
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "ellipsoid-mesh">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
+    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     aromaticScale: PD.Numeric;
@@ -96,7 +96,7 @@ export declare function getEllipsoidParams(ctx: ThemeRegistryContext, structure:
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -129,12 +129,12 @@ export declare const EllipsoidRepresentationProvider: StructureRepresentationPro
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "ellipsoid-mesh">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
+    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     aromaticScale: PD.Numeric;
@@ -152,7 +152,7 @@ export declare const EllipsoidRepresentationProvider: StructureRepresentationPro
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

@@ -19,7 +19,7 @@ export declare const PointParams: {
     sizeFactor: PD.Numeric;
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -49,7 +49,7 @@ export declare function getPointParams(ctx: ThemeRegistryContext, structure: Str
     sizeFactor: PD.Numeric;
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -80,7 +80,7 @@ export declare const PointRepresentationProvider: StructureRepresentationProvide
     sizeFactor: PD.Numeric;
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

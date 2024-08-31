@@ -70,7 +70,7 @@ export declare abstract class MeshExporter<D extends RenderObjectExportData> imp
         vertices: Float32Array;
         normals: Float32Array | undefined;
         indices: Uint32Array | undefined;
-        groups: Uint8Array | Float32Array;
+        groups: Float32Array | Uint8Array;
         vertexCount: number;
         drawCount: number;
     };
@@ -88,7 +88,7 @@ export declare abstract class MeshExporter<D extends RenderObjectExportData> imp
         includeHidden: boolean;
         linesAsTriangles: boolean;
         pointsAsTriangles: boolean;
-        primitivesQuality: "auto" | "high" | "low" | "medium";
+        primitivesQuality: "auto" | "high" | "medium" | "low";
     };
     abstract getData(ctx: RuntimeContext): Promise<D>;
     abstract getBlob(ctx: RuntimeContext): Promise<Blob>;

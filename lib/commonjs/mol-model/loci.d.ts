@@ -101,9 +101,9 @@ declare namespace Loci {
         } | DataLoci<unknown, unknown> | Shape.Loci | ShapeGroup.Loci | Volume.Loci | Volume.Isosurface.Loci | Volume.Cell.Loci | Volume.Segment.Loci;
     };
     export type Granularity = keyof typeof Granularity;
-    export const GranularityOptions: ["element" | "operator" | "residue" | "chain" | "entity" | "model" | "structure" | "elementInstances" | "residueInstances" | "chainInstances", string][];
+    export const GranularityOptions: ["residue" | "structure" | "element" | "chain" | "model" | "entity" | "operator" | "elementInstances" | "residueInstances" | "chainInstances", string][];
     /** Exclude `Instances` granularity kinds */
-    export function simpleGranularity(granularity: Granularity): "element" | "operator" | "residue" | "chain" | "entity" | "model" | "structure" | "elementInstances" | "residueInstances" | "chainInstances";
+    export function simpleGranularity(granularity: Granularity): "residue" | "structure" | "element" | "chain" | "model" | "entity" | "operator" | "elementInstances" | "residueInstances" | "chainInstances";
     export function applyGranularity(loci: Loci, granularity: Granularity): Loci;
     /**
      * Converts structure related loci to StructureElement.Loci and applies

@@ -12,7 +12,9 @@ export function isApplicable(model?: Model): boolean {
 }
 
 export function getSequenceArr(model: Model) {
-    const arr = model.sequence.sequences.map((seq) => {
+    const entityIdMapIndex: Record<string, number> = {};
+    const arr = model.sequence.sequences.map((seq, i) => {
+        entityIdMapIndex[seq.entityId] = i;
         const len = seq.sequence.length;
         const sequencArr: string[] = [];
         for (let i = 0; i < len; i++) {
@@ -23,14 +25,15 @@ export function getSequenceArr(model: Model) {
         return sequencArr.join('');
     });
 
-    return arr;
+    return [arr, entityIdMapIndex] as [string[], Record<string, number>];
 }
 
 export function expandEntityToChainArray(
     list: SeqInfoModel[],
-    model: Model
+    model: Model,
+    entityIdMapIndex: Record<string, number>
 ): (SeqInfoModel | null)[] {
-    const { entities, atomicHierarchy, properties, modelNum, sequence } = model;
+    const { atomicHierarchy, properties, modelNum, sequence } = model;
     const { chains } = atomicHierarchy;
     const { missingResidues } = properties;
     const len = chains._rowCount;
@@ -38,9 +41,8 @@ export function expandEntityToChainArray(
     for (let i = 0; i < len; i++) {
         const entityId = chains.label_entity_id.value(i);
         const asymId = chains.label_asym_id.value(i);
-        const entityIndex = entities.getEntityIndex(entityId);
 
-        const chainItem = list[entityIndex];
+        const chainItem = list[entityIdMapIndex[entityId]];
 
         const currentSequence = sequence.sequences.find((item) => {
             return item.entityId === entityId;

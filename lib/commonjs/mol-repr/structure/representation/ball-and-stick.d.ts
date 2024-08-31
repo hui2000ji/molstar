@@ -17,12 +17,12 @@ export declare const BallAndStickParams: {
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
+    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -41,7 +41,7 @@ export declare const BallAndStickParams: {
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -77,12 +77,12 @@ export declare function getBallAndStickParams(ctx: ThemeRegistryContext, structu
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
+    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -101,7 +101,7 @@ export declare function getBallAndStickParams(ctx: ThemeRegistryContext, structu
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -138,12 +138,12 @@ export declare const BallAndStickRepresentationProvider: StructureRepresentation
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
+    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -162,7 +162,7 @@ export declare const BallAndStickRepresentationProvider: StructureRepresentation
     solidInterior: PD.BooleanParam;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

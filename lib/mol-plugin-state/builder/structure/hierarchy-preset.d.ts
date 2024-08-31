@@ -28,7 +28,7 @@ export declare namespace TrajectoryHierarchyPresetProvider {
                 [x: string]: any;
             }>;
         }>> | undefined>;
-        representationPreset: PD.Base<"auto" | "illustrative" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined>;
+        representationPreset: PD.Base<"illustrative" | "auto" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined>;
     };
 }
 export declare const PresetTrajectoryHierarchy: {
@@ -41,7 +41,7 @@ export declare const PresetTrajectoryHierarchy: {
             autoAttach: any;
             properties: any;
         }>> | undefined;
-        representationPreset: "auto" | "illustrative" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
+        representationPreset: "illustrative" | "auto" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
         model: PD.Normalize<PD.Normalize<{
             modelIndex: any;
         }>> | undefined;
@@ -52,12 +52,12 @@ export declare const PresetTrajectoryHierarchy: {
             dynamicBonds: any;
         }>, "model"> | PD.NamedParams<PD.Normalize<{
             dynamicBonds: any;
-            id: any;
-        }>, "assembly"> | PD.NamedParams<PD.Normalize<{
-            dynamicBonds: any;
             ijkMin: any;
             ijkMax: any;
         }>, "symmetry"> | PD.NamedParams<PD.Normalize<{
+            dynamicBonds: any;
+            id: any;
+        }>, "assembly"> | PD.NamedParams<PD.Normalize<{
             dynamicBonds: any;
             radius: any;
         }>, "symmetry-mates"> | PD.NamedParams<PD.Normalize<{
@@ -88,7 +88,7 @@ export declare const PresetTrajectoryHierarchy: {
             autoAttach: any;
             properties: any;
         }>> | undefined;
-        representationPreset: "auto" | "illustrative" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
+        representationPreset: "illustrative" | "auto" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
         useDefaultIfSingleModel: boolean | undefined;
         representationPresetParams: PD.Normalize<{
             ignoreHydrogens: any;
@@ -120,7 +120,7 @@ export declare const PresetTrajectoryHierarchy: {
             autoAttach: any;
             properties: any;
         }>> | undefined;
-        representationPreset: "auto" | "illustrative" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
+        representationPreset: "illustrative" | "auto" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
         model: PD.Normalize<PD.Normalize<{
             modelIndex: any;
         }>> | undefined;
@@ -141,7 +141,7 @@ export declare const PresetTrajectoryHierarchy: {
             autoAttach: any;
             properties: any;
         }>> | undefined;
-        representationPreset: "auto" | "illustrative" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
+        representationPreset: "illustrative" | "auto" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
         model: PD.Normalize<PD.Normalize<{
             modelIndex: any;
         }>> | undefined;
@@ -162,7 +162,7 @@ export declare const PresetTrajectoryHierarchy: {
             autoAttach: any;
             properties: any;
         }>> | undefined;
-        representationPreset: "auto" | "illustrative" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
+        representationPreset: "illustrative" | "auto" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
         model: PD.Normalize<PD.Normalize<{
             modelIndex: any;
         }>> | undefined;

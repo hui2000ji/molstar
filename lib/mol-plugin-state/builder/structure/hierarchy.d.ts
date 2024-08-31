@@ -23,7 +23,7 @@ export declare class TrajectoryHierarchyBuilder {
             autoAttach: any;
             properties: any;
         }>> | undefined;
-        representationPreset: "auto" | "illustrative" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
+        representationPreset: "illustrative" | "auto" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
         model: PD.Normalize<PD.Normalize<{
             modelIndex: any;
         }>> | undefined;
@@ -34,12 +34,12 @@ export declare class TrajectoryHierarchyBuilder {
             dynamicBonds: any;
         }>, "model"> | PD.NamedParams<PD.Normalize<{
             dynamicBonds: any;
-            id: any;
-        }>, "assembly"> | PD.NamedParams<PD.Normalize<{
-            dynamicBonds: any;
             ijkMin: any;
             ijkMax: any;
         }>, "symmetry"> | PD.NamedParams<PD.Normalize<{
+            dynamicBonds: any;
+            id: any;
+        }>, "assembly"> | PD.NamedParams<PD.Normalize<{
             dynamicBonds: any;
             radius: any;
         }>, "symmetry-mates"> | PD.NamedParams<PD.Normalize<{

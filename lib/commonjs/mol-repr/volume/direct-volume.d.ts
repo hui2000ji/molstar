@@ -26,10 +26,10 @@ export declare const DirectVolumeParams: {
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -74,10 +74,10 @@ export declare function getDirectVolumeParams(ctx: ThemeRegistryContext, volume:
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -124,10 +124,10 @@ export declare const DirectVolumeRepresentationProvider: VolumeRepresentationPro
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;

@@ -9,10 +9,6 @@ import { ParamDefinition as PD } from '../../mol-util/param-definition';
 import { ThemeDataContext } from '../theme';
 export declare const IllustrativeColorThemeParams: {
     style: PD.Mapped<PD.NamedParams<PD.Normalize<{
-        value: Color;
-        saturation: number;
-        lightness: number;
-    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -79,6 +75,10 @@ export declare const IllustrativeColorThemeParams: {
             list: any;
         }>, "colors">;
     }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
+        value: Color;
+        saturation: number;
+        lightness: number;
+    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         saturation: number;
         lightness: number;
         colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
@@ -96,10 +96,6 @@ export declare const IllustrativeColorThemeParams: {
 export type IllustrativeColorThemeParams = typeof IllustrativeColorThemeParams;
 export declare function getIllustrativeColorThemeParams(ctx: ThemeDataContext): {
     style: PD.Mapped<PD.NamedParams<PD.Normalize<{
-        value: Color;
-        saturation: number;
-        lightness: number;
-    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -166,6 +162,10 @@ export declare function getIllustrativeColorThemeParams(ctx: ThemeDataContext): 
             list: any;
         }>, "colors">;
     }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
+        value: Color;
+        saturation: number;
+        lightness: number;
+    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         saturation: number;
         lightness: number;
         colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{

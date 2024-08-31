@@ -21,7 +21,7 @@ export declare const ElementPointParams: {
     sizeFactor: PD.Numeric;
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

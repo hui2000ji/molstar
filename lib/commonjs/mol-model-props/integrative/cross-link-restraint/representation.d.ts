@@ -34,7 +34,7 @@ export declare const CrossLinkRestraintCylinderParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -78,7 +78,7 @@ export declare const CrossLinkRestraintParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -121,7 +121,7 @@ export declare function getCrossLinkRestraintParams(ctx: ThemeRegistryContext, s
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -165,7 +165,7 @@ export declare const CrossLinkRestraintRepresentationProvider: StructureRepresen
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

@@ -42,7 +42,7 @@ export declare const ExtensionMap: {
 };
 declare const DefaultViewerOptions: {
     customFormats: [string, DataFormatProvider<any, any, any>][];
-    extensions: ("g3d" | "volseg" | "cellpack" | "dnatco-ntcs" | "sb-ncbr-partial-charges" | "wwpdb-chemical-component-dictionary" | "backgrounds" | "pdbe-structure-quality-report" | "rcsb-assembly-symmetry" | "rcsb-validation-report" | "anvil-membrane-orientation" | "model-export" | "mp4-export" | "geo-export" | "ma-quality-assessment" | "zenodo-import")[];
+    extensions: ("sb-ncbr-partial-charges" | "g3d" | "volseg" | "cellpack" | "dnatco-ntcs" | "wwpdb-chemical-component-dictionary" | "backgrounds" | "pdbe-structure-quality-report" | "rcsb-assembly-symmetry" | "rcsb-validation-report" | "anvil-membrane-orientation" | "model-export" | "mp4-export" | "geo-export" | "ma-quality-assessment" | "zenodo-import")[];
     disabledExtensions: string[];
     layoutIsExpanded: boolean;
     layoutShowControls: boolean;

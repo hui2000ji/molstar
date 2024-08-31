@@ -12,7 +12,7 @@ export declare const InteractionsInterUnitParams: {
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     includeParent: PD.BooleanParam;
-    parentDisplay: PD.Select<"full" | "stub" | "between">;
+    parentDisplay: PD.Select<"stub" | "full" | "between">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -32,7 +32,7 @@ export declare const InteractionsInterUnitParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

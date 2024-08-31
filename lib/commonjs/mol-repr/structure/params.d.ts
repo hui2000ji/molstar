@@ -22,7 +22,7 @@ export declare const StructureMeshParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -54,7 +54,7 @@ export declare const StructureSpheresParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -84,7 +84,7 @@ export declare const StructureCylindersParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -108,7 +108,7 @@ export declare const StructurePointsParams: {
     pointSizeAttenuation: PD.BooleanParam;
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -131,7 +131,7 @@ export declare const StructureLinesParams: {
     sizeFactor: PD.Numeric;
     lineSizeAttenuation: PD.BooleanParam;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -164,14 +164,14 @@ export declare const StructureTextParams: {
     tether: PD.BooleanParam;
     tetherLength: PD.Numeric;
     tetherBaseWidth: PD.Numeric;
-    attachment: PD.Select<"bottom-left" | "bottom-right" | "top-left" | "top-right" | "middle-center" | "bottom-center" | "middle-left" | "middle-right" | "top-center">;
+    attachment: PD.Select<"middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right">;
     fontFamily: PD.Select<import("../../mol-geo/geometry/text/font-atlas").FontFamily>;
     fontQuality: PD.Select<number>;
     fontStyle: PD.Select<import("../../mol-geo/geometry/text/font-atlas").FontStyle>;
     fontVariant: PD.Select<import("../../mol-geo/geometry/text/font-atlas").FontVariant>;
     fontWeight: PD.Select<import("../../mol-geo/geometry/text/font-atlas").FontWeight>;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -197,7 +197,7 @@ export declare const StructureDirectVolumeParams: {
     stepsPerCell: PD.Numeric;
     jumpLength: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -226,7 +226,7 @@ export declare const StructureTextureMeshParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

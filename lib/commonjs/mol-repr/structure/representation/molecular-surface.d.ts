@@ -22,7 +22,7 @@ export declare const MolecularSurfaceParams: {
     unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     lineSizeAttenuation: PD.BooleanParam;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -39,10 +39,10 @@ export declare const MolecularSurfaceParams: {
         }>[];
     }>>;
     instanceGranularity: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -66,7 +66,7 @@ export declare function getMolecularSurfaceParams(ctx: ThemeRegistryContext, str
     unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     lineSizeAttenuation: PD.BooleanParam;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -83,10 +83,10 @@ export declare function getMolecularSurfaceParams(ctx: ThemeRegistryContext, str
         }>[];
     }>>;
     instanceGranularity: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -111,7 +111,7 @@ export declare const MolecularSurfaceRepresentationProvider: StructureRepresenta
     unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     lineSizeAttenuation: PD.BooleanParam;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -128,10 +128,10 @@ export declare const MolecularSurfaceRepresentationProvider: StructureRepresenta
         }>[];
     }>>;
     instanceGranularity: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;

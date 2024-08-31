@@ -15,10 +15,10 @@ export declare const SliceParams: {
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -35,7 +35,7 @@ export declare const SliceParams: {
             legend?: import("../../mol-util/legend").Legend | undefined;
         }) | undefined;
     };
-    dimension: PD.Mapped<PD.NamedParams<number, "x"> | PD.NamedParams<number, "y"> | PD.NamedParams<number, "z">>;
+    dimension: PD.Mapped<PD.NamedParams<number, "y"> | PD.NamedParams<number, "z"> | PD.NamedParams<number, "x">>;
     isoValue: PD.Conditioned<Readonly<{
         kind: "absolute";
         absoluteValue: number;
@@ -82,10 +82,10 @@ export declare function getSliceParams(ctx: ThemeRegistryContext, volume: Volume
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -102,7 +102,7 @@ export declare function getSliceParams(ctx: ThemeRegistryContext, volume: Volume
             legend?: import("../../mol-util/legend").Legend | undefined;
         }) | undefined;
     };
-    dimension: PD.Mapped<PD.NamedParams<number, "x"> | PD.NamedParams<number, "y"> | PD.NamedParams<number, "z">>;
+    dimension: PD.Mapped<PD.NamedParams<number, "y"> | PD.NamedParams<number, "z"> | PD.NamedParams<number, "x">>;
     isoValue: PD.Conditioned<Readonly<{
         kind: "absolute";
         absoluteValue: number;
@@ -150,10 +150,10 @@ export declare const SliceRepresentationProvider: VolumeRepresentationProvider<{
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -170,7 +170,7 @@ export declare const SliceRepresentationProvider: VolumeRepresentationProvider<{
             legend?: import("../../mol-util/legend").Legend | undefined;
         }) | undefined;
     };
-    dimension: PD.Mapped<PD.NamedParams<number, "x"> | PD.NamedParams<number, "y"> | PD.NamedParams<number, "z">>;
+    dimension: PD.Mapped<PD.NamedParams<number, "y"> | PD.NamedParams<number, "z"> | PD.NamedParams<number, "x">>;
     isoValue: PD.Conditioned<Readonly<{
         kind: "absolute";
         absoluteValue: number;

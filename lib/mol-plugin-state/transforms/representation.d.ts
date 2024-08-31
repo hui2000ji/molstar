@@ -150,7 +150,7 @@ declare const ModelUnitcell3D: StateTransformer<SO.Molecule.Model, SO.Shape.Repr
     cellColor: Color;
     cellScale: number;
     ref: "model" | "origin";
-    attachment: "corner" | "center";
+    attachment: "center" | "corner";
     doubleSided: boolean;
     flipSided: boolean;
     flatShaded: boolean;

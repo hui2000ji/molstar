@@ -74,12 +74,12 @@ export declare const CubeProvider: {
                 dynamicBonds: any;
             }>, "model"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
-                id: any;
-            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
-                dynamicBonds: any;
                 ijkMin: any;
                 ijkMax: any;
             }>, "symmetry"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
+                dynamicBonds: any;
+                id: any;
+            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
                 radius: any;
             }>, "symmetry-mates"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
@@ -169,12 +169,12 @@ export declare const BuiltInVolumeFormats: readonly [readonly ["ccp4", {
                 dynamicBonds: any;
             }>, "model"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
-                id: any;
-            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
-                dynamicBonds: any;
                 ijkMin: any;
                 ijkMax: any;
             }>, "symmetry"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
+                dynamicBonds: any;
+                id: any;
+            }>, "assembly"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 dynamicBonds: any;
                 radius: any;
             }>, "symmetry-mates"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{

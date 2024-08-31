@@ -17,7 +17,7 @@ export declare const ChemicalCompontentTrajectoryHierarchyPreset: TrajectoryHier
         autoAttach: any;
         properties: any;
     }>> | undefined;
-    representationPreset: "auto" | "illustrative" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
+    representationPreset: "illustrative" | "auto" | "empty" | "atomic-detail" | "polymer-cartoon" | "polymer-and-ligand" | "protein-and-nucleic" | "coarse-surface" | undefined;
     representationPresetParams: PD.Normalize<{
         ignoreHydrogens: any;
         ignoreHydrogensVariant: any;

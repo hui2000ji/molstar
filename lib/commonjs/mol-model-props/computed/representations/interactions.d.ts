@@ -17,7 +17,7 @@ export declare const InteractionsParams: {
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     includeParent: PD.BooleanParam;
-    parentDisplay: PD.Select<"full" | "stub" | "between">;
+    parentDisplay: PD.Select<"stub" | "full" | "between">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -36,7 +36,7 @@ export declare const InteractionsParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -64,7 +64,7 @@ export declare function getInteractionParams(ctx: ThemeRegistryContext, structur
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     includeParent: PD.BooleanParam;
-    parentDisplay: PD.Select<"full" | "stub" | "between">;
+    parentDisplay: PD.Select<"stub" | "full" | "between">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -83,7 +83,7 @@ export declare function getInteractionParams(ctx: ThemeRegistryContext, structur
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -112,7 +112,7 @@ export declare const InteractionsRepresentationProvider: StructureRepresentation
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     includeParent: PD.BooleanParam;
-    parentDisplay: PD.Select<"full" | "stub" | "between">;
+    parentDisplay: PD.Select<"stub" | "full" | "between">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     linkCap: PD.BooleanParam;
@@ -131,7 +131,7 @@ export declare const InteractionsRepresentationProvider: StructureRepresentation
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

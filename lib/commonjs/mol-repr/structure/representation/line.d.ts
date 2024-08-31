@@ -10,7 +10,7 @@ import { ThemeRegistryContext } from '../../../mol-theme/theme';
 import { Structure } from '../../../mol-model/structure';
 export declare const LineParams: {
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
-    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
+    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
@@ -22,7 +22,7 @@ export declare const LineParams: {
     crosses: PD.Select<"all" | "lone">;
     crossSize: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -41,8 +41,8 @@ export declare const LineParams: {
     instanceGranularity: PD.BooleanParam;
     pointSizeAttenuation: PD.BooleanParam;
     stride: PD.Numeric;
-    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     aromaticBonds: PD.BooleanParam;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
@@ -52,7 +52,7 @@ export declare const LineParams: {
 export type LineParams = typeof LineParams;
 export declare function getLineParams(ctx: ThemeRegistryContext, structure: Structure): {
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
-    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
+    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
@@ -64,7 +64,7 @@ export declare function getLineParams(ctx: ThemeRegistryContext, structure: Stru
     crosses: PD.Select<"all" | "lone">;
     crossSize: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -83,8 +83,8 @@ export declare function getLineParams(ctx: ThemeRegistryContext, structure: Stru
     instanceGranularity: PD.BooleanParam;
     pointSizeAttenuation: PD.BooleanParam;
     stride: PD.Numeric;
-    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     aromaticBonds: PD.BooleanParam;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
@@ -95,7 +95,7 @@ export type LineRepresentation = StructureRepresentation<LineParams>;
 export declare function LineRepresentation(ctx: RepresentationContext, getParams: RepresentationParamsGetter<Structure, LineParams>): LineRepresentation;
 export declare const LineRepresentationProvider: StructureRepresentationProvider<{
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
-    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
+    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
@@ -107,7 +107,7 @@ export declare const LineRepresentationProvider: StructureRepresentationProvider
     crosses: PD.Select<"all" | "lone">;
     crossSize: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -126,8 +126,8 @@ export declare const LineRepresentationProvider: StructureRepresentationProvider
     instanceGranularity: PD.BooleanParam;
     pointSizeAttenuation: PD.BooleanParam;
     stride: PD.Numeric;
-    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     aromaticBonds: PD.BooleanParam;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;

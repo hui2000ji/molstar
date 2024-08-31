@@ -22,7 +22,7 @@ export declare const GaussianSurfaceParams: {
     smoothness: PD.Numeric;
     unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -40,10 +40,10 @@ export declare const GaussianSurfaceParams: {
     }>>;
     instanceGranularity: PD.BooleanParam;
     tryUseGpu: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -67,7 +67,7 @@ export declare function getGaussianSurfaceParams(ctx: ThemeRegistryContext, stru
     smoothness: PD.Numeric;
     unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -85,10 +85,10 @@ export declare function getGaussianSurfaceParams(ctx: ThemeRegistryContext, stru
     }>>;
     instanceGranularity: PD.BooleanParam;
     tryUseGpu: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;
@@ -113,7 +113,7 @@ export declare const GaussianSurfaceRepresentationProvider: StructureRepresentat
     smoothness: PD.Numeric;
     unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -131,10 +131,10 @@ export declare const GaussianSurfaceRepresentationProvider: StructureRepresentat
     }>>;
     instanceGranularity: PD.BooleanParam;
     tryUseGpu: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;

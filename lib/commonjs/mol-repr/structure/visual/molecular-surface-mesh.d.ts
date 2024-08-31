@@ -7,10 +7,10 @@ import { ParamDefinition as PD } from '../../../mol-util/param-definition';
 import { UnitsVisual } from '../units-visual';
 import { ComplexVisual } from '../complex-visual';
 export declare const MolecularSurfaceMeshParams: {
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     traceOnly: PD.BooleanParam;
@@ -28,7 +28,7 @@ export declare const MolecularSurfaceMeshParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

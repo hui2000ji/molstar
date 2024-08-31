@@ -9,10 +9,6 @@ export declare const AntibodyColoringResidueColorThemeParams: {
     'VH/V\u03B1 CDR': PD.Color;
     'VL/V\u03B2 CDR': PD.Color;
     'Other polymer': PD.Mapped<PD.NamedParams<PD.Normalize<{
-        value: Color;
-        saturation: number;
-        lightness: number;
-    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -39,7 +35,7 @@ export declare const AntibodyColoringResidueColorThemeParams: {
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
-    }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+    }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -78,6 +74,19 @@ export declare const AntibodyColoringResidueColorThemeParams: {
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
+    }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+        palette: PD.NamedParams<PD.Normalize<{
+            maxCount: any;
+            hue: any;
+            chroma: any;
+            luminance: any;
+            sort: any;
+            clusteringStepCount: any;
+            minSampleCount: any;
+            sampleCountFactor: any;
+        }>, "generate"> | PD.NamedParams<PD.Normalize<{
+            list: any;
+        }>, "colors">;
     }>, "model-index"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
@@ -92,19 +101,10 @@ export declare const AntibodyColoringResidueColorThemeParams: {
             list: any;
         }>, "colors">;
     }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
-        palette: PD.NamedParams<PD.Normalize<{
-            maxCount: any;
-            hue: any;
-            chroma: any;
-            luminance: any;
-            sort: any;
-            clusteringStepCount: any;
-            minSampleCount: any;
-            sampleCountFactor: any;
-        }>, "generate"> | PD.NamedParams<PD.Normalize<{
-            list: any;
-        }>, "colors">;
-    }>, "unit-index">>;
+        value: Color;
+        saturation: number;
+        lightness: number;
+    }>, "uniform">>;
     'Non-polymer': PD.Color;
 };
 type Params = typeof AntibodyColoringResidueColorThemeParams;

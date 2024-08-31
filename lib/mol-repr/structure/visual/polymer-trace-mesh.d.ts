@@ -10,8 +10,8 @@ export declare const PolymerTraceMeshParams: {
     aspectRatio: PD.Numeric;
     arrowFactor: PD.Numeric;
     tubularHelices: PD.BooleanParam;
-    helixProfile: PD.Select<"square" | "elliptical" | "rounded">;
-    nucleicProfile: PD.Select<"square" | "elliptical" | "rounded">;
+    helixProfile: PD.Select<"elliptical" | "rounded" | "square">;
+    nucleicProfile: PD.Select<"elliptical" | "rounded" | "square">;
     detail: PD.Numeric;
     linearSegments: PD.Numeric;
     radialSegments: PD.Numeric;
@@ -21,8 +21,8 @@ export declare const DefaultPolymerTraceMeshProps: PD.Values<{
     aspectRatio: PD.Numeric;
     arrowFactor: PD.Numeric;
     tubularHelices: PD.BooleanParam;
-    helixProfile: PD.Select<"square" | "elliptical" | "rounded">;
-    nucleicProfile: PD.Select<"square" | "elliptical" | "rounded">;
+    helixProfile: PD.Select<"elliptical" | "rounded" | "square">;
+    nucleicProfile: PD.Select<"elliptical" | "rounded" | "square">;
     detail: PD.Numeric;
     linearSegments: PD.Numeric;
     radialSegments: PD.Numeric;
@@ -33,12 +33,12 @@ export declare const PolymerTraceParams: {
     aspectRatio: PD.Numeric;
     arrowFactor: PD.Numeric;
     tubularHelices: PD.BooleanParam;
-    helixProfile: PD.Select<"square" | "elliptical" | "rounded">;
-    nucleicProfile: PD.Select<"square" | "elliptical" | "rounded">;
+    helixProfile: PD.Select<"elliptical" | "rounded" | "square">;
+    nucleicProfile: PD.Select<"elliptical" | "rounded" | "square">;
     detail: PD.Numeric;
     linearSegments: PD.Numeric;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "gaussians" | "atomic">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -49,7 +49,7 @@ export declare const PolymerTraceParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"auto" | "medium" | "high" | "low" | "custom" | "highest" | "higher" | "lower" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

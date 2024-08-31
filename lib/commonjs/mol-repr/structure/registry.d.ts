@@ -25,7 +25,7 @@ export declare namespace StructureRepresentationRegistry {
             transparentBackfaces: import("../../mol-util/param-definition").ParamDefinition.Select<string>;
             bumpAmplitude: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -67,7 +67,7 @@ export declare namespace StructureRepresentationRegistry {
             transparentBackfaces: import("../../mol-util/param-definition").ParamDefinition.Select<string>;
             bumpAmplitude: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -100,12 +100,12 @@ export declare namespace StructureRepresentationRegistry {
             bumpFrequency: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             tryUseImpostor: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             adjustCylinderLength: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
-            includeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-            excludeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+            includeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+            excludeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
             ignoreHydrogens: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             ignoreHydrogensVariant: import("../../mol-util/param-definition").ParamDefinition.Select<"all" | "non-polar">;
             aromaticBonds: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
-            multipleBonds: import("../../mol-util/param-definition").ParamDefinition.Select<"offset" | "off" | "symmetric">;
+            multipleBonds: import("../../mol-util/param-definition").ParamDefinition.Select<"symmetric" | "off" | "offset">;
             linkScale: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             linkSpacing: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             linkCap: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
@@ -124,7 +124,7 @@ export declare namespace StructureRepresentationRegistry {
             solidInterior: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             bumpAmplitude: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -175,7 +175,7 @@ export declare namespace StructureRepresentationRegistry {
             transparentBackfaces: import("../../mol-util/param-definition").ParamDefinition.Select<string>;
             bumpAmplitude: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -206,12 +206,12 @@ export declare namespace StructureRepresentationRegistry {
             visuals: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"intra-bond" | "inter-bond" | "ellipsoid-mesh">;
             bumpFrequency: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             tryUseImpostor: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
-            includeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-            excludeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+            includeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+            excludeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
             ignoreHydrogens: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             ignoreHydrogensVariant: import("../../mol-util/param-definition").ParamDefinition.Select<"all" | "non-polar">;
             aromaticBonds: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
-            multipleBonds: import("../../mol-util/param-definition").ParamDefinition.Select<"offset" | "off" | "symmetric">;
+            multipleBonds: import("../../mol-util/param-definition").ParamDefinition.Select<"symmetric" | "off" | "offset">;
             linkScale: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             linkSpacing: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             aromaticScale: import("../../mol-util/param-definition").ParamDefinition.Numeric;
@@ -229,7 +229,7 @@ export declare namespace StructureRepresentationRegistry {
             solidInterior: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             bumpAmplitude: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -264,7 +264,7 @@ export declare namespace StructureRepresentationRegistry {
             smoothness: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             unitKinds: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"spheres" | "atomic" | "gaussians">;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -282,10 +282,10 @@ export declare namespace StructureRepresentationRegistry {
             }>>;
             instanceGranularity: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             tryUseGpu: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
-            smoothColors: import("../../mol-util/param-definition").ParamDefinition.Mapped<import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "off"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "auto"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
+            smoothColors: import("../../mol-util/param-definition").ParamDefinition.Mapped<import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "auto"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 resolutionFactor: number;
                 sampleStride: number;
-            }>, "on">>;
+            }>, "on"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "off">>;
             doubleSided: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             flipSided: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             flatShaded: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
@@ -310,7 +310,7 @@ export declare namespace StructureRepresentationRegistry {
             controlPoints: import("../../mol-util/param-definition").ParamDefinition.LineGraph;
             stepsPerCell: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -335,7 +335,7 @@ export declare namespace StructureRepresentationRegistry {
             backgroundColor: import("../../mol-util/param-definition").ParamDefinition.Color;
             backgroundOpacity: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             borderWidth: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            level: import("../../mol-util/param-definition").ParamDefinition.Select<"element" | "residue" | "chain">;
+            level: import("../../mol-util/param-definition").ParamDefinition.Select<"residue" | "element" | "chain">;
             ignoreHydrogens: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             ignoreHydrogensVariant: import("../../mol-util/param-definition").ParamDefinition.Select<"all" | "non-polar">;
             chainScale: import("../../mol-util/param-definition").ParamDefinition.Numeric;
@@ -351,14 +351,14 @@ export declare namespace StructureRepresentationRegistry {
             tether: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             tetherLength: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             tetherBaseWidth: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            attachment: import("../../mol-util/param-definition").ParamDefinition.Select<"bottom-left" | "bottom-right" | "top-left" | "top-right" | "middle-center" | "bottom-center" | "middle-left" | "middle-right" | "top-center">;
+            attachment: import("../../mol-util/param-definition").ParamDefinition.Select<"middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right">;
             fontFamily: import("../../mol-util/param-definition").ParamDefinition.Select<import("../../mol-geo/geometry/text/font-atlas").FontFamily>;
             fontQuality: import("../../mol-util/param-definition").ParamDefinition.Select<number>;
             fontStyle: import("../../mol-util/param-definition").ParamDefinition.Select<import("../../mol-geo/geometry/text/font-atlas").FontStyle>;
             fontVariant: import("../../mol-util/param-definition").ParamDefinition.Select<import("../../mol-geo/geometry/text/font-atlas").FontVariant>;
             fontWeight: import("../../mol-util/param-definition").ParamDefinition.Select<import("../../mol-geo/geometry/text/font-atlas").FontWeight>;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -378,7 +378,7 @@ export declare namespace StructureRepresentationRegistry {
         }, "label">;
         line: import("./representation").StructureRepresentationProvider<{
             pointStyle: import("../../mol-util/param-definition").ParamDefinition.Select<"square" | "circle" | "fuzzy">;
-            multipleBonds: import("../../mol-util/param-definition").ParamDefinition.Select<"offset" | "off" | "symmetric">;
+            multipleBonds: import("../../mol-util/param-definition").ParamDefinition.Select<"symmetric" | "off" | "offset">;
             includeParent: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             sizeFactor: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             unitKinds: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"spheres" | "atomic" | "gaussians">;
@@ -390,7 +390,7 @@ export declare namespace StructureRepresentationRegistry {
             crosses: import("../../mol-util/param-definition").ParamDefinition.Select<"all" | "lone">;
             crossSize: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -409,8 +409,8 @@ export declare namespace StructureRepresentationRegistry {
             instanceGranularity: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             pointSizeAttenuation: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             stride: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            includeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-            excludeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+            includeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+            excludeTypes: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
             aromaticBonds: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             linkScale: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             linkSpacing: import("../../mol-util/param-definition").ParamDefinition.Numeric;
@@ -431,7 +431,7 @@ export declare namespace StructureRepresentationRegistry {
             unitKinds: import("../../mol-util/param-definition").ParamDefinition.MultiSelect<"spheres" | "atomic" | "gaussians">;
             lineSizeAttenuation: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -448,10 +448,10 @@ export declare namespace StructureRepresentationRegistry {
                 }>[];
             }>>;
             instanceGranularity: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
-            smoothColors: import("../../mol-util/param-definition").ParamDefinition.Mapped<import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "off"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "auto"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
+            smoothColors: import("../../mol-util/param-definition").ParamDefinition.Mapped<import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "auto"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 resolutionFactor: number;
                 sampleStride: number;
-            }>, "on">>;
+            }>, "on"> | import("../../mol-util/param-definition").ParamDefinition.NamedParams<import("../../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "off">>;
             doubleSided: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             flipSided: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
             flatShaded: import("../../mol-util/param-definition").ParamDefinition.BooleanParam;
@@ -475,7 +475,7 @@ export declare namespace StructureRepresentationRegistry {
             transparentBackfaces: import("../../mol-util/param-definition").ParamDefinition.Select<string>;
             bumpAmplitude: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -504,7 +504,7 @@ export declare namespace StructureRepresentationRegistry {
             sizeFactor: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             pointStyle: import("../../mol-util/param-definition").ParamDefinition.Select<"square" | "circle" | "fuzzy">;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -537,7 +537,7 @@ export declare namespace StructureRepresentationRegistry {
             transparentBackfaces: import("../../mol-util/param-definition").ParamDefinition.Select<string>;
             bumpAmplitude: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;
@@ -578,7 +578,7 @@ export declare namespace StructureRepresentationRegistry {
             alphaThickness: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             bumpAmplitude: import("../../mol-util/param-definition").ParamDefinition.Numeric;
             alpha: import("../../mol-util/param-definition").ParamDefinition.Numeric;
-            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+            quality: import("../../mol-util/param-definition").ParamDefinition.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
             material: import("../../mol-util/param-definition").ParamDefinition.Group<import("../../mol-util/param-definition").ParamDefinition.Normalize<{
                 metalness: number;
                 roughness: number;

@@ -133,10 +133,6 @@ export declare const ElementSymbolColors: ColorMap<{
 export type ElementSymbolColors = typeof ElementSymbolColors;
 export declare const ElementSymbolColorThemeParams: {
     carbonColor: PD.Mapped<PD.NamedParams<PD.Normalize<{
-        value: Color;
-        saturation: number;
-        lightness: number;
-    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -163,7 +159,7 @@ export declare const ElementSymbolColorThemeParams: {
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
-    }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+    }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -202,6 +198,19 @@ export declare const ElementSymbolColorThemeParams: {
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
+    }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+        palette: PD.NamedParams<PD.Normalize<{
+            maxCount: any;
+            hue: any;
+            chroma: any;
+            luminance: any;
+            sort: any;
+            clusteringStepCount: any;
+            minSampleCount: any;
+            sampleCountFactor: any;
+        }>, "generate"> | PD.NamedParams<PD.Normalize<{
+            list: any;
+        }>, "colors">;
     }>, "model-index"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
@@ -216,46 +225,37 @@ export declare const ElementSymbolColorThemeParams: {
             list: any;
         }>, "colors">;
     }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
-        palette: PD.NamedParams<PD.Normalize<{
-            maxCount: any;
-            hue: any;
-            chroma: any;
-            luminance: any;
-            sort: any;
-            clusteringStepCount: any;
-            minSampleCount: any;
-            sampleCountFactor: any;
-        }>, "generate"> | PD.NamedParams<PD.Normalize<{
-            list: any;
-        }>, "colors">;
-    }>, "unit-index"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
+        value: Color;
+        saturation: number;
+        lightness: number;
+    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         'CDR def.': string;
         'VH/V\u03B1 FR': Color;
         'VL/V\u03B2 FR': Color;
         'VH/V\u03B1 CDR': Color;
         'VL/V\u03B2 CDR': Color;
         'Other polymer': PD.NamedParams<PD.Normalize<{
-            value: any;
-            saturation: any;
-            lightness: any;
-        }>, "uniform"> | PD.NamedParams<PD.Normalize<{
             palette: any;
             asymId: any;
         }>, "chain-id"> | PD.NamedParams<PD.Normalize<{
             palette: any;
-        }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+        }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
             palette: any;
         }>, "entity-id"> | PD.NamedParams<PD.Normalize<{
             palette: any;
         }>, "entity-source"> | PD.NamedParams<PD.Normalize<{
             palette: any;
+        }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+            palette: any;
         }>, "model-index"> | PD.NamedParams<PD.Normalize<{
             palette: any;
         }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
-            palette: any;
-        }>, "unit-index">;
+            value: any;
+            saturation: any;
+            lightness: any;
+        }>, "uniform">;
         'Non-polymer': Color;
-    }>, "antibody-coloring-residue">>;
+    }>, "antibody-coloring-residue"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol">>;
     saturation: PD.Numeric;
     lightness: PD.Numeric;
     colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
@@ -383,10 +383,6 @@ export declare const ElementSymbolColorThemeParams: {
 export type ElementSymbolColorThemeParams = typeof ElementSymbolColorThemeParams;
 export declare function getElementSymbolColorThemeParams(ctx: ThemeDataContext): {
     carbonColor: PD.Mapped<PD.NamedParams<PD.Normalize<{
-        value: Color;
-        saturation: number;
-        lightness: number;
-    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -413,7 +409,7 @@ export declare function getElementSymbolColorThemeParams(ctx: ThemeDataContext):
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
-    }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+    }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
             hue: any;
@@ -452,6 +448,19 @@ export declare function getElementSymbolColorThemeParams(ctx: ThemeDataContext):
         }>, "generate"> | PD.NamedParams<PD.Normalize<{
             list: any;
         }>, "colors">;
+    }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+        palette: PD.NamedParams<PD.Normalize<{
+            maxCount: any;
+            hue: any;
+            chroma: any;
+            luminance: any;
+            sort: any;
+            clusteringStepCount: any;
+            minSampleCount: any;
+            sampleCountFactor: any;
+        }>, "generate"> | PD.NamedParams<PD.Normalize<{
+            list: any;
+        }>, "colors">;
     }>, "model-index"> | PD.NamedParams<PD.Normalize<{
         palette: PD.NamedParams<PD.Normalize<{
             maxCount: any;
@@ -466,46 +475,37 @@ export declare function getElementSymbolColorThemeParams(ctx: ThemeDataContext):
             list: any;
         }>, "colors">;
     }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
-        palette: PD.NamedParams<PD.Normalize<{
-            maxCount: any;
-            hue: any;
-            chroma: any;
-            luminance: any;
-            sort: any;
-            clusteringStepCount: any;
-            minSampleCount: any;
-            sampleCountFactor: any;
-        }>, "generate"> | PD.NamedParams<PD.Normalize<{
-            list: any;
-        }>, "colors">;
-    }>, "unit-index"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
+        value: Color;
+        saturation: number;
+        lightness: number;
+    }>, "uniform"> | PD.NamedParams<PD.Normalize<{
         'CDR def.': string;
         'VH/V\u03B1 FR': Color;
         'VL/V\u03B2 FR': Color;
         'VH/V\u03B1 CDR': Color;
         'VL/V\u03B2 CDR': Color;
         'Other polymer': PD.NamedParams<PD.Normalize<{
-            value: any;
-            saturation: any;
-            lightness: any;
-        }>, "uniform"> | PD.NamedParams<PD.Normalize<{
             palette: any;
             asymId: any;
         }>, "chain-id"> | PD.NamedParams<PD.Normalize<{
             palette: any;
-        }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+        }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
             palette: any;
         }>, "entity-id"> | PD.NamedParams<PD.Normalize<{
             palette: any;
         }>, "entity-source"> | PD.NamedParams<PD.Normalize<{
             palette: any;
+        }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+            palette: any;
         }>, "model-index"> | PD.NamedParams<PD.Normalize<{
             palette: any;
         }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
-            palette: any;
-        }>, "unit-index">;
+            value: any;
+            saturation: any;
+            lightness: any;
+        }>, "uniform">;
         'Non-polymer': Color;
-    }>, "antibody-coloring-residue">>;
+    }>, "antibody-coloring-residue"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol">>;
     saturation: PD.Numeric;
     lightness: PD.Numeric;
     colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{

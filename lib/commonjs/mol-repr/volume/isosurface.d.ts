@@ -45,10 +45,10 @@ export declare function IsosurfaceVisual(materialId: number, volume: Volume, key
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -120,10 +120,10 @@ export declare const IsosurfaceMeshParams: {
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -197,10 +197,10 @@ export declare const IsosurfaceWireframeParams: {
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -262,15 +262,15 @@ export declare const IsosurfaceWireframeParams: {
 export type IsosurfaceWireframeParams = typeof IsosurfaceWireframeParams;
 export declare function IsosurfaceWireframeVisual(materialId: number): VolumeVisual<IsosurfaceWireframeParams>;
 export declare const IsosurfaceParams: {
-    visuals: PD.MultiSelect<"solid" | "wireframe">;
+    visuals: PD.MultiSelect<"wireframe" | "solid">;
     bumpFrequency: PD.Numeric;
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -339,15 +339,15 @@ export declare const IsosurfaceParams: {
 };
 export type IsosurfaceParams = typeof IsosurfaceParams;
 export declare function getIsosurfaceParams(ctx: ThemeRegistryContext, volume: Volume): {
-    visuals: PD.MultiSelect<"solid" | "wireframe">;
+    visuals: PD.MultiSelect<"wireframe" | "solid">;
     bumpFrequency: PD.Numeric;
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;
@@ -417,15 +417,15 @@ export declare function getIsosurfaceParams(ctx: ThemeRegistryContext, volume: V
 export type IsosurfaceRepresentation = VolumeRepresentation<IsosurfaceParams>;
 export declare function IsosurfaceRepresentation(ctx: RepresentationContext, getParams: RepresentationParamsGetter<Volume, IsosurfaceParams>): IsosurfaceRepresentation;
 export declare const IsosurfaceRepresentationProvider: VolumeRepresentationProvider<{
-    visuals: PD.MultiSelect<"solid" | "wireframe">;
+    visuals: PD.MultiSelect<"wireframe" | "solid">;
     bumpFrequency: PD.Numeric;
     quality: {
         isEssential: boolean;
         type: "select";
-        options: readonly (readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string] | readonly ["lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest", string, string | undefined])[];
+        options: readonly (readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string] | readonly ["custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest", string, string | undefined])[];
         cycle?: boolean | undefined;
         isOptional?: boolean | undefined;
-        defaultValue: "lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest";
+        defaultValue: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
         label?: string | undefined;
         description?: string | undefined;
         legend?: import("../../mol-util/legend").Legend | undefined;

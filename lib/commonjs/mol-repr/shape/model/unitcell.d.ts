@@ -14,7 +14,7 @@ interface UnitcellData {
 export declare const UnitcellParams: {
     cellColor: PD.Color;
     cellScale: PD.Numeric;
-    ref: PD.Select<"origin" | "model">;
+    ref: PD.Select<"model" | "origin">;
     attachment: PD.Select<"center" | "corner">;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -25,7 +25,7 @@ export declare const UnitcellParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

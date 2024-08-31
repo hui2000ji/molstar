@@ -13,7 +13,7 @@ import { Script } from '../../mol-script/script';
 export declare const StaticStructureComponentTypes: readonly ["all", "polymer", "protein", "nucleic", "water", "ion", "lipid", "branched", "ligand", "non-standard", "coarse"];
 export type StaticStructureComponentType = (typeof StaticStructureComponentTypes)[number];
 export declare const StructureComponentParams: () => {
-    type: PD.Mapped<PD.NamedParams<"all" | "polymer" | "protein" | "nucleic" | "water" | "ion" | "lipid" | "branched" | "ligand" | "non-standard" | "coarse", "static"> | PD.NamedParams<Expression, "expression"> | PD.NamedParams<StructureElement.Bundle, "bundle"> | PD.NamedParams<Script, "script">>;
+    type: PD.Mapped<PD.NamedParams<"polymer" | "water" | "branched" | "ligand" | "ion" | "protein" | "all" | "nucleic" | "lipid" | "non-standard" | "coarse", "static"> | PD.NamedParams<Script, "script"> | PD.NamedParams<Expression, "expression"> | PD.NamedParams<StructureElement.Bundle, "bundle">>;
     nullIfEmpty: PD.Base<boolean | undefined>;
     label: PD.Text<string>;
 };

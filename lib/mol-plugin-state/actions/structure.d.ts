@@ -27,6 +27,12 @@ declare const DownloadStructure: StateAction<PluginStateObject.Root, void, PD.No
         label: any;
         options: any;
     }>, "url"> | PD.NamedParams<PD.Normalize<{
+        id: any;
+        options: any;
+    }>, "alphafolddb"> | PD.NamedParams<PD.Normalize<{
+        id: any;
+        options: any;
+    }>, "modelarchive"> | PD.NamedParams<PD.Normalize<{
         provider: any;
         options: any;
     }>, "pdb"> | PD.NamedParams<PD.Normalize<{
@@ -36,12 +42,6 @@ declare const DownloadStructure: StateAction<PluginStateObject.Root, void, PD.No
         id: any;
         options: any;
     }>, "swissmodel"> | PD.NamedParams<PD.Normalize<{
-        id: any;
-        options: any;
-    }>, "alphafolddb"> | PD.NamedParams<PD.Normalize<{
-        id: any;
-        options: any;
-    }>, "modelarchive"> | PD.NamedParams<PD.Normalize<{
         id: any;
         options: any;
     }>, "pubchem">;

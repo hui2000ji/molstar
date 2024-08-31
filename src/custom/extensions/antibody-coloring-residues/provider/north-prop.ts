@@ -12,12 +12,12 @@ export async function fromServer(
     props: AntibodyColoringResidueProps
 ): Promise<CustomProperty.Data<SequenceList>> {
 
-    const seqs = getSequenceArr(model);
+    const [seqs, entityIdMapIndex] = getSequenceArr(model);
     const { data } = await batchGetSeqInfoApi({
         sequences: seqs,
         cdr_definition: 'north',
     });
-    const res = expandEntityToChainArray(data.list, model);
+    const res = expandEntityToChainArray(data.list, model, entityIdMapIndex);
     return { value: res };
 }
 

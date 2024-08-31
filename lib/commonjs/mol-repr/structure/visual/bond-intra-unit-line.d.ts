@@ -7,12 +7,12 @@ import { ParamDefinition as PD } from '../../../mol-util/param-definition';
 import { UnitsVisual } from '../units-visual';
 export declare const IntraUnitBondLineParams: {
     includeParent: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
-    excludeTypes: PD.MultiSelect<"covalent" | "computed" | "aromatic" | "metal-coordination" | "hydrogen-bond" | "disulfide">;
+    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
-    multipleBonds: PD.Select<"offset" | "off" | "symmetric">;
+    multipleBonds: PD.Select<"symmetric" | "off" | "offset">;
     linkScale: PD.Numeric;
     linkSpacing: PD.Numeric;
     aromaticDashCount: PD.Numeric;
@@ -21,7 +21,7 @@ export declare const IntraUnitBondLineParams: {
     sizeFactor: PD.Numeric;
     lineSizeAttenuation: PD.BooleanParam;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

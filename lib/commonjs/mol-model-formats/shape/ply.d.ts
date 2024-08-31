@@ -17,11 +17,11 @@ export declare const PlyShapeParams: {
         red: string;
         green: string;
         blue: string;
-    }>, "material"> | PD.NamedParams<PD.Normalize<{
+    }>, "vertex"> | PD.NamedParams<PD.Normalize<{
         red: string;
         green: string;
         blue: string;
-    }>, "vertex">>;
+    }>, "material">>;
     grouping: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "none"> | PD.NamedParams<PD.Normalize<{
         group: string;
     }>, "vertex">>;
@@ -34,7 +34,7 @@ export declare const PlyShapeParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -60,11 +60,11 @@ export declare function shapeFromPly(source: PlyFile, params?: {}): Task<ShapePr
         red: string;
         green: string;
         blue: string;
-    }>, "material"> | PD.NamedParams<PD.Normalize<{
+    }>, "vertex"> | PD.NamedParams<PD.Normalize<{
         red: string;
         green: string;
         blue: string;
-    }>, "vertex">>;
+    }>, "material">>;
     grouping: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "none"> | PD.NamedParams<PD.Normalize<{
         group: string;
     }>, "vertex">>;
@@ -77,7 +77,7 @@ export declare function shapeFromPly(source: PlyFile, params?: {}): Task<ShapePr
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;

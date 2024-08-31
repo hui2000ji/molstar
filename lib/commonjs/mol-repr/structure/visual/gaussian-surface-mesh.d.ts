@@ -13,10 +13,10 @@ export declare const GaussianSurfaceMeshParams: {
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     tryUseGpu: PD.BooleanParam;
     includeParent: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     traceOnly: PD.BooleanParam;
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
@@ -31,7 +31,7 @@ export declare const GaussianSurfaceMeshParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -55,10 +55,10 @@ export declare const StructureGaussianSurfaceMeshParams: {
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     tryUseGpu: PD.BooleanParam;
     includeParent: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     traceOnly: PD.BooleanParam;
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
@@ -73,7 +73,7 @@ export declare const StructureGaussianSurfaceMeshParams: {
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -97,10 +97,10 @@ export declare function GaussianSurfaceVisual(materialId: number, structure: Str
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     tryUseGpu: PD.BooleanParam;
     includeParent: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     traceOnly: PD.BooleanParam;
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
@@ -115,7 +115,7 @@ export declare function GaussianSurfaceVisual(materialId: number, structure: Str
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
@@ -138,10 +138,10 @@ export declare function StructureGaussianSurfaceVisual(materialId: number, struc
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     tryUseGpu: PD.BooleanParam;
     includeParent: PD.BooleanParam;
-    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
+    smoothColors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "auto"> | PD.NamedParams<PD.Normalize<{
         resolutionFactor: number;
         sampleStride: number;
-    }>, "on">>;
+    }>, "on"> | PD.NamedParams<PD.Normalize<unknown>, "off">>;
     traceOnly: PD.BooleanParam;
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
@@ -156,7 +156,7 @@ export declare function StructureGaussianSurfaceVisual(materialId: number, struc
     bumpFrequency: PD.Numeric;
     bumpAmplitude: PD.Numeric;
     alpha: PD.Numeric;
-    quality: PD.Select<"lower" | "auto" | "high" | "low" | "medium" | "custom" | "highest" | "higher" | "lowest">;
+    quality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
     material: PD.Group<PD.Normalize<{
         metalness: number;
         roughness: number;
