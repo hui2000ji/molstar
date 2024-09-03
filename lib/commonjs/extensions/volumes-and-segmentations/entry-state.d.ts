@@ -6,10 +6,10 @@
 import { PluginStateObject } from '../../mol-plugin-state/objects';
 import { ParamDefinition as PD } from '../../mol-util/param-definition';
 import { Choice } from './helpers';
-export declare const VolumeTypeChoice: Choice<"direct-volume" | "off" | "isosurface", "isosurface">;
+export declare const VolumeTypeChoice: Choice<"off" | "direct-volume" | "isosurface", "isosurface">;
 export type VolumeType = Choice.Values<typeof VolumeTypeChoice>;
 export declare const VolsegStateParams: {
-    volumeType: PD.Select<"direct-volume" | "off" | "isosurface">;
+    volumeType: PD.Select<"off" | "direct-volume" | "isosurface">;
     volumeIsovalueKind: PD.Select<string>;
     volumeIsovalueValue: PD.Numeric;
     volumeOpacity: PD.Numeric;
@@ -25,7 +25,7 @@ export declare const VolsegStateParams: {
 export type VolsegStateData = PD.Values<typeof VolsegStateParams>;
 declare const VolsegState_base: {
     new (data: PD.Values<{
-        volumeType: PD.Select<"direct-volume" | "off" | "isosurface">;
+        volumeType: PD.Select<"off" | "direct-volume" | "isosurface">;
         volumeIsovalueKind: PD.Select<string>;
         volumeIsovalueValue: PD.Numeric;
         volumeOpacity: PD.Numeric;
@@ -46,7 +46,7 @@ declare const VolsegState_base: {
         label: string;
         description?: string | undefined;
         data: PD.Values<{
-            volumeType: PD.Select<"direct-volume" | "off" | "isosurface">;
+            volumeType: PD.Select<"off" | "direct-volume" | "isosurface">;
             volumeIsovalueKind: PD.Select<string>;
             volumeIsovalueValue: PD.Numeric;
             volumeOpacity: PD.Numeric;
@@ -62,7 +62,7 @@ declare const VolsegState_base: {
     };
     type: PluginStateObject.TypeInfo;
     is(obj?: import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>> | undefined): obj is import("../../mol-state/object").StateObject<PD.Values<{
-        volumeType: PD.Select<"direct-volume" | "off" | "isosurface">;
+        volumeType: PD.Select<"off" | "direct-volume" | "isosurface">;
         volumeIsovalueKind: PD.Select<string>;
         volumeIsovalueValue: PD.Numeric;
         volumeOpacity: PD.Numeric;

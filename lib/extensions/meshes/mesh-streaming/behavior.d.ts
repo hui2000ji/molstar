@@ -33,7 +33,7 @@ export declare class MeshStreaming extends MeshStreaming_base {
 }
 export declare namespace MeshStreaming {
     namespace Params {
-        const ViewTypeChoice: Choice<"all" | "select" | "off", "select">;
+        const ViewTypeChoice: Choice<"all" | "off" | "select", "select">;
         type ViewType = Choice.Values<typeof ViewTypeChoice>;
         function create(options: MeshServerInfo.Data): {
             view: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<{

@@ -25,7 +25,7 @@ const InteractionTypeColors = ColorMap({
     HalogenBond: 0x7F3BF5,
     Ionic: 0x2EA121,
     MetalCoordination: 0xF54A45,
-    CationPi: 0xF80,
+    CationPi: 0xFF8600,
     PiStacking: 0xF0C814,
     WeakHydrogenBond: 0x98CDFD,
 });

@@ -14,7 +14,7 @@ export declare const ValidationReportGeometryQualityPreset: StructureRepresentat
     ignoreHydrogens: boolean | undefined;
     ignoreHydrogensVariant: "all" | "non-polar" | undefined;
     ignoreLight: boolean | undefined;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+    quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
     theme: PD.Normalize<{
         globalName: any;
         globalColorParams: any;
@@ -54,7 +54,7 @@ export declare const ValidationReportDensityFitPreset: StructureRepresentationPr
     ignoreHydrogens: boolean | undefined;
     ignoreHydrogensVariant: "all" | "non-polar" | undefined;
     ignoreLight: boolean | undefined;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+    quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
     theme: PD.Normalize<{
         globalName: any;
         globalColorParams: any;
@@ -86,7 +86,7 @@ export declare const ValidationReportRandomCoilIndexPreset: StructureRepresentat
     ignoreHydrogens: boolean | undefined;
     ignoreHydrogensVariant: "all" | "non-polar" | undefined;
     ignoreLight: boolean | undefined;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+    quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
     theme: PD.Normalize<{
         globalName: any;
         globalColorParams: any;

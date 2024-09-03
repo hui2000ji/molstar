@@ -21,7 +21,7 @@ export type StructureComponentParams = PD.ValuesFor<ReturnType<typeof StructureC
 export declare function createStructureComponent(a: Structure, params: StructureComponentParams, cache: {
     source: Structure;
     entry?: StructureQueryHelper.CacheEntry;
-}): StateObject<any, any> | SO.Molecule.Structure;
+}): SO.Molecule.Structure | StateObject<any, any>;
 export declare function updateStructureComponent(a: Structure, b: SO.Molecule.Structure, oldParams: StructureComponentParams, newParams: StructureComponentParams, cache: {
     source: Structure;
     entry?: StructureQueryHelper.CacheEntry;

@@ -42,7 +42,7 @@ export declare const ExtensionMap: {
 };
 declare const DefaultViewerOptions: {
     customFormats: [string, DataFormatProvider<any, any, any>][];
-    extensions: ("volseg" | "geo-export" | "model-export" | "mp4-export" | "zenodo-import" | "g3d" | "cellpack" | "dnatco-ntcs" | "sb-ncbr-partial-charges" | "wwpdb-chemical-component-dictionary" | "backgrounds" | "pdbe-structure-quality-report" | "rcsb-assembly-symmetry" | "rcsb-validation-report" | "anvil-membrane-orientation" | "ma-quality-assessment")[];
+    extensions: ("cellpack" | "dnatco-ntcs" | "g3d" | "volseg" | "geo-export" | "model-export" | "mp4-export" | "pdbe-structure-quality-report" | "zenodo-import" | "sb-ncbr-partial-charges" | "wwpdb-chemical-component-dictionary" | "backgrounds" | "rcsb-assembly-symmetry" | "rcsb-validation-report" | "anvil-membrane-orientation" | "ma-quality-assessment")[];
     disabledExtensions: string[];
     layoutIsExpanded: boolean;
     layoutShowControls: boolean;
@@ -237,7 +237,7 @@ export declare const ViewerAutoPreset: StructureRepresentationPresetProvider<{
     ignoreHydrogens: boolean | undefined;
     ignoreHydrogensVariant: "all" | "non-polar" | undefined;
     ignoreLight: boolean | undefined;
-    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+    quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
     theme: import("../../mol-util/param-definition").ParamDefinition.Normalize<{
         globalName: any;
         globalColorParams: any;

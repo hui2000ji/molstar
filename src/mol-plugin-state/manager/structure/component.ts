@@ -202,7 +202,7 @@ class StructureComponentManager extends StatefulPluginComponent<StructureCompone
             if (r.cell.state.isHidden) return;
             return r.cell.obj?.data.boundary.sphere;
         });
-        this.plugin.selectionMode = false;
+        // this.plugin.selectionMode = false;
     }
 
     canBeModified(ref: StructureHierarchyRef) {

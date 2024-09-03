@@ -11,7 +11,7 @@ declare const DcdProvider: {
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
 };
 type DcdProvider = typeof DcdProvider;
 export { XtcProvider };
@@ -20,7 +20,7 @@ declare const XtcProvider: {
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
 };
 type XtcProvider = typeof XtcProvider;
 export { TrrProvider };
@@ -29,7 +29,7 @@ declare const TrrProvider: {
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
 };
 type TrrProvider = typeof TrrProvider;
 export { NctrajProvider };
@@ -38,7 +38,7 @@ declare const NctrajProvider: {
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
 };
 type NctrajProvider = typeof NctrajProvider;
 export type CoordinatesProvider = DcdProvider | XtcProvider | TrrProvider;
@@ -47,24 +47,24 @@ export declare const BuiltInCoordinatesFormats: readonly [readonly ["dcd", {
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
 }], readonly ["xtc", {
     label: string;
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
 }], readonly ["trr", {
     label: string;
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
 }], readonly ["nctraj", {
     label: string;
     description: string;
     category: string;
     binaryExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Coordinates, import("../../mol-state/transformer").StateTransformer<import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, import("../../mol-state/object").StateObject<any, import("../../mol-state/object").StateObject.Type<any>>, any>>>;
 }]];
 export type BuiltInCoordinatesFormat = (typeof BuiltInCoordinatesFormats)[number][0];
