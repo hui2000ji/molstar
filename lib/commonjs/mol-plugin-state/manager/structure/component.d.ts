@@ -124,16 +124,16 @@ declare namespace StructureComponentManager {
         action: PD.Mapped<PD.NamedParams<PD.Normalize<{
             color: import("../../../mol-util/color").Color;
         }>, "color"> | PD.NamedParams<PD.Normalize<{
-            value: number;
-        }>, "transparency"> | PD.NamedParams<PD.Normalize<{
-            excludeGroups: ("one" | "two" | "three" | "four" | "five" | "six")[];
-        }>, "clipping"> | PD.NamedParams<PD.Normalize<{
             material: PD.Normalize<{
                 metalness: number;
                 roughness: number;
                 bumpiness: number;
             }>;
-        }>, "material"> | PD.NamedParams<PD.Normalize<unknown>, "resetColor"> | PD.NamedParams<PD.Normalize<unknown>, "resetMaterial">>;
+        }>, "material"> | PD.NamedParams<PD.Normalize<{
+            value: number;
+        }>, "transparency"> | PD.NamedParams<PD.Normalize<{
+            excludeGroups: ("one" | "two" | "three" | "four" | "five" | "six")[];
+        }>, "clipping"> | PD.NamedParams<PD.Normalize<unknown>, "resetColor"> | PD.NamedParams<PD.Normalize<unknown>, "resetMaterial">>;
         representations: PD.MultiSelect<string>;
     };
     type ThemeParams = PD.Values<ReturnType<typeof getThemeParams>>;

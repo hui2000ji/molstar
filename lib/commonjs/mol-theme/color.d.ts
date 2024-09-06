@@ -76,7 +76,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -96,7 +96,7 @@ declare namespace ColorTheme {
             }>, "uniform"> | PD.NamedParams<PD.Normalize<{
                 saturation: number;
                 lightness: number;
-                colors: PD.NamedParams<PD.Normalize<{
+                colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
                     water: any;
                     ion: any;
                     protein: any;
@@ -104,7 +104,7 @@ declare namespace ColorTheme {
                     DNA: any;
                     PNA: any;
                     saccharide: any;
-                }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "default">;
+                }>, "custom">;
             }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
                 palette: PD.NamedParams<PD.Normalize<{
                     maxCount: any;
@@ -393,7 +393,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -411,7 +411,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -677,7 +677,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -694,7 +694,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -717,7 +717,7 @@ declare namespace ColorTheme {
             }>, "uniform"> | PD.NamedParams<PD.Normalize<{
                 saturation: number;
                 lightness: number;
-                colors: PD.NamedParams<PD.Normalize<{
+                colors: PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
                     water: any;
                     ion: any;
                     protein: any;
@@ -725,7 +725,7 @@ declare namespace ColorTheme {
                     DNA: any;
                     PNA: any;
                     saccharide: any;
-                }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "default">;
+                }>, "custom">;
             }>, "molecule-type"> | PD.NamedParams<PD.Normalize<{
                 palette: PD.NamedParams<PD.Normalize<{
                     maxCount: any;
@@ -801,7 +801,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -815,7 +815,7 @@ declare namespace ColorTheme {
         'molecule-type': Provider<{
             saturation: PD.Numeric;
             lightness: PD.Numeric;
-            colors: PD.Mapped<PD.NamedParams<PD.Normalize<{
+            colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
                 water: Color;
                 ion: Color;
                 protein: Color;
@@ -823,7 +823,7 @@ declare namespace ColorTheme {
                 DNA: Color;
                 PNA: Color;
                 saccharide: Color;
-            }>, "custom"> | PD.NamedParams<PD.Normalize<unknown>, "default">>;
+            }>, "custom">>;
         }, "molecule-type", ColorType>;
         occupancy: Provider<{
             domain: PD.Interval;
@@ -835,7 +835,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -852,7 +852,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -873,7 +873,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -890,7 +890,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -970,7 +970,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -987,7 +987,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -1008,7 +1008,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;
@@ -1030,7 +1030,7 @@ declare namespace ColorTheme {
                 hue: [number, number];
                 chroma: [number, number];
                 luminance: [number, number];
-                sort: "none" | "contrast";
+                sort: "contrast" | "none";
                 clusteringStepCount: number;
                 minSampleCount: number;
                 sampleCountFactor: number;

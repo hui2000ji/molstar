@@ -50,6 +50,7 @@ export declare const PluginConfig: {
         ShowSelectionMode: PluginConfigItem<boolean>;
         ShowAnimation: PluginConfigItem<boolean>;
         ShowTrajectoryControls: PluginConfigItem<boolean>;
+        ShowRuler: PluginConfigItem<boolean>;
     };
     Download: {
         DefaultPdbProvider: PluginConfigItem<"rcsb" | "pdbe" | "pdbj">;
@@ -70,13 +71,6 @@ export declare const PluginConfig: {
     Background: {
         Styles: PluginConfigItem<[import("../mol-util/param-definition").ParamDefinition.Values<{
             variant: import("../mol-util/param-definition").ParamDefinition.Mapped<import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<unknown>, "off"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
-                coverage: string;
-                opacity: number;
-                saturation: number;
-                lightness: number;
-                source: import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/assets").Asset.File | null, "file"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<any, "url">;
-                blur: number;
-            }>, "image"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
                 opacity: number;
                 saturation: number;
                 lightness: number;
@@ -97,6 +91,13 @@ export declare const PluginConfig: {
                 }>, "files">;
                 blur: number;
             }>, "skybox"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
+                coverage: string;
+                opacity: number;
+                saturation: number;
+                lightness: number;
+                source: import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/assets").Asset.File | null, "file"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<any, "url">;
+                blur: number;
+            }>, "image"> | import("../mol-util/param-definition").ParamDefinition.NamedParams<import("../mol-util/param-definition").ParamDefinition.Normalize<{
                 topColor: import("../mol-util/color").Color;
                 bottomColor: import("../mol-util/color").Color;
                 ratio: number;

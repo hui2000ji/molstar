@@ -219,7 +219,7 @@ declare const StructureSelectionsDistance3D: StateTransformer<SO.Molecule.Struct
     tether: boolean;
     tetherLength: number;
     tetherBaseWidth: number;
-    attachment: "middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right";
+    attachment: "bottom-left" | "bottom-right" | "top-left" | "top-right" | "middle-center" | "bottom-center" | "middle-left" | "middle-right" | "top-center";
     fontFamily: import("../../mol-geo/geometry/text/font-atlas").FontFamily;
     fontQuality: number;
     fontStyle: import("../../mol-geo/geometry/text/font-atlas").FontStyle;
@@ -262,7 +262,7 @@ declare const StructureSelectionsAngle3D: StateTransformer<SO.Molecule.Structure
     tether: boolean;
     tetherLength: number;
     tetherBaseWidth: number;
-    attachment: "middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right";
+    attachment: "bottom-left" | "bottom-right" | "top-left" | "top-right" | "middle-center" | "bottom-center" | "middle-left" | "middle-right" | "top-center";
     fontFamily: import("../../mol-geo/geometry/text/font-atlas").FontFamily;
     fontQuality: number;
     fontStyle: import("../../mol-geo/geometry/text/font-atlas").FontStyle;
@@ -315,7 +315,7 @@ declare const StructureSelectionsDihedral3D: StateTransformer<SO.Molecule.Struct
     tether: boolean;
     tetherLength: number;
     tetherBaseWidth: number;
-    attachment: "middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right";
+    attachment: "bottom-left" | "bottom-right" | "top-left" | "top-right" | "middle-center" | "bottom-center" | "middle-left" | "middle-right" | "top-center";
     fontFamily: import("../../mol-geo/geometry/text/font-atlas").FontFamily;
     fontQuality: number;
     fontStyle: import("../../mol-geo/geometry/text/font-atlas").FontStyle;
@@ -369,7 +369,7 @@ declare const StructureSelectionsLabel3D: StateTransformer<SO.Molecule.Structure
     tether: boolean;
     tetherLength: number;
     tetherBaseWidth: number;
-    attachment: "middle-center" | "bottom-left" | "bottom-center" | "bottom-right" | "middle-left" | "middle-right" | "top-left" | "top-center" | "top-right";
+    attachment: "bottom-left" | "bottom-right" | "top-left" | "top-right" | "middle-center" | "bottom-center" | "middle-left" | "middle-right" | "top-center";
     fontFamily: import("../../mol-geo/geometry/text/font-atlas").FontFamily;
     fontQuality: number;
     fontStyle: import("../../mol-geo/geometry/text/font-atlas").FontStyle;
@@ -391,7 +391,7 @@ declare const StructureSelectionsLabel3D: StateTransformer<SO.Molecule.Structure
 export { StructureSelectionsOrientation3D };
 type StructureSelectionsOrientation3D = typeof StructureSelectionsOrientation3D;
 declare const StructureSelectionsOrientation3D: StateTransformer<SO.Molecule.Structure.Selections, SO.Shape.Representation3D, PD.Normalize<{
-    visuals: ("box" | "ellipsoid" | "axes")[];
+    visuals: ("axes" | "ellipsoid" | "box")[];
     color: Color;
     scaleFactor: number;
     radiusScale: number;
