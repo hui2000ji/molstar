@@ -5,6 +5,7 @@ import { AntibodyColoringResidueKabatProvider } from './provider/kabat-prop';
 import { AntibodyColoringResidueChothiaProvider } from './provider/chothia-prop';
 import { AntibodyColoringResidueImgtProvider } from './provider/imgt-prop';
 import { AntibodyColoringResidueNorthProvider } from './provider/north-prop';
+import { PROTEIN_LETTERS_3TO1_EXTENDED, NUCLEIC_LETTERS_3TO1_EXTENDED } from '../../config/common.config';
 
 export type SequenceList = (SeqInfoModel | null)[] | undefined;
 export function isApplicable(model?: Model): boolean {
@@ -19,9 +20,14 @@ export function getSequenceArr(model: Model) {
         const sequencArr: string[] = [];
         for (let i = 0; i < len; i++) {
             const s = seq.sequence.label.value(i);
-            sequencArr.push(s);
-        }
+            if (s.length > 1) {
+                const resi = PROTEIN_LETTERS_3TO1_EXTENDED[s] || NUCLEIC_LETTERS_3TO1_EXTENDED[s] || 'X';
+                sequencArr.push(resi);
+            } else {
+                sequencArr.push(s);
 
+            }
+        }
         return sequencArr.join('');
     });
 
