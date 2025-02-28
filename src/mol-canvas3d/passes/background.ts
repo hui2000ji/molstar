@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2022-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2022-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
@@ -23,7 +23,9 @@ import { Vec2 } from '../../mol-math/linear-algebra/3d/vec2';
 import { Color } from '../../mol-util/color';
 import { Asset, AssetManager } from '../../mol-util/assets';
 import { Vec4 } from '../../mol-math/linear-algebra/3d/vec4';
-import { isPowerOfTwo } from '../../mol-math/misc';
+import { degToRad, isPowerOfTwo } from '../../mol-math/misc';
+import { Mat3 } from '../../mol-math/linear-algebra/3d/mat3';
+import { Euler } from '../../mol-math/linear-algebra/3d/euler';
 
 const SharedParams = {
     opacity: PD.Numeric(1, { min: 0.0, max: 1.0, step: 0.01 }),
@@ -51,6 +53,11 @@ const SkyboxParams = {
         }, { isExpanded: true, label: 'Files' }),
     }),
     blur: PD.Numeric(0, { min: 0.0, max: 1.0, step: 0.01 }, { description: 'Note, this only works in WebGL2 or when "EXT_shader_texture_lod" is available.' }),
+    rotation: PD.Group({
+        x: PD.Numeric(0, { min: 0, max: 360, step: 1 }, { immediateUpdate: true }),
+        y: PD.Numeric(0, { min: 0, max: 360, step: 1 }, { immediateUpdate: true }),
+        z: PD.Numeric(0, { min: 0, max: 360, step: 1 }, { immediateUpdate: true }),
+    }),
     ...SharedParams,
 };
 type SkyboxProps = PD.Values<typeof SkyboxParams>
@@ -172,6 +179,14 @@ export class BackgroundPass {
         Mat4.mul(m, cam.projection, m);
         Mat4.invert(m, m);
         ValueCell.update(this.renderable.values.uViewDirectionProjectionInverse, m);
+
+        const r = this.renderable.values.uRotation.ref.value;
+        Mat3.fromEuler(r, Euler.create(
+            degToRad(props.rotation.x),
+            degToRad(props.rotation.y),
+            degToRad(props.rotation.z)
+        ), 'XYZ');
+        ValueCell.update(this.renderable.values.uRotation, r);
 
         ValueCell.updateIfChanged(this.renderable.values.uBlur, props.blur);
         ValueCell.updateIfChanged(this.renderable.values.uOpacity, props.opacity);
@@ -295,8 +310,29 @@ export class BackgroundPass {
         );
     }
 
-    render() {
-        if (!this.isReady()) return;
+    private readonly bgColor = Vec3();
+
+    clear(props: BackgroundProps, transparentBackground: boolean, backgroundColor: Color) {
+        const { gl, state } = this.webgl;
+
+        if (this.isEnabled(props)) {
+            if (transparentBackground) {
+                state.clearColor(0, 0, 0, 0);
+            } else {
+                Color.toVec3Normalized(this.bgColor, backgroundColor);
+                state.clearColor(this.bgColor[0], this.bgColor[1], this.bgColor[2], 1);
+            }
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            state.enable(gl.BLEND);
+            state.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+        } else {
+            state.clearColor(0, 0, 0, 1);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+        }
+    }
+
+    render(props: BackgroundProps) {
+        if (!this.isEnabled(props) || !this.isReady()) return;
 
         if (this.renderable.values.dVariant.ref.value === 'image') {
             this.updateImageScaling();
@@ -449,6 +485,7 @@ const BackgroundSchema = {
     uOpacity: UniformSpec('f'),
     uSaturation: UniformSpec('f'),
     uLightness: UniformSpec('f'),
+    uRotation: UniformSpec('m3'),
     dVariant: DefineSpec('string', ['skybox', 'image', 'verticalGradient', 'horizontalGradient', 'radialGradient']),
 };
 const SkyboxShaderCode = ShaderCode('background', background_vert, background_frag, {
@@ -476,6 +513,7 @@ function getBackgroundRenderable(ctx: WebGLContext, width: number, height: numbe
         uOpacity: ValueCell.create(1),
         uSaturation: ValueCell.create(0),
         uLightness: ValueCell.create(0),
+        uRotation: ValueCell.create(Mat3.identity()),
         dVariant: ValueCell.create('skybox'),
     };
 

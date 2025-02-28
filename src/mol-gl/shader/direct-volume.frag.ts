@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017-2022 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2017-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  * @author Michael Krone <michael.krone@uni-tuebingen.de>
@@ -18,6 +18,7 @@ precision highp int;
     uniform vec3 uClipObjectPosition[dClipObjectCount];
     uniform vec4 uClipObjectRotation[dClipObjectCount];
     uniform vec3 uClipObjectScale[dClipObjectCount];
+    uniform mat4 uClipObjectTransform[dClipObjectCount];
 #endif
 #include common_clip
 
@@ -67,6 +68,10 @@ uniform int uGroupCount;
 
 uniform float uMetalness;
 uniform float uRoughness;
+uniform float uEmissive;
+
+// Density value to estimate object thickness
+uniform float uDensity;
 
 uniform bool uFog;
 uniform float uFogNear;
@@ -76,6 +81,7 @@ uniform vec3 uFogColor;
 uniform float uAlpha;
 uniform bool uTransparentBackground;
 uniform float uXrayEdgeFalloff;
+uniform float uCelSteps;
 uniform float uExposure;
 
 uniform int uRenderMask;
@@ -117,6 +123,7 @@ uniform mat4 uCartnToUnit;
 #endif
 
 #ifdef dUsePalette
+    uniform vec2 uPaletteDomain;
     uniform sampler2D tPalette;
 #endif
 
@@ -162,7 +169,7 @@ vec3 v3m4(vec3 p, mat4 m) {
 float preFogAlphaBlended = 0.0;
 
 vec4 raymarch(vec3 startLoc, vec3 step, vec3 rayDir) {
-    mat3 normalMatrix = transpose3(inverse3(mat3(uModelView * vTransform)));
+    mat3 normalMatrix = adjoint(uModelView * vTransform);
     mat4 cartnToUnit = uCartnToUnit * inverse4(vTransform);
     #if defined(dClipVariant_pixel) && dClipObjectCount != 0
         mat4 modelTransform = uModel * vTransform * uTransform;
@@ -190,6 +197,7 @@ vec4 raymarch(vec3 startLoc, vec3 step, vec3 rayDir) {
     vec4 overpaint;
     float metalness = uMetalness;
     float roughness = uRoughness;
+    float emissive = uEmissive;
 
     vec3 gradient = vec3(1.0);
     vec3 dx = vec3(gradOffset * scaleVol.x, 0.0, 0.0);
@@ -234,7 +242,7 @@ vec4 raymarch(vec3 startLoc, vec3 step, vec3 rayDir) {
 
         #if defined(dClipVariant_pixel) && dClipObjectCount != 0
             vec3 vModelPosition = v3m4(unitPos * uGridDim, modelTransform);
-            if (clipTest(vec4(vModelPosition, 0.0))) {
+            if (clipTest(modelPosition)) {
                 prevValue = value;
                 pos += step;
                 continue;
@@ -265,7 +273,8 @@ vec4 raymarch(vec3 startLoc, vec3 step, vec3 rayDir) {
         #endif
 
         #if defined(dColorType_direct) && defined(dUsePalette)
-            material.rgb = texture2D(tPalette, vec2(value, 0.0)).rgb;
+            float paletteValue = (value - uPaletteDomain[0]) / (uPaletteDomain[1] - uPaletteDomain[0]);
+            material.rgb = texture2D(tPalette, vec2(clamp(paletteValue, 0.0, 1.0), 0.0)).rgb;
         #elif defined(dColorType_uniform)
             material.rgb = uColor;
         #elif defined(dColorType_instance)
@@ -290,7 +299,7 @@ vec4 raymarch(vec3 startLoc, vec3 step, vec3 rayDir) {
             material.rgb = mix(material.rgb, overpaint.rgb, overpaint.a);
         #endif
 
-        #ifdef dIgnoreLight
+        #if defined(dIgnoreLight)
             gl_FragColor.rgb = material.rgb;
         #else
             if (material.a >= 0.01) {
@@ -326,7 +335,7 @@ vec4 raymarch(vec3 startLoc, vec3 step, vec3 rayDir) {
 
         src = gl_FragColor;
 
-        if (!uTransparentBackground) {
+        if (!uTransparentBackground || !uFog) {
             // done in 'apply_fog' otherwise
             src.rgb *= src.a;
         }
@@ -346,19 +355,23 @@ vec4 raymarch(vec3 startLoc, vec3 step, vec3 rayDir) {
 // TODO: support clipping exclusion texture support
 
 void main() {
-    if (gl_FrontFacing)
+    #if defined(dRenderVariant_tracing) || defined(dRenderVariant_emissive)
         discard;
+    #else
+        if (gl_FrontFacing)
+            discard;
 
-    vec3 rayDir = mix(normalize(vOrigPos - uCameraPosition), uCameraDir, uIsOrtho);
-    vec3 step = rayDir * uStepScale;
+        vec3 rayDir = mix(normalize(vOrigPos - uCameraPosition), uCameraDir, uIsOrtho);
+        vec3 step = rayDir * uStepScale;
 
-    float boundingSphereNear = distance(vBoundingSphere.xyz, uCameraPosition) - vBoundingSphere.w;
-    float d = max(uNear, boundingSphereNear) - mix(0.0, distance(vOrigPos, uCameraPosition), uIsOrtho);
-    vec3 start = mix(uCameraPosition, vOrigPos, uIsOrtho) + (d * rayDir);
-    gl_FragColor = raymarch(start, step, rayDir);
+        float boundingSphereNear = distance(vBoundingSphere.xyz, uCameraPosition) - vBoundingSphere.w;
+        float d = max(uNear, boundingSphereNear) - mix(0.0, distance(vOrigPos, uCameraPosition), uIsOrtho);
+        vec3 start = mix(uCameraPosition, vOrigPos, uIsOrtho) + (d * rayDir);
+        gl_FragColor = raymarch(start, step, rayDir);
 
-    float fragmentDepth = calcDepth((uModelView * vec4(start, 1.0)).xyz);
-    float preFogAlpha = clamp(preFogAlphaBlended, 0.0, 1.0);
-    #include wboit_write
+        float fragmentDepth = calcDepth((uModelView * vec4(start, 1.0)).xyz);
+        float preFogAlpha = clamp(preFogAlphaBlended, 0.0, 1.0);
+        #include wboit_write
+    #endif
 }
 `;

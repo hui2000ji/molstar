@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2022 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
@@ -40,7 +40,7 @@ export const PdbDownloadProvider = {
         encoding: PD.Select('bcif', PD.arrayToOptions(['cif', 'bcif'] as const)),
     }, { label: 'RCSB PDB', isFlat: true }),
     'pdbe': PD.Group({
-        variant: PD.Select('updated-bcif', [['updated-bcif', 'Updated (bcif)'], ['updated', 'Updated'], ['archival', 'Archival']] as ['updated' | 'updtaed-bcif' | 'archival', string][]),
+        variant: PD.Select('updated-bcif', [['updated-bcif', 'Updated (bcif)'], ['updated', 'Updated'], ['archival', 'Archival']] as ['updated' | 'updated-bcif' | 'archival', string][]),
     }, { label: 'PDBe', isFlat: true }),
     'pdbj': PD.EmptyGroup({ label: 'PDBj' }),
 };
@@ -63,19 +63,22 @@ const DownloadStructure = StateAction.build({
                     }, { pivot: 'id' }),
                     options
                 }, { isFlat: true, label: 'PDB' }),
-                'pdb-dev': PD.Group({
+                'pdb-ihm': PD.Group({
                     provider: PD.Group({
-                        id: PD.Text('PDBDEV_00000001', { label: 'PDB-Dev Id(s)', description: 'One or more comma/space separated ids.' }),
+                        id: PD.Text('8zzc', { label: 'PDB-IHM Id(s)', description: 'One or more comma/space separated ids.' }),
                         encoding: PD.Select('bcif', PD.arrayToOptions(['cif', 'bcif'] as const)),
                     }, { pivot: 'id' }),
                     options
-                }, { isFlat: true, label: 'PDB-Dev' }),
+                }, { isFlat: true, label: 'PDB-IHM' }),
                 'swissmodel': PD.Group({
                     id: PD.Text('Q9Y2I8', { label: 'UniProtKB AC(s)', description: 'One or more comma/space separated ACs.' }),
                     options
                 }, { isFlat: true, label: 'SWISS-MODEL', description: 'Loads the best homology model or experimental structure' }),
                 'alphafolddb': PD.Group({
-                    id: PD.Text('Q8W3K0', { label: 'UniProtKB AC(s)', description: 'One or more comma/space separated ACs.' }),
+                    provider: PD.Group({
+                        id: PD.Text('Q8W3K0', { label: 'UniProtKB AC(s)', description: 'One or more comma/space separated ACs.' }),
+                        encoding: PD.Select('bcif', PD.arrayToOptions(['cif', 'bcif'] as const)),
+                    }, { pivot: 'id' }),
                     options
                 }, { isFlat: true, label: 'AlphaFold DB', description: 'Loads the predicted model if available' }),
                 'modelarchive': PD.Group({
@@ -101,7 +104,8 @@ const DownloadStructure = StateAction.build({
 
     const src = params.source;
     let downloadParams: StateTransformer.Params<Download>[];
-    let asTrajectory = false, format: BuiltInTrajectoryFormat | 'auto' = 'mmcif';
+    let asTrajectory = false;
+    let format: BuiltInTrajectoryFormat = 'mmcif';
 
     switch (src.name) {
         case 'url':
@@ -120,15 +124,22 @@ const DownloadStructure = StateAction.build({
             );
             asTrajectory = !!src.params.options.asTrajectory;
             break;
-        case 'pdb-dev':
+        case 'pdb-ihm':
+            const map = (id: string) => id.startsWith('PDBDEV_') ? id : `PDBDEV_${id.padStart(8, '0')}`;
             downloadParams = await getDownloadParams(src.params.provider.id,
                 id => {
-                    const nId = id.toUpperCase().startsWith('PDBDEV_') ? id : `PDBDEV_${id.padStart(8, '0')}`;
+                    // 4 character PDB id, TODO: support extended PDB ID
+                    if (id.match(/^[1-9][A-Z0-9]{3}$/i) !== null) {
+                        return src.params.provider.encoding === 'bcif'
+                            ? `https://pdb-ihm.org/bcif/${id.toLowerCase()}.bcif`
+                            : `https://pdb-ihm.org/cif/${id.toLowerCase()}.cif`;
+                    }
+                    const nId = map(id.toUpperCase());
                     return src.params.provider.encoding === 'bcif'
-                        ? `https://pdb-dev.wwpdb.org/bcif/${nId.toUpperCase()}.bcif`
-                        : `https://pdb-dev.wwpdb.org/cif/${nId.toUpperCase()}.cif`;
+                        ? `https://pdb-ihm.org/bcif/${nId}.bcif`
+                        : `https://pdb-ihm.org/cif/${nId}.cif`;
                 },
-                id => id.toUpperCase().startsWith('PDBDEV_') ? id : `PDBDEV_${id.padStart(8, '0')}`,
+                id => { const nId = id.toUpperCase(); return nId.match(/^[1-9][A-Z0-9]{3}$/) ? `PDB-IHM: ${nId}` : map(nId); },
                 src.params.provider.encoding === 'bcif'
             );
             asTrajectory = !!src.params.options.asTrajectory;
@@ -139,12 +150,19 @@ const DownloadStructure = StateAction.build({
             format = 'pdb';
             break;
         case 'alphafolddb':
-            downloadParams = await getDownloadParams(src.params.id, async id => {
-                const url = `https://www.alphafold.ebi.ac.uk/api/prediction/${id.toUpperCase()}`;
-                const info = await plugin.runTask(plugin.fetch({ url, type: 'json' }));
-                if (Array.isArray(info) && info.length > 0) return info[0].cifUrl;
-                throw new Error(`No AlphaFold DB entry for '${id}'`);
-            }, id => `AlphaFold DB: ${id}`, false);
+            downloadParams = await getDownloadParams(src.params.provider.id,
+                async id => {
+                    const url = `https://www.alphafold.ebi.ac.uk/api/prediction/${id.toUpperCase()}`;
+                    const info = await plugin.runTask(plugin.fetch({ url, type: 'json' }));
+                    if (Array.isArray(info) && info.length > 0) {
+                        const prop = src.params.provider.encoding === 'bcif' ? 'bcifUrl' : 'cifUrl';
+                        return info[0][prop];
+                    }
+                    throw new Error(`No AlphaFold DB entry for '${id}'`);
+                },
+                id => `AlphaFold DB: ${id}`,
+                src.params.provider.encoding === 'bcif'
+            );
             asTrajectory = !!src.params.options.asTrajectory;
             format = 'mmcif';
             break;
@@ -165,14 +183,13 @@ const DownloadStructure = StateAction.build({
     const showUnitcell = representationPreset !== PresetStructureRepresentations.empty.id;
 
     const structure = src.params.options.type.name === 'auto' ? void 0 : src.params.options.type;
-
     await state.transaction(async () => {
         if (downloadParams.length > 0 && asTrajectory) {
             const blob = await plugin.builders.data.downloadBlob({
                 sources: downloadParams.map((src, i) => ({ id: '' + i, url: src.url, isBinary: src.isBinary })),
                 maxConcurrency: 6
             }, { state: { isGhost: true } });
-            const trajectory = await plugin.builders.structure.parseTrajectory(blob, { formats: downloadParams.map((_, i) => ({ id: '' + i, format: 'cif' as 'cif' })) });
+            const trajectory = await plugin.builders.structure.parseTrajectory(blob, { formats: downloadParams.map((_, i) => ({ id: '' + i, format: 'cif' as const })) });
 
             await plugin.builders.structure.hierarchy.applyPreset(trajectory, 'default', {
                 structure,
@@ -183,9 +200,7 @@ const DownloadStructure = StateAction.build({
         } else {
             for (const download of downloadParams) {
                 const data = await plugin.builders.data.download(download, { state: { isGhost: true } });
-                const provider = format === 'auto'
-                    ? plugin.dataFormats.auto(getFileNameInfo(Asset.getUrl(download.url)), data.cell?.obj!)
-                    : plugin.dataFormats.get(format);
+                const provider = plugin.dataFormats.get(format);
                 if (!provider) throw new Error('unknown file format');
                 const trajectory = await plugin.builders.structure.parseTrajectory(data, provider);
 
@@ -220,7 +235,7 @@ async function getPdbeDownloadParams(src: ReturnType<DownloadStructure['createDe
 
 async function getPdbjDownloadParams(src: ReturnType<DownloadStructure['createDefaultParams']>['source']) {
     if (src.name !== 'pdb' || src.params.provider.server.name !== 'pdbj') throw new Error('expected pdbj');
-    return getDownloadParams(src.params.provider.id, id => `https://data.pdbjbk1.pdbj.org/pub/pdb/data/structures/divided/mmCIF/${id.toLowerCase().substring(1, 3)}/${id.toLowerCase()}.cif`, id => `PDBj: ${id} (cif)`, false);
+    return getDownloadParams(src.params.provider.id, id => `https://data.pdbjlc1.pdbj.org/pub/pdb/data/structures/divided/mmCIF/${id.toLowerCase().substring(1, 3)}/${id.toLowerCase()}.cif`, id => `PDBj: ${id} (cif)`, false);
 }
 
 async function getRcsbDownloadParams(src: ReturnType<DownloadStructure['createDefaultParams']>['source']) {

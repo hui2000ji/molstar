@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  * @author David Sehnal <david.sehnal@gmail.com>
@@ -28,6 +28,7 @@ import { RenderableState } from '../../../mol-gl/renderable';
 import { arraySetAdd } from '../../../mol-util/array';
 import { degToRad } from '../../../mol-math/misc';
 import { createEmptySubstance } from '../substance-data';
+import { createEmptyEmissive } from '../emissive-data';
 
 export interface Mesh {
     readonly kind: 'mesh',
@@ -627,8 +628,9 @@ export namespace Mesh {
         flipSided: PD.Boolean(false, BaseGeometry.ShadingCategory),
         flatShaded: PD.Boolean(false, BaseGeometry.ShadingCategory),
         ignoreLight: PD.Boolean(false, BaseGeometry.ShadingCategory),
+        celShaded: PD.Boolean(false, BaseGeometry.ShadingCategory),
         xrayShaded: PD.Select<boolean | 'inverted'>(false, [[false, 'Off'], [true, 'On'], ['inverted', 'Inverted']], BaseGeometry.ShadingCategory),
-        transparentBackfaces: PD.Select('off', PD.arrayToOptions(['off', 'on', 'opaque']), BaseGeometry.ShadingCategory),
+        transparentBackfaces: PD.Select('off', PD.arrayToOptions(['off', 'on', 'opaque'] as const), BaseGeometry.ShadingCategory),
         bumpFrequency: PD.Numeric(0, { min: 0, max: 10, step: 0.1 }, BaseGeometry.ShadingCategory),
         bumpAmplitude: PD.Numeric(1, { min: 0, max: 5, step: 0.1 }, BaseGeometry.ShadingCategory),
     };
@@ -651,13 +653,17 @@ export namespace Mesh {
         const instanceCount = transform.instanceCount.ref.value;
         const location = PositionLocation();
         const p = location.position;
-        const v = mesh.vertexBuffer.ref.value;
+        const n = location.normal;
+        const vs = mesh.vertexBuffer.ref.value;
+        const ns = mesh.normalBuffer.ref.value;
         const m = transform.aTransform.ref.value;
         const getLocation = (groupIndex: number, instanceIndex: number) => {
             if (instanceIndex < 0) {
-                Vec3.fromArray(p, v, groupIndex * 3);
+                Vec3.fromArray(p, vs, groupIndex * 3);
+                Vec3.fromArray(n, ns, groupIndex * 3);
             } else {
-                Vec3.transformMat4Offset(p, v, m, 0, groupIndex * 3, instanceIndex * 16);
+                Vec3.transformMat4Offset(p, vs, m, 0, groupIndex * 3, instanceIndex * 16);
+                Vec3.transformDirectionOffset(n, ns, m, 0, groupIndex * 3, instanceIndex * 16);
             }
             return location;
         };
@@ -674,6 +680,7 @@ export namespace Mesh {
             : createMarkers(instanceCount * groupCount, 'groupInstance');
         const overpaint = createEmptyOverpaint();
         const transparency = createEmptyTransparency();
+        const emissive = createEmptyEmissive();
         const material = createEmptySubstance();
         const clipping = createEmptyClipping();
 
@@ -697,6 +704,7 @@ export namespace Mesh {
             ...marker,
             ...overpaint,
             ...transparency,
+            ...emissive,
             ...material,
             ...clipping,
             ...transform,
@@ -706,6 +714,7 @@ export namespace Mesh {
             dFlatShaded: ValueCell.create(props.flatShaded),
             dFlipSided: ValueCell.create(props.flipSided),
             dIgnoreLight: ValueCell.create(props.ignoreLight),
+            dCelShaded: ValueCell.create(props.celShaded),
             dXrayShaded: ValueCell.create(props.xrayShaded === 'inverted' ? 'inverted' : props.xrayShaded === true ? 'on' : 'off'),
             dTransparentBackfaces: ValueCell.create(props.transparentBackfaces),
             uBumpFrequency: ValueCell.create(props.bumpFrequency),
@@ -727,6 +736,7 @@ export namespace Mesh {
         ValueCell.updateIfChanged(values.dFlatShaded, props.flatShaded);
         ValueCell.updateIfChanged(values.dFlipSided, props.flipSided);
         ValueCell.updateIfChanged(values.dIgnoreLight, props.ignoreLight);
+        ValueCell.updateIfChanged(values.dCelShaded, props.celShaded);
         ValueCell.updateIfChanged(values.dXrayShaded, props.xrayShaded === 'inverted' ? 'inverted' : props.xrayShaded === true ? 'on' : 'off');
         ValueCell.updateIfChanged(values.dTransparentBackfaces, props.transparentBackfaces);
         ValueCell.updateIfChanged(values.uBumpFrequency, props.bumpFrequency);

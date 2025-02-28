@@ -1,13 +1,14 @@
 /**
- * Copyright (c) 2019-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2019-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
 
 import { Canvas3DProps } from '../../mol-canvas3d/canvas3d';
 import { BuiltInTrajectoryFormat } from '../../mol-plugin-state/formats/trajectory';
-import { createPluginUI } from '../../mol-plugin-ui/react18';
+import { createPluginUI } from '../../mol-plugin-ui';
 import { PluginUIContext } from '../../mol-plugin-ui/context';
+import { renderReact18 } from '../../mol-plugin-ui/react18';
 import { DefaultPluginUISpec } from '../../mol-plugin-ui/spec';
 import { PluginCommands } from '../../mol-plugin/commands';
 import { Asset } from '../../mol-util/assets';
@@ -32,8 +33,10 @@ const Canvas3DPresets = {
                         radius: 5,
                         bias: 0.8,
                         blurKernelSize: 15,
+                        blurDepthBias: 0.5,
                         resolutionScale: 1,
                         color: Color(0x000000),
+                        transparentThreshold: 0.4,
                     }
                 },
                 outline: {
@@ -113,16 +116,20 @@ class LightingDemo {
     private preset: Canvas3DPreset = 'illustrative';
 
     async init(target: string | HTMLElement) {
-        this.plugin = await createPluginUI(typeof target === 'string' ? document.getElementById(target)! : target, {
-            ...DefaultPluginUISpec(),
-            layout: {
-                initial: {
-                    isExpanded: false,
-                    showControls: false
+        this.plugin = await createPluginUI({
+            target: typeof target === 'string' ? document.getElementById(target)! : target,
+            render: renderReact18,
+            spec: {
+                ...DefaultPluginUISpec(),
+                layout: {
+                    initial: {
+                        isExpanded: false,
+                        showControls: false
+                    },
                 },
-            },
-            components: {
-                controls: { left: 'none', right: 'none', top: 'none', bottom: 'none' }
+                components: {
+                    controls: { left: 'none', right: 'none', top: 'none', bottom: 'none' }
+                }
             }
         });
 

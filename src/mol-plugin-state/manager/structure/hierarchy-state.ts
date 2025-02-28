@@ -1,7 +1,8 @@
 /**
- * Copyright (c) 2020 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2020-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
+ * @author Cai Huiyu <szmun.caihy@gmail.com>
  */
 
 import { PluginStateObject as SO } from '../../objects';
@@ -270,18 +271,15 @@ const Mapping: [TestCell, ApplyRef, LeaveRef][] = [
     }, (state, cell) => {
         if (state.currentStructure) {
             if (state.currentComponent) {
-                if (!state.parentComponents) {
-                    state.parentComponents = [];
-                }
+                if (!state.parentComponents) state.parentComponents = [];
                 state.parentComponents.push(state.currentComponent);
             }
-            state.currentComponent = createOrUpdateRefList(state, cell, state.currentStructure.components, StructureComponentRef, cell, state.currentStructure, state.currentComponent);
+            state.currentComponent = createOrUpdateRefList(state, cell, state.currentStructure.components, StructureComponentRef, cell, state.currentStructure);
         }
     }, state => {
         if (state.parentComponents && state.parentComponents.length > 0) {
             state.currentComponent = state.parentComponents.pop();
-        }
-        state.currentComponent = void 0;
+        } else state.currentComponent = void 0;
     }],
 
     // Component Representation

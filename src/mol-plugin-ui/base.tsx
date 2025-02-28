@@ -80,7 +80,7 @@ export type CollapsableState = {
 }
 
 export abstract class CollapsableControls<P = {}, S = {}, SS = {}> extends PluginUIComponent<P & CollapsableProps, S & CollapsableState, SS> {
-    toggleCollapsed = () => {
+    toggleCollapsed() {
         this.setState({ isCollapsed: !this.state.isCollapsed } as (S & CollapsableState));
     };
 
@@ -95,14 +95,14 @@ export abstract class CollapsableControls<P = {}, S = {}, SS = {}> extends Plugi
 
     render() {
         if (this.state.isHidden) return null;
-
+        const divid = this.state.header.toLowerCase().replace(/\s/g, '');
         const wrapClass = this.state.isCollapsed
             ? 'msp-transform-wrapper msp-transform-wrapper-collapsed'
             : 'msp-transform-wrapper';
 
         return <div className={wrapClass}>
-            <div className='msp-transform-header'>
-                <Button icon={this.state.brand ? void 0 : this.state.isCollapsed ? ArrowRightSvg : ArrowDropDownSvg} noOverflow onClick={this.toggleCollapsed}
+            <div id={divid} className='msp-transform-header'>
+                <Button icon={this.state.brand ? void 0 : this.state.isCollapsed ? ArrowRightSvg : ArrowDropDownSvg} noOverflow onClick={() => this.toggleCollapsed()}
                     className={this.state.brand ? `msp-transform-header-brand msp-transform-header-brand-${this.state.brand.accent}` : void 0} title={`Click to ${this.state.isCollapsed ? 'expand' : 'collapse'}`}>
                     {/* {this.state.brand && <div className={`msp-accent-bg-${this.state.brand.accent}`}>{this.state.brand.svg ? <Icon svg={this.state.brand.svg} /> : this.state.brand.name}</div>} */}
                     <Icon svg={this.state.brand?.svg} inline />

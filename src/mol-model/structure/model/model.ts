@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2017-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
@@ -15,7 +15,7 @@ import { SaccharideComponentMap } from '../structure/carbohydrates/constants';
 import { ModelFormat } from '../../../mol-model-formats/format';
 import { calcModelCenter, getAsymIdCount } from './util';
 import { Vec3 } from '../../../mol-math/linear-algebra';
-import { Coordinates } from '../coordinates';
+import { Coordinates, Frame } from '../coordinates';
 import { Topology } from '../topology';
 import { Task } from '../../../mol-task';
 import { IndexPairBonds } from '../../../mol-model-formats/structure/property/bonds/index-pair';
@@ -96,9 +96,7 @@ export namespace Model {
         const trajectory: Model[] = [];
         const { frames } = coordinates;
 
-        const srcIndex = model.atomicHierarchy.atomSourceIndex;
-        const isIdentity = Column.isIdentity(srcIndex);
-        const srcIndexArray = isIdentity ? void 0 : srcIndex.toArray({ array: Int32Array });
+        const srcIndexArray = getSourceIndexArray(model);
         const coarseGrained = isCoarseGrained(model);
         const elementCount = model.atomicHierarchy.atoms._rowCount;
 
@@ -112,11 +110,7 @@ export namespace Model {
                 ...model,
                 id: UUID.create22(),
                 modelNum: i,
-                atomicConformation: Coordinates.getAtomicConformation(f, {
-                    atomId: model.atomicConformation.atomId,
-                    occupancy: model.atomicConformation.occupancy,
-                    B_iso_or_equiv: model.atomicConformation.B_iso_or_equiv
-                }, srcIndexArray),
+                atomicConformation: getAtomicConformationFromFrame(model, f),
                 // TODO: add support for supplying sphere and gaussian coordinates in addition to atomic coordinates?
                 // coarseConformation: coarse.conformation,
                 customProperties: new CustomProperties(),
@@ -135,6 +129,18 @@ export namespace Model {
             trajectory.push(m);
         }
         return { trajectory, srcIndexArray };
+    }
+
+    function getSourceIndexArray(model: Model): ArrayLike<number> | undefined {
+        const srcIndex = model.atomicHierarchy.atomSourceIndex;
+        let srcIndexArray: ArrayLike<number> | undefined = undefined;
+        if ('__srcIndexArray__' in model._staticPropertyData) {
+            srcIndexArray = model._dynamicPropertyData.__srcIndexArray__;
+        } else {
+            srcIndexArray = Column.isIdentity(srcIndex) ? void 0 : srcIndex.toArray({ array: Int32Array });
+            model._dynamicPropertyData.__srcIndexArray__ = srcIndexArray;
+        }
+        return srcIndexArray;
     }
 
     export function trajectoryFromModelAndCoordinates(model: Model, coordinates: Coordinates): Trajectory {
@@ -160,6 +166,14 @@ export namespace Model {
             }
             return new ArrayTrajectory(trajectory);
         });
+    }
+
+    export function getAtomicConformationFromFrame(model: Model, frame: Frame) {
+        return Coordinates.getAtomicConformation(frame, {
+            atomId: model.atomicConformation.atomId,
+            occupancy: model.atomicConformation.occupancy,
+            B_iso_or_equiv: model.atomicConformation.B_iso_or_equiv
+        }, getSourceIndexArray(model));
     }
 
     const CenterProp = '__Center__';
@@ -251,16 +265,22 @@ export namespace Model {
         }
     };
     /**
-     * Has typical coarse grained atom names (BB, SC1) or less than three times as many
-     * atoms as polymer residues (C-alpha only models).
+     * Mark as coarse grained if any of the following conditions are met:
+     * - has typical coarse grained atom names (BB, SC1)
+     * - has less than three times as many atoms as polymer residues (C-alpha only models)
+     * - has no standard sidechain atoms
      */
     export function isCoarseGrained(model: Model): boolean {
         let coarseGrained = CoarseGrained.get(model);
         if (coarseGrained === undefined) {
             let polymerResidueCount = 0;
-            const { polymerType } = model.atomicHierarchy.derived.residue;
+            let polymerDirectionCount = 0;
+            const { polymerType, directionToElementIndex } = model.atomicHierarchy.derived.residue;
             for (let i = 0; i < polymerType.length; ++i) {
-                if (polymerType[i] !== PolymerType.NA) polymerResidueCount += 1;
+                if (polymerType[i] !== PolymerType.NA) {
+                    polymerResidueCount += 1;
+                    if (directionToElementIndex[i] !== -1) polymerDirectionCount += 1;
+                }
             }
 
             // check for coarse grained atom names
@@ -273,11 +293,16 @@ export namespace Model {
                 if (hasBB && hasSC1) break;
             }
 
-            coarseGrained = (hasBB && hasSC1) || (
-                polymerResidueCount && atomCount
-                    ? atomCount / polymerResidueCount < 3
-                    : false
-            );
+            coarseGrained = false;
+            if (atomCount > 0 && polymerResidueCount > 0) {
+                if (hasBB && hasSC1) {
+                    coarseGrained = true;
+                } else if (atomCount / polymerResidueCount < 3) {
+                    coarseGrained = true;
+                } else if (polymerDirectionCount === 0) {
+                    coarseGrained = true;
+                }
+            }
             CoarseGrained.set(model, coarseGrained);
         }
         return coarseGrained;
@@ -374,6 +399,33 @@ export namespace Model {
         for (let i = 0; i < db.exptl.method.rowCount; i++) {
             const v = db.exptl.method.value(i).toUpperCase();
             if (v.indexOf('NMR') >= 0) return true;
+        }
+        return false;
+    }
+
+    export function isExperimental(model: Model): boolean {
+        if (!MmcifFormat.is(model.sourceData)) return false;
+        const { db } = model.sourceData.data;
+        for (let i = 0; i < db.struct.pdbx_structure_determination_methodology.rowCount; i++) {
+            if (db.struct.pdbx_structure_determination_methodology.value(i).toLowerCase() === 'experimental') return true;
+        }
+        return false;
+    }
+
+    export function isIntegrative(model: Model): boolean {
+        if (!MmcifFormat.is(model.sourceData)) return false;
+        const { db } = model.sourceData.data;
+        for (let i = 0; i < db.struct.pdbx_structure_determination_methodology.rowCount; i++) {
+            if (db.struct.pdbx_structure_determination_methodology.value(i).toLowerCase() === 'integrative') return true;
+        }
+        return false;
+    }
+
+    export function isComputational(model: Model): boolean {
+        if (!MmcifFormat.is(model.sourceData)) return false;
+        const { db } = model.sourceData.data;
+        for (let i = 0; i < db.struct.pdbx_structure_determination_methodology.rowCount; i++) {
+            if (db.struct.pdbx_structure_determination_methodology.value(i).toLowerCase() === 'computational') return true;
         }
         return false;
     }

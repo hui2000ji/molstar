@@ -52,11 +52,11 @@ export class VolumeApiV2 {
     }
 
     public async getEntryList(maxEntries: number, keyword?: string): Promise<{ [source: string]: string[] }> {
-        try {
-            const response = await fetch(this.entryListUrl(maxEntries, keyword));
+        const response = await fetch(this.entryListUrl(maxEntries, keyword));
+        if (response.ok) {
             return await response.json();
-        } catch (e) {
-            console.error(e);
+        } else {
+            console.error('Failed to fetch "Volume & Segmentation" entry list');
             return {};
         }
     }

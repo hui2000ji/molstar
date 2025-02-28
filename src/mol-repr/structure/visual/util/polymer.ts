@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  * @author David Sehnal <david.sehnal@gmail.com>
@@ -41,7 +41,7 @@ export function getGapRanges(unit: Unit): SortedRanges<ElementIndex> {
 }
 
 export namespace PolymerLocationIterator {
-    export function fromGroup(structureGroup: StructureGroup, asSecondary = false): LocationIterator {
+    export function fromGroup(structureGroup: StructureGroup, options?: { asSecondary?: boolean }): LocationIterator {
         const { group, structure } = structureGroup;
         const polymerElements = group.units[0].polymerElements;
         const groupCount = polymerElements.length;
@@ -53,6 +53,7 @@ export namespace PolymerLocationIterator {
             location.element = polymerElements[groupIndex];
             return location;
         };
+        const asSecondary = !!options?.asSecondary;
         function isSecondary(elementIndex: number, instanceIndex: number) {
             return asSecondary;
         }
@@ -61,7 +62,7 @@ export namespace PolymerLocationIterator {
 }
 
 export namespace PolymerGapLocationIterator {
-    export function fromGroup(structureGroup: StructureGroup): LocationIterator {
+    export function fromGroup(structureGroup: StructureGroup, options?: { asSecondary?: boolean }): LocationIterator {
         const { group, structure } = structureGroup;
         const gapElements = group.units[0].gapElements;
         const groupCount = gapElements.length;
@@ -73,7 +74,11 @@ export namespace PolymerGapLocationIterator {
             location.element = gapElements[groupIndex];
             return location;
         };
-        return LocationIterator(groupCount, instanceCount, 1, getLocation);
+        const asSecondary = !!options?.asSecondary;
+        function isSecondary(elementIndex: number, instanceIndex: number) {
+            return asSecondary;
+        }
+        return LocationIterator(groupCount, instanceCount, 1, getLocation, false, isSecondary);
     }
 }
 
@@ -253,6 +258,10 @@ export function eachPolymerGapElement(loci: Loci, structureGroup: StructureGroup
                     const idx = OrderedSet.indexOf(e.unit.gapElements, e.unit.elements[v]);
                     if (idx !== -1) {
                         if (apply(Interval.ofSingleton(unitIdx * groupCount + idx))) changed = true;
+                        // need to check the next element in case of consecutive gaps
+                        if (OrderedSet.getAt(e.unit.gapElements, idx + 1) === e.unit.elements[v]) {
+                            if (apply(Interval.ofSingleton(unitIdx * groupCount + idx + 1))) changed = true;
+                        }
                     }
                 });
             }

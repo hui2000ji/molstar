@@ -3,6 +3,8 @@
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
+ * @author Christian Dominguez <christian.99dominguez@gmail.com>
+ * @author Ventura Rivera <venturaxrivera@gmail.com>
  */
 
 import { List } from 'immutable';
@@ -10,7 +12,7 @@ import * as React from 'react';
 import { formatTime } from '../mol-util';
 import { LogEntry } from '../mol-util/log-entry';
 import { PluginReactContext, PluginUIComponent } from './base';
-import { AnimationViewportControls, DefaultStructureTools, LociLabels, StateSnapshotViewportControls, TrajectoryViewportControls, SelectionViewportControls } from './controls';
+import { AnimationViewportControls, DefaultStructureTools, LociLabels, StateSnapshotViewportControls, TrajectoryViewportControls, SelectionViewportControls, ViewportSnapshotDescription } from './controls';
 import { LeftPanelControls } from './left-panel';
 import { SequenceView } from './sequence';
 import { BackgroundTaskProgress, OverlayTaskProgress } from './task';
@@ -82,7 +84,7 @@ class Layout extends PluginUIComponent {
         this.subscribe(this.plugin.layout.events.updated, () => this.forceUpdate());
     }
 
-    region(kind: RegionKind, Element?: React.ComponentClass) {
+    region(kind: RegionKind, Element?: React.ComponentClass | React.FC) {
         return <div className={`msp-layout-region msp-layout-${kind}`}>
             <div className='msp-layout-static'>
                 {Element ? <Element /> : null}
@@ -168,18 +170,38 @@ class Layout extends PluginUIComponent {
     };
 
     private showDragOverlay = new BehaviorSubject(false);
-    onDragEnter = () => this.showDragOverlay.next(true);
+    onDragEnter = (ev: React.DragEvent<HTMLDivElement>) => {
+        let hasFile = false;
+        if (ev.dataTransfer.items && ev.dataTransfer.items.length > 0) {
+            for (let i = 0; i < ev.dataTransfer.items.length; i++) {
+                if (ev.dataTransfer.items[i].kind !== 'file') continue;
+                hasFile = true;
+                break;
+            }
+        } else {
+            for (let i = 0; i < ev.dataTransfer.types.length; i++) {
+                if (ev.dataTransfer.types[i] !== 'Files') continue;
+                hasFile = true;
+                break;
+            }
+        }
+
+        if (hasFile) {
+            this.showDragOverlay.next(true);
+        }
+    };
 
     render() {
         const layout = this.plugin.layout.state;
         const controls = this.plugin.spec.components?.controls || {};
         const viewport = this.plugin.spec.components?.viewport?.view || DefaultViewport;
+        const sequenceView = this.plugin.spec.components?.sequenceViewer?.view || SequenceView;
 
         return <div className='msp-plugin'>
             <div className={this.layoutClassName} onDragEnter={this.onDragEnter}>
                 <div className={this.layoutVisibilityClassName}>
                     {this.region('main', viewport)}
-                    {layout.showControls && controls.top !== 'none' && this.region('top', controls.top || SequenceView)}
+                    {layout.showControls && controls.top !== 'none' && this.region('top', controls.top || sequenceView)}
                     {layout.showControls && controls.left !== 'none' && this.region('left', controls.left || LeftPanelControls)}
                     {layout.showControls && controls.right !== 'none' && this.region('right', controls.right || ControlsWrapper)}
                     {layout.showControls && controls.bottom !== 'none' && this.region('bottom', controls.bottom || Log)}
@@ -247,6 +269,8 @@ export class ControlsWrapper extends PluginUIComponent {
 export class DefaultViewport extends PluginUIComponent {
     render() {
         const VPControls = this.plugin.spec.components?.viewport?.controls || ViewportControls;
+        const SVPControls = this.plugin.spec.components?.selectionTools?.controls || SelectionViewportControls;
+        const SnapshotDescription = this.plugin.spec.components?.viewport?.snapshotDescription || ViewportSnapshotDescription;
 
         return <>
             <Viewport />
@@ -254,8 +278,9 @@ export class DefaultViewport extends PluginUIComponent {
                 <AnimationViewportControls />
                 <TrajectoryViewportControls />
                 <StateSnapshotViewportControls />
+                <SnapshotDescription />
             </div>
-            <SelectionViewportControls />
+            <SVPControls />
             <VPControls />
             <BackgroundTaskProgress />
             <div className='msp-highlight-toast-wrapper'>

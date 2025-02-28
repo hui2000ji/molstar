@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
@@ -28,6 +28,7 @@ import { createTransferFunctionTexture, getControlPointsFromVec2Array } from './
 import { createEmptyClipping } from '../clipping-data';
 import { Grid } from '../../../mol-model/volume';
 import { createEmptySubstance } from '../substance-data';
+import { createEmptyEmissive } from '../emissive-data';
 
 const VolumeBox = Box();
 
@@ -48,6 +49,7 @@ export interface DirectVolume {
     readonly cartnToUnit: ValueCell<Mat4>
     readonly packedGroup: ValueCell<boolean>
     readonly axisOrder: ValueCell<Vec3>
+    readonly dataType: ValueCell<'byte' | 'float' | 'halfFloat'>
 
     /** Bounding sphere of the volume */
     readonly boundingSphere: Sphere3D
@@ -56,10 +58,10 @@ export interface DirectVolume {
 }
 
 export namespace DirectVolume {
-    export function create(bbox: Box3D, gridDimension: Vec3, transform: Mat4, unitToCartn: Mat4, cellDim: Vec3, texture: Texture, stats: Grid['stats'], packedGroup: boolean, axisOrder: Vec3, directVolume?: DirectVolume): DirectVolume {
+    export function create(bbox: Box3D, gridDimension: Vec3, transform: Mat4, unitToCartn: Mat4, cellDim: Vec3, texture: Texture, stats: Grid['stats'], packedGroup: boolean, axisOrder: Vec3, dataType: 'byte' | 'float' | 'halfFloat', directVolume?: DirectVolume): DirectVolume {
         return directVolume ?
-            update(bbox, gridDimension, transform, unitToCartn, cellDim, texture, stats, packedGroup, axisOrder, directVolume) :
-            fromData(bbox, gridDimension, transform, unitToCartn, cellDim, texture, stats, packedGroup, axisOrder);
+            update(bbox, gridDimension, transform, unitToCartn, cellDim, texture, stats, packedGroup, axisOrder, dataType, directVolume) :
+            fromData(bbox, gridDimension, transform, unitToCartn, cellDim, texture, stats, packedGroup, axisOrder, dataType);
     }
 
     function hashCode(directVolume: DirectVolume) {
@@ -70,7 +72,7 @@ export namespace DirectVolume {
         ]);
     }
 
-    function fromData(bbox: Box3D, gridDimension: Vec3, transform: Mat4, unitToCartn: Mat4, cellDim: Vec3, texture: Texture, stats: Grid['stats'], packedGroup: boolean, axisOrder: Vec3): DirectVolume {
+    function fromData(bbox: Box3D, gridDimension: Vec3, transform: Mat4, unitToCartn: Mat4, cellDim: Vec3, texture: Texture, stats: Grid['stats'], packedGroup: boolean, axisOrder: Vec3, dataType: 'byte' | 'float' | 'halfFloat'): DirectVolume {
         const boundingSphere = Sphere3D();
         let currentHash = -1;
 
@@ -102,6 +104,7 @@ export namespace DirectVolume {
             },
             packedGroup: ValueCell.create(packedGroup),
             axisOrder: ValueCell.create(axisOrder),
+            dataType: ValueCell.create(dataType),
             setBoundingSphere(sphere: Sphere3D) {
                 Sphere3D.copy(boundingSphere, sphere);
                 currentHash = hashCode(directVolume);
@@ -110,7 +113,7 @@ export namespace DirectVolume {
         return directVolume;
     }
 
-    function update(bbox: Box3D, gridDimension: Vec3, transform: Mat4, unitToCartn: Mat4, cellDim: Vec3, texture: Texture, stats: Grid['stats'], packedGroup: boolean, axisOrder: Vec3, directVolume: DirectVolume): DirectVolume {
+    function update(bbox: Box3D, gridDimension: Vec3, transform: Mat4, unitToCartn: Mat4, cellDim: Vec3, texture: Texture, stats: Grid['stats'], packedGroup: boolean, axisOrder: Vec3, dataType: 'byte' | 'float' | 'halfFloat', directVolume: DirectVolume): DirectVolume {
         const width = texture.getWidth();
         const height = texture.getHeight();
         const depth = texture.getDepth();
@@ -128,6 +131,7 @@ export namespace DirectVolume {
         ValueCell.update(directVolume.cartnToUnit, Mat4.invert(Mat4(), unitToCartn));
         ValueCell.updateIfChanged(directVolume.packedGroup, packedGroup);
         ValueCell.updateIfChanged(directVolume.axisOrder, Vec3.fromArray(directVolume.axisOrder.ref.value, axisOrder, 0));
+        ValueCell.updateIfChanged(directVolume.dataType, dataType);
         return directVolume;
     }
 
@@ -141,12 +145,14 @@ export namespace DirectVolume {
         const stats = Grid.One.stats;
         const packedGroup = false;
         const axisOrder = Vec3.create(0, 1, 2);
-        return create(bbox, gridDimension, transform, unitToCartn, cellDim, texture, stats, packedGroup, axisOrder, directVolume);
+        const dataType = 'byte';
+        return create(bbox, gridDimension, transform, unitToCartn, cellDim, texture, stats, packedGroup, axisOrder, dataType, directVolume);
     }
 
     export const Params = {
         ...BaseGeometry.Params,
         ignoreLight: PD.Boolean(false, BaseGeometry.ShadingCategory),
+        celShaded: PD.Boolean(false, BaseGeometry.ShadingCategory),
         xrayShaded: PD.Select<boolean | 'inverted'>(false, [[false, 'Off'], [true, 'On'], ['inverted', 'Inverted']], BaseGeometry.ShadingCategory),
         controlPoints: PD.LineGraph([
             Vec2.create(0.19, 0.0), Vec2.create(0.2, 0.05), Vec2.create(0.25, 0.05), Vec2.create(0.26, 0.0),
@@ -208,7 +214,7 @@ export namespace DirectVolume {
         const { bboxSize, bboxMin, bboxMax, gridDimension, transform: gridTransform } = directVolume;
 
         const { instanceCount, groupCount } = locationIt;
-        const positionIt = Utils.createPositionIterator(directVolume, transform);
+        const positionIt = createPositionIterator(directVolume, transform);
 
         const color = createColors(locationIt, positionIt, theme.color);
         const marker = props.instanceGranularity
@@ -216,6 +222,7 @@ export namespace DirectVolume {
             : createMarkers(instanceCount * groupCount, 'groupInstance');
         const overpaint = createEmptyOverpaint();
         const transparency = createEmptyTransparency();
+        const emissive = createEmptyEmissive();
         const material = createEmptySubstance();
         const clipping = createEmptyClipping();
 
@@ -235,6 +242,7 @@ export namespace DirectVolume {
             ...marker,
             ...overpaint,
             ...transparency,
+            ...emissive,
             ...material,
             ...clipping,
             ...transform,
@@ -269,6 +277,7 @@ export namespace DirectVolume {
             dAxisOrder: ValueCell.create(directVolume.axisOrder.ref.value.join('')),
 
             dIgnoreLight: ValueCell.create(props.ignoreLight),
+            dCelShaded: ValueCell.create(props.celShaded),
             dXrayShaded: ValueCell.create(props.xrayShaded === 'inverted' ? 'inverted' : props.xrayShaded === true ? 'on' : 'off'),
         };
     }
@@ -282,6 +291,7 @@ export namespace DirectVolume {
     function updateValues(values: DirectVolumeValues, props: PD.Values<Params>) {
         BaseGeometry.updateValues(values, props);
         ValueCell.updateIfChanged(values.dIgnoreLight, props.ignoreLight);
+        ValueCell.updateIfChanged(values.dCelShaded, props.celShaded);
         ValueCell.updateIfChanged(values.dXrayShaded, props.xrayShaded === 'inverted' ? 'inverted' : props.xrayShaded === true ? 'on' : 'off');
 
         const controlPoints = getControlPointsFromVec2Array(props.controlPoints);

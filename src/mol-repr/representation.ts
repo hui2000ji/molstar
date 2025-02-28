@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
@@ -26,6 +26,8 @@ import { Clipping } from '../mol-theme/clipping';
 import { SetUtils } from '../mol-util/set';
 import { cantorPairing } from '../mol-data/util';
 import { Substance } from '../mol-theme/substance';
+import { Emissive } from '../mol-theme/emissive';
+import { Location } from '../mol-model/location';
 
 export type RepresentationProps = { [k: string]: any }
 
@@ -56,12 +58,13 @@ export interface RepresentationProvider<D = any, P extends PD.Params = any, S ex
     }
     readonly getData?: (data: D, props: PD.Values<P>) => D
     readonly mustRecreate?: (oldProps: PD.Values<P>, newProps: PD.Values<P>) => boolean
+    readonly locationKinds?: ReadonlyArray<Location['kind']>
 }
 
 export namespace RepresentationProvider {
     export type ParamValues<R extends RepresentationProvider<any, any, any>> = R extends RepresentationProvider<any, infer P, any> ? PD.Values<P> : never;
 
-    export function getDetaultParams<R extends RepresentationProvider<D, any, any>, D>(r: R, ctx: ThemeRegistryContext, data: D) {
+    export function getDefaultParams<R extends RepresentationProvider<D, any, any>, D>(r: R, ctx: ThemeRegistryContext, data: D) {
         return PD.getDefaultValues(r.getParams(ctx, data));
     }
 }
@@ -75,8 +78,8 @@ export const EmptyRepresentationProvider: RepresentationProvider = {
     factory: () => Representation.Empty,
     getParams: () => ({}),
     defaultValues: {},
-    defaultColorTheme: ColorTheme.EmptyProvider,
-    defaultSizeTheme: SizeTheme.EmptyProvider,
+    defaultColorTheme: { name: '' },
+    defaultSizeTheme: { name: '' },
     isApplicable: () => true
 };
 
@@ -194,12 +197,14 @@ namespace Representation {
         overpaint: Overpaint
         /** Per group transparency applied to the representation's renderobjects */
         transparency: Transparency
+        /** Per group emissive applied to the representation's renderobjects */
+        emissive: Emissive
         /** Per group material applied to the representation's renderobjects */
         substance: Substance
         /** Bit mask of per group clipping applied to the representation's renderobjects */
         clipping: Clipping
-        /** Strength of the representations overpaint, transparency, substance*/
-        themeStrength: { overpaint: number, transparency: number, substance: number }
+        /** Strength of the representations overpaint, transparency, emmissive, substance*/
+        themeStrength: { overpaint: number, transparency: number, emissive: number, substance: number }
         /** Controls if the representation's renderobjects are synced automatically with GPU or not */
         syncManually: boolean
         /** A transformation applied to the representation's renderobjects */
@@ -217,9 +222,10 @@ namespace Representation {
             transform: Mat4.identity(),
             overpaint: Overpaint.Empty,
             transparency: Transparency.Empty,
+            emissive: Emissive.Empty,
             substance: Substance.Empty,
             clipping: Clipping.Empty,
-            themeStrength: { overpaint: 1, transparency: 1, substance: 1 },
+            themeStrength: { overpaint: 1, transparency: 1, emissive: 1, substance: 1 },
             markerActions: MarkerActions.All
         };
     }
@@ -230,6 +236,7 @@ namespace Representation {
         if (update.colorOnly !== undefined) state.colorOnly = update.colorOnly;
         if (update.overpaint !== undefined) state.overpaint = update.overpaint;
         if (update.transparency !== undefined) state.transparency = update.transparency;
+        if (update.emissive !== undefined) state.emissive = update.emissive;
         if (update.substance !== undefined) state.substance = update.substance;
         if (update.clipping !== undefined) state.clipping = update.clipping;
         if (update.themeStrength !== undefined) state.themeStrength = update.themeStrength;
@@ -464,7 +471,13 @@ namespace Representation {
                 if (state.transparency !== undefined) {
                     // TODO
                 }
+                if (state.emissive !== undefined) {
+                    // TODO
+                }
                 if (state.substance !== undefined) {
+                    // TODO
+                }
+                if (state.clipping !== undefined) {
                     // TODO
                 }
                 if (state.themeStrength !== undefined) Visual.setThemeStrength(renderObject, state.themeStrength);

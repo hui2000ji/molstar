@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "sass:color";
 
 .msp-control-row {
     position: relative;
@@ -47,6 +48,17 @@
         bottom: 0;
     }
 
+    > div.msp-control-row-text {
+        position: absolute;
+        left: $control-label-width + $control-spacing;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        padding: 0 $control-spacing;
+    }
+
     > div {
         background: $msp-form-control-background;
     }
@@ -69,6 +81,10 @@
 .msp-control-col-2 {
     float: left;
     width: 50%;
+}
+
+.msp-control-twoline {
+    height: 2 * $row-height !important;
 }
 
 .msp-control-group {
@@ -328,7 +344,7 @@
 
 .msp-help:hover span {
     display: inline-block;
-    background: linear-gradient($default-background, change-color($default-background, $alpha: 0.8));
+    background: linear-gradient($default-background, color.change($default-background, $alpha: 0.8));
 }
 
 .msp-help-text {
@@ -337,6 +353,12 @@
     margin-top: 1px;
 
     > div {
+        padding: (math.div($control-spacing, 2)) $control-spacing;
+        text-align: left;
+        color: color-lower-contrast($font-color, 15%);
+    }
+
+    > p {
         padding: (math.div($control-spacing, 2)) $control-spacing;
         text-align: left;
         color: color-lower-contrast($font-color, 15%);
@@ -416,4 +438,26 @@
     img {
         margin-top: 1px;
     }
+}
+
+.msp-control-text-area-wrapper, .msp-text-area-wrapper {
+    position: relative;
+    textarea {
+        border: none;
+        width: 100%;
+        height: 100%;
+        background: $msp-form-control-background;
+        padding: math.div($control-spacing, 2) $control-spacing;
+        resize: none;
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+
+.msp-control-text-area-wrapper {
+    height: 2 * $row-height !important;
+}
+
+.msp-text-area-wrapper {
+    height: 3 * $row-height !important;
 }

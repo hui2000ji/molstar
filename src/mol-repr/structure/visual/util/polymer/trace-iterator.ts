@@ -1,7 +1,8 @@
 /**
- * Copyright (c) 2018-2021 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
+ * @author Gianluca Tomasello <giagitom@gmail.com>
  */
 
 import { Unit, StructureElement, ElementIndex, ResidueIndex, Structure } from '../../../../../mol-model/structure';
@@ -15,7 +16,7 @@ import { getPolymerRanges } from '../polymer';
 import { AtomicConformation } from '../../../../../mol-model/structure/model/properties/atomic';
 import { SecondaryStructureProvider } from '../../../../../mol-model-props/computed/secondary-structure';
 import { HelixOrientationProvider } from '../../../../../mol-model-props/computed/helix-orientation';
-import { SecondaryStructure } from '../../../../../mol-model/structure/model/properties/seconday-structure';
+import { SecondaryStructure } from '../../../../../mol-model/structure/model/properties/secondary-structure';
 
 function isHelixSS(ss: SecondaryStructureType.Flag) {
     return SecondaryStructureType.is(ss, SecondaryStructureType.Flag.Helix);
@@ -54,7 +55,6 @@ interface PolymerTraceElement {
     secStrucFirst: boolean, secStrucLast: boolean
     secStrucType: SecondaryStructureType
     moleculeType: MoleculeType
-    isCoarseBackbone: boolean
     coarseBackboneFirst: boolean, coarseBackboneLast: boolean
 
     p0: Vec3, p1: Vec3, p2: Vec3, p3: Vec3, p4: Vec3
@@ -74,7 +74,6 @@ function createPolymerTraceElement(structure: Structure, unit: Unit): PolymerTra
         secStrucType: SecStrucTypeNA,
         moleculeType: MoleculeType.Unknown,
         coarseBackboneFirst: false, coarseBackboneLast: false,
-        isCoarseBackbone: false,
         p0: Vec3(), p1: Vec3(), p2: Vec3(), p3: Vec3(), p4: Vec3(),
         d12: Vec3(), d23: Vec3()
     };
@@ -188,7 +187,7 @@ export class AtomicPolymerTraceIterator implements Iterator<PolymerTraceElement>
     }
 
     private setFromToVector(out: Vec3, residueIndex: ResidueIndex, ss: SecondaryStructureType.Flag) {
-        if (this.value.isCoarseBackbone || (this.helixOrientationCenters && isHelixSS(ss))) {
+        if (this.helixOrientationCenters && isHelixSS(ss)) {
             Vec3.set(out, 1, 0, 0);
         } else {
             this.atomicPos(tmpVecA, this.directionFromElementIndex[residueIndex]);
@@ -244,7 +243,6 @@ export class AtomicPolymerTraceIterator implements Iterator<PolymerTraceElement>
             value.secStrucType = this.currSecStrucType;
             value.secStrucFirst = this.prevSecStrucType !== this.currSecStrucType;
             value.secStrucLast = this.currSecStrucType !== this.nextSecStrucType;
-            value.isCoarseBackbone = this.currCoarseBackbone;
             value.coarseBackboneFirst = this.prevCoarseBackbone !== this.currCoarseBackbone;
             value.coarseBackboneLast = this.currCoarseBackbone !== this.nextCoarseBackbone;
             value.first = residueIndex === this.residueSegmentMin;
@@ -283,7 +281,7 @@ export class AtomicPolymerTraceIterator implements Iterator<PolymerTraceElement>
             const isHelixNext3 = isHelixSS(ssNext3);
 
             // handle positions for tubular helices
-            if (this.helixOrientationCenters) {
+            if (this.helixOrientationCenters && !(isHelix && value.secStrucFirst && value.secStrucLast)) {
                 if (isHelix !== isHelixPrev1) {
                     if (isHelix) {
                         Vec3.copy(this.p0, this.p3);
@@ -343,10 +341,17 @@ export class AtomicPolymerTraceIterator implements Iterator<PolymerTraceElement>
                 }
             }
 
-            this.setFromToVector(this.d01, residueIndexPrev1, ssPrev1);
-            this.setFromToVector(this.d12, residueIndex, ss);
-            this.setFromToVector(this.d23, residueIndexNext1, ssNext1);
-            this.setFromToVector(this.d34, residueIndexNext2, ssNext2);
+            if (this.currCoarseBackbone) {
+                Vec3.triangleNormal(this.d01, this.p1, this.p2, this.p3);
+                Vec3.triangleNormal(this.d12, this.p2, this.p3, this.p4);
+                Vec3.triangleNormal(this.d23, this.p3, this.p4, this.p5);
+                Vec3.triangleNormal(this.d34, this.p4, this.p5, this.p6);
+            } else {
+                this.setFromToVector(this.d01, residueIndexPrev1, ssPrev1);
+                this.setFromToVector(this.d12, residueIndex, ss);
+                this.setFromToVector(this.d23, residueIndexNext1, ssNext1);
+                this.setFromToVector(this.d34, residueIndexNext2, ssNext2);
+            }
 
             const helixFlag = isHelix && this.helixOrientationCenters;
 

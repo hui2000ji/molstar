@@ -1,7 +1,8 @@
 /**
- * Copyright (c) 2020-2022 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2020-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
+ * @author Gianluca Tomasello <giagitom@gmail.com>
  */
 
 export const cylinders_frag = `
@@ -83,7 +84,7 @@ bool CylinderImpostor(
         viewPosition = (uView * vec4(modelPosition, 1.0)).xyz;
         fragmentDepth = calcDepth(viewPosition);
         #if defined(dClipVariant_pixel) && dClipObjectCount != 0
-            if (clipTest(vec4(modelPosition, 0.0))) {
+            if (clipTest(modelPosition)) {
                 objectClipped = true;
                 fragmentDepth = -1.0;
                 #ifdef dSolidInterior
@@ -107,7 +108,7 @@ bool CylinderImpostor(
                 viewPosition = (uView * vec4(modelPosition, 1.0)).xyz;
                 fragmentDepth = calcDepth(viewPosition);
                 #if defined(dClipVariant_pixel) && dClipObjectCount != 0
-                    if (clipTest(vec4(modelPosition, 0.0))) {
+                    if (clipTest(modelPosition)) {
                         objectClipped = true;
                         fragmentDepth = -1.0;
                         #ifdef dSolidInterior
@@ -120,7 +121,11 @@ bool CylinderImpostor(
                     #ifdef dSolidInterior
                         if (interior) cameraNormal = -rayDir;
                     #endif
-                    return true;
+                    #if defined(dClipVariant_pixel) && dClipObjectCount != 0
+                        return true;
+                    #else
+                        return !interior;
+                    #endif
                 }
             }
         } else if (bottomCap && y >= 0.0) {
@@ -133,7 +138,7 @@ bool CylinderImpostor(
                 viewPosition = (uView * vec4(modelPosition, 1.0)).xyz;
                 fragmentDepth = calcDepth(viewPosition);
                 #if defined(dClipVariant_pixel) && dClipObjectCount != 0
-                    if (clipTest(vec4(modelPosition, 0.0))) {
+                    if (clipTest(modelPosition)) {
                         objectClipped = true;
                         fragmentDepth = -1.0;
                         #ifdef dSolidInterior
@@ -146,7 +151,11 @@ bool CylinderImpostor(
                     #ifdef dSolidInterior
                         if (interior) cameraNormal = -rayDir;
                     #endif
-                    return true;
+                    #if defined(dClipVariant_pixel) && dClipObjectCount != 0
+                        return true;
+                    #else
+                        return !interior;
+                    #endif
                 }
             }
         }
@@ -237,8 +246,16 @@ void main() {
     vec3 vViewPosition = viewPosition;
     vec3 vModelPosition = modelPosition;
 
+    #include fade_lod
     #include clip_pixel
+
+    #ifdef dNeedsNormal
+        mat3 normalMatrix = adjoint(uView);
+        vec3 normal = normalize(normalMatrix * -normalize(cameraNormal));
+    #endif
+
     #include assign_material_color
+    #include check_transparency
 
     #if defined(dRenderVariant_pick)
         #include check_picking_alpha
@@ -254,16 +271,21 @@ void main() {
         gl_FragColor = material;
     #elif defined(dRenderVariant_marking)
         gl_FragColor = material;
-    #elif defined(dRenderVariant_color)
-        mat3 normalMatrix = transpose3(inverse3(mat3(uView)));
-        vec3 normal = normalize(normalMatrix * -normalize(cameraNormal));
+    #elif defined(dRenderVariant_emissive)
+        gl_FragColor = material;
+    #elif defined(dRenderVariant_color) || defined(dRenderVariant_tracing)
         #include apply_light_color
-
         #include apply_interior_color
         #include apply_marker_color
-        #include apply_fog
-        #include wboit_write
-        #include dpoit_write
+
+        #if defined(dRenderVariant_color)
+            #include apply_fog
+            #include wboit_write
+            #include dpoit_write
+        #elif defined(dRenderVariant_tracing)
+            gl_FragData[1] = vec4(normal, emissive);
+            gl_FragData[2] = vec4(material.rgb, uDensity);
+        #endif
     #endif
 }
 `;

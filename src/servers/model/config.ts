@@ -1,7 +1,8 @@
 ﻿/**
- * Copyright (c) 2018-2020 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
+ * @author Sebastian Bittrich <sebastian.bittrich@rcsb.org>
  */
 
 import * as argparse from 'argparse';
@@ -106,7 +107,12 @@ const DefaultModelServerConfig = {
     sourceMap: [
         ['pdb-cif', 'e:/test/quick/${id}_updated.cif'],
         // ['pdb-bcif', 'e:/test/quick/${id}.bcif'],
-    ] as ([string, string] | [string, string, ModelServerFetchFormats])[]
+    ] as ([string, string] | [string, string, ModelServerFetchFormats])[],
+
+    /**
+     * Optionally point to files. The service health-check will assert that all are readable and fail otherwise.
+     */
+    healthCheckPath: [] as string[],
 };
 
 export const ModelServerFetchFormats = ['cif', 'bcif', 'cif.gz', 'bcif.gz'] as const;
@@ -194,9 +200,15 @@ function addServerArgs(parser: argparse.ArgumentParser) {
         metavar: ['SOURCE', 'PATH', 'SOURCE_MAP_FORMAT'] as any,
         help: [
             'Same as --sourceMap but for URL. \'--sourceMapUrl src url format\'',
-            'Example: \'pdb-cif "https://www.ebi.ac.uk/pdbe/entry-files/download/${id}_updated.cif" cif\'',
-            `Supported formats: ${ModelServerFetchFormats.join(', ')}`
+            'Example: "pdb-cif \'https://www.ebi.ac.uk/pdbe/entry-files/download/${id}_updated.cif\' cif"',
+            `Supported formats: ${ModelServerFetchFormats.join(', ')}. Supported protocols: http://, https://, gs://`
         ].join('\n'),
+    });
+    parser.add_argument('--healthCheckPath', {
+        default: DefaultModelServerConfig.healthCheckPath,
+        action: 'append',
+        metavar: 'PATH',
+        help: `File path(s) to use for health-checks. Will test if all files are accessible and report a failed health-check if that's not the case.`,
     });
 }
 

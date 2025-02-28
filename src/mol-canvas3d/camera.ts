@@ -28,8 +28,6 @@ interface ICamera {
     readonly fogNear: number,
 }
 
-const tmpPos1 = Vec3();
-const tmpPos2 = Vec3();
 const tmpClip = Vec4();
 
 class Camera implements ICamera {
@@ -37,12 +35,6 @@ class Camera implements ICamera {
     readonly projection: Mat4 = Mat4.identity();
     readonly projectionView: Mat4 = Mat4.identity();
     readonly inverseProjectionView: Mat4 = Mat4.identity();
-
-    private pixelScale: number;
-    get pixelRatio() {
-        const dpr = (typeof window !== 'undefined') ? window.devicePixelRatio : 1;
-        return dpr * this.pixelScale;
-    }
 
     readonly viewport: Viewport;
     readonly state: Readonly<Camera.Snapshot> = Camera.createDefaultSnapshot();
@@ -116,7 +108,7 @@ class Camera implements ICamera {
     }
 
     getTargetDistance(radius: number) {
-        return Camera.targetDistance(radius, this.state.fov, this.viewport.width, this.viewport.height);
+        return Camera.targetDistance(radius, this.state.mode, this.state.fov, this.viewport.width, this.viewport.height);
     }
 
     getFocus(target: Vec3, radius: number, up?: Vec3, dir?: Vec3, snapshot?: Partial<Camera.Snapshot>): Partial<Camera.Snapshot> {
@@ -192,19 +184,15 @@ class Camera implements ICamera {
 
     /** World space pixel size at given `point` */
     getPixelSize(point: Vec3) {
-        // project -> unproject of `point` does not exactly return the same
-        // to get a sufficiently accurate measure we unproject the original
-        // clip position in addition to the one shifted by one pixel
         this.project(tmpClip, point);
-        this.unproject(tmpPos1, tmpClip);
-        tmpClip[0] += 1;
-        this.unproject(tmpPos2, tmpClip);
-        return Vec3.distance(tmpPos1, tmpPos2);
+        const w = tmpClip[3];
+        const rx = this.viewport.width;
+        const P00 = this.projection[0];
+        return (2 / w) / (rx * Math.abs(P00));
     }
 
-    constructor(state?: Partial<Camera.Snapshot>, viewport = Viewport.create(0, 0, 128, 128), props: Partial<{ pixelScale: number }> = {}) {
+    constructor(state?: Partial<Camera.Snapshot>, viewport = Viewport.create(0, 0, 128, 128)) {
         this.viewport = viewport;
-        this.pixelScale = props.pixelScale || 1;
         Camera.copySnapshot(this.state, state);
     }
 }
@@ -257,11 +245,14 @@ namespace Camera {
         out.height = view.height;
     }
 
-    export function targetDistance(radius: number, fov: number, width: number, height: number) {
+    export function targetDistance(radius: number, mode: Mode, fov: number, width: number, height: number) {
         const r = Math.max(radius, 0.01);
         const aspect = width / height;
         const aspectFactor = (height < width ? 1 : aspect);
-        return Math.abs((r / aspectFactor) / Math.sin(fov / 2));
+        if (mode === 'orthographic')
+            return Math.abs((r / aspectFactor) / Math.tan(fov / 2));
+        else
+            return Math.abs((r / aspectFactor) / Math.sin(fov / 2));
     }
 
     export function createDefaultSnapshot(): Snapshot {

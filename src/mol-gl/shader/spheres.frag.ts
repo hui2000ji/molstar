@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2019-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
@@ -52,7 +52,7 @@ bool SphereImpostor(out vec3 modelPos, out vec3 cameraPos, out vec3 cameraNormal
     bool objectClipped = false;
 
     #if !defined(dClipPrimitive) && defined(dClipVariant_pixel) && dClipObjectCount != 0
-        if (clipTest(vec4(modelPos, 0.0))) {
+        if (clipTest(modelPos)) {
             objectClipped = true;
             fragmentDepth = -1.0;
         }
@@ -72,7 +72,7 @@ bool SphereImpostor(out vec3 modelPos, out vec3 cameraPos, out vec3 cameraNormal
             #ifdef dSolidInterior
                 if (!objectClipped) {
                     fragmentDepth = 0.0 + (0.0000001 / vRadius);
-                    cameraNormal = -mix(normalize(vPoint), vec3(0.0, 0.0, 1.0), uIsOrtho);
+                    cameraNormal = -mix(normalize(vPoint), vec3(0.0, 0.0, -1.0), uIsOrtho);
                 }
             #endif
             return true;
@@ -91,9 +91,9 @@ void main(void){
         if (dot(pointDir, pointDir) > vRadius * vRadius) discard;
         vec3 vViewPosition = -vPointViewPosition;
         fragmentDepth = gl_FragCoord.z;
-        #if !defined(dIgnoreLight) || defined(dXrayShaded)
-            pointDir.z -= cos(length(pointDir) / vRadius);
-            cameraNormal = -normalize(pointDir / vRadius);
+        #if !defined(dIgnoreLight) || defined(dXrayShaded) || defined(dRenderVariant_tracing)
+            pointDir.z -= cos(length(pointDir));
+            cameraNormal = -normalize(pointDir);
         #endif
         interior = false;
     #else
@@ -111,10 +111,24 @@ void main(void){
         vec3 vViewPosition = cameraPos;
     #endif
 
+    #include fade_lod
     #if !defined(dClipPrimitive) && defined(dClipVariant_pixel) && dClipObjectCount != 0
         #include clip_pixel
     #endif
+
+    #ifdef dNeedsNormal
+        vec3 normal = -cameraNormal;
+    #endif
+
     #include assign_material_color
+
+    #if defined(dRenderVariant_color) || defined(dRenderVariant_tracing)
+        if (uRenderMask == MaskTransparent && uAlphaThickness > 0.0) {
+            material.a *= min(1.0, vRadius / uAlphaThickness);
+        }
+    #endif
+
+    #include check_transparency
 
     #if defined(dRenderVariant_pick)
         #include check_picking_alpha
@@ -130,19 +144,21 @@ void main(void){
         gl_FragColor = material;
     #elif defined(dRenderVariant_marking)
         gl_FragColor = material;
-    #elif defined(dRenderVariant_color)
-        vec3 normal = -cameraNormal;
+    #elif defined(dRenderVariant_emissive)
+        gl_FragColor = material;
+    #elif defined(dRenderVariant_color) || defined(dRenderVariant_tracing)
         #include apply_light_color
-
-        if (uRenderMask == MaskTransparent && uAlphaThickness > 0.0) {
-            gl_FragColor.a *= min(1.0, vRadius / uAlphaThickness);
-        }
-
         #include apply_interior_color
         #include apply_marker_color
-        #include apply_fog
-        #include wboit_write
-        #include dpoit_write
+
+        #if defined(dRenderVariant_color)
+            #include apply_fog
+            #include wboit_write
+            #include dpoit_write
+        #elif defined(dRenderVariant_tracing)
+            gl_FragData[1] = vec4(normal, emissive);
+            gl_FragData[2] = vec4(material.rgb, uDensity);
+        #endif
     #endif
 }
 `;

@@ -1,8 +1,9 @@
 /**
- * Copyright (c) 2018-2022 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  * @author David Sehnal <david.sehnal@gmail.com>
+ * @author Gianluca Tomasello <giagitom@gmail.com>
  */
 
 import { ValueCell } from '../../mol-util';
@@ -23,6 +24,8 @@ export type ColorData = {
     uColor: ValueCell<Vec3>,
     tColor: ValueCell<TextureImage<Uint8Array>>,
     tColorGrid: ValueCell<Texture>,
+    uPaletteDomain: ValueCell<Vec2>,
+    uPaletteDefault: ValueCell<Vec3>,
     tPalette: ValueCell<TextureImage<Uint8Array>>,
     uColorTexDim: ValueCell<Vec2>,
     uColorGridDim: ValueCell<Vec3>,
@@ -35,6 +38,9 @@ export function createColors(locationIt: LocationIterator, positionIt: LocationI
     const data = _createColors(locationIt, positionIt, colorTheme, colorData);
     if (colorTheme.palette) {
         ValueCell.updateIfChanged(data.dUsePalette, true);
+        const [min, max] = colorTheme.palette.domain || [0, 1];
+        ValueCell.update(data.uPaletteDomain, Vec2.set(data.uPaletteDomain.ref.value, min, max));
+        ValueCell.update(data.uPaletteDefault, Color.toVec3Normalized(data.uPaletteDefault.ref.value, colorTheme.palette.defaultColor ?? Color(0xCCCCCC)));
         updatePaletteTexture(colorTheme.palette, data.tPalette);
     } else {
         ValueCell.updateIfChanged(data.dUsePalette, false);
@@ -102,6 +108,8 @@ export function createValueColor(value: Color, colorData?: ColorData): ColorData
             uColor: ValueCell.create(Color.toVec3Normalized(Vec3(), value)),
             tColor: ValueCell.create({ array: new Uint8Array(3), width: 1, height: 1 }),
             tColorGrid: ValueCell.create(createNullTexture()),
+            uPaletteDomain: ValueCell.create(Vec2.create(0, 1)),
+            uPaletteDefault: ValueCell.create(Vec3()),
             tPalette: ValueCell.create({ array: new Uint8Array(3), width: 1, height: 1 }),
             uColorTexDim: ValueCell.create(Vec2.create(1, 1)),
             uColorGridDim: ValueCell.create(Vec3.create(1, 1, 1)),
@@ -130,6 +138,8 @@ export function createTextureColor(colors: TextureImage<Uint8Array>, type: Color
             uColor: ValueCell.create(Vec3()),
             tColor: ValueCell.create(colors),
             tColorGrid: ValueCell.create(createNullTexture()),
+            uPaletteDomain: ValueCell.create(Vec2.create(0, 1)),
+            uPaletteDefault: ValueCell.create(Vec3()),
             tPalette: ValueCell.create({ array: new Uint8Array(3), width: 1, height: 1 }),
             uColorTexDim: ValueCell.create(Vec2.create(colors.width, colors.height)),
             uColorGridDim: ValueCell.create(Vec3.create(1, 1, 1)),
@@ -155,25 +165,29 @@ function createInstanceColor(locationIt: LocationIterator, color: LocationColor,
 
 /** Creates color texture with color for each group (i.e. shared across instances) */
 function createGroupColor(locationIt: LocationIterator, color: LocationColor, colorData?: ColorData): ColorData {
-    const { groupCount } = locationIt;
-    const colors = createTextureImage(Math.max(1, groupCount), 3, Uint8Array, colorData && colorData.tColor.ref.value.array);
+    const { groupCount, hasLocation2 } = locationIt;
+    const colors = createTextureImage(Math.max(1, groupCount * (hasLocation2 ? 2 : 1)), 3, Uint8Array, colorData && colorData.tColor.ref.value.array);
     locationIt.reset();
+    const indexMultiplier = hasLocation2 ? 6 : 3;
     while (locationIt.hasNext && !locationIt.isNextNewInstance) {
-        const { location, isSecondary, groupIndex } = locationIt.move();
-        Color.toArray(color(location, isSecondary), colors.array, groupIndex * 3);
+        const { location, location2, isSecondary, groupIndex } = locationIt.move();
+        Color.toArray(color(location, isSecondary), colors.array, groupIndex * indexMultiplier);
+        if (hasLocation2) Color.toArray(color(location2, isSecondary), colors.array, groupIndex * indexMultiplier + 3);
     }
     return createTextureColor(colors, 'group', colorData);
 }
 
 /** Creates color texture with color for each group in each instance */
 function createGroupInstanceColor(locationIt: LocationIterator, color: LocationColor, colorData?: ColorData): ColorData {
-    const { groupCount, instanceCount } = locationIt;
-    const count = instanceCount * groupCount;
+    const { groupCount, instanceCount, hasLocation2 } = locationIt;
+    const count = instanceCount * groupCount * (hasLocation2 ? 2 : 1);
     const colors = createTextureImage(Math.max(1, count), 3, Uint8Array, colorData && colorData.tColor.ref.value.array);
     locationIt.reset();
+    const indexMultiplier = hasLocation2 ? 6 : 3;
     while (locationIt.hasNext) {
-        const { location, isSecondary, index } = locationIt.move();
-        Color.toArray(color(location, isSecondary), colors.array, index * 3);
+        const { location, location2, isSecondary, index } = locationIt.move();
+        Color.toArray(color(location, isSecondary), colors.array, index * indexMultiplier);
+        if (hasLocation2) Color.toArray(color(location2, isSecondary), colors.array, index * indexMultiplier + 3);
     }
     return createTextureColor(colors, 'groupInstance', colorData);
 }
@@ -228,6 +242,8 @@ export function createGridColor(grid: ColorVolume, type: ColorType, colorData?: 
             uColor: ValueCell.create(Vec3()),
             tColor: ValueCell.create({ array: new Uint8Array(3), width: 1, height: 1 }),
             tColorGrid: ValueCell.create(colors),
+            uPaletteDomain: ValueCell.create(Vec2.create(0, 1)),
+            uPaletteDefault: ValueCell.create(Vec3()),
             tPalette: ValueCell.create({ array: new Uint8Array(3), width: 1, height: 1 }),
             uColorTexDim: ValueCell.create(Vec2.create(width, height)),
             uColorGridDim: ValueCell.create(Vec3.clone(dimension)),
@@ -250,6 +266,8 @@ function createDirectColor(colorData?: ColorData): ColorData {
             uColor: ValueCell.create(Vec3()),
             tColor: ValueCell.create({ array: new Uint8Array(3), width: 1, height: 1 }),
             tColorGrid: ValueCell.create(createNullTexture()),
+            uPaletteDomain: ValueCell.create(Vec2.create(0, 1)),
+            uPaletteDefault: ValueCell.create(Vec3()),
             tPalette: ValueCell.create({ array: new Uint8Array(3), width: 1, height: 1 }),
             uColorTexDim: ValueCell.create(Vec2.create(1, 1)),
             uColorGridDim: ValueCell.create(Vec3.create(1, 1, 1)),

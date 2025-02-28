@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2017-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
@@ -130,6 +130,7 @@ namespace Unit {
         MultiChain = 0x1,
         Partitioned = 0x2,
         FastBoundary = 0x4,
+        Water = 0x8,
     }
     export namespace Traits {
         export const is: (t: Traits, f: Trait) => boolean = BitFlags.has;
@@ -176,12 +177,12 @@ namespace Unit {
 
     function getSphereRadiusFunc(model: Model) {
         const r = model.coarseConformation.spheres.radius;
-        return (i: number) => r[i];
+        return (i: ElementIndex) => r[i];
     }
 
-    function getGaussianRadiusFunc(model: Model) {
+    function getGaussianRadiusFunc(_model: Model) {
         // TODO: compute radius for gaussians
-        return (i: number) => 0;
+        return (i: ElementIndex) => 0;
     }
 
     /**
@@ -248,7 +249,7 @@ namespace Unit {
             }
 
             const conformation = (this.model.atomicConformation !== model.atomicConformation || operator !== this.conformation.operator)
-                ? SymmetryOperator.createMapping(operator, model.atomicConformation)
+                ? SymmetryOperator.createMapping<ElementIndex>(operator, model.atomicConformation)
                 : this.conformation;
             return new Atomic(this.id, this.invariantId, this.chainGroupId, this.traits, model, this.elements, conformation, props);
         }
@@ -282,7 +283,9 @@ namespace Unit {
             let bonds = cache.get(this.elements);
             if (!bonds) {
                 bonds = computeIntraUnitBonds(this);
-                cache.set(this.elements, bonds);
+                if (bonds.props?.cacheable) {
+                    cache.set(this.elements, bonds);
+                }
             }
             this.props.bonds = bonds;
             return this.props.bonds;
@@ -411,7 +414,7 @@ namespace Unit {
             }
 
             const conformation = coarseConformation !== modelCoarseConformation
-                ? SymmetryOperator.createMapping(this.conformation.operator, modelCoarseConformation)
+                ? SymmetryOperator.createMapping(this.conformation.operator, modelCoarseConformation, this.kind === Unit.Kind.Spheres ? getSphereRadiusFunc(model) : getGaussianRadiusFunc(model))
                 : this.conformation;
             return new Coarse(this.id, this.invariantId, this.chainGroupId, this.traits, model, this.kind, this.elements, conformation, props) as Unit.Spheres | Unit.Gaussians; // TODO get rid of casting
         }

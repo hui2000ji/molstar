@@ -1,12 +1,14 @@
 export const common_vert_params = `
 uniform mat4 uProjection, uModel, uView;
 uniform vec3 uCameraPosition;
+uniform vec4 uCameraPlane;
 
 uniform int uObjectId;
 uniform int uVertexCount;
 uniform int uInstanceCount;
 uniform int uGroupCount;
 uniform vec4 uInvariantBoundingSphere;
+uniform vec4 uLod;
 
 uniform bool uDoubleSided;
 uniform int uPickType;
@@ -17,6 +19,7 @@ uniform int uPickType;
     uniform vec3 uClipObjectPosition[dClipObjectCount];
     uniform vec4 uClipObjectRotation[dClipObjectCount];
     uniform vec3 uClipObjectScale[dClipObjectCount];
+    uniform mat4 uClipObjectTransform[dClipObjectCount];
 
     #if defined(dClipping)
         uniform vec2 uClippingTexDim;
@@ -50,5 +53,11 @@ varying vec3 vViewPosition;
 #else
     attribute float aVertex;
     #define VertexID int(aVertex)
+#endif
+
+#if defined(enabledMultiDraw)
+    #define DrawID gl_DrawID
+#else
+    #define DrawID uDrawId
 #endif
 `;

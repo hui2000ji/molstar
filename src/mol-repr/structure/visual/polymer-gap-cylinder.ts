@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  * @author Gianluca Tomasello <giagitom@gmail.com>
@@ -19,6 +19,7 @@ import { UnitsMeshParams, UnitsVisual, UnitsMeshVisual } from '../units-visual';
 import { VisualUpdateState } from '../../util';
 import { BaseGeometry } from '../../../mol-geo/geometry/base';
 import { Sphere3D } from '../../../mol-math/geometry';
+import { StructureGroup } from './util/common';
 // import { TriangularPyramid } from '../../../mol-geo/primitive/pyramid';
 
 const segmentCount = 10;
@@ -43,9 +44,8 @@ function createPolymerGapCylinderMesh(ctx: VisualContext, unit: Unit, structure:
     const vertexCountEstimate = segmentCount * radialSegments * 2 * polymerGapCount * 2;
     const builderState = MeshBuilder.createState(vertexCountEstimate, vertexCountEstimate / 10, mesh);
 
-    const pos = unit.conformation.invariantPosition;
-    const pA = Vec3.zero();
-    const pB = Vec3.zero();
+    const pA = Vec3();
+    const pB = Vec3();
     const cylinderProps: CylinderProps = {
         radiusTop: 1, radiusBottom: 1, topCap: true, bottomCap: true, radialSegments
     };
@@ -64,8 +64,8 @@ function createPolymerGapCylinderMesh(ctx: VisualContext, unit: Unit, structure:
             // Mat4.scale(t, t, Vec3.create(0.7, 0.7, 2.5))
             // MeshBuilder.addPrimitive(builderState, t, triangularPyramid)
         } else {
-            pos(centerA.element, pA);
-            pos(centerB.element, pB);
+            unit.conformation.invariantPosition(centerA.element, pA);
+            unit.conformation.invariantPosition(centerB.element, pB);
 
             cylinderProps.radiusTop = cylinderProps.radiusBottom = theme.size.size(centerA) * sizeFactor;
             builderState.currentGroup = i;
@@ -97,7 +97,7 @@ export function PolymerGapVisual(materialId: number): UnitsVisual<PolymerGapPara
     return UnitsMeshVisual<PolymerGapParams>({
         defaultProps: PD.getDefaultValues(PolymerGapParams),
         createGeometry: createPolymerGapCylinderMesh,
-        createLocationIterator: PolymerGapLocationIterator.fromGroup,
+        createLocationIterator: (structureGroup: StructureGroup) => PolymerGapLocationIterator.fromGroup(structureGroup, { asSecondary: true }),
         getLoci: getPolymerGapElementLoci,
         eachLocation: eachPolymerGapElement,
         setUpdateState: (state: VisualUpdateState, newProps: PD.Values<PolymerGapParams>, currentProps: PD.Values<PolymerGapParams>) => {

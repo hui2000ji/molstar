@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2022 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
@@ -17,6 +17,7 @@ const vec2 center = vec2(0.5);
 const float radius = 0.5;
 
 void main(){
+    #include fade_lod
     #include clip_pixel
 
     float fragmentDepth = gl_FragCoord.z;
@@ -30,6 +31,12 @@ void main(){
         float fuzzyAlpha = 1.0 - smoothstep(0.0, radius, dist);
         if (fuzzyAlpha < 0.0001) discard;
     #endif
+
+    #if defined(dPointStyle_fuzzy) && (defined(dRenderVariant_color) || defined(dRenderVariant_tracing))
+        material.a *= fuzzyAlpha;
+    #endif
+
+    #include check_transparency
 
     #if defined(dRenderVariant_pick)
         #include check_picking_alpha
@@ -45,17 +52,20 @@ void main(){
         gl_FragColor = material;
     #elif defined(dRenderVariant_marking)
         gl_FragColor = material;
-    #elif defined(dRenderVariant_color)
+    #elif defined(dRenderVariant_emissive)
         gl_FragColor = material;
-
-        #if defined(dPointStyle_fuzzy)
-            gl_FragColor.a *= fuzzyAlpha;
-        #endif
-
+    #elif defined(dRenderVariant_color) || defined(dRenderVariant_tracing)
+        gl_FragColor = material;
         #include apply_marker_color
-        #include apply_fog
-        #include wboit_write
-        #include dpoit_write
+
+        #if defined(dRenderVariant_color)
+            #include apply_fog
+            #include wboit_write
+            #include dpoit_write
+        #elif defined(dRenderVariant_tracing)
+            gl_FragData[1] = vec4(normalize(vViewPosition), emissive);
+            gl_FragData[2] = vec4(material.rgb, uDensity);
+        #endif
     #endif
 }
 `;

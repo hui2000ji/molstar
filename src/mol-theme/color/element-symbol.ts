@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  * @author Adam Midlik <midlik@gmail.com>
@@ -28,6 +28,7 @@ import { UniformColorTheme, UniformColorThemeParams } from './uniform';
 import { AntibodyColoringResidueColorThemeParams, AntibodyColoringResidueColorTheme, AntibodyColoringResidueColorThemeProvider } from '../../custom/extensions/antibody-coloring-residues/color';
 import { CustomProperty } from '../../mol-model-props/common/custom-property';
 
+import { TrajectoryIndexColorTheme, TrajectoryIndexColorThemeParams } from './trajectory-index';
 
 // from Jmol http://jmol.sourceforge.net/jscolors/ (or 0xFFFFFF)
 export const ElementSymbolColors = ColorMap({
@@ -47,6 +48,7 @@ export const ElementSymbolColorThemeParams = {
         'operator-name': PD.Group(OperatorNameColorThemeParams),
         'model-index': PD.Group(ModelIndexColorThemeParams),
         'structure-index': PD.Group(StructureIndexColorThemeParams),
+        'trajectory-index': PD.Group(TrajectoryIndexColorThemeParams),
         'uniform': PD.Group(UniformColorThemeParams),
         'antibody-coloring-residue': PD.Group(AntibodyColoringResidueColorThemeParams, { label: 'Antibody/TCR' }),
         'element-symbol': PD.EmptyGroup(),
@@ -79,6 +81,7 @@ function getCarbonTheme(ctx: ThemeDataContext, props: ElementSymbolColorThemePro
         case 'operator-name': return OperatorNameColorTheme(ctx, props.params);
         case 'model-index': return ModelIndexColorTheme(ctx, props.params);
         case 'structure-index': return StructureIndexColorTheme(ctx, props.params);
+        case 'trajectory-index': return TrajectoryIndexColorTheme(ctx, props.params);
         case 'uniform': return UniformColorTheme(ctx, props.params);
         case 'antibody-coloring-residue': return AntibodyColoringResidueColorTheme(ctx, props.params);
         case 'element-symbol': return undefined;
@@ -89,7 +92,9 @@ function getCarbonTheme(ctx: ThemeDataContext, props: ElementSymbolColorThemePro
 export function ElementSymbolColorTheme(ctx: ThemeDataContext, props: PD.Values<ElementSymbolColorThemeParams>): ColorTheme<ElementSymbolColorThemeParams> {
     const colorMap = getAdjustedColorMap(props.colors.name === 'default' ? ElementSymbolColors : props.colors.params, props.saturation, props.lightness);
 
-    const carbonColor = getCarbonTheme(ctx, props.carbonColor)?.color;
+    const carbonTheme = getCarbonTheme(ctx, props.carbonColor);
+    const carbonColor = carbonTheme?.color;
+    const contextHash = carbonTheme?.contextHash ?? -1;
 
     function elementColor(element: ElementSymbol, location: Location) {
         return (carbonColor && element === 'C')
@@ -121,6 +126,7 @@ export function ElementSymbolColorTheme(ctx: ThemeDataContext, props: PD.Values<
         preferSmoothing: true,
         color,
         props,
+        contextHash,
         description: Description,
         legend: TableLegend(Object.keys(colorMap).map(name => {
             return [name, (colorMap as any)[name] as Color] as [string, Color];

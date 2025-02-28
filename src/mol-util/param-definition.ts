@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  * @author David Sehnal <david.sehnal@gmail.com>
@@ -104,10 +104,13 @@ export namespace ParamDefinition {
     }
 
     export interface Text<T extends string = string> extends Base<T> {
-        type: 'text'
+        type: 'text',
+        multiline?: boolean,
+        placeholder?: string,
+        disableInteractiveUpdates?: boolean
     }
-    export function Text<T extends string = string>(defaultValue: string = '', info?: Info): Text<T> {
-        return setInfo<Text<T>>({ type: 'text', defaultValue: defaultValue as any }, info);
+    export function Text<T extends string = string>(defaultValue: string = '', info?: Info & { multiline?: boolean, placeholder?: string, disableInteractiveUpdates?: boolean }): Text<T> {
+        return setInfo<Text<T>>({ type: 'text', defaultValue: defaultValue as any, multiline: info?.multiline, placeholder: info?.placeholder, disableInteractiveUpdates: info?.disableInteractiveUpdates }, info);
     }
 
     export interface Color extends Base<ColorData> {
@@ -682,5 +685,15 @@ export namespace ParamDefinition {
             if (o[0] === k) return k;
         }
         return options.length > 0 ? options[0][0] : void 0 as any as T;
+    }
+
+    export function withDefaults<T extends Params>(schema: T, updates: Partial<ValuesFor<T>>): T {
+        const next: any = {};
+        for (const k of Object.keys(updates)) {
+            const v = (updates as any)[k];
+            if (!schema[k] || v === null || v === undefined || schema[k].defaultValue === v) continue;
+            next[k] = { ...schema[k], defaultValue: v };
+        }
+        return { ...schema, ...next };
     }
 }

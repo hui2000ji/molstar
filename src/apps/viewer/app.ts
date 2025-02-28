@@ -1,60 +1,66 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
+ * @author Neli Fonseca <neli@ebi.ac.uk>
+ * @author Adam Midlik <midlik@gmail.com>
  */
 
 import { ANVILMembraneOrientation } from '../../extensions/anvil/behavior';
-import { CellPack } from '../../extensions/cellpack';
+import { Backgrounds } from '../../extensions/backgrounds';
 import { DnatcoNtCs } from '../../extensions/dnatco';
 import { G3DFormat, G3dProvider } from '../../extensions/g3d/format';
-import { Volseg, VolsegVolumeServerConfig } from '../../extensions/volumes-and-segmentations';
 import { GeometryExport } from '../../extensions/geo-export';
-import { MAQualityAssessment } from '../../extensions/model-archive/quality-assessment/behavior';
-import { QualityAssessmentPLDDTPreset, QualityAssessmentQmeanPreset } from '../../extensions/model-archive/quality-assessment/behavior';
+import { MAQualityAssessment, MAQualityAssessmentConfig, QualityAssessmentPLDDTPreset, QualityAssessmentQmeanPreset } from '../../extensions/model-archive/quality-assessment/behavior';
 import { QualityAssessment } from '../../extensions/model-archive/quality-assessment/prop';
 import { ModelExport } from '../../extensions/model-export';
 import { Mp4Export } from '../../extensions/mp4-export';
+import { MolViewSpec } from '../../extensions/mvs/behavior';
+import { loadMVSX } from '../../extensions/mvs/components/formats';
+import { loadMVS, MolstarLoadingExtension } from '../../extensions/mvs/load';
+import { MVSData } from '../../extensions/mvs/mvs-data';
 import { PDBeStructureQualityReport } from '../../extensions/pdbe';
-import { RCSBAssemblySymmetry, RCSBValidationReport } from '../../extensions/rcsb';
+import { RCSBValidationReport } from '../../extensions/rcsb';
+import { AssemblySymmetry, AssemblySymmetryConfig } from '../../extensions/assembly-symmetry';
+import { SbNcbrPartialCharges, SbNcbrPartialChargesPreset, SbNcbrPartialChargesPropertyProvider, SbNcbrTunnels } from '../../extensions/sb-ncbr';
+import { Volseg, VolsegVolumeServerConfig } from '../../extensions/volumes-and-segmentations';
+import { wwPDBChemicalComponentDictionary } from '../../extensions/wwpdb/ccd/behavior';
+import { wwPDBStructConnExtensionFunctions } from '../../extensions/wwpdb/struct-conn';
 import { ZenodoImport } from '../../extensions/zenodo';
+import { SaccharideCompIdMapType } from '../../mol-model/structure/structure/carbohydrates/constants';
 import { Volume } from '../../mol-model/volume';
 import { DownloadStructure, PdbDownloadProvider } from '../../mol-plugin-state/actions/structure';
 import { DownloadDensity } from '../../mol-plugin-state/actions/volume';
 import { PresetTrajectoryHierarchy } from '../../mol-plugin-state/builder/structure/hierarchy-preset';
 import { PresetStructureRepresentations, StructureRepresentationPresetProvider } from '../../mol-plugin-state/builder/structure/representation-preset';
+import { BuiltInCoordinatesFormat } from '../../mol-plugin-state/formats/coordinates';
 import { DataFormatProvider } from '../../mol-plugin-state/formats/provider';
 import { BuiltInTopologyFormat } from '../../mol-plugin-state/formats/topology';
-import { BuiltInCoordinatesFormat } from '../../mol-plugin-state/formats/coordinates';
 import { BuiltInTrajectoryFormat } from '../../mol-plugin-state/formats/trajectory';
 import { BuildInVolumeFormat } from '../../mol-plugin-state/formats/volume';
 import { createVolumeRepresentationParams } from '../../mol-plugin-state/helpers/volume-representation-params';
 import { PluginStateObject } from '../../mol-plugin-state/objects';
 import { StateTransforms } from '../../mol-plugin-state/transforms';
 import { TrajectoryFromModelAndCoordinates } from '../../mol-plugin-state/transforms/model';
-import { createPluginUI } from '../../mol-plugin-ui/react18';
 import { PluginUIContext } from '../../mol-plugin-ui/context';
+import { createPluginUI } from '../../mol-plugin-ui';
+import { renderReact18 } from '../../mol-plugin-ui/react18';
 import { DefaultPluginUISpec, PluginUISpec } from '../../mol-plugin-ui/spec';
 import { PluginCommands } from '../../mol-plugin/commands';
-import { PluginConfig } from '../../mol-plugin/config';
+import { PluginConfig, PluginConfigItem } from '../../mol-plugin/config';
 import { PluginLayoutControlsDisplay } from '../../mol-plugin/layout';
 import { PluginSpec } from '../../mol-plugin/spec';
 import { PluginState } from '../../mol-plugin/state';
 import { StateObjectRef, StateObjectSelector } from '../../mol-state';
+import { Task } from '../../mol-task';
 import { Asset } from '../../mol-util/assets';
 import { Color } from '../../mol-util/color';
 import '../../mol-util/polyfill';
 import { ObjectKeys } from '../../mol-util/type-helpers';
-import { SaccharideCompIdMapType } from '../../mol-model/structure/structure/carbohydrates/constants';
-import { Backgrounds } from '../../extensions/backgrounds';
-import { SbNcbrPartialCharges, SbNcbrPartialChargesPreset, SbNcbrPartialChargesPropertyProvider } from '../../extensions/sb-ncbr';
-import { wwPDBStructConnExtensionFunctions } from '../../extensions/wwpdb/struct-conn';
-import { wwPDBChemicalComponentDictionary } from '../../extensions/wwpdb/ccd/behavior';
-import { RCSBAssemblySymmetryConfig } from '../../extensions/rcsb/assembly-symmetry/behavior';
 
 export { PLUGIN_VERSION as version } from '../../mol-plugin/version';
-export { setDebugMode, setProductionMode, setTimingMode, consoleStats } from '../../mol-util/debug';
+export { consoleStats, setDebugMode, setProductionMode, setTimingMode } from '../../mol-util/debug';
 
 const CustomFormats = [
     ['g3d', G3dProvider] as const
@@ -63,10 +69,9 @@ const CustomFormats = [
 export const ExtensionMap = {
     'volseg': PluginSpec.Behavior(Volseg),
     'backgrounds': PluginSpec.Behavior(Backgrounds),
-    'cellpack': PluginSpec.Behavior(CellPack),
     'dnatco-ntcs': PluginSpec.Behavior(DnatcoNtCs),
     'pdbe-structure-quality-report': PluginSpec.Behavior(PDBeStructureQualityReport),
-    'rcsb-assembly-symmetry': PluginSpec.Behavior(RCSBAssemblySymmetry),
+    'assembly-symmetry': PluginSpec.Behavior(AssemblySymmetry),
     'rcsb-validation-report': PluginSpec.Behavior(RCSBValidationReport),
     'anvil-membrane-orientation': PluginSpec.Behavior(ANVILMembraneOrientation),
     'g3d': PluginSpec.Behavior(G3DFormat),
@@ -77,6 +82,8 @@ export const ExtensionMap = {
     'zenodo-import': PluginSpec.Behavior(ZenodoImport),
     'sb-ncbr-partial-charges': PluginSpec.Behavior(SbNcbrPartialCharges),
     'wwpdb-chemical-component-dictionary': PluginSpec.Behavior(wwPDBChemicalComponentDictionary),
+    'mvs': PluginSpec.Behavior(MolViewSpec),
+    'tunnels': PluginSpec.Behavior(SbNcbrTunnels),
 };
 
 const DefaultViewerOptions = {
@@ -95,12 +102,12 @@ const DefaultViewerOptions = {
     disableAntialiasing: PluginConfig.General.DisableAntialiasing.defaultValue,
     pixelScale: PluginConfig.General.PixelScale.defaultValue,
     pickScale: PluginConfig.General.PickScale.defaultValue,
-    pickPadding: PluginConfig.General.PickPadding.defaultValue,
-    enableWboit: PluginConfig.General.EnableWboit.defaultValue,
-    enableDpoit: PluginConfig.General.EnableDpoit.defaultValue,
+    transparency: PluginConfig.General.Transparency.defaultValue,
     preferWebgl1: PluginConfig.General.PreferWebGl1.defaultValue,
     allowMajorPerformanceCaveat: PluginConfig.General.AllowMajorPerformanceCaveat.defaultValue,
     powerPreference: PluginConfig.General.PowerPreference.defaultValue,
+    resolutionMode: PluginConfig.General.ResolutionMode.defaultValue,
+    illumination: false,
 
     viewportShowExpand: PluginConfig.Viewport.ShowExpand.defaultValue,
     viewportShowControls: PluginConfig.Viewport.ShowControls.defaultValue,
@@ -115,9 +122,11 @@ const DefaultViewerOptions = {
     emdbProvider: PluginConfig.Download.DefaultEmdbProvider.defaultValue,
     saccharideCompIdMapType: 'default' as SaccharideCompIdMapType,
     volumesAndSegmentationsDefaultServer: VolsegVolumeServerConfig.DefaultServer.defaultValue,
-    rcsbAssemblySymmetryDefaultServerType: RCSBAssemblySymmetryConfig.DefaultServerType.defaultValue,
-    rcsbAssemblySymmetryDefaultServerUrl: RCSBAssemblySymmetryConfig.DefaultServerUrl.defaultValue,
-    rcsbAssemblySymmetryApplyColors: RCSBAssemblySymmetryConfig.ApplyColors.defaultValue,
+    rcsbAssemblySymmetryDefaultServerType: AssemblySymmetryConfig.DefaultServerType.defaultValue,
+    rcsbAssemblySymmetryDefaultServerUrl: AssemblySymmetryConfig.DefaultServerUrl.defaultValue,
+    rcsbAssemblySymmetryApplyColors: AssemblySymmetryConfig.ApplyColors.defaultValue,
+
+    config: [] as [PluginConfigItem, any][],
 };
 type ViewerOptions = typeof DefaultViewerOptions;
 
@@ -174,12 +183,11 @@ export class Viewer {
                 [PluginConfig.General.DisableAntialiasing, o.disableAntialiasing],
                 [PluginConfig.General.PixelScale, o.pixelScale],
                 [PluginConfig.General.PickScale, o.pickScale],
-                [PluginConfig.General.PickPadding, o.pickPadding],
-                [PluginConfig.General.EnableWboit, o.enableWboit],
-                [PluginConfig.General.EnableDpoit, o.enableDpoit],
+                [PluginConfig.General.Transparency, o.transparency],
                 [PluginConfig.General.PreferWebGl1, o.preferWebgl1],
                 [PluginConfig.General.AllowMajorPerformanceCaveat, o.allowMajorPerformanceCaveat],
                 [PluginConfig.General.PowerPreference, o.powerPreference],
+                [PluginConfig.General.ResolutionMode, o.resolutionMode],
                 [PluginConfig.Viewport.ShowExpand, o.viewportShowExpand],
                 [PluginConfig.Viewport.ShowControls, o.viewportShowControls],
                 [PluginConfig.Viewport.ShowSettings, o.viewportShowSettings],
@@ -195,9 +203,10 @@ export class Viewer {
                 [PluginConfig.Structure.DefaultRepresentationPreset, ViewerAutoPreset.id],
                 [PluginConfig.Structure.SaccharideCompIdMapType, o.saccharideCompIdMapType],
                 [VolsegVolumeServerConfig.DefaultServer, o.volumesAndSegmentationsDefaultServer],
-                [RCSBAssemblySymmetryConfig.DefaultServerType, o.rcsbAssemblySymmetryDefaultServerType],
-                [RCSBAssemblySymmetryConfig.DefaultServerUrl, o.rcsbAssemblySymmetryDefaultServerUrl],
-                [RCSBAssemblySymmetryConfig.ApplyColors, o.rcsbAssemblySymmetryApplyColors],
+                [AssemblySymmetryConfig.DefaultServerType, o.rcsbAssemblySymmetryDefaultServerType],
+                [AssemblySymmetryConfig.DefaultServerUrl, o.rcsbAssemblySymmetryDefaultServerUrl],
+                [AssemblySymmetryConfig.ApplyColors, o.rcsbAssemblySymmetryApplyColors],
+                ...(o.config ?? []),
             ]
         };
 
@@ -205,13 +214,17 @@ export class Viewer {
             ? document.getElementById(elementOrId)
             : elementOrId;
         if (!element) throw new Error(`Could not get element with id '${elementOrId}'`);
-        const plugin = await createPluginUI(element, spec, {
+        const plugin = await createPluginUI({
+            target: element,
+            spec,
+            render: renderReact18,
             onBeforeUIRender: plugin => {
                 // the preset needs to be added before the UI renders otherwise
                 // "Download Structure" wont be able to pick it up
                 plugin.builders.structure.representation.registerPreset(ViewerAutoPreset);
             }
         });
+        plugin.canvas3d?.setProps({ illumination: { enabled: o.illumination } });
         return new Viewer(plugin);
     }
 
@@ -275,14 +288,21 @@ export class Viewer {
         }));
     }
 
+    /**
+     * @deprecated Scheduled for removal in v5. Use {@link loadPdbIhm | loadPdbIhm(pdbIhm: string)} instead.
+     */
     loadPdbDev(pdbDev: string) {
+        return this.loadPdbIhm(pdbDev);
+    }
+
+    loadPdbIhm(pdbIhm: string) {
         const params = DownloadStructure.createDefaultParams(this.plugin.state.data.root.obj!, this.plugin);
         return this.plugin.runTask(this.plugin.state.data.applyAction(DownloadStructure, {
             source: {
-                name: 'pdb-dev' as const,
+                name: 'pdb-ihm' as const,
                 params: {
                     provider: {
-                        id: pdbDev,
+                        id: pdbIhm,
                         encoding: 'bcif',
                     },
                     options: params.source.params.options,
@@ -313,7 +333,10 @@ export class Viewer {
             source: {
                 name: 'alphafolddb' as const,
                 params: {
-                    id: afdb,
+                    provider: {
+                        id: afdb,
+                        encoding: 'bcif'
+                    },
                     options: {
                         ...params.source.params.options,
                         representation: 'preset-structure-representation-ma-quality-assessment-plddt'
@@ -419,6 +442,34 @@ export class Viewer {
         });
     }
 
+    loadFullResolutionEMDBMap(emdbId: string, options: { isoValue: Volume.IsoValue, color?: Color }) {
+        const plugin = this.plugin;
+        const numericId = parseInt(emdbId.toUpperCase().replace('EMD-', ''));
+        const url = `https://ftp.ebi.ac.uk/pub/databases/emdb/structures/EMD-${numericId}/map/emd_${numericId}.map.gz`;
+
+        return plugin.dataTransaction(async () => {
+            const data = await plugin.build().toRoot()
+                .apply(StateTransforms.Data.Download, { url, isBinary: true, label: emdbId }, { state: { isGhost: true } })
+                .apply(StateTransforms.Data.DeflateData)
+                .commit();
+
+            const parsed = await plugin.dataFormats.get('ccp4')!.parse(plugin, data, { entryId: emdbId });
+            const firstVolume = (parsed.volume || parsed.volumes[0]) as StateObjectSelector<PluginStateObject.Volume.Data>;
+            if (!firstVolume?.isOk) throw new Error('Failed to parse any volume.');
+
+            const volume: StateObjectSelector<PluginStateObject.Volume.Data> = parsed.volumes?.[0] ?? parsed.volume;
+            await plugin.build()
+                .to(volume)
+                .apply(StateTransforms.Representation.VolumeRepresentation3D, createVolumeRepresentationParams(this.plugin, firstVolume.data!, {
+                    type: 'isosurface',
+                    typeParams: { alpha: 1, isoValue: options.isoValue },
+                    color: 'uniform',
+                    colorParams: { value: options.color ?? Color(0x33BB33) }
+                }))
+                .commit();
+        });
+    }
+
     /**
      * @example
      *  viewer.loadTrajectory({
@@ -467,8 +518,54 @@ export class Viewer {
         return { model, coords, preset };
     }
 
+    async loadMvsFromUrl(url: string, format: 'mvsj' | 'mvsx', options?: { replaceExisting?: boolean, keepCamera?: boolean, extensions?: MolstarLoadingExtension<any>[] }) {
+        if (format === 'mvsj') {
+            const data = await this.plugin.runTask(this.plugin.fetch({ url, type: 'string' }));
+            const mvsData = MVSData.fromMVSJ(data);
+            await loadMVS(this.plugin, mvsData, { sanityChecks: true, sourceUrl: url, ...options });
+        } else if (format === 'mvsx') {
+            const data = await this.plugin.runTask(this.plugin.fetch({ url, type: 'binary' }));
+            await this.plugin.runTask(Task.create('Load MVSX file', async ctx => {
+                const parsed = await loadMVSX(this.plugin, ctx, data);
+                await loadMVS(this.plugin, parsed.mvsData, { sanityChecks: true, sourceUrl: parsed.sourceUrl, ...options });
+            }));
+        } else {
+            throw new Error(`Unknown MolViewSpec format: ${format}`);
+        }
+    }
+
+    /** Load MolViewSpec from `data`.
+     * If `format` is 'mvsj', `data` must be a string or a Uint8Array containing a UTF8-encoded string.
+     * If `format` is 'mvsx', `data` must be a Uint8Array or a string containing base64-encoded binary data prefixed with 'base64,'. */
+    async loadMvsData(data: string | Uint8Array, format: 'mvsj' | 'mvsx', options?: { replaceExisting?: boolean, keepCamera?: boolean, extensions?: MolstarLoadingExtension<any>[] }) {
+        if (typeof data === 'string' && data.startsWith('base64')) {
+            data = Uint8Array.from(atob(data.substring(7)), c => c.charCodeAt(0)); // Decode base64 string to Uint8Array
+        }
+        if (format === 'mvsj') {
+            if (typeof data !== 'string') {
+                data = new TextDecoder().decode(data); // Decode Uint8Array to string using UTF8
+            }
+            const mvsData = MVSData.fromMVSJ(data);
+            await loadMVS(this.plugin, mvsData, { sanityChecks: true, sourceUrl: undefined, ...options });
+        } else if (format === 'mvsx') {
+            if (typeof data === 'string') {
+                throw new Error("loadMvsData: if `format` is 'mvsx', then `data` must be a Uint8Array or a base64-encoded string prefixed with 'base64,'.");
+            }
+            await this.plugin.runTask(Task.create('Load MVSX file', async ctx => {
+                const parsed = await loadMVSX(this.plugin, ctx, data as Uint8Array);
+                await loadMVS(this.plugin, parsed.mvsData, { sanityChecks: true, sourceUrl: parsed.sourceUrl, ...options });
+            }));
+        } else {
+            throw new Error(`Unknown MolViewSpec format: ${format}`);
+        }
+    }
+
     handleResize() {
         this.plugin.layout.events.updated.next(void 0);
+    }
+
+    dispose() {
+        this.plugin.dispose();
     }
 }
 
@@ -528,4 +625,10 @@ export const ViewerAutoPreset = StructureRepresentationPresetProvider({
 
 export const PluginExtensions = {
     wwPDBStructConn: wwPDBStructConnExtensionFunctions,
+    mvs: { MVSData, loadMVS },
+    modelArchive: {
+        qualityAssessment: {
+            config: MAQualityAssessmentConfig
+        }
+    }
 };

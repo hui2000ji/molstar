@@ -1,8 +1,9 @@
 /**
- * Copyright (c) 2019-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2019-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Áron Samuel Kovács <aron.kovacs@mail.muni.cz>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
+ * @author Ludovic Autin <ludovic.autin@gmail.com>
  */
 
 export const ssaoBlur_frag = `
@@ -15,6 +16,7 @@ uniform vec2 uTexSize;
 uniform vec4 uBounds;
 
 uniform float uKernel[dOcclusionKernelSize];
+uniform float uBlurDepthBias;
 
 uniform float uBlurDirectionX;
 uniform float uBlurDirectionY;
@@ -34,7 +36,12 @@ float getViewZ(const in float depth) {
 }
 
 bool isBackground(const in float depth) {
-    return depth == 1.0;
+    // checking for 1.0 is not enough, because of precision issues
+    return depth >= 0.999;
+}
+
+bool isNearClip(const in float depth) {
+    return depth == 0.0;
 }
 
 bool outsideBounds(const in vec2 p) {
@@ -58,15 +65,14 @@ void main(void) {
     }
 
     float selfDepth = unpackRGToUnitInterval(packedDepth);
-    // if background and if second pass
-    if (isBackground(selfDepth) && uBlurDirectionY != 0.0) {
+    // (if background and if second pass) or if near clip
+    if ((isBackground(selfDepth) && uBlurDirectionY != 0.0) || isNearClip(selfDepth)) {
         gl_FragColor = vec4(packUnitIntervalToRG(1.0), packedDepth);
         return;
     }
 
     float selfViewZ = getViewZ(selfDepth);
     float pixelSize = getPixelSize(coords, selfDepth);
-    float maxDiffViewZ = pixelSize * 10.0;
 
     vec2 offset = vec2(uBlurDirectionX, uBlurDirectionY) / uTexSize;
 
@@ -84,15 +90,13 @@ void main(void) {
         vec4 sampleSsaoDepth = texture2D(tSsaoDepth, sampleCoords);
 
         float sampleDepth = unpackRGToUnitInterval(sampleSsaoDepth.zw);
-        if (isBackground(sampleDepth)) {
+        if (isBackground(sampleDepth) || isNearClip(sampleDepth)) {
             continue;
         }
 
-        if (abs(float(i)) > 1.0) {
-            float sampleViewZ = getViewZ(sampleDepth);
-            if (abs(selfViewZ - sampleViewZ) > maxDiffViewZ) {
-                continue;
-            }
+        float sampleViewZ = getViewZ(sampleDepth);
+        if (abs(selfViewZ - sampleViewZ) >= uBlurDepthBias) {
+            continue;
         }
 
         float kernel = uKernel[int(abs(float(i)))]; // abs is not defined for int in webgl1
@@ -101,7 +105,6 @@ void main(void) {
         sum += kernel * sampleValue;
         kernelSum += kernel;
     }
-
     gl_FragColor = vec4(packUnitIntervalToRG(sum / kernelSum), packedDepth);
 }
 `;

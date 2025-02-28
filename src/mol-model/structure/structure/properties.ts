@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017-2022 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2017-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
@@ -112,9 +112,9 @@ const residue = {
 const chain = {
     key: p(l => !Unit.isAtomic(l.unit) ? notAtomic() : l.unit.chainIndex[l.element]),
 
-    label_asym_id: p(l => !Unit.isAtomic(l.unit) ? notAtomic() : l.unit.model.atomicHierarchy.chains.label_asym_id.value(l.unit.chainIndex[l.element])),
+    label_asym_id: p(l => !Unit.isAtomic(l.unit) ? l.unit.coarseElements.asym_id.value(l.element) : l.unit.model.atomicHierarchy.chains.label_asym_id.value(l.unit.chainIndex[l.element])),
     auth_asym_id: p(l => !Unit.isAtomic(l.unit) ? notAtomic() : l.unit.model.atomicHierarchy.chains.auth_asym_id.value(l.unit.chainIndex[l.element])),
-    label_entity_id: p(l => !Unit.isAtomic(l.unit) ? notAtomic() : l.unit.model.atomicHierarchy.chains.label_entity_id.value(l.unit.chainIndex[l.element]))
+    label_entity_id: p(l => !Unit.isAtomic(l.unit) ? l.unit.coarseElements.entity_id.value(l.element) : l.unit.model.atomicHierarchy.chains.label_entity_id.value(l.unit.chainIndex[l.element]))
 };
 
 const coarse = {
@@ -161,7 +161,7 @@ const entity = {
     pdbx_mutation: p(l => l.unit.model.entities.data.pdbx_mutation.value(eK(l))),
     pdbx_fragment: p(l => l.unit.model.entities.data.pdbx_fragment.value(eK(l))),
     pdbx_ec: p(l => l.unit.model.entities.data.pdbx_ec.value(eK(l))),
-
+    pdbx_parent_entity_id: p(l => l.unit.model.entities.data.pdbx_parent_entity_id.value(eK(l))),
     subtype: p(l => l.unit.model.entities.subtype.value(eK(l))),
     prd_id: p(l => l.unit.model.entities.prd_id?.value(eK(l)) ?? ''),
 };

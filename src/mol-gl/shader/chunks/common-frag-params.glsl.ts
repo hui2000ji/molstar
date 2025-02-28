@@ -6,12 +6,16 @@ uniform int uGroupCount;
 uniform int uPickType;
 uniform int uMarkingType;
 
+uniform vec4 uCameraPlane;
+uniform vec4 uLod;
+
 #if dClipObjectCount != 0
     uniform int uClipObjectType[dClipObjectCount];
     uniform bool uClipObjectInvert[dClipObjectCount];
     uniform vec3 uClipObjectPosition[dClipObjectCount];
     uniform vec4 uClipObjectRotation[dClipObjectCount];
     uniform vec3 uClipObjectScale[dClipObjectCount];
+    uniform mat4 uClipObjectTransform[dClipObjectCount];
 
     #if defined(dClipping)
         #if __VERSION__ == 100 || defined(dClippingType_instance) || !defined(dVaryingGroup)
@@ -73,6 +77,7 @@ uniform vec3 uInteriorColor;
 bool interior;
 
 uniform float uXrayEdgeFalloff;
+uniform float uCelSteps;
 uniform float uExposure;
 
 uniform mat4 uProjection;
@@ -109,6 +114,7 @@ vec3 perturbNormal(in vec3 position, in vec3 normal, in float height, in float s
     vec3 r1 = cross(sigmaT, normal);
     vec3 r2 = cross(normal, sigmaS);
     float det = dot(sigmaS, r1);
+    if (det == 0.0) return normal;
 
     float bs = dFdx(height);
     float bt = dFdy(height);
@@ -144,4 +150,15 @@ float fbm(in vec3 p) {
 
     return f;
 }
+
+#ifdef dXrayShaded
+    float calcXrayShadedAlpha(in float alpha, const in vec3 normal) {
+        #if defined(dXrayShaded_on)
+            alpha *= 1.0 - pow(abs(dot(normal, vec3(0.0, 0.0, 1.0))), uXrayEdgeFalloff);
+        #elif defined(dXrayShaded_inverted)
+            alpha *= pow(abs(dot(normal, vec3(0.0, 0.0, 1.0))), uXrayEdgeFalloff);
+        #endif
+        return clamp(alpha, 0.001, 0.999);
+    }
+#endif
 `;

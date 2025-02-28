@@ -41,6 +41,7 @@ export function getFieldType(type: string, description: string, values?: string[
         case 'pdbx_related_db_id':
         case 'sequence_dep':
         case 'pdb_id':
+        case 'pdb_id_u': // should be case insensitve, but can't express that
         case 'emd_id':
         // todo, consider adding specialised fields
         case 'yyyy-mm-dd':
@@ -233,13 +234,19 @@ const FORCE_INT_FIELDS = [
     '_atom_site.id',
     '_atom_site.auth_seq_id',
     '_atom_site_anisotrop.id',
+    '_atom_site_anisotrop.pdbx_auth_seq_id',
     '_pdbx_struct_mod_residue.auth_seq_id',
+    '_pdbx_unobs_or_zero_occ_residues.auth_seq_id',
     '_struct_conf.beg_auth_seq_id',
     '_struct_conf.end_auth_seq_id',
     '_struct_conn.ptnr1_auth_seq_id',
     '_struct_conn.ptnr2_auth_seq_id',
     '_struct_sheet_range.beg_auth_seq_id',
     '_struct_sheet_range.end_auth_seq_id',
+    '_struct_site.pdbx_auth_seq_id',
+    '_struct_site_gen.auth_seq_id',
+    '_struct_mon_prot_cis.auth_seq_id',
+    '_struct_mon_prot_cis.pdbx_auth_seq_id_2',
 ];
 
 /**

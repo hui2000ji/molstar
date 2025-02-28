@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2019-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
@@ -70,7 +70,9 @@ void main(void){
         mapping = vec2(1.0, -1.0);
     }
 
-    vec4 positionGroup = readFromTexture(tPositionGroup, VertexID / 6, uTexDim);
+    int vertexId = VertexID / 6;
+
+    vec4 positionGroup = readFromTexture(tPositionGroup, vertexId, uTexDim);
     vec3 position = positionGroup.rgb;
     float group = positionGroup.a;
 
@@ -82,6 +84,18 @@ void main(void){
     vRadius = size * matrixScale(uModelView);
 
     vec4 position4 = vec4(position, 1.0);
+    vModelPosition = (uModel * aTransform * position4).xyz; // for clipping in frag shader
+
+    float d;
+    if (uLod.w != 0.0 && (uLod.x != 0.0 || uLod.y != 0.0)) {
+        d = dot(uCameraPlane.xyz, vModelPosition) + uCameraPlane.w;
+        float f = min(
+            smoothstep(uLod.x, uLod.x + uLod.z, d),
+            1.0 - smoothstep(uLod.y - uLod.z, uLod.y, d)
+        ) * uLod.w;
+        vRadius *= f;
+    }
+
     vec4 mvPosition = uModelView * aTransform * position4;
 
     #ifdef dApproximate
@@ -103,15 +117,20 @@ void main(void){
     vPoint = vPoint4.xyz / vPoint4.w;
     vPointViewPosition = -mvPosition.xyz / mvPosition.w;
 
-    vModelPosition = (uModel * aTransform * position4).xyz; // for clipping in frag shader
-
     if (gl_Position.z < -gl_Position.w) {
         mvPosition.z -= 2.0 * vRadius; // avoid clipping
         gl_Position.z = (uProjection * vec4(mvPosition.xyz, 1.0)).z;
     }
 
+    if (uLod.w != 0.0 && (uLod.x != 0.0 || uLod.y != 0.0)) {
+        if (d < uLod.x || d > uLod.y) {
+            // move out of [ -w, +w ] to 'discard' in vert shader
+            gl_Position.z = 2.0 * gl_Position.w;
+        }
+    }
+
     #if defined(dClipPrimitive) && !defined(dClipVariant_instance) && dClipObjectCount != 0
-        if (clipTest(vec4(vModelPosition.xyz, 0.0))) {
+        if (clipTest(vModelPosition)) {
             // move out of [ -w, +w ] to 'discard' in vert shader
             gl_Position.z = 2.0 * gl_Position.w;
         }

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2017-2022 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
- * Code-generated 'mmCIF' schema file. Dictionary versions: mmCIF 5.381, IHM 1.23, MA 1.4.5.
+ * Code-generated 'mmCIF' schema file. Dictionary versions: mmCIF 5.401, IHM 1.27, MA 1.4.7.
  *
  * @author molstar/ciftools package
  */
@@ -290,7 +290,7 @@ export const mmCIF_Schema = {
         /**
          * Pointer to _atom_site.auth_seq_id
          */
-        pdbx_auth_seq_id: str,
+        pdbx_auth_seq_id: int,
         /**
          * Pointer to _atom_site.auth_asym_id
          */
@@ -705,7 +705,7 @@ export const mmCIF_Schema = {
         /**
          * An abbreviation that identifies the database.
          */
-        database_id: Aliased<'alphafolddb' | 'cas' | 'csd' | 'emdb' | 'icsd' | 'modelarchive' | 'mdf' | 'modbase' | 'ndb' | 'nbs' | 'pdb' | 'pdf' | 'rcsb' | 'swiss-model_repository' | 'ebi' | 'pdbe' | 'bmrb' | 'wwpdb' | 'pdb_acc'>(lstr),
+        database_id: Aliased<'alphafolddb' | 'cas' | 'csd' | 'emdb' | 'icsd' | 'modelarchive' | 'mdf' | 'modbase' | 'ndb' | 'nbs' | 'pdb' | 'pdb-dev' | 'pdf' | 'rcsb' | 'swiss-model_repository' | 'ebi' | 'pdbe' | 'bmrb' | 'wwpdb' | 'pdb_acc'>(lstr),
         /**
          * The code assigned by the database identified in
          * _database_2.database_id.
@@ -794,6 +794,14 @@ export const mmCIF_Schema = {
          */
         pdbx_number_of_molecules: int,
         /**
+         * An identifier for the parent entity if this entity
+         * is part of a complex entity.  For instance a chimeric
+         * entity may be decomposed into several independent
+         * chemical entities where each component entity was
+         * obtained from a different source.
+         */
+        pdbx_parent_entity_id: str,
+        /**
          * Details about any entity mutation(s).
          */
         pdbx_mutation: str,
@@ -876,7 +884,7 @@ export const mmCIF_Schema = {
          * (DT) for Thymidine-5'-monophosphate
          * (MSE) for Selenomethionine
          * (SEP) for Phosphoserine
-         * (PTO) for Phosphothreonine
+         * (TPO) for Phosphothreonine
          * (PTR) for Phosphotyrosine
          * (PCA) for Pyroglutamic acid
          * (UNK) for Unknown amino acid
@@ -1025,6 +1033,10 @@ export const mmCIF_Schema = {
          * and to distinguish this structural result from others.
          */
         title: str,
+        /**
+         * Indicates if the structure was determined using experimental, computational, or integrative methods
+         */
+        pdbx_structure_determination_methodology: Aliased<'experimental' | 'integrative' | 'computational'>(str),
         /**
          * An automatically generated descriptor for an NDB structure or
          * the unstructured content of the PDB COMPND record.
@@ -1484,6 +1496,116 @@ export const mmCIF_Schema = {
         pdbx_keywords: str,
     },
     /**
+     * Data items in the STRUCT_MON_PROT_CIS category identify
+     * monomers that have been found to have the peptide bond in the cis
+     * conformation. The criterion used to select residues to be
+     * designated as containing cis peptide bonds is given in
+     * _struct_mon_details.prot_cis.
+     */
+    struct_mon_prot_cis: {
+        /**
+         * A component of the identifier for the monomer.
+         *
+         * This data item is a pointer to _atom_sites_alt.id in the
+         * ATOM_SITES_ALT category.
+         */
+        label_alt_id: str,
+        /**
+         * A component of the identifier for the monomer.
+         *
+         * This data item is a pointer to _atom_site.label_asym_id in the
+         * ATOM_SITE category.
+         */
+        label_asym_id: str,
+        /**
+         * A component of the identifier for the monomer.
+         *
+         * This data item is a pointer to _atom_site.label_comp_id in the
+         * ATOM_SITE category.
+         */
+        label_comp_id: str,
+        /**
+         * A component of the identifier for the monomer.
+         *
+         * This data item is a pointer to _atom_site.label_seq_id in the
+         * ATOM_SITE category.
+         */
+        label_seq_id: int,
+        /**
+         * A component of the identifier for the monomer.
+         *
+         * This data item is a pointer to _atom_site.auth_asym_id in the
+         * ATOM_SITE category.
+         */
+        auth_asym_id: str,
+        /**
+         * A component of the identifier for the monomer.
+         *
+         * This data item is a pointer to _atom_site.auth_comp_id in the
+         * ATOM_SITE category.
+         */
+        auth_comp_id: str,
+        /**
+         * A component of the identifier for the monomer.
+         *
+         * This data item is a pointer to _atom_site.auth_seq_id in the
+         * ATOM_SITE category.
+         */
+        auth_seq_id: int,
+        /**
+         * Pointer to _atom_site.auth_asym_id.
+         */
+        pdbx_auth_asym_id_2: str,
+        /**
+         * Pointer to _atom_site.auth_comp_id.
+         */
+        pdbx_auth_comp_id_2: str,
+        /**
+         * Pointer to _atom_site.auth_seq_id
+         */
+        pdbx_auth_seq_id_2: int,
+        /**
+         * Pointer to _atom_site.label_asym_id.
+         */
+        pdbx_label_asym_id_2: str,
+        /**
+         * Pointer to _atom_site.label_comp_id.
+         */
+        pdbx_label_comp_id_2: str,
+        /**
+         * Pointer to _atom_site.label_seq_id
+         */
+        pdbx_label_seq_id_2: int,
+        /**
+         * Pointer to _atom_site.pdbx_PDB_ins_code
+         */
+        pdbx_PDB_ins_code: str,
+        /**
+         * Pointer to _atom_site.pdbx_PDB_ins_code
+         */
+        pdbx_PDB_ins_code_2: str,
+        /**
+         * Pointer to _atom_site.pdbx_PDB_model_num
+         */
+        pdbx_PDB_model_num: int,
+        /**
+         * omega torsion angle
+         */
+        pdbx_omega_angle: str,
+        /**
+         * ordinal index
+         */
+        pdbx_id: str,
+        /**
+         * PDB Insertion code
+         */
+        pdbx_auth_ins_code: str,
+        /**
+         * PDB Insertion code
+         */
+        pdbx_auth_ins_code_2: str,
+    },
+    /**
      * Data items in the STRUCT_NCS_OPER category describe the
      * noncrystallographic symmetry operations.
      *
@@ -1699,7 +1821,7 @@ export const mmCIF_Schema = {
          * This data item is a pointer to _atom_site.auth_seq_id in the
          * ATOM_SITE category.
          */
-        pdbx_auth_seq_id: str,
+        pdbx_auth_seq_id: int,
         /**
          * PDB insertion code for the ligand in the site.
          */
@@ -1769,6 +1891,13 @@ export const mmCIF_Schema = {
         /**
          * A component of the identifier for participants in the site.
          *
+         * This data item is a pointer to _atom_site.auth_atom_id in the
+         * ATOM_SITE category.
+         */
+        auth_atom_id: str,
+        /**
+         * A component of the identifier for participants in the site.
+         *
          * This data item is a pointer to _atom_site.auth_comp_id in the
          * ATOM_SITE category.
          */
@@ -1779,7 +1908,7 @@ export const mmCIF_Schema = {
          * This data item is a pointer to _atom_site.auth_seq_id in the
          * ATOM_SITE category.
          */
-        auth_seq_id: str,
+        auth_seq_id: int,
         /**
          * This data item is a pointer to _struct_site.id in the STRUCT_SITE
          * category.
@@ -1799,6 +1928,21 @@ export const mmCIF_Schema = {
          * Number of residues in the site.
          */
         pdbx_num_res: int,
+    },
+    /**
+     * Data items in the STRUCT_SITE_KEYWORDS category record
+     * keywords describing the site.
+     */
+    struct_site_keywords: {
+        /**
+         * This data item is a pointer to _struct_site.id in the STRUCT_SITE
+         * category.
+         */
+        site_id: str,
+        /**
+         * Keywords describing this site.
+         */
+        text: str,
     },
     /**
      * Data items in the SYMMETRY category record details about the
@@ -1954,7 +2098,7 @@ export const mmCIF_Schema = {
         /**
          * The name of the database containing the related entry.
          */
-        db_name: str,
+        db_name: Aliased<'BIOISIS' | 'BMCD' | 'BMRB' | 'EMDB' | 'NDB' | 'PDB' | 'PDB-Dev' | 'SASBDB' | 'TargetDB' | 'TargetTrack'>(str),
         /**
          * A description of the related entry.
          */
@@ -1966,7 +2110,7 @@ export const mmCIF_Schema = {
         /**
          * The identifying content type of the related entry.
          */
-        content_type: Aliased<'minimized average structure' | 'representative structure' | 'ensemble' | 'derivative structure' | 'native structure' | 'associated EM volume' | 'other EM volume' | 'associated NMR restraints' | 'associated structure factors' | 'associated SAS data' | 'protein target sequence and/or protocol data' | 'split' | 're-refinement' | 'complete structure' | 'unspecified' | 'other'>(str),
+        content_type: Aliased<'minimized average structure' | 'representative structure' | 'ensemble' | 'derivative structure' | 'native structure' | 'associated EM volume' | 'other EM volume' | 'focused EM volume' | 'consensus EM volume' | 'associated NMR restraints' | 'associated structure factors' | 'associated SAS data' | 'protein target sequence and/or protocol data' | 'split' | 're-refinement' | 'complete structure' | 'unspecified' | 'other'>(str),
     },
     /**
      * The PDBX_ENTITY_NONPOLY category provides a mapping between
@@ -2082,7 +2226,7 @@ export const mmCIF_Schema = {
          * This data item is a pointer to _atom_site.auth_seq_id in the
          * ATOM_SITE category.
          */
-        auth_seq_id: str,
+        auth_seq_id: int,
         /**
          * Part of the identifier for the unobserved or zero occupancy residue.
          *
@@ -3508,7 +3652,7 @@ export const mmCIF_Schema = {
     },
     /**
      * Data items in the IHM_MODEL_LIST category record the
-     * details of the models being deposited.
+     * details of the structure models being deposited.
      */
     ihm_model_list: {
         /**
@@ -3540,7 +3684,7 @@ export const mmCIF_Schema = {
     },
     /**
      * IHM_MODEL_GROUP category defines collections or groups of integrative
-     * structural models.
+     * structure models.
      */
     ihm_model_group: {
         /**
@@ -3568,8 +3712,8 @@ export const mmCIF_Schema = {
         details: str,
     },
     /**
-     * IHM_MODEL_GROUP_LINK category provides the list of models present in
-     * a particular model group.
+     * IHM_MODEL_GROUP_LINK category provides the list of structure models present in
+     * a particular structure model group.
      */
     ihm_model_group_link: {
         /**
@@ -3587,7 +3731,7 @@ export const mmCIF_Schema = {
     },
     /**
      * Data items in the IHM_MODEL_REPRESENTATIVE category record the
-     * details of the representative model in an ensemble or cluster.
+     * details of the representative structure model in an ensemble or cluster.
      */
     ihm_model_representative: {
         /**
@@ -3628,7 +3772,7 @@ export const mmCIF_Schema = {
         /**
          * The type of data held in the dataset.
          */
-        data_type: Aliased<'NMR data' | '3DEM volume' | '2DEM class average' | 'EM raw micrographs' | 'X-ray diffraction data' | 'SAS data' | 'CX-MS data' | 'Mass Spectrometry data' | 'EPR data' | 'H/D exchange data' | 'Single molecule FRET data' | 'Ensemble FRET data' | 'Experimental model' | 'Comparative model' | 'Integrative model' | 'De Novo model' | 'Predicted contacts' | 'Mutagenesis data' | 'DNA footprinting data' | 'Hydroxyl radical footprinting data' | 'Yeast two-hybrid screening data' | 'Quantitative measurements of genetic interactions' | 'Other'>(str),
+        data_type: Aliased<'NMR data' | '3DEM volume' | '2DEM class average' | 'EM raw micrographs' | 'X-ray diffraction data' | 'SAS data' | 'CX-MS data' | 'Crosslinking-MS data' | 'Mass Spectrometry data' | 'EPR data' | 'H/D exchange data' | 'Single molecule FRET data' | 'Ensemble FRET data' | 'Experimental model' | 'Comparative model' | 'Integrative model' | 'De Novo model' | 'Predicted contacts' | 'Mutagenesis data' | 'DNA footprinting data' | 'Hydroxyl radical footprinting data' | 'Yeast two-hybrid screening data' | 'Quantitative measurements of genetic interactions' | 'Other'>(str),
         /**
          * A flag that indicates whether the dataset is archived in
          * an IHM related database or elsewhere.
@@ -3650,7 +3794,7 @@ export const mmCIF_Schema = {
         /**
          * The application / utilization of the dataset group in modeling.
          */
-        application: Aliased<'restraint' | 'validation' | 'filter' | 'representation' | 'sampling' | 'other'>(str),
+        application: Aliased<'restraint' | 'validation' | 'filter' | 'representation' | 'sampling' | 'modeling' | 'other'>(str),
         /**
          * Additional details regarding the dataset group.
          */
@@ -3710,7 +3854,7 @@ export const mmCIF_Schema = {
         /**
          * The name of the database containing the dataset entry.
          */
-        db_name: Aliased<'PDB' | 'PDB-Dev' | 'BMRB' | 'EMDB' | 'EMPIAR' | 'SASBDB' | 'PRIDE' | 'MODEL ARCHIVE' | 'MASSIVE' | 'BioGRID' | 'ProXL' | 'jPOSTrepo' | 'iProX' | 'AlphaFoldDB' | 'Other'>(str),
+        db_name: Aliased<'PDB' | 'PDB-Dev' | 'BMRB' | 'EMDB' | 'EMPIAR' | 'SASBDB' | 'PRIDE' | 'MODEL ARCHIVE' | 'MASSIVE' | 'BioGRID' | 'ProXL' | 'jPOSTrepo' | 'iProX' | 'AlphaFoldDB' | 'ProteomeXchange' | 'BMRbig' | 'Other'>(str),
         /**
          * The accession code for the database entry.
          */
@@ -4037,7 +4181,7 @@ export const mmCIF_Schema = {
         /**
          * The type of crosslinker used.
          */
-        linker_type: Aliased<'EDC' | 'DSS' | 'EGS' | 'BS3' | 'BS2G' | 'DST' | 'sulfo-SDA' | 'sulfo-SMCC' | 'DSSO' | 'DSG' | 'BSP' | 'BMSO' | 'DHSO' | 'CYS' | 'SDA' | 'DSA' | 'BrdU' | 'LCSDA' | 'CDI' | 'ADH' | 'L-Photo-Leucine' | 'KArGO' | 'BrEtY' | 'DSBU' | 'DSPP' | 'TBDSPP' | 'Other'>(str),
+        linker_type: Aliased<'EDC' | 'DSS' | 'EGS' | 'BS3' | 'BS2G' | 'DST' | 'sulfo-SDA' | 'sulfo-SMCC' | 'DSSO' | 'DSG' | 'BSP' | 'BMSO' | 'DHSO' | 'CYS' | 'SDA' | 'DSA' | 'BrdU' | 'LCSDA' | 'CDI' | 'ADH' | 'L-Photo-Leucine' | 'KArGO' | 'BrEtY' | 'DSBU' | 'DSPP' | 'TBDSPP' | 'DMTMM' | 'PDH' | 'Other'>(str),
         /**
          * Identifier to the crosslinking dataset.
          * This data item is a pointer to the _ihm_dataset_list.id in the
@@ -4795,25 +4939,19 @@ export const mmCIF_Schema = {
      */
     ma_model_list: {
         /**
-         * A unique identifier for the model / model group combination.
+         * A unique identifier for the structural model being deposited.
          */
         ordinal_id: int,
         /**
          * A unique identifier for the structural model being deposited.
+         * This data item was practically a duplicate of _ma_model_list.ordinal_id
+         * and has been deprecated with dictionary version 1.4.7.
          */
         model_id: int,
         /**
          * An identifier to group structural models into collections or sets.
-         * A cluster of models and its representative can either be grouped together
-         * or can be separate groups in the ma_model_list table. The choice between
-         * the two options should be decided based on how the modeling was carried out
-         * and how the representative was chosen. If the representative is a member of
-         * the ensemble (i.e., best scoring model), then it is recommended that the
-         * representative and the ensemble belong to the same model group. If the
-         * representative is calculated from the ensemble (i.e., centroid), then it is
-         * recommended that the representative be separated into a different group.
-         * If the models do not need to be grouped into collections, then the
-         * _ma_model_list.model_group_id is the same as _ma_model_list.model_id.
+         * This data item has been deprecated with dictionary version 1.4.7.
+         * See ma_model_group category.
          */
         model_group_id: int,
         /**
@@ -4822,6 +4960,8 @@ export const mmCIF_Schema = {
         model_name: str,
         /**
          * A decsriptive name for the model group.
+         * This data item has been deprecated with dictionary version 1.4.7.
+         * See ma_model_group category.
          */
         model_group_name: str,
         /**
@@ -4987,11 +5127,11 @@ export const mmCIF_Schema = {
         /**
          * The type of QA metric.
          */
-        type: Aliased<'zscore' | 'energy' | 'distance' | 'normalized score' | 'pLDDT' | 'pLDDT in [0,1]' | 'pLDDT all-atom' | 'pLDDT all-atom in [0,1]' | 'PAE' | 'pTM' | 'ipTM' | 'contact probability' | 'other'>(str),
+        type: Aliased<'zscore' | 'energy' | 'distance' | 'normalized score' | 'pLDDT' | 'pLDDT in [0,1]' | 'pLDDT all-atom' | 'pLDDT all-atom in [0,1]' | 'pLDDT to polymer' | 'PAE' | 'pTM' | 'ipTM' | 'contact probability' | 'boolean' | 'other'>(str),
         /**
          * The mode of calculation of the QA metric.
          */
-        mode: Aliased<'local' | 'global' | 'local-pairwise'>(str),
+        mode: Aliased<'local' | 'global' | 'local-pairwise' | 'per-feature' | 'per-feature-pair'>(str),
         /**
          * Identifier to the set of software used to calculate the QA metric.
          * This data item is a pointer to the _ma_software_group.group_id in the
@@ -5010,7 +5150,7 @@ export const mmCIF_Schema = {
         ordinal_id: int,
         /**
          * The identifier for the structural model, for which global QA metric is provided.
-         * This data item is a pointer to _ma_model_list.model_id
+         * This data item is a pointer to _ma_model_list.ordinal_id
          * in the MA_MODEL_LIST category.
          */
         model_id: int,
@@ -5028,6 +5168,10 @@ export const mmCIF_Schema = {
     /**
      * Data items in the MA_QA_METRIC_LOCAL category captures the
      * details of the local QA metrics, calculated at the residue-level.
+     * Data in this category can be extracted into a separate file which
+     * is linked to the main file using the categories
+     * ma_associated_archive_file_details or ma_entry_associated_files
+     * with file_content set to "QA metrics".
      */
     ma_qa_metric_local: {
         /**
@@ -5036,7 +5180,7 @@ export const mmCIF_Schema = {
         ordinal_id: int,
         /**
          * The identifier for the structural model, for which local QA metric is provided.
-         * This data item is a pointer to _ma_model_list.model_id
+         * This data item is a pointer to _ma_model_list.ordinal_id
          * in the MA_MODEL_LIST category.
          */
         model_id: int,
@@ -5061,6 +5205,83 @@ export const mmCIF_Schema = {
          * in the ATOM_SITE category.
          */
         label_comp_id: str,
+        /**
+         * The identifier for the QA metric.
+         * This data item is a pointer to _ma_qa_metric.id in the
+         * MA_QA_METRIC category.
+         */
+        metric_id: int,
+        /**
+         * The value of the local QA metric.
+         */
+        metric_value: float,
+    },
+    /**
+     * Data items in the MA_QA_METRIC_LOCAL_PAIRWISE category captures the
+     * details of the local QA metrics, calculated at the pairwise residue level.
+     * In cases where the metric is symmetric, it is enough to store just one value per pair.
+     * For asymmetric metrics, the order of residues is expected to be meaningful
+     * (e.g. PAE where PAE_ij is defined by aligning residue i (label_*_1) and measuring
+     * the error on residue j (label_*_2)).
+     * In all cases, it is perfectly valid to only provide values for a subset of residue pairs.
+     * Data in this category is expected to be very large and can be extracted into a
+     * separate file which is linked to the main file using the categories
+     * ma_associated_archive_file_details or ma_entry_associated_files with file_content
+     * set to "QA metrics".
+     */
+    ma_qa_metric_local_pairwise: {
+        /**
+         * A unique identifier for the category.
+         */
+        ordinal_id: int,
+        /**
+         * The identifier for the structural model, for which local QA metric is provided.
+         * This data item is a pointer to _ma_model_list.ordinal_id
+         * in the MA_MODEL_LIST category.
+         */
+        model_id: int,
+        /**
+         * The identifier for the asym id of the first residue in the
+         * pair, for which local QA metric is provided.
+         * This data item is a pointer to _atom_site.label_asym_id
+         * in the ATOM_SITE category.
+         */
+        label_asym_id_1: str,
+        /**
+         * The identifier for the sequence index of the first residue
+         * in the pair, for which local QA metric is provided.
+         * This data item is a pointer to _atom_site.label_seq_id
+         * in the ATOM_SITE category.
+         */
+        label_seq_id_1: int,
+        /**
+         * The component identifier for the first residue in the
+         * pair, for which local QA metric is provided.
+         * This data item is a pointer to _atom_site.label_comp_id
+         * in the ATOM_SITE category.
+         */
+        label_comp_id_1: str,
+        /**
+         * The identifier for the asym id of the second residue in the
+         * pair, for which local QA metric is provided.
+         * This data item is a pointer to _atom_site.label_asym_id
+         * in the ATOM_SITE category.
+         */
+        label_asym_id_2: str,
+        /**
+         * The identifier for the sequence index of the second residue
+         * in the pair, for which local QA metric is provided.
+         * This data item is a pointer to _atom_site.label_seq_id
+         * in the ATOM_SITE category.
+         */
+        label_seq_id_2: int,
+        /**
+         * The component identifier for the second residue in the
+         * pair, for which local QA metric is provided.
+         * This data item is a pointer to _atom_site.label_comp_id
+         * in the ATOM_SITE category.
+         */
+        label_comp_id_2: str,
         /**
          * The identifier for the QA metric.
          * This data item is a pointer to _ma_qa_metric.id in the

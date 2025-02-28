@@ -3,8 +3,393 @@ All notable changes to this project will be documented in this file, following t
 
 Note that since we don't clearly distinguish between a public and private interfaces there will be changes in non-major versions that are potentially breaking. If we make breaking changes to less used interfaces we will highlight it in here.
 
-
 ## [Unreleased]
+
+## [v4.12.0] - 2025-02-28
+
+- Fix PDBj structure data URL
+- Improve logic when to cull in renderer
+- Add `atom.ihm.has-seq-id` and `atom.ihm.overlaps-seq-id-range` symbol to the query language
+- MolViewSpec extension:
+  - Add box, arrow, ellipse, ellipsoid, angle primitives
+  - Add basic support for volumetric data (map, Volume Server)
+  - Add support for `molstar_color_theme_name` custom extension
+  - Better IH/M support:
+    - Support `coarse` components
+    - Support `spacefill` representation
+    - Support `carbohydrate` representation
+    - Support for `custom.molstar_use_default_coloring` property on Color node.
+    - Use `atom.ihm.has-seq-id` and `atom.ihm.overlaps-seq-id-range` for matching `label_seq_id` locations to support querying coarse elements.
+    - Add ihm-restraints example
+- Add `mvs-kinase-story` example
+- Remove static uses of `ColorTheme` and `SizeTheme` fields. Should resolvent "undefined" errors in certain builds
+- Add `transform` property to clip objects
+- Add support for trimming `image` geometry to a box
+- Improve/fix iso-level support of `slice` representation
+- Add support for rotating `slice` representation around an axis
+- Add default color support for palette based themes
+- Add `plane` structure representation
+    - Can be colored with any structure theme
+    - Can be colored with the `external-volume` theme
+    - Can show atoms as a cutout
+    - Supports principal axes and bounding box as a reference frame
+- Add `Camera` section to "Screenshot / State" controls
+- Add `CoarseIndex` for fast lookup of coarse elements
+
+## [v4.11.0] - 2025-01-26
+
+- Fix for tubular helices issue (Fixes #1422)
+- Volume UI improvements
+    - Render all volume entries instead of selecting them one-by-one
+    - Toggle visibility of all volumes
+    - More accessible iso value control
+- Support wheel event on sliders
+- MolViewSpec extension:
+    - Add validation for discriminated union params
+    - Primitives: remove triangle_colors, line_colors, have implicit grouping instead; rename many parameters
+- UI configuration options
+    - Support removal of independent selection controls in the viewport
+    - Support custom selection controls
+    - Support for custom granularity dropdown options
+    - Support for custom Sequence Viewer mode options
+- Add `external-structure` theme that colors any geometry by structure properties
+- Support float and half-float data type for direct-volume rendering and GPU isosurface extraction
+- Minor documentation updates
+- Add support for position-location to `volume-value` color theme
+- Add support for color themes to `slice` representation
+- Improve/fix palette support in volume color themes
+- Fix `Plane3D.projectPoint`
+- Fix marking related `image` rendering issues
+    - Handle pixels without a group
+    - Take fog into account
+- MolViewSpec extension: Initial support for customizable representation parameters
+- Quick Styles section reorganized
+- UI color improvements (scrollbar contrast, toggle button hover color)
+- Add `overrideWater` param for entity-id color theme
+- Renames PDB-Dev to PDB-IHM and adjusts data source
+- Fix vertex based themes for spheres shader
+- Add volume dot representation
+- Add volume-value size theme
+- Sequence panel: Mark focused loci (bold+underline)
+- Change modifier key behavior in Normal Mode (default = select only, Ctrl/Cmd = add to selection, Shift = extend last selected range)
+- Handle Firefox's limit on vertex ids per draw (#1116)
+- Fix behavior of `Vec3.makeRotation(out, a, b)` when `a ≈ -b`
+
+## [v4.10.0] - 2024-12-15
+
+- Add `ModelWithCoordinates` decorator transform.
+- Fix outlines on transparent background using illumination mode (#1364)
+- Fix transparent depth texture artifacts using illumination mode
+- Fix marking of consecutive gap elements (#876)
+- Allow React 19 in dependencies
+- Fix missing deflate header if `CompressionStream` is available
+- Fix is_iOS check for NodeJS
+- Added PluginCommands.Camera.FocusObject
+- Plugin state snapshot can have instructions to focus objects (PluginState.Snapshot.camera.focus)
+- MolViewSpec extension: Support for multi-state files (animations)
+- Fix units transform data not fully updated when structure child changes
+- Fix `addIndexPairBonds` quadratic runtime case
+- Use adjoint matrix to transform normals in shaders
+- Fix resize handling in `tests/browser`
+
+## [v4.9.1] - 2024-12-05
+
+- Fix iOS check when running on Node
+
+## [v4.9.0] - 2024-12-01
+
+- Fix artifacts when using xray shading with high xrayEdgeFalloff values
+- Enable double rounded capping on tubular helices
+- Fix single residue tubular helices not showing up
+- Fix outlines on volume and surface reps that do not disappear (#1326)
+- Add example `glb-export`
+- Membrane orientation: Improve `isApplicable` check and error handling (#1316)
+- Fix set fenceSync to null after deleteSync.
+- Fix operator key-based `IndexPairBonds` assignment
+    - Don't add bonds twice
+    - Add `IndexPairs.bySameOperator` to avoid looping over all bonds for each unit
+- Add `Structure.intraUnitBondMapping`
+- Add more structure-based visuals to avoid too many (small) render-objects
+    - `structure-intra-bond`, `structure-ellipsoid-mesh`, `structure-element-point`, `structure-element-cross`
+- Upgrade to express v5 (#1311)
+- Fix occupancy check using wrong index for inter-unit bond computation (@rxht, #1321)
+- Fix transparent SSAO for image rendering, e.g., volumne slices (#1332)
+- Fix bonds not shown with `ignoreHydrogens` on (#1315)
+    - Better handle mmCIF files with no entities defined by using `label_asym_id`
+    - Show bonds in water chains when `ignoreHydorgensVariant` is `non-polar`
+- Add MembraneServer API, generating data to be consumed in the context of MolViewSpec
+- Fix `StructConn.isExhaustive` for partial models (e.g., returned by the model server)
+- Refactor value swapping in molstar-math to fix SWC (Next.js) build (#1345)
+- Fix transform data not updated when structure child changes
+- Fix `PluginStateSnapshotManager.syncCurrent` to work as expected on re-loaded states.
+- Fix do not compute implicit hydrogens when unit is explicitly protonated (#1257)
+- ModelServer and VolumeServer: support for input files from Google Cloud Storage (gs://)
+- Fix color of missing partial charges for SB partial charges extension
+
+## [v4.8.0] - 2024-10-27
+
+- Add SSAO support for transparent geometry
+- Fix SSAO color not updating
+- Improve blending of overlapping outlines from transparent & opaque geometries
+- Default to `blended` transparency on iOS due to `wboit` not being supported.
+- Fix direct-volume with fog off (and on with `dpoit`) and transparent background on (#1286)
+- Fix missing pre-multiplied alpha for `blended` & `wboit` with no fog (#1284)
+- Fix backfaces visible using blended transparency on impostors (#1285)
+- Fix StructureElement.Loci.isSubset() only considers common units (#1292)
+- Fix `Scene.opacityAverage` calculation never 1
+- Fix bloom in illumination mode
+- Fix `findPredecessorIndex` bug when repeating values
+- MolViewSpec: Support for transparency and custom properties
+- MolViewSpec: MVP Support for geometrical primitives (mesh, lines, line, label, distance measurement)
+- Mesoscale Explorer: Add support for 4-character PDB IDs (e.g., 8ZZC) in PDB-IHM/PDB-Dev loader
+- Fix Sequence View in Safari 18
+- Improve performance of `IndexPairBonds` assignment when operator keys are available
+- ModelArchive QualityAssessment extension:
+    - Add support for ma_qa_metric_local_pairwise mmCIF category
+    - Add PAE plot component
+- Add new AlphaFoldDB-PAE example app
+- Add support for LAMMPS data and dump formats
+- Remove extra anti-aliasing from text shader (fixes #1208 & #1306)
+
+## [v4.7.1] - 2024-09-30
+
+- Improve `resolutionMode` (#1279)
+    - Add `auto` that picks `scaled` for mobile devices and `native` elsewhere
+    - Add `resolution-mode` Viewer GET param
+    - Add `PluginConfig.General.ResolutionMode` config item
+
+## [v4.7.0] - 2024-09-29
+
+- Add illumination mode
+    - Path-traced SSGI
+    - Automatic thickness (estimate)
+        - Base thickness as max(backface depth) - min(frontface depth)
+        - Per object density factor to adjust thickness
+    - Progressively trace samples to keep viewport interactive
+    - Toggle on/off by pressing "G"
+    - `illumination` Viewer GET param
+- Enables dXrayShaded define when rendering depth
+- Fix handling of PDB files that have chains with same id separated by TER record (#1245)
+- Sequence Panel: Improve visuals of unmodeled sequence positions (#1248)
+- Fix no-compression xtc parser (#1258)
+- Mol2 Reader: Fix mol2 status_bit read error (#1251)
+- Fix shadows with multiple lights
+- Fix impostor sphere interior normal when using orthographic projection
+- Add `resolutionMode` parameter to `Canvas3DContext`
+    - `scaled`, divides by `devicePixelRatio`
+    - `native`, no changes
+- Add `CustomProperty.Context.errorContext` to support reporting errors during loading of custom properties (#1254)
+    - Use in MolViewSpec extension
+- Mesoscale Explorer: fix color & style issues
+- Remove use of deprecated SASS explicit color functions
+- Allow "Components" section to display nested components created by "Apply Action > Selection".
+
+## [v4.6.0] - 2024-08-28
+
+- Add round-caps option on tubular alpha helices
+- Fix missing Sequence UI update on state object removal (#1219)
+- Improved prmtop format support (CTITLE, %COMMENT)
+- Avoid calculating bonds for water units when `ignoreHydrogens` is on
+- Add `Water` trait to `Unit`
+- Improve entity-id coloring for structures with multiple models from the same source (#1221)
+- Wrap screenshot & image generation in a `Task`
+- AlphaFold DB: Add BinaryCIF support when fetching data
+- PDB-IHM/PDB-Dev: Add support for 4-character PDB IDs (e.g., 8ZZC)
+- Fix polymer-gap visual coloring with cartoon theme
+- Add formal-charge color theme (#328)
+- Add more coloring options to cartoon theme
+- Use `CompressionStream` Browser API when available
+- Add `pdbx_structure_determination_methodology` mmcif field and `Model` helpers
+- Fix cartoon representation not updated when secondary structure changes
+- Add Zhang-Skolnick secondary-structure assignment method which handles coarse-grained models (#49)
+- Calculate bonds for coarse-grained models
+- VolumeServer: Add `health-check` endpoint + `healthCheckPath` config prop to report service health
+- ModelServer: Add `health-check` endpoint + `healthCheckPath` config prop to report service health
+
+## [v4.5.0] - 2024-07-28
+
+- Separated postprocessing passes
+- Take into account explicit hydrogens when computing hydrogen bonds
+- Fix DoF with pixel ratios =! 1
+- Fix DoF missing transparent depth
+- Fix trackball pinch zoom and add pan
+- Fix aromatic link rendering when `adjustCylinderLength` is true
+- Change trackball animate spin speed unit to radians per second
+- Fix `mol-plugin-ui/skin/base/components/misc.scss` syntax to be in line with latest Sass syntax
+- Handle missing theme updates
+    - Fix trajectory-index color-theme not always updated (#896)
+    - Fix bond cylinders not updated on size-theme change with `adjustCylinderLength` enabled (#1215)
+- Use `OES_texture_float_linear` for SSAO when available
+
+## [v4.4.1] - 2024-06-30
+
+- Clean `solidInterior` transparent cylinders
+- Create a transformer to deflate compressed data
+- Adjust Quick Styles panel button labels
+- Improve camera interpolation code (interpolate camera rotation instead of just position)
+- Mesoscale Explorer
+    - Add `illustrative` coloring option
+    - Press 'C' to toggle between center and zoom & center on click
+    - Add entities selection description
+    - Clicking a leaf node in the right panel tree will center each instance in turn
+    - Add measurement controls to right panel
+    - Mouse left click on label with snapshot key will load snapshot
+    - Mouse hover over label with protein name highlight entities with the same name
+    - Custom ViewportSnapshotDescription with custom MarkdowAnchor
+        - \# other snapshots with a given key \[...](#key)
+        - i highlight a protein with a given NAME \[...](iNAME)
+        - g highlight a group with a given group type and group name \[...](ggrouptype.groupname)
+        - h URLs with a given link \[...](http...)
+    - Snapshot description panel window size and text can be resized and hidden with new icons
+    - Add styles controls to right panel
+    - Add viewport settings to left panel
+    - Add app info component to left panel with interactive tour and doc link
+- Fixes SSAO edge artifacts (#1122)
+    - Add `reuseOcclusion` parameter to multi-sample pass
+    - Add `blurDepthBias` parameter to occlusion pass
+    - Handle near clip in SSAO blur
+- Support reading score from B-factor in pLDDT color theme
+- Add Cel-shading support
+    - `celShaded` geometry parameter
+    - `celSteps` renderer parameter
+- Add the ability to customize the Snapshot Description component via `PluginUISpec.components.viewport.snapshotDescription`
+- Add `doNotDisposeCanvas3DContext` option to `PluginContext.dispose`
+- Remove support for density data from edmaps.rcsb.org
+
+## [v4.3.0] - 2024-05-26
+
+- Fix State Snapshots export animation (#1140)
+- Add depth of field (dof) postprocessing effect
+- Add `SbNcbrTunnels` extension for for visualizing tunnels in molecular structures from ChannelsDB (more info in [tunnels.md](./docs/docs/extensions/tunnels.md))
+- Fix edge case in minimizing RMSD transform computation
+
+## [v4.2.0] - 2024-05-04
+
+- Add emissive material support
+- Add bloom post-processing
+- MolViewSpec extension: `loadMVS` supports `keepCamera` parameter
+- Return StateTransform selectors from measurements API (addDistance, addAngle, etc.)
+- Refactor transparency rendering
+    - More uniform behavior for blended, wboit, dpoit
+    - Fix issues with text & image geometry
+- Fix render-spheres example (#1100)
+    - Wrong step size in sphere geometry boundingSphere & groupmapping
+    - Handle empty `instanceGrid` in renderer & renderable
+- Fix bond assignment from `IndexPairBonds`
+    - Can not always be cached in `ElementSetIntraBondCache`
+    - Wrong operator checks in `findPairBonds`
+- Fix SSAO artifacts (@corredD, #1082)
+- Fix bumpiness artifacts (#1107, #1084)
+
+## [v4.1.0] - 2024-03-31
+
+- Add `VolumeTransform` to translate/rotate a volume like in a structure superposition
+- Fix BinaryCIF encoder edge cases caused by re-encoding an existing BinaryCIF file
+- Fix edge-case where width/height in InputObserver are not correct
+- Fix transparency rendering fallback (#1058)
+- Fix SSAO broken when `OES_texture_float_linear` is unavailable
+- Add `normalOffset` to `external-volume` color theme
+    - This can give results similar to pymol's surface_ramp_above_mode=1
+- Add `rotation` parameter to skybox background
+
+## [v4.0.1] - 2024-02-19
+
+- Fix BinaryCIF decoder edge cases. Fixes mmCIF model export from data provided by ModelServer.
+- MolViewSpec extension: support for MVSX file format
+- Revert "require WEBGL_depth_texture extension" & "remove renderbuffer use"
+
+## [v4.0.0] - 2024-02-04
+
+- Add Mesoscale Explorer app for investigating large systems
+- [Breaking] Remove `cellpack` extension (superseded by Mesoscale Explorer app)
+- [Breaking] Set minimal node.js version to 18
+- [Breaking] Generalize rcsb/assembly-symmetry/ extension
+    - Move to assembly-symmetry/
+    - Remove RCSB specific dependencies and prefixes
+- [Breaking] Require `WEBGL_depth_texture` webgl extension
+    - Remove `renderbuffer` use
+- [Breaking] Change build target to ES2018
+    - Custom builds only require ES6 for dependencies like immer.js
+- [Breaking] Changed `createPluginUI`
+    - The function now takes a single `options` argument
+    - The caller must specify a `render` method that mounts the Mol* react component to DOM
+        - A default `renderReact18` method is provided, but needs to be imported separately
+        - To support React 16 and 17, `ReactDOM.render` can be passed
+- Improve `SetUtils` performance using ES6 features
+- [Breaking] Reduce memory usage of `SymmetryOperator.ArrayMapping`
+    - Requires calling methods from instance
+- [Breaking] Fix `mol-model/structure/model/properties/seconday-structure.ts` file name (#938)
+- [Breaking] Add `Canvas3DContext` runtime props
+    - Props: pixelScale, pickScale, transparency (blended, wboit, dpoit)
+    - Replaces instantiation-time attribs
+- [Breaking] Change default compile target to ES2018
+- [Breaking] Add culling & LOD support
+    - Cull per-object and per-instance
+    - Cull based on frustum and camera distance
+    - LOD visibility based on camera distance
+    - Special LOD mode for spheres with automatic levels
+    - Occlusion culling (only WebGL2)
+        - Hi-Z pass
+        - Cull based on previous frame's Hi-Z buffer
+- Add stochastic/dithered transparency to fade overlapping LODs in and out
+- Add "Automatic Detail" preset that shows surface/cartoon/ball & stick based on camera distance
+
+## [v3.45.0] - 2024-02-03
+
+- Add color interpolation to impostor cylinders
+- MolViewSpec components are applicable only when the model has been loaded from MolViewSpec
+- Add `snapshotKey` and `tooltip` params to loci `LabelRepresentation`
+- Update `FocusLoci` behavior to support `snapshotKey` param
+  - Clicking a visual with `snapshotKey` will trigger that snapshot
+- Render multiline loci label tooltips as Markdown
+- `ParamDefinition.Text` updates:
+  - Support `multiline` inputs
+  - Support `placeholder` parameter
+  - Support `disableInteractiveUpdates` to only trigger updates once the control loses focus
+- Move dependencies related to the headless context from optional deps to optional peer deps
+
+## [v3.44.0] - 2024-01-06
+
+- Add new `cartoon` visuals to support atomic nucleotide base with sugar
+- Add `thicknessFactor` to `cartoon` representation for scaling nucleotide block/ring/atomic-fill visuals
+- Use bonds from `_struct_conn` in mmCIF files that use `label_seq_id`
+- Fix measurement label `offsetZ` default: not needed when `scaleByRadius` is enbaled
+- Support for label rendering in HeadlessPluginContext
+- MolViewSpec extension
+  - Support all X11 colors
+  - Support relative URIs
+  - CLI tools: mvs-validate, mvs-render, mvs-print-schema
+  - Labels applied in one node
+- ModelServer SDF/MOL2 ligand export: fix atom indices when additional atoms are present
+- Avoid showing (and calculating) inter-unit bonds for huge structures
+- Fixed `DragOverlay` on WebKit/Safari browsers
+
+## [v3.43.1] - 2023-12-04
+
+- Fix `react-markdown` dependency
+
+## [v3.43.0] - 2023-12-02
+
+- Fix `State.tryGetCellData` (return type & data check)
+- Don't change camera.target unless flyMode or pointerLock are enabled
+- Handle empty CIF files
+- Snapshot improvements:
+    - Add `key` property
+    - Ability to existing snapshot name, key, and description
+    - Support markdown in descriptions (ignores all HTML tags)
+    - Ability to link to snapshots by key from descriptions
+    - Separate UI control showing description of the current snapshot
+- Do not activate drag overlay for non-file content
+- Add `structure-element-sphere` visual to `spacefill` representation
+- Fix missing `await` in `HeadlessPluginContext.saveStateSnapshot`
+- Added support for providing custom sequence viewers to the plugin spec
+- MolViewSpec extension (MVS)
+- Add URL parameters `mvs-url`, `mvs-data`, `mvs-format`
+- Add drag&drop for `.mvsj` files
+- Fix `bumpiness` scaling with `ignoreLight` enabled
+- Add `transforms` & `label` params to `ShapeFromPly`
+- Optimize `LociSelectManager.selectOnly` to avoid superfluous loci set operations
+- Dispose of viewer on `unload` event to aid GC
 
 ## [v3.42.0] - 2023-11-05
 

@@ -1,8 +1,9 @@
 /**
- * Copyright (c) 2019-2021 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2019-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  * @author David Sehnal <david.sehnal@gmail.com>
+ * @author Adam Midlik <midlik@gmail.com>
  */
 
 import { EveryLoci, isEmptyLoci, Loci } from '../../mol-model/loci';
@@ -53,6 +54,12 @@ class InteractivityManager extends StatefulPluginComponent<InteractivityManagerS
         this.lociSelects.setProps(_new);
         this.lociHighlights.setProps(_new);
         this.events.propsUpdated.next(void 0);
+    }
+
+    dispose() {
+        super.dispose();
+        this.lociSelects.dispose();
+        this.lociHighlights.dispose();
     }
 
     constructor(readonly plugin: PluginContext, props: Partial<InteractivityManager.Props> = {}) {
@@ -115,6 +122,11 @@ namespace InteractivityManager {
             }
         }
 
+        dispose() {
+            this.providers.length = 0;
+            this.sel.dispose();
+        }
+
         constructor(public readonly ctx: PluginContext, props: Partial<Props> = {}) {
             this.sel = ctx.managers.structure.selection;
             this.setProps(props);
@@ -167,8 +179,9 @@ namespace InteractivityManager {
         highlightOnlyExtend(current: Representation.Loci, applyGranularity = true) {
             const normalized = this.normalizedLoci(current, applyGranularity);
             if (StructureElement.Loci.is(normalized.loci)) {
+                const range = this.ctx.selectionMode ? this.sel.tryGetRange(normalized.loci) : this.ctx.managers.structure.focus.tryGetRange(normalized.loci);
                 const extended = {
-                    loci: this.sel.tryGetRange(normalized.loci) || normalized.loci,
+                    loci: range ?? normalized.loci,
                     repr: normalized.repr
                 };
                 if (!this.isHighlighted(extended)) {
@@ -180,6 +193,11 @@ namespace InteractivityManager {
                     }
                 }
             }
+        }
+
+        dispose() {
+            super.dispose();
+            this.prev.length = 0;
         }
     }
 
@@ -228,7 +246,7 @@ namespace InteractivityManager {
             const normalized = this.normalizedLoci(current, applyGranularity, true);
             if (StructureElement.Loci.is(normalized.loci)) {
                 // only deselect for the structure of the given loci
-                this.deselect({ loci: Structure.toStructureElementLoci(normalized.loci.structure), repr: normalized.repr }, false);
+                this.mark({ loci: Structure.Loci(normalized.loci.structure), repr: normalized.repr }, MarkerAction.Deselect);
                 this.sel.modify('set', normalized.loci);
             }
             this.mark(normalized, MarkerAction.Select);

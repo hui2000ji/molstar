@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
@@ -46,8 +46,8 @@ export function ShapeRepresentation<D, G extends Geometry, P extends Geometry.Pa
     let _shape: Shape<G>;
     let geometryVersion = -1;
     const _theme = Theme.createEmpty();
-    let currentProps: PD.Values<P> = PD.getDefaultValues(geometryUtils.Params as P); // TODO avoid casting
-    let currentParams: P;
+    const currentParams: P = geometryUtils.Params as P; // TODO avoid casting
+    let currentProps: PD.Values<P> = PD.getDefaultValues(currentParams);
     let locationIt: LocationIterator;
     let positionIt: LocationIterator;
 
@@ -85,6 +85,7 @@ export function ShapeRepresentation<D, G extends Geometry, P extends Geometry.Pa
         if (updateState.updateTransform) {
             updateState.updateColor = true;
             updateState.updateSize = true;
+            updateState.updateMatrix = true;
         }
 
         if (updateState.createGeometry) {
@@ -110,7 +111,7 @@ export function ShapeRepresentation<D, G extends Geometry, P extends Geometry.Pa
             if (updateState.createNew) {
                 renderObjects.length = 0; // clear list o renderObjects
                 locationIt = Shape.groupIterator(_shape);
-                const transform = Shape.createTransform(_shape.transforms);
+                const transform = Shape.createTransform(_shape.transforms, _shape.geometry.boundingSphere, newProps.cellSize, newProps.batchSize);
                 const values = geometryUtils.createValues(_shape.geometry, transform, locationIt, _theme, newProps);
                 const state = geometryUtils.createRenderableState(newProps);
                 if (builder.modifyState) Object.assign(state, builder.modifyState(state));
@@ -126,13 +127,21 @@ export function ShapeRepresentation<D, G extends Geometry, P extends Geometry.Pa
 
                 if (updateState.updateTransform) {
                     // console.log('update transform')
-                    Shape.createTransform(_shape.transforms, _renderObject.values);
                     locationIt = Shape.groupIterator(_shape);
                     const { instanceCount, groupCount } = locationIt;
                     if (props.instanceGranularity) {
                         createMarkers(instanceCount, 'instance', _renderObject.values);
                     } else {
                         createMarkers(instanceCount * groupCount, 'groupInstance', _renderObject.values);
+                    }
+                }
+
+                if (updateState.updateMatrix) {
+                    // console.log('update matrix');
+                    Shape.createTransform(_shape.transforms, _shape.geometry.boundingSphere, newProps.cellSize, newProps.batchSize, _renderObject.values);
+                    if ('lodLevels' in _renderObject.values) {
+                        // to trigger `uLod` update in `renderable.cull`
+                        ValueCell.update(_renderObject.values.lodLevels, _renderObject.values.lodLevels.ref.value);
                     }
                 }
 

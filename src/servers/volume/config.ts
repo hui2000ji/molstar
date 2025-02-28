@@ -1,8 +1,9 @@
 /**
- * Copyright (c) 2019-2020 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2019-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
+ * @author Sebastian Bittrich <sebastian.bittrich@rcsb.org>
  */
 
 import * as argparse from 'argparse';
@@ -15,7 +16,8 @@ const DefaultServerConfig = {
     defaultPort: 1337,
     shutdownTimeoutMinutes: 24 * 60, /* a day */
     shutdownTimeoutVarianceMinutes: 60,
-    idMap: [] as [string, string][]
+    idMap: [] as [string, string][],
+    healthCheckPath: [] as string[],
 };
 
 function addLimitsArgs(parser: argparse.ArgumentParser) {
@@ -72,14 +74,21 @@ function addServerArgs(parser: argparse.ArgumentParser) {
         action: 'append',
         metavar: ['TYPE', 'PATH'] as any,
         help: [
-            'Map `id`s for a `type` to a file path.',
+            'Map `id`s for a `type` to a file path or URL.',
             'Example: x-ray \'../../data/mdb/xray/${id}-ccp4.mdb\'',
             '',
             '  - JS expressions can be used inside ${}, e.g. \'${id.substr(1, 2)}/${id}.mdb\'',
             '  - Can be specified multiple times.',
             '  - The `TYPE` variable (e.g. `x-ray`) is arbitrary and depends on how you plan to use the server.',
-            '    By default, Mol* Viewer uses `x-ray` and `em`, but any particular use case may vary. '
+            '    By default, Mol* Viewer uses `x-ray` and `em`, but any particular use case may vary. ',
+            '  - If using URL, it can be http://, https://, gs:// or file:// protocol.',
         ].join('\n'),
+    });
+    parser.add_argument('--healthCheckPath', {
+        default: DefaultServerConfig.healthCheckPath,
+        action: 'append',
+        metavar: 'PATH',
+        help: `File path(s) to use for health-checks. Will test if all files are accessible and report a failed health-check if that's not the case.`,
     });
 }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
@@ -17,6 +17,7 @@ import { readFromFile } from '../../mol-util/data-source';
 import { objectForEach } from '../../mol-util/object';
 import { PLUGIN_VERSION } from '../../mol-plugin/version';
 import { canvasToBlob } from '../../mol-canvas3d/util';
+import { Task } from '../../mol-task';
 
 export { PluginStateSnapshotManager };
 
@@ -35,6 +36,11 @@ class PluginStateSnapshotManager extends StatefulPluginComponent<{
         changed: this.ev(),
         opened: this.ev(),
     };
+
+    get current() {
+        const id = this.state.current;
+        return this.state.entries.find(e => e.snapshot.id === id);
+    }
 
     getIndex(e: PluginStateSnapshotManager.Entry) {
         return this.state.entries.indexOf(e);
@@ -74,8 +80,10 @@ class PluginStateSnapshotManager extends StatefulPluginComponent<{
         const idx = this.getIndex(old);
         // The id changes here!
         const e = PluginStateSnapshotManager.Entry(snapshot, {
+            key: params?.key ?? old.key,
             name: params?.name ?? old.name,
             description: params?.description ?? old.description,
+            descriptionFormat: params?.descriptionFormat ?? old.descriptionFormat,
             image: params?.image,
         });
         this.entryMap.set(snapshot.id, e);
@@ -102,6 +110,21 @@ class PluginStateSnapshotManager extends StatefulPluginComponent<{
         this.events.changed.next(void 0);
     }
 
+    update(e: PluginStateSnapshotManager.Entry, options: { key?: string, name?: string, description?: string, descriptionFormat?: PluginStateSnapshotManager.DescriptionFormat }) {
+        const idx = this.getIndex(e);
+        if (idx < 0) return;
+        const entries = this.state.entries.set(idx, {
+            ...e,
+            key: options.key?.trim() || undefined,
+            name: options.name?.trim() || undefined,
+            description: options.description?.trim() || undefined,
+            descriptionFormat: options.descriptionFormat,
+        });
+        this.updateState({ entries });
+        this.entryMap.set(e.snapshot.id, this.state.entries.get(idx)!);
+        this.events.changed.next(void 0);
+    }
+
     clear() {
         if (this.state.entries.size === 0) return;
 
@@ -111,6 +134,15 @@ class PluginStateSnapshotManager extends StatefulPluginComponent<{
         this.entryMap.clear();
         this.updateState({ current: void 0, entries: List<PluginStateSnapshotManager.Entry>() });
         this.events.changed.next(void 0);
+    }
+
+    applyKey(key: string) {
+        const e = this.state.entries.find(e => e.key === key);
+        if (!e) return;
+
+        this.updateState({ current: e.snapshot.id as UUID });
+        this.events.changed.next(void 0);
+        this.plugin.state.setSnapshot(e.snapshot);
     }
 
     setCurrent(id: string) {
@@ -139,6 +171,14 @@ class PluginStateSnapshotManager extends StatefulPluginComponent<{
         if (idx < 0) idx += len;
 
         return this.state.entries.get(idx)!.snapshot.id;
+    }
+
+    applyNext(dir: -1 | 1) {
+        const next = this.getNextId(this.state.current, dir);
+        if (next) {
+            const snapshot = this.setCurrent(next);
+            if (snapshot) return this.plugin.state.setSnapshot(snapshot);
+        }
     }
 
     async setStateSnapshot(snapshot: PluginStateSnapshotManager.StateSnapshot): Promise<PluginState.Snapshot | undefined> {
@@ -174,17 +214,16 @@ class PluginStateSnapshotManager extends StatefulPluginComponent<{
         return next;
     }
 
-    private async syncCurrent(options?: { name?: string, description?: string, params?: PluginState.SnapshotParams }) {
+    private async syncCurrent(options?: { name?: string, description?: string, descriptionFormat?: PluginStateSnapshotManager.DescriptionFormat, params?: PluginState.SnapshotParams }) {
         const isEmpty = this.state.entries.size === 0;
-        const canReplace = this.state.entries.size === 1 && this.state.current && this.state.current === this.defaultSnapshotId;
-
+        const canReplace = this.state.entries.size === 1 && this.state.current && (!this.defaultSnapshotId || this.state.current === this.defaultSnapshotId);
         if (!isEmpty && !canReplace) return;
 
         const snapshot = this.plugin.state.getSnapshot(options?.params);
         const image = (options?.params?.image ?? this.plugin.state.snapshotParams.value.image) ? await PluginStateSnapshotManager.getCanvasImageAsset(this.plugin, `${snapshot.id}-image.png`) : undefined;
 
         if (isEmpty) {
-            this.add(PluginStateSnapshotManager.Entry(snapshot, { name: options?.name, description: options?.description, image }));
+            this.add(PluginStateSnapshotManager.Entry(snapshot, { name: options?.name, description: options?.description, descriptionFormat: options?.descriptionFormat, image }));
         } else if (canReplace) {
             // Replace the current state only if there is a single snapshot that has been created automatically
             const current = this.getEntry(this.state.current);
@@ -338,6 +377,11 @@ class PluginStateSnapshotManager extends StatefulPluginComponent<{
         }
     }
 
+    dispose() {
+        super.dispose();
+        this.entryMap.clear();
+    }
+
     constructor(private plugin: PluginContext) {
         super({
             current: void 0,
@@ -350,10 +394,16 @@ class PluginStateSnapshotManager extends StatefulPluginComponent<{
 }
 
 namespace PluginStateSnapshotManager {
+    export type DescriptionFormat = 'markdown' | 'plaintext';
+
     export interface EntryParams {
+        key?: string,
         name?: string,
+        /** Information about the snapshot, to be shown in the UI when the snapshot is loaded. */
         description?: string,
-        image?: Asset
+        /** Toggle between markdown and plaintext interpretation of `description`. Default is markdown. */
+        descriptionFormat?: DescriptionFormat,
+        image?: Asset,
     }
 
     export interface Entry extends EntryParams {
@@ -384,15 +434,17 @@ namespace PluginStateSnapshotManager {
     }
 
     export async function getCanvasImageAsset(ctx: PluginContext, name: string): Promise<Asset | undefined> {
-        if (!ctx.helpers.viewportScreenshot) return;
+        const task = Task.create('Render Screenshot', async runtime => {
+            if (!ctx.helpers.viewportScreenshot) return;
+            const p = await ctx.helpers.viewportScreenshot.getPreview(runtime, 512);
+            if (!p) return;
 
-        const p = ctx.helpers.viewportScreenshot.getPreview(512);
-        if (!p) return;
-
-        const blob = await canvasToBlob(p.canvas, 'png');
-        const file = new File([blob], name);
-        const image: Asset = { kind: 'file', id: UUID.create22(), name };
-        ctx.managers.asset.set(image, file);
-        return image;
+            const blob = await canvasToBlob(p.canvas, 'png');
+            const file = new File([blob], name);
+            const image: Asset = { kind: 'file', id: UUID.create22(), name };
+            ctx.managers.asset.set(image, file);
+            return image;
+        });
+        return ctx.runTask(task);
     }
 }

@@ -1,9 +1,10 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  * @author Adam Midlik <midlik@gmail.com>
+ * @author Ludovic Autin <ludovic.autin@gmail.com>
  */
 
 import { parseDcd } from '../../mol-io/reader/dcd/parser';
@@ -16,7 +17,7 @@ import { trajectoryFromGRO } from '../../mol-model-formats/structure/gro';
 import { trajectoryFromCCD, trajectoryFromMmCIF } from '../../mol-model-formats/structure/mmcif';
 import { trajectoryFromPDB } from '../../mol-model-formats/structure/pdb';
 import { topologyFromPsf } from '../../mol-model-formats/structure/psf';
-import { Coordinates, Model, Queries, QueryContext, Structure, StructureElement, StructureQuery, StructureSelection as Sel, Topology, ArrayTrajectory, Trajectory } from '../../mol-model/structure';
+import { Coordinates, Model, Queries, QueryContext, Structure, StructureElement, StructureQuery, StructureSelection as Sel, Topology, ArrayTrajectory, Trajectory, Frame } from '../../mol-model/structure';
 import { PluginContext } from '../../mol-plugin/context';
 import { MolScriptBuilder } from '../../mol-script/language/builder';
 import { Expression } from '../../mol-script/language/expression';
@@ -40,6 +41,11 @@ import { parseXtc } from '../../mol-io/reader/xtc/parser';
 import { coordinatesFromXtc } from '../../mol-model-formats/structure/xtc';
 import { parseXyz } from '../../mol-io/reader/xyz/parser';
 import { trajectoryFromXyz } from '../../mol-model-formats/structure/xyz';
+import { UnitStyles } from '../../mol-io/reader/lammps/schema';
+import { parseLammpsData } from '../../mol-io/reader/lammps/data/parser';
+import { trajectoryFromLammpsData } from '../../mol-model-formats/structure/lammps-data';
+import { parseLammpsTrajectory } from '../../mol-io/reader/lammps/traj/parser';
+import { coordinatesFromLammpsTrajectory, trajectoryFromLammpsTrajectory } from '../../mol-model-formats/structure/lammps-trajectory';
 import { parseSdf } from '../../mol-io/reader/sdf/parser';
 import { trajectoryFromSdf } from '../../mol-model-formats/structure/sdf';
 import { assertUnreachable } from '../../mol-util/type-helpers';
@@ -54,6 +60,7 @@ export { CoordinatesFromDcd };
 export { CoordinatesFromXtc };
 export { CoordinatesFromTrr };
 export { CoordinatesFromNctraj };
+export { CoordinatesFromLammpstraj };
 export { TopologyFromPsf };
 export { TopologyFromPrmtop };
 export { TopologyFromTop };
@@ -63,12 +70,15 @@ export { TrajectoryFromMmCif };
 export { TrajectoryFromPDB };
 export { TrajectoryFromGRO };
 export { TrajectoryFromXYZ };
+export { TrajectoryFromLammpsData };
+export { TrajectoryFromLammpsTrajData };
 export { TrajectoryFromMOL };
 export { TrajectoryFromSDF };
 export { TrajectoryFromMOL2 };
 export { TrajectoryFromCube };
 export { TrajectoryFromCifCore };
 export { ModelFromTrajectory };
+export { ModelWithCoordinates };
 export { StructureFromTrajectory };
 export { StructureFromModel };
 export { TransformStructureConformation };
@@ -145,6 +155,23 @@ const CoordinatesFromNctraj = PluginStateTransform.BuiltIn({
             const parsed = await parseNctraj(a.data).runInContext(ctx);
             if (parsed.isError) throw new Error(parsed.message);
             const coordinates = await coordinatesFromNctraj(parsed.result).runInContext(ctx);
+            return new SO.Molecule.Coordinates(coordinates, { label: a.label, description: 'Coordinates' });
+        });
+    }
+});
+
+type CoordinatesFromLammpstraj = typeof CoordinatesFromLammpstraj
+const CoordinatesFromLammpstraj = PluginStateTransform.BuiltIn({
+    name: 'coordinates-from-lammpstraj',
+    display: { name: 'Parse LAMMPSTRAJ', description: 'Parse LAMMPSTRAJ data.' },
+    from: [SO.Data.String],
+    to: SO.Molecule.Coordinates
+})({
+    apply({ a }) {
+        return Task.create('Parse LAMMPSTRAJ', async ctx => {
+            const parsed = await parseLammpsTrajectory(a.data).runInContext(ctx);
+            if (parsed.isError) throw new Error(parsed.message);
+            const coordinates = await coordinatesFromLammpsTrajectory(parsed.result).runInContext(ctx);
             return new SO.Molecule.Coordinates(coordinates, { label: a.label, description: 'Coordinates' });
         });
     }
@@ -374,6 +401,49 @@ const TrajectoryFromXYZ = PluginStateTransform.BuiltIn({
         });
     }
 });
+
+type TrajectoryFromLammpsData = typeof TrajectoryFromLammpsData
+const TrajectoryFromLammpsData = PluginStateTransform.BuiltIn({
+    name: 'trajectory-from-lammps-data',
+    display: { name: 'Parse Lammps Data', description: 'Parse Lammps Data from string and create trajectory.' },
+    from: [SO.Data.String],
+    to: SO.Molecule.Trajectory,
+    params: {
+        unitsStyle: PD.Select('real', PD.arrayToOptions(UnitStyles)),
+    }
+})({
+    apply({ a, params }) {
+        return Task.create('Parse Lammps Data', async ctx => {
+            const parsed = await parseLammpsData(a.data).runInContext(ctx);
+            if (parsed.isError) throw new Error(parsed.message);
+            const models = await trajectoryFromLammpsData(parsed.result, params.unitsStyle).runInContext(ctx);
+            const props = trajectoryProps(models);
+            return new SO.Molecule.Trajectory(models, props);
+        });
+    }
+});
+
+type TrajectoryFromLammpsTrajData = typeof TrajectoryFromLammpsTrajData
+const TrajectoryFromLammpsTrajData = PluginStateTransform.BuiltIn({
+    name: 'trajectory-from-lammps-traj-data',
+    display: { name: 'Parse Lammps traj Data', description: 'Parse Lammps Traj Data string and create trajectory.' },
+    from: [SO.Data.String],
+    to: SO.Molecule.Trajectory,
+    params: {
+        unitsStyle: PD.Select('real', PD.arrayToOptions(UnitStyles)),
+    }
+})({
+    apply({ a, params }) {
+        return Task.create('Parse Lammps Data', async ctx => {
+            const parsed = await parseLammpsTrajectory(a.data).runInContext(ctx);
+            if (parsed.isError) throw new Error(parsed.message);
+            const models = await trajectoryFromLammpsTrajectory(parsed.result, params.unitsStyle).runInContext(ctx);
+            const props = trajectoryProps(models);
+            return new SO.Molecule.Trajectory(models, props);
+        });
+    }
+});
+
 
 type TrajectoryFromMOL = typeof TrajectoryFromMOL
 const TrajectoryFromMOL = PluginStateTransform.BuiltIn({
@@ -634,6 +704,41 @@ const TransformStructureConformation = PluginStateTransform.BuiltIn({
     //     const translation = Mat4.getTranslation(Vec3(), m);
     //     return { axis, angle, translation };
     // }
+});
+
+type ModelWithCoordinates = typeof ModelWithCoordinates
+const ModelWithCoordinates = PluginStateTransform.BuiltIn({
+    name: 'model-with-coordinates',
+    display: { name: 'Model With Coordinates', description: 'Updates the current model with provided coordinate frame' },
+    from: SO.Molecule.Model,
+    to: SO.Molecule.Model,
+    params: {
+        frameIndex: PD.Optional(PD.Numeric(0, undefined, { isHidden: true })),
+        frameCount: PD.Optional(PD.Numeric(1, undefined, { isHidden: true })),
+        atomicCoordinateFrame: PD.Optional(PD.Value<Frame | undefined>(undefined, { isHidden: true })),
+    },
+    isDecorator: true,
+})({
+    apply({ a, params }) {
+        if (!params.atomicCoordinateFrame) {
+            return a;
+        }
+        const model: Model = { ...a.data, atomicConformation: Model.getAtomicConformationFromFrame(a.data, params.atomicCoordinateFrame) };
+        Model.TrajectoryInfo.set(model, { index: params.frameIndex ?? 0, size: params.frameCount ?? 1 });
+        return new SO.Molecule.Model(model, { label: a.label, description: a.description });
+    },
+    update: ({ a, b, oldParams, newParams }) => {
+        if (oldParams.atomicCoordinateFrame === newParams.atomicCoordinateFrame) {
+            return StateTransformer.UpdateResult.Unchanged;
+        }
+        if (!newParams.atomicCoordinateFrame) {
+            b.data = a.data;
+        } else {
+            b.data = { ...b.data, atomicConformation: Model.getAtomicConformationFromFrame(b.data, newParams.atomicCoordinateFrame) };
+        }
+        Model.TrajectoryInfo.set(b.data, { index: newParams.frameIndex ?? 0, size: newParams.frameCount ?? 1 });
+        return StateTransformer.UpdateResult.Updated;
+    },
 });
 
 type StructureSelectionFromExpression = typeof StructureSelectionFromExpression
@@ -1013,7 +1118,7 @@ const CustomModelProperties = PluginStateTransform.BuiltIn({
     }
 });
 async function attachModelProps(model: Model, ctx: PluginContext, taskCtx: RuntimeContext, params: ReturnType<CustomModelProperties['createDefaultParams']>) {
-    const propertyCtx = { runtime: taskCtx, assetManager: ctx.managers.asset };
+    const propertyCtx = { runtime: taskCtx, assetManager: ctx.managers.asset, errorContext: ctx.errorContext };
     const { autoAttach, properties } = params;
     for (const name of Object.keys(properties)) {
         const property = ctx.customModelProperties.get(name)!;
@@ -1068,7 +1173,7 @@ const CustomStructureProperties = PluginStateTransform.BuiltIn({
     }
 });
 async function attachStructureProps(structure: Structure, ctx: PluginContext, taskCtx: RuntimeContext, params: ReturnType<CustomStructureProperties['createDefaultParams']>) {
-    const propertyCtx = { runtime: taskCtx, assetManager: ctx.managers.asset };
+    const propertyCtx = { runtime: taskCtx, assetManager: ctx.managers.asset, errorContext: ctx.errorContext };
     const { autoAttach, properties } = params;
     for (const name of Object.keys(properties)) {
         const property = ctx.customStructureProperties.get(name)!;
@@ -1092,13 +1197,16 @@ const ShapeFromPly = PluginStateTransform.BuiltIn({
     from: SO.Format.Ply,
     to: SO.Shape.Provider,
     params(a) {
-        return {};
+        return {
+            transforms: PD.Optional(PD.Value<Mat4[]>([], { isHidden: true })),
+            label: PD.Optional(PD.Text('', { isHidden: true }))
+        };
     }
 })({
     apply({ a, params }) {
         return Task.create('Create shape from PLY', async ctx => {
             const shape = await shapeFromPly(a.data, params).runInContext(ctx);
-            const props = { label: 'Shape' };
+            const props = { label: params.label || 'Shape' };
             return new SO.Shape.Provider(shape, props);
         });
     }

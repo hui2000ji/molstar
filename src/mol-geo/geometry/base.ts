@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2022 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
@@ -18,6 +18,8 @@ import { UniformSizeTheme } from '../../mol-theme/size/uniform';
 import { smoothstep } from '../../mol-math/interpolate';
 import { Material } from '../../mol-util/material';
 import { Clip } from '../../mol-util/clip';
+import { Vec3 } from '../../mol-math/linear-algebra/3d/vec3';
+import { Vec4 } from '../../mol-math/linear-algebra/3d/vec4';
 
 export const VisualQualityInfo = {
     'custom': {},
@@ -73,6 +75,7 @@ export function getColorSmoothingProps(smoothColors: PD.Values<ColorSmoothingPar
 export namespace BaseGeometry {
     export const MaterialCategory: PD.Info = { category: 'Material' };
     export const ShadingCategory: PD.Info = { category: 'Shading' };
+    export const CullingLodCategory: PD.Info = { category: 'Culling & LOD' };
     export const CustomQualityParamInfo: PD.Info = {
         category: 'Custom Quality',
         hideIf: (params: PD.Values<Params>) => typeof params.quality !== 'undefined' && params.quality !== 'custom'
@@ -83,7 +86,12 @@ export namespace BaseGeometry {
         quality: PD.Select<VisualQuality>('auto', VisualQualityOptions, { isEssential: true, description: 'Visual/rendering quality of the representation.' }),
         material: Material.getParam(),
         clip: PD.Group(Clip.Params),
+        emissive: PD.Numeric(0, { min: 0, max: 1, step: 0.01 }),
+        density: PD.Numeric(0.2, { min: 0, max: 1, step: 0.01 }, { description: 'Density value to estimate object thickness.' }),
         instanceGranularity: PD.Boolean(false, { description: 'Use instance granularity for marker, transparency, clipping, overpaint, substance data to save memory.' }),
+        lod: PD.Vec3(Vec3(), undefined, { ...CullingLodCategory, description: 'Level of detail.', fieldLabels: { x: 'Min Distance', y: 'Max Distance', z: 'Overlap (Shader)' } }),
+        cellSize: PD.Numeric(200, { min: 0, max: 5000, step: 100 }, { ...CullingLodCategory, description: 'Instance grid cell size.' }),
+        batchSize: PD.Numeric(2000, { min: 0, max: 50000, step: 500 }, { ...CullingLodCategory, description: 'Instance grid batch size.' }),
     };
     export type Params = typeof Params
 
@@ -110,6 +118,8 @@ export namespace BaseGeometry {
             uMetalness: ValueCell.create(props.material.metalness),
             uRoughness: ValueCell.create(props.material.roughness),
             uBumpiness: ValueCell.create(props.material.bumpiness),
+            uEmissive: ValueCell.create(props.emissive),
+            uDensity: ValueCell.create(props.density),
             dLightCount: ValueCell.create(1),
             dColorMarker: ValueCell.create(true),
 
@@ -120,8 +130,10 @@ export namespace BaseGeometry {
             uClipObjectPosition: ValueCell.create(clip.objects.position),
             uClipObjectRotation: ValueCell.create(clip.objects.rotation),
             uClipObjectScale: ValueCell.create(clip.objects.scale),
+            uClipObjectTransform: ValueCell.create(clip.objects.transform),
 
             instanceGranularity: ValueCell.create(props.instanceGranularity),
+            uLod: ValueCell.create(Vec4.create(props.lod[0], props.lod[1], props.lod[2], 0)),
         };
     }
 
@@ -130,6 +142,8 @@ export namespace BaseGeometry {
         ValueCell.updateIfChanged(values.uMetalness, props.material.metalness);
         ValueCell.updateIfChanged(values.uRoughness, props.material.roughness);
         ValueCell.updateIfChanged(values.uBumpiness, props.material.bumpiness);
+        ValueCell.updateIfChanged(values.uEmissive, props.emissive);
+        ValueCell.updateIfChanged(values.uDensity, props.density);
 
         const clip = Clip.getClip(props.clip);
         ValueCell.updateIfChanged(values.dClipObjectCount, clip.objects.count);
@@ -139,8 +153,10 @@ export namespace BaseGeometry {
         ValueCell.update(values.uClipObjectPosition, clip.objects.position);
         ValueCell.update(values.uClipObjectRotation, clip.objects.rotation);
         ValueCell.update(values.uClipObjectScale, clip.objects.scale);
+        ValueCell.update(values.uClipObjectTransform, clip.objects.transform);
 
         ValueCell.updateIfChanged(values.instanceGranularity, props.instanceGranularity);
+        ValueCell.update(values.uLod, Vec4.set(values.uLod.ref.value, props.lod[0], props.lod[1], props.lod[2], 0));
     }
 
     export function createRenderableState(props: Partial<PD.Values<Params>> = {}): RenderableState {

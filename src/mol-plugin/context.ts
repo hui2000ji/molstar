@@ -1,11 +1,11 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
 
-import produce, { setAutoFreeze } from 'immer';
+import { produce, setAutoFreeze } from 'immer';
 import { List } from 'immutable';
 import { merge, Subscription } from 'rxjs';
 import { debounceTime, filter, take, throttleTime } from 'rxjs/operators';
@@ -62,6 +62,7 @@ import { ViewportScreenshotHelper } from './util/viewport-screenshot';
 import { PLUGIN_VERSION, PLUGIN_VERSION_DATE } from './version';
 import { setSaccharideCompIdMapType } from '../mol-model/structure/structure/carbohydrates/constants';
 import { DragAndDropManager } from '../mol-plugin-state/manager/drag-and-drop';
+import { ErrorContext } from '../mol-util/error-context';
 
 export type PluginInitializedState =
     | { kind: 'no' }
@@ -207,6 +208,15 @@ export class PluginContext {
     readonly genericRepresentationControls = new Map<string, (selection: StructureHierarchyManager['selection']) => [StructureHierarchyRef[], string]>();
 
     /**
+     * A helper for collecting and notifying errors
+     * in async contexts such as custom properties.
+     *
+     * Individual extensions are responsible for using this
+     * context and displaying the errors in appropriate ways.
+     */
+    readonly errorContext = new ErrorContext();
+
+    /**
      * Used to store application specific custom state which is then available
      * to State Actions and similar constructs via the PluginContext.
      */
@@ -274,21 +284,22 @@ export class PluginContext {
             this.layout.setRoot(container);
             if (this.spec.layout && this.spec.layout.initial) this.layout.setProps(this.spec.layout.initial);
 
-            if (canvas3dContext) {
-                (this.canvas3dContext as Canvas3DContext) = canvas3dContext;
-            } else {
-                const antialias = !(this.config.get(PluginConfig.General.DisableAntialiasing) ?? false);
-                const preserveDrawingBuffer = !(this.config.get(PluginConfig.General.DisablePreserveDrawingBuffer) ?? false);
-                const pixelScale = this.config.get(PluginConfig.General.PixelScale) || 1;
-                const pickScale = this.config.get(PluginConfig.General.PickScale) || 0.25;
-                const pickPadding = this.config.get(PluginConfig.General.PickPadding) ?? 1;
-                const enableWboit = this.config.get(PluginConfig.General.EnableWboit) || false;
-                const enableDpoit = this.config.get(PluginConfig.General.EnableDpoit) || false;
-                const preferWebGl1 = this.config.get(PluginConfig.General.PreferWebGl1) || false;
-                const failIfMajorPerformanceCaveat = !(this.config.get(PluginConfig.General.AllowMajorPerformanceCaveat) ?? false);
-                const powerPreference = this.config.get(PluginConfig.General.PowerPreference) || 'high-performance';
-                (this.canvas3dContext as Canvas3DContext) = Canvas3DContext.fromCanvas(canvas, this.managers.asset, { antialias, preserveDrawingBuffer, pixelScale, pickScale, pickPadding, enableWboit, enableDpoit, preferWebGl1, failIfMajorPerformanceCaveat, powerPreference });
+            if (!canvas3dContext) {
+                canvas3dContext = Canvas3DContext.fromCanvas(canvas, this.managers.asset, {
+                    antialias: !(this.config.get(PluginConfig.General.DisableAntialiasing) ?? false),
+                    preserveDrawingBuffer: !(this.config.get(PluginConfig.General.DisablePreserveDrawingBuffer) ?? false),
+                    preferWebGl1: this.config.get(PluginConfig.General.PreferWebGl1) || false,
+                    failIfMajorPerformanceCaveat: !(this.config.get(PluginConfig.General.AllowMajorPerformanceCaveat) ?? false),
+                    powerPreference: this.config.get(PluginConfig.General.PowerPreference) || 'high-performance',
+                    handleResize: this.handleResize,
+                }, {
+                    pixelScale: this.config.get(PluginConfig.General.PixelScale) || 1,
+                    pickScale: this.config.get(PluginConfig.General.PickScale) || 0.25,
+                    transparency: this.config.get(PluginConfig.General.Transparency) || 'wboit',
+                    resolutionMode: this.config.get(PluginConfig.General.ResolutionMode) || 'auto',
+                });
             }
+            (this.canvas3dContext as Canvas3DContext) = canvas3dContext;
             (this.canvas3d as Canvas3D) = Canvas3D.create(this.canvas3dContext!);
             this.canvas3dInit.next(true);
             let props = this.spec.canvas3d;
@@ -328,15 +339,15 @@ export class PluginContext {
         }
     }
 
-    handleResize() {
+    handleResize = () => {
         const canvas = this.canvas3dContext?.canvas;
         const container = this.layout.root;
         if (container && canvas) {
-            const pixelScale = this.config.get(PluginConfig.General.PixelScale) || 1;
-            resizeCanvas(canvas, container, pixelScale);
+            resizeCanvas(canvas, container, this.canvas3dContext.pixelScale);
+            this.canvas3dContext.syncPixelScale();
             this.canvas3d?.requestResize();
         }
-    }
+    };
 
     readonly log = {
         entries: List<LogEntry>(),
@@ -375,7 +386,7 @@ export class PluginContext {
         return PluginCommands.State.RemoveObject(this, { state: this.state.data, ref: StateTransform.RootRef });
     }
 
-    dispose(options?: { doNotForceWebGLContextLoss?: boolean }) {
+    dispose(options?: { doNotForceWebGLContextLoss?: boolean, doNotDisposeCanvas3DContext?: boolean }) {
         if (this.disposed) return;
 
         for (const s of this.subs) {
@@ -386,17 +397,20 @@ export class PluginContext {
         this.animationLoop.stop();
         this.commands.dispose();
         this.canvas3d?.dispose();
-        this.canvas3dContext?.dispose(options);
+        if (!options?.doNotDisposeCanvas3DContext) {
+            this.canvas3dContext?.dispose(options);
+        }
         this.ev.dispose();
         this.state.dispose();
-        this.managers.task.dispose();
         this.helpers.substructureParent.dispose();
 
         objectForEach(this.managers, m => (m as any)?.dispose?.());
         objectForEach(this.managers.structure, m => (m as any)?.dispose?.());
+        objectForEach(this.managers.volume, m => (m as any)?.dispose?.());
 
         this.unmount();
         this.canvasContainer = undefined;
+        (this.customState as any) = {};
 
         this.disposed = true;
     }

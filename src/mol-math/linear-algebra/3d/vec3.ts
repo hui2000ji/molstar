@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2017-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
@@ -466,6 +466,26 @@ namespace Vec3 {
     }
 
     /**
+     * Transforms the direction vector with a Mat4. 4th vector component is implicitly '0'
+     * This means the translation components of the matrix are ignored.
+     * Assumes that m is already the transpose of the inverse matrix suitable for normal transformation.
+     */
+    export function transformDirectionOffset(out: NumberArray, a: NumberArray, m: NumberArray, outO: number, aO: number, oM: number) {
+        const x = a[0 + aO], y = a[1 + aO], z = a[2 + aO];
+        out[0 + outO] = m[0 + oM] * x + m[4 + oM] * y + m[8 + oM] * z;
+        out[1 + outO] = m[1 + oM] * x + m[5 + oM] * y + m[9 + oM] * z;
+        out[2 + outO] = m[2 + oM] * x + m[6 + oM] * y + m[10 + oM] * z;
+        // Normalize the output vector to handle non-uniform scaling
+        const len = Math.hypot(out[0 + outO], out[1 + outO], out[2 + outO]);
+        if (len > 0) {
+            out[0 + outO] /= len;
+            out[1 + outO] /= len;
+            out[2 + outO] /= len;
+        }
+        return out;
+    }
+
+    /**
      * Transforms the Vec3 with a Mat3.
      */
     export function transformMat3(out: Vec3, a: Vec3, m: Mat3) {
@@ -564,8 +584,8 @@ namespace Vec3 {
         const by = angle(a, b);
         if (Math.abs(by) < 0.0001) return Mat4.setIdentity(mat);
         if (Math.abs(by - Math.PI) < EPSILON) {
-            // here, axis can be [0,0,0] but the rotation is a simple flip
-            return Mat4.fromScaling(mat, negUnit);
+            // choose arbitrary orthogonal axis
+            return Mat4.fromRotation(mat, Math.PI, Math.abs(a[0]) < 0.9 ? Vec3.unitX : Vec3.unitZ);
         }
         const axis = cross(rotTemp, a, b);
         return Mat4.fromRotation(mat, by, axis);
@@ -623,6 +643,11 @@ namespace Vec3 {
         sub(triangleNormalTmpAB, b, a);
         sub(triangleNormalTmpAC, c, a);
         return normalize(out, cross(out, triangleNormalTmpAB, triangleNormalTmpAC));
+    }
+
+    const centerTmpV = zero();
+    export function center(out: Vec3, a: Vec3, b: Vec3): Vec3 {
+        return Vec3.scaleAndAdd(out, a, Vec3.sub(centerTmpV, b, a), 0.5);
     }
 
     export function toString(a: Vec3, precision?: number) {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2025 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  * @author Gianluca Tomasello <giagitom@gmail.com>
@@ -12,6 +12,7 @@ import { DefineKind, DefineValues } from '../shader-code';
 import { Mat4 } from '../../mol-math/linear-algebra';
 import { TextureValues, TextureType, TextureFormat, TextureFilter, TextureKind, TextureKindValue } from '../webgl/texture';
 import { Sphere3D } from '../../mol-math/geometry';
+import { InstanceGrid } from '../../mol-math/geometry/instance-grid';
 
 export type ValueKindType = {
     'number': number
@@ -22,7 +23,9 @@ export type ValueKindType = {
 
     'm4': Mat4,
     'float32': Float32Array
+    'uint32': Uint32Array
     'sphere': Sphere3D
+    'instanceGrid': InstanceGrid
 }
 export type ValueKind = keyof ValueKindType
 
@@ -60,7 +63,7 @@ export function splitValues(schema: RenderableSchema, values: RenderableValues) 
     return { attributeValues, defineValues, textureValues, materialTextureValues, uniformValues, materialUniformValues, bufferedUniformValues };
 }
 
-export type Versions<T extends RenderableValues> = { [k in keyof T]: number }
+export type Versions<T extends RenderableValues> = { -readonly [k in keyof T]: number }
 export function getValueVersions<T extends RenderableValues>(values: T) {
     const versions: Versions<any> = {};
     Object.keys(values).forEach(k => {
@@ -116,6 +119,8 @@ export type RenderableValues = { readonly [k: string]: ValueCell<any> }
 //
 
 export const GlobalUniformSchema = {
+    uDrawId: UniformSpec('i'),
+
     uModel: UniformSpec('m4'),
     uView: UniformSpec('m4'),
     uInvView: UniformSpec('m4'),
@@ -134,6 +139,7 @@ export const GlobalUniformSchema = {
 
     uCameraPosition: UniformSpec('v3'),
     uCameraDir: UniformSpec('v3'),
+    uCameraPlane: UniformSpec('v4'),
     uNear: UniformSpec('f'),
     uFar: UniformSpec('f'),
     uFog: UniformSpec('b'),
@@ -163,6 +169,7 @@ export const GlobalUniformSchema = {
     uMarkerAverage: UniformSpec('f'),
 
     uXrayEdgeFalloff: UniformSpec('f'),
+    uCelSteps: UniformSpec('f'),
     uExposure: UniformSpec('f'),
 
     uRenderMask: UniformSpec('i'),
@@ -196,6 +203,8 @@ export const ColorSchema = {
     uColorTexDim: UniformSpec('v2'),
     uColorGridDim: UniformSpec('v3'),
     uColorGridTransform: UniformSpec('v4'),
+    uPaletteDomain: UniformSpec('v2'),
+    uPaletteDefault: UniformSpec('v3'),
     tColor: TextureSpec('image-uint8', 'rgb', 'ubyte', 'nearest'),
     tPalette: TextureSpec('image-uint8', 'rgb', 'ubyte', 'nearest'),
     tColorGrid: TextureSpec('texture', 'rgb', 'ubyte', 'linear'),
@@ -246,6 +255,7 @@ export const TransparencySchema = {
     tTransparency: TextureSpec('image-uint8', 'alpha', 'ubyte', 'nearest'),
     dTransparency: DefineSpec('boolean'),
     transparencyAverage: ValueSpec('number'),
+    transparencyMin: ValueSpec('number'),
 
     uTransparencyGridDim: UniformSpec('v3'),
     uTransparencyGridTransform: UniformSpec('v4'),
@@ -255,6 +265,21 @@ export const TransparencySchema = {
 } as const;
 export type TransparencySchema = typeof TransparencySchema
 export type TransparencyValues = Values<TransparencySchema>
+
+export const EmissiveSchema = {
+    uEmissiveTexDim: UniformSpec('v2'),
+    tEmissive: TextureSpec('image-uint8', 'alpha', 'ubyte', 'nearest'),
+    dEmissive: DefineSpec('boolean'),
+    emissiveAverage: ValueSpec('number'),
+
+    uEmissiveGridDim: UniformSpec('v3'),
+    uEmissiveGridTransform: UniformSpec('v4'),
+    tEmissiveGrid: TextureSpec('texture', 'alpha', 'ubyte', 'linear'),
+    dEmissiveType: DefineSpec('string', ['instance', 'groupInstance', 'volumeInstance']),
+    uEmissiveStrength: UniformSpec('f', 'material'),
+} as const;
+export type EmissiveSchema = typeof EmissiveSchema
+export type EmissiveValues = Values<EmissiveSchema>
 
 export const SubstanceSchema = {
     uSubstanceTexDim: UniformSpec('v2'),
@@ -286,6 +311,7 @@ export const BaseSchema = {
     ...MarkerSchema,
     ...OverpaintSchema,
     ...TransparencySchema,
+    ...EmissiveSchema,
     ...SubstanceSchema,
     ...ClippingSchema,
 
@@ -299,6 +325,7 @@ export const BaseSchema = {
     uClipObjectPosition: UniformSpec('v3[]', 'material'),
     uClipObjectRotation: UniformSpec('v4[]', 'material'),
     uClipObjectScale: UniformSpec('v3[]', 'material'),
+    uClipObjectTransform: UniformSpec('m4[]', 'material'),
 
     aInstance: AttributeSpec('float32', 1, 1),
     /**
@@ -314,11 +341,16 @@ export const BaseSchema = {
     uMetalness: UniformSpec('f', 'material'),
     uRoughness: UniformSpec('f', 'material'),
     uBumpiness: UniformSpec('f', 'material'),
+    uEmissive: UniformSpec('f', 'material'),
+
+    /** density value to estimate object thickness */
+    uDensity: UniformSpec('f', 'material'),
 
     uVertexCount: UniformSpec('i'),
     uInstanceCount: UniformSpec('i'),
     uGroupCount: UniformSpec('i'),
     uInvariantBoundingSphere: UniformSpec('v4'),
+    uLod: UniformSpec('v4'),
 
     drawCount: ValueSpec('number'),
     instanceCount: ValueSpec('number'),
@@ -341,6 +373,8 @@ export const BaseSchema = {
     boundingSphere: ValueSpec('sphere'),
     /** bounding sphere NOT taking aTransform into account */
     invariantBoundingSphere: ValueSpec('sphere'),
+
+    instanceGrid: ValueSpec('instanceGrid'),
 } as const;
 export type BaseSchema = typeof BaseSchema
 export type BaseValues = Values<BaseSchema>

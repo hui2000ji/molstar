@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2020-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  */
@@ -83,11 +83,11 @@ export async function encodeMp4Animation<A extends PluginStateAnimation>(plugin:
         await params.pass.updateBackground();
 
         await plugin.managers.animation.play(params.animation.definition, params.animation.params);
+
         stoppedAnimation = false;
         for (let i = 0; i <= N; i++) {
-            await loop.tick(i * dt, { isSynchronous: true, animation: { currentFrame: i, frameCount: N }, manualDraw: true });
-
-            const image = params.pass.getImageData(width, height, normalizedViewport);
+            await loop.tick(i * dt, { isSynchronous: true, animation: { currentFrame: i, frameCount: N }, manualDraw: true, updateControls: true });
+            const image = await params.pass.getImageData(ctx, width, height, normalizedViewport);
             encoder.addFrameRgba(image.data);
 
             // If PNG frames are requested, encode the image data directly to PNG

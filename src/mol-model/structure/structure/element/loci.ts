@@ -1,8 +1,9 @@
 /**
- * Copyright (c) 2017-2022 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2017-2023 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
+ * @author Paul Pillot <paul.pillot@tandemai.com>
  */
 
 import { UniqueArray } from '../../../../mol-data/generic';
@@ -265,7 +266,7 @@ export namespace Loci {
 
         let isSubset = false;
         for (const e of ys.elements) {
-            if (!map.has(e.unit.id)) continue;
+            if (!map.has(e.unit.id)) return false;
             if (!OrderedSet.isSubset(map.get(e.unit.id)!, e.indices)) return false;
             else isSubset = true;
         }
@@ -555,25 +556,23 @@ export namespace Loci {
 
         for (const e of loci.elements) {
             const { indices } = e;
-            const pos = e.unit.conformation.position, r = e.unit.conformation.r;
-            const { elements } = e.unit;
+            const { elements, conformation } = e.unit;
             for (let i = 0, _i = OrderedSet.size(indices); i < _i; i++) {
                 const eI = elements[OrderedSet.getAt(indices, i)];
-                pos(eI, tempPosBoundary);
+                conformation.position(eI, tempPosBoundary);
                 if (transform) Vec3.transformMat4(tempPosBoundary, tempPosBoundary, transform);
-                boundaryHelper.includePositionRadius(tempPosBoundary, r(eI));
+                boundaryHelper.includePositionRadius(tempPosBoundary, conformation.r(eI));
             }
         }
         boundaryHelper.finishedIncludeStep();
         for (const e of loci.elements) {
             const { indices } = e;
-            const pos = e.unit.conformation.position, r = e.unit.conformation.r;
-            const { elements } = e.unit;
+            const { elements, conformation } = e.unit;
             for (let i = 0, _i = OrderedSet.size(indices); i < _i; i++) {
                 const eI = elements[OrderedSet.getAt(indices, i)];
-                pos(eI, tempPosBoundary);
+                conformation.position(eI, tempPosBoundary);
                 if (transform) Vec3.transformMat4(tempPosBoundary, tempPosBoundary, transform);
-                boundaryHelper.radiusPositionRadius(tempPosBoundary, r(eI));
+                boundaryHelper.radiusPositionRadius(tempPosBoundary, conformation.r(eI));
             }
         }
 
@@ -585,12 +584,11 @@ export namespace Loci {
         let m = offset;
         for (const e of loci.elements) {
             const { indices } = e;
-            const pos = e.unit.conformation.position;
-            const { elements } = e.unit;
+            const { elements, conformation } = e.unit;
             const indexCount = OrderedSet.size(indices);
             for (let i = 0; i < indexCount; i++) {
                 const eI = elements[OrderedSet.getAt(indices, i)];
-                pos(eI, tempPos);
+                conformation.position(eI, tempPos);
                 Vec3.toArray(tempPos, positions, m + i * 3);
             }
             m += indexCount * 3;

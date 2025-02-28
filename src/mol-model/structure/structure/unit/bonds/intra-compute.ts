@@ -1,12 +1,12 @@
 /**
- * Copyright (c) 2017-2022 Mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2017-2024 Mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
 
 import { BondType } from '../../../model/types';
-import { IntraUnitBonds } from './data';
+import { IntraUnitBondProps, IntraUnitBonds } from './data';
 import { Unit } from '../../unit';
 import { IntAdjacencyGraph } from '../../../../../mol-math/graph';
 import { BondComputationProps, getElementIdx, MetalsSet, getElementThreshold, isHydrogen, DefaultBondComputationProps, getPairingThreshold } from './common';
@@ -24,7 +24,11 @@ import { Model } from '../../../model/model';
 // avoiding namespace lookup improved performance in Chrome (Aug 2020)
 const v3distance = Vec3.distance;
 
-function getGraph(atomA: StructureElement.UnitIndex[], atomB: StructureElement.UnitIndex[], _order: number[], _flags: number[], _key: number[], atomCount: number, canRemap: boolean): IntraUnitBonds {
+const CoarseGrainedBondMaxRadius = 6;
+const CoarseGrainedIntraResidueBondMaxDistance = 5.5;
+const CoarseGrainedInterResidueBondMaxDistance = 3.9;
+
+function getGraph(atomA: StructureElement.UnitIndex[], atomB: StructureElement.UnitIndex[], _order: number[], _flags: number[], _key: number[], atomCount: number, props?: IntraUnitBondProps): IntraUnitBonds {
     const builder = new IntAdjacencyGraph.EdgeBuilder(atomCount, atomA, atomB);
     const flags = new Uint16Array(builder.slotCount);
     const order = new Int8Array(builder.slotCount);
@@ -36,7 +40,7 @@ function getGraph(atomA: StructureElement.UnitIndex[], atomB: StructureElement.U
         builder.assignProperty(key, _key[i]);
     }
 
-    return builder.createGraph({ flags, order, key }, { canRemap });
+    return builder.createGraph({ flags, order, key }, props);
 }
 
 const tmpDistVecA = Vec3();
@@ -118,17 +122,22 @@ function findIndexPairBonds(unit: Unit.Atomic) {
         }
     }
 
-    return getGraph(atomA, atomB, orders, flags, keys, atomCount, false);
+    return getGraph(atomA, atomB, orders, flags, keys, atomCount, {
+        canRemap: false,
+        cacheable: indexPairs.cacheable,
+    });
 }
 
 function findBonds(unit: Unit.Atomic, props: BondComputationProps): IntraUnitBonds {
-    const { maxRadius } = props;
+    const isCoarseGrained = Model.isCoarseGrained(unit.model);
+    const maxRadius = isCoarseGrained ? CoarseGrainedBondMaxRadius : props.maxRadius;
 
     const { x, y, z } = unit.model.atomicConformation;
     const atomCount = unit.elements.length;
     const { elements: atoms, residueIndex, chainIndex } = unit;
     const { type_symbol, label_atom_id, label_alt_id, label_comp_id } = unit.model.atomicHierarchy.atoms;
     const { label_seq_id } = unit.model.atomicHierarchy.residues;
+    const { traceElementIndex } = unit.model.atomicHierarchy.derived.residue;
     const { index } = unit.model.atomicHierarchy;
     const { byEntityKey } = unit.model.sequence;
     const query3d = unit.lookup3d;
@@ -250,8 +259,21 @@ function findBonds(unit: Unit.Atomic, props: BondComputationProps): IntraUnitBon
             const dist = Math.sqrt(squaredDistances[ni]);
             if (dist === 0) continue;
 
-            const pairingThreshold = getPairingThreshold(aeI, beI, thresholdA, getElementThreshold(beI));
-            if (dist <= pairingThreshold) {
+            let flag = false;
+            if (isCoarseGrained) {
+                if (raI === rbI) {
+                    // intra residue bonds
+                    flag = dist <= CoarseGrainedIntraResidueBondMaxDistance;
+                } else {
+                    // inter residue "backbone" bonds
+                    flag = dist <= CoarseGrainedInterResidueBondMaxDistance && traceElementIndex[raI] === aI && traceElementIndex[rbI] === bI;
+                }
+            } else {
+                const pairingThreshold = getPairingThreshold(aeI, beI, thresholdA, getElementThreshold(beI));
+                flag = dist <= pairingThreshold;
+            }
+
+            if (flag) {
                 atomA[atomA.length] = _aI;
                 atomB[atomB.length] = _bI;
                 order[order.length] = getIntraBondOrderFromTable(compId, atomIdA, label_atom_id.value(bI));
@@ -266,18 +288,65 @@ function findBonds(unit: Unit.Atomic, props: BondComputationProps): IntraUnitBon
         }
     }
 
-    const canRemap = isWatery || (isDictionaryBased && isSequenced);
-    return getGraph(atomA, atomB, order, flags, key, atomCount, canRemap);
+    return getGraph(atomA, atomB, order, flags, key, atomCount, {
+        canRemap: isWatery || (isDictionaryBased && isSequenced),
+    });
+}
+
+function canGetFromIndexPairBonds(unit: Unit.Atomic) {
+    if (unit.conformation.operator.key === -1) return false;
+
+    const indexPairs = IndexPairBonds.Provider.get(unit.model);
+    return !!indexPairs?.hasOperators;
+}
+
+function getIndexPairBonds(unit: Unit.Atomic) {
+    const indexPairs = IndexPairBonds.Provider.get(unit.model)!;
+    const bonds = indexPairs.bySameOperator.get(unit.conformation.operator.key);
+    if (!bonds) return IntraUnitBonds.Empty;
+
+    const { a, b, edgeProps: { key, flag, order } } = indexPairs.bonds;
+    const { invertedIndex } = Model.getInvertedAtomSourceIndex(unit.model);
+    const { elements } = unit;
+
+    const atomA: StructureElement.UnitIndex[] = [];
+    const atomB: StructureElement.UnitIndex[] = [];
+    const flags: number[] = [];
+    const orders: number[] = [];
+    const keys: number[] = [];
+
+    for (let j = 0, jl = bonds.length; j < jl; ++j) {
+        const i = bonds[j];
+        if (a[i] >= b[i]) continue;
+
+        const aI = invertedIndex[a[i]];
+        const _aI = SortedArray.indexOf(elements, aI) as StructureElement.UnitIndex;
+        if (_aI < 0) continue;
+
+        const bI = invertedIndex[b[i]];
+        const _bI = SortedArray.indexOf(elements, bI) as StructureElement.UnitIndex;
+        if (_bI < 0) continue;
+
+        atomA[atomA.length] = _aI;
+        atomB[atomB.length] = _bI;
+        flags[flags.length] = flag[i];
+        orders[orders.length] = order[i];
+        keys[keys.length] = key[i];
+    }
+
+    return getGraph(atomA, atomB, orders, flags, keys, elements.length, {
+        canRemap: false,
+        cacheable: indexPairs.cacheable,
+    });
 }
 
 function computeIntraUnitBonds(unit: Unit.Atomic, props?: Partial<BondComputationProps>) {
     const p = { ...DefaultBondComputationProps, ...props };
-    if (p.noCompute || (Model.isCoarseGrained(unit.model) && !IndexPairBonds.Provider.get(unit.model) && !StructConn.isExhaustive(unit.model))) {
-        return IntraUnitBonds.Empty;
-    }
+    if (p.noCompute) return IntraUnitBonds.Empty;
+    if (unit.elements.length <= 1) return IntraUnitBonds.Empty;
 
     if (!p.forceCompute && IndexPairBonds.Provider.get(unit.model)) {
-        return findIndexPairBonds(unit);
+        return canGetFromIndexPairBonds(unit) ? getIndexPairBonds(unit) : findIndexPairBonds(unit);
     } else {
         return findBonds(unit, p);
     }

@@ -6,8 +6,12 @@ uniform float uBumpiness;
     uniform float uBumpFrequency;
     uniform float uBumpAmplitude;
 #endif
+uniform float uEmissive;
 
-#if defined(dRenderVariant_color)
+// Density value to estimate object thickness
+uniform float uDensity;
+
+#if defined(dRenderVariant_color) || defined(dRenderVariant_tracing)
     #if defined(dColorType_uniform)
         uniform vec3 uColor;
     #elif defined(dColorType_varying)
@@ -23,8 +27,16 @@ uniform float uBumpiness;
         varying vec4 vOverpaint;
     #endif
 
+    #ifdef dEmissive
+        varying float vEmissive;
+    #endif
+
     #ifdef dSubstance
         varying vec4 vSubstance;
+    #endif
+#elif defined(dRenderVariant_emissive)
+    #ifdef dEmissive
+        varying float vEmissive;
     #endif
 #elif defined(dRenderVariant_pick)
     #if __VERSION__ == 100 || !defined(dVaryingGroup)

@@ -1,7 +1,8 @@
 /**
- * Copyright (c) 2018-2022 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ * Copyright (c) 2018-2024 mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
+ * @author Gianluca Tomasello <giagitom@gmail.com>
  */
 
 import { ParamDefinition as PD } from '../../../mol-util/param-definition';
@@ -15,11 +16,13 @@ import { createLinkCylinderImpostors, createLinkCylinderMesh, LinkBuilderProps, 
 import { ComplexMeshParams, ComplexVisual, ComplexMeshVisual, ComplexCylindersParams, ComplexCylindersVisual } from '../complex-visual';
 import { VisualUpdateState } from '../../util';
 import { BondType } from '../../../mol-model/structure/model/types';
-import { BondCylinderParams, BondIterator, getInterBondLoci, eachInterBond, makeInterBondIgnoreTest } from './util/bond';
+import { BondCylinderParams, BondIterator, getInterBondLoci, eachInterBond, makeInterBondIgnoreTest, hasStructureVisibleBonds } from './util/bond';
 import { Sphere3D } from '../../../mol-math/geometry';
 import { Cylinders } from '../../../mol-geo/geometry/cylinders/cylinders';
 import { WebGLContext } from '../../../mol-gl/webgl/context';
 import { SortedArray } from '../../../mol-data/int/sorted-array';
+import { SizeTheme } from '../../../mol-theme/size';
+import { EmptyLocationIterator } from '../../../mol-geo/util/location-iterator';
 
 const tmpRefPosBondIt = new Bond.ElementBondIterator();
 function setRefPosition(pos: Vec3, structure: Structure, unit: Unit.Atomic, index: StructureElement.UnitIndex) {
@@ -112,7 +115,7 @@ function getInterUnitBondCylinderBuilderProps(structure: Structure, theme: Theme
             }
             return setRefPosition(tmpRef, structure, unitA, indexA) || setRefPosition(tmpRef, structure, unitB, indexB);
         },
-        position: (posA: Vec3, posB: Vec3, edgeIndex: number) => {
+        position: (posA: Vec3, posB: Vec3, edgeIndex: number, adjust: boolean) => {
             const b = edges[edgeIndex];
             const uA = structure.unitMap.get(b.unitA);
             const uB = structure.unitMap.get(b.unitB);
@@ -120,7 +123,7 @@ function getInterUnitBondCylinderBuilderProps(structure: Structure, theme: Theme
             uA.conformation.position(uA.elements[b.indexA], posA);
             uB.conformation.position(uB.elements[b.indexB], posB);
 
-            if (adjustCylinderLength) {
+            if (adjust && adjustCylinderLength) {
                 const rA = radiusA(edgeIndex), rB = radiusB(edgeIndex);
                 const r = Math.min(rA, rB) * sizeAspectRatio;
                 const oA = Math.sqrt(Math.max(0, rA * rA - r * r)) - 0.05;
@@ -159,6 +162,7 @@ function getInterUnitBondCylinderBuilderProps(structure: Structure, theme: Theme
 }
 
 function createInterUnitBondCylinderImpostors(ctx: VisualContext, structure: Structure, theme: Theme, props: PD.Values<InterUnitBondCylinderParams>, cylinders?: Cylinders) {
+    if (!hasStructureVisibleBonds(structure, props)) return Cylinders.createEmpty(cylinders);
     if (!structure.interUnitBonds.edgeCount) return Cylinders.createEmpty(cylinders);
 
     const builderProps = getInterUnitBondCylinderBuilderProps(structure, theme, props);
@@ -176,6 +180,7 @@ function createInterUnitBondCylinderImpostors(ctx: VisualContext, structure: Str
 }
 
 function createInterUnitBondCylinderMesh(ctx: VisualContext, structure: Structure, theme: Theme, props: PD.Values<InterUnitBondCylinderParams>, mesh?: Mesh) {
+    if (!hasStructureVisibleBonds(structure, props)) return Mesh.createEmpty(mesh);
     if (!structure.interUnitBonds.edgeCount) return Mesh.createEmpty(mesh);
 
     const builderProps = getInterUnitBondCylinderBuilderProps(structure, theme, props);
@@ -213,7 +218,11 @@ export function InterUnitBondCylinderImpostorVisual(materialId: number): Complex
     return ComplexCylindersVisual<InterUnitBondCylinderParams>({
         defaultProps: PD.getDefaultValues(InterUnitBondCylinderParams),
         createGeometry: createInterUnitBondCylinderImpostors,
-        createLocationIterator: BondIterator.fromStructure,
+        createLocationIterator: (structure: Structure, props: PD.Values<InterUnitBondCylinderParams>) => {
+            return !hasStructureVisibleBonds(structure, props)
+                ? EmptyLocationIterator
+                : BondIterator.fromStructure(structure, { includeLocation2: props.colorMode === 'interpolate' });
+        },
         getLoci: getInterBondLoci,
         eachLocation: eachInterBond,
         setUpdateState: (state: VisualUpdateState, newProps: PD.Values<InterUnitBondCylinderParams>, currentProps: PD.Values<InterUnitBondCylinderParams>, newTheme: Theme, currentTheme: Theme, newStructure: Structure, currentStructure: Structure) => {
@@ -238,7 +247,13 @@ export function InterUnitBondCylinderImpostorVisual(materialId: number): Complex
                 newProps.multipleBonds !== currentProps.multipleBonds
             );
 
-            if (newStructure.interUnitBonds !== currentStructure.interUnitBonds) {
+            if (newProps.colorMode !== currentProps.colorMode) {
+                state.createGeometry = true;
+                state.updateTransform = true;
+                state.updateColor = true;
+            }
+
+            if (hasStructureVisibleBonds(newStructure, newProps) && newStructure.interUnitBonds !== currentStructure.interUnitBonds) {
                 state.createGeometry = true;
                 state.updateTransform = true;
                 state.updateColor = true;
@@ -255,7 +270,11 @@ export function InterUnitBondCylinderMeshVisual(materialId: number): ComplexVisu
     return ComplexMeshVisual<InterUnitBondCylinderParams>({
         defaultProps: PD.getDefaultValues(InterUnitBondCylinderParams),
         createGeometry: createInterUnitBondCylinderMesh,
-        createLocationIterator: BondIterator.fromStructure,
+        createLocationIterator: (structure: Structure, props: PD.Values<InterUnitBondCylinderParams>) => {
+            return !hasStructureVisibleBonds(structure, props)
+                ? EmptyLocationIterator
+                : BondIterator.fromStructure(structure);
+        },
         getLoci: getInterBondLoci,
         eachLocation: eachInterBond,
         setUpdateState: (state: VisualUpdateState, newProps: PD.Values<InterUnitBondCylinderParams>, currentProps: PD.Values<InterUnitBondCylinderParams>, newTheme: Theme, currentTheme: Theme, newStructure: Structure, currentStructure: Structure) => {
@@ -278,10 +297,11 @@ export function InterUnitBondCylinderMeshVisual(materialId: number): ComplexVisu
                 !arrayEqual(newProps.includeTypes, currentProps.includeTypes) ||
                 !arrayEqual(newProps.excludeTypes, currentProps.excludeTypes) ||
                 newProps.adjustCylinderLength !== currentProps.adjustCylinderLength ||
-                newProps.multipleBonds !== currentProps.multipleBonds
+                newProps.multipleBonds !== currentProps.multipleBonds ||
+                newProps.adjustCylinderLength && !SizeTheme.areEqual(newTheme.size, currentTheme.size)
             );
 
-            if (newStructure.interUnitBonds !== currentStructure.interUnitBonds) {
+            if (hasStructureVisibleBonds(newStructure, newProps) && newStructure.interUnitBonds !== currentStructure.interUnitBonds) {
                 state.createGeometry = true;
                 state.updateTransform = true;
                 state.updateColor = true;
