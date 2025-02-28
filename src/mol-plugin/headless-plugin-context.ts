@@ -90,7 +90,7 @@ export class HeadlessPluginContext extends PluginContext {
 
         const task = Task.create('Export Animation', async ctx => {
             const { width, height } = options?.size ?? this.renderer.canvasSize;
-            const movie = await encodeMp4Animation(this, ctx, {
+            const mp4EncoderResult = await encodeMp4Animation(this, ctx, {
                 animation: { definition: AnimateStateSnapshots, params: {} },
                 width,
                 height,
@@ -102,14 +102,14 @@ export class HeadlessPluginContext extends PluginContext {
                     updateBackground: () => this.renderer.imagePass.updateBackground(),
                 } as ImagePass,
             });
-            return movie;
+            return mp4EncoderResult;
         });
         return this.runTask(task, { useOverlay: true });
     }
 
     /** Render plugin state snapshots animation and save to a MP4 file */
     async saveAnimation(outPath: string, options?: { quantization?: number, size?: { width: number, height: number }, fps?: number, postprocessing?: Partial<PostprocessingProps> }) {
-        const movie = await this.getAnimation(options);
+        const { movie } = await this.getAnimation(options);
         await new Promise<void>(resolve => {
             fs.writeFile(outPath, movie, () => resolve());
         });

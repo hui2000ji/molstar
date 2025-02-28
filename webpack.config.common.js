@@ -13,6 +13,45 @@ class VersionFilePlugin {
     }
 }
 
+// Function to add Node.js polyfills to webpack config
+function addPolyfills(config) {
+    // Make sure config has resolve and plugins properties
+    config.resolve = config.resolve || {};
+    config.resolve.fallback = {
+        ...config.resolve.fallback,
+        "util": require.resolve("util/"),
+        "zlib": require.resolve("browserify-zlib"),
+        "assert": require.resolve("assert/"),
+        "buffer": require.resolve("buffer/"),
+        "stream": require.resolve("stream-browserify"),
+        "path": require.resolve("path-browserify"),
+        "crypto": require.resolve("crypto-browserify"),
+        "process": require.resolve("process/browser"),
+        "fs": false,
+        "vm": false
+    };
+
+    config.plugins = config.plugins || [];
+
+    // Add Buffer and process polyfills if not already present
+    const hasProvidePlugin = config.plugins.some(plugin =>
+        plugin instanceof webpack.ProvidePlugin &&
+        plugin.definitions &&
+        plugin.definitions.Buffer
+    );
+
+    if (!hasProvidePlugin) {
+        config.plugins.push(
+            new webpack.ProvidePlugin({
+                Buffer: ['buffer', 'Buffer'],
+                process: 'process/browser'
+            })
+        );
+    }
+
+    return config;
+}
+
 const sharedConfig = {
     module: {
         rules: [
@@ -50,6 +89,10 @@ const sharedConfig = {
         }),
         new MiniCssExtractPlugin({ filename: 'molstar.css' }),
         new VersionFilePlugin(),
+        new webpack.ProvidePlugin({
+            Buffer: ['buffer', 'Buffer'],
+            process: 'process/browser'
+        }),
     ],
     resolve: {
         modules: [
@@ -59,10 +102,14 @@ const sharedConfig = {
         fallback: {
             fs: false,
             vm: false,
-            buffer: false,
+            buffer: require.resolve("buffer/"),
             crypto: require.resolve('crypto-browserify'),
             path: require.resolve('path-browserify'),
             stream: require.resolve('stream-browserify'),
+            zlib: require.resolve("browserify-zlib"),
+            util: require.resolve("util/"),
+            assert: require.resolve("assert/"),
+            process: require.resolve("process/browser")
         }
     },
     watchOptions: {
@@ -71,24 +118,24 @@ const sharedConfig = {
 };
 
 function createEntry(src, outFolder, outFilename, isNode) {
-    return {
+    return addPolyfills({
         target: isNode ? 'node' : void 0,
         entry: path.resolve(__dirname, `lib/${src}.js`),
         output: { filename: `${outFilename}.js`, path: path.resolve(__dirname, `build/${outFolder}`) },
         ...sharedConfig
-    };
+    });
 }
 
 function createEntryPoint(name, dir, out, library) {
-    return {
+    return addPolyfills({
         entry: path.resolve(__dirname, `lib/${dir}/${name}.js`),
         output: { filename: `${library || name}.js`, path: path.resolve(__dirname, `build/${out}`), library: library || out, libraryTarget: 'umd', assetModuleFilename: 'images/[hash][ext][query]', 'publicPath': '' },
         ...sharedConfig
-    };
+    });
 }
 
 function createNodeEntryPoint(name, dir, out) {
-    return {
+    return addPolyfills({
         target: 'node',
         entry: path.resolve(__dirname, `lib/${dir}/${name}.js`),
         output: { filename: `${name}.js`, path: path.resolve(__dirname, `build/${out}`) },
@@ -99,7 +146,7 @@ function createNodeEntryPoint(name, dir, out) {
             xhr2: 'require("xhr2")',
         },
         ...sharedConfig
-    };
+    });
 }
 
 function createApp(name, library) { return createEntryPoint('index', `apps/${name}`, name, library); }
@@ -113,5 +160,6 @@ module.exports = {
     createExample,
     createBrowserTest,
     createNodeEntryPoint,
-    createNodeApp
+    createNodeApp,
+    addPolyfills
 };
