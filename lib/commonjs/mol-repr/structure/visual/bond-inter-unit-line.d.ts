@@ -7,8 +7,8 @@ import { ParamDefinition as PD } from '../../../mol-util/param-definition';
 import { ComplexVisual } from '../complex-visual';
 export declare const InterUnitBondLineParams: {
     includeParent: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -17,7 +17,7 @@ export declare const InterUnitBondLineParams: {
     linkSpacing: PD.Numeric;
     aromaticDashCount: PD.Numeric;
     dashCount: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     sizeFactor: PD.Numeric;
     lineSizeAttenuation: PD.BooleanParam;
     alpha: PD.Numeric;

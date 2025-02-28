@@ -10,7 +10,7 @@ export declare const NtCTubePreset: StructureRepresentationPresetProvider<{
     ignoreHydrogens: boolean | undefined;
     ignoreHydrogensVariant: "all" | "non-polar" | undefined;
     ignoreLight: boolean | undefined;
-    quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+    quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
     theme: import("../../../mol-util/param-definition").ParamDefinition.Normalize<{
         globalName: any;
         globalColorParams: any;

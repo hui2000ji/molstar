@@ -98,7 +98,7 @@ declare namespace PluginBehavior {
     export const CreateCategory: StateTransformer<Root, Category, ParamDefinition.Normalize<{
         label: string;
     }>>;
-    export function getCategoryId(t: StateTransformer): "interaction" | "misc" | "common" | "representation" | "custom-props";
+    export function getCategoryId(t: StateTransformer): "representation" | "custom-props" | "common" | "interaction" | "misc";
     export function create<P extends {}>(params: CreateParams<P>): StateTransformer<Category, Behavior, P>;
     export function simpleCommandHandler<T>(cmd: PluginCommand<T>, action: (data: T, ctx: PluginContext) => void | Promise<void>): {
         new (ctx: PluginContext): {

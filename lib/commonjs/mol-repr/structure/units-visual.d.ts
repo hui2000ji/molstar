@@ -44,7 +44,7 @@ interface UnitsVisualGeometryBuilder<P extends StructureParams, G extends Geomet
 }
 export declare function UnitsVisual<G extends Geometry, P extends StructureParams & Geometry.Params<G>>(builder: UnitsVisualGeometryBuilder<P, G>, materialId: number): UnitsVisual<P>;
 export declare const UnitsMeshParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -78,7 +78,7 @@ export interface UnitsMeshVisualBuilder<P extends UnitsMeshParams> extends Units
 }
 export declare function UnitsMeshVisual<P extends UnitsMeshParams>(builder: UnitsMeshVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsSpheresParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     doubleSided: PD.BooleanParam;
@@ -115,7 +115,7 @@ export interface UnitsSpheresVisualBuilder<P extends UnitsSpheresParams> extends
 }
 export declare function UnitsSpheresVisual<P extends UnitsSpheresParams>(builder: UnitsSpheresVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsCylindersParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
@@ -150,7 +150,7 @@ export interface UnitsCylindersVisualBuilder<P extends UnitsCylindersParams> ext
 }
 export declare function UnitsCylindersVisual<P extends UnitsCylindersParams>(builder: UnitsCylindersVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsPointsParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     pointSizeAttenuation: PD.BooleanParam;
@@ -179,7 +179,7 @@ export interface UnitsPointVisualBuilder<P extends UnitsPointsParams> extends Un
 }
 export declare function UnitsPointsVisual<P extends UnitsPointsParams>(builder: UnitsPointVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsLinesParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     lineSizeAttenuation: PD.BooleanParam;
@@ -207,7 +207,7 @@ export interface UnitsLinesVisualBuilder<P extends UnitsLinesParams> extends Uni
 }
 export declare function UnitsLinesVisual<P extends UnitsLinesParams>(builder: UnitsLinesVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsTextParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     borderWidth: PD.Numeric;
@@ -252,7 +252,7 @@ export interface UnitsTextVisualBuilder<P extends UnitsTextParams> extends Units
 }
 export declare function UnitsTextVisual<P extends UnitsTextParams>(builder: UnitsTextVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsDirectVolumeParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
     xrayShaded: PD.Select<boolean | "inverted">;
@@ -283,7 +283,7 @@ export interface UnitsDirectVolumeVisualBuilder<P extends UnitsDirectVolumeParam
 }
 export declare function UnitsDirectVolumeVisual<P extends UnitsDirectVolumeParams>(builder: UnitsDirectVolumeVisualBuilder<P>, materialId: number): UnitsVisual<P>;
 export declare const UnitsTextureMeshParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

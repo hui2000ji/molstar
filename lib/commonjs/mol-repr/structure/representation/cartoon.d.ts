@@ -12,7 +12,7 @@ export declare const CartoonParams: {
     sizeFactor: PD.Numeric;
     visuals: PD.MultiSelect<"polymer-trace" | "polymer-gap" | "nucleotide-ring" | "nucleotide-block" | "direction-wedge">;
     bumpFrequency: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -44,8 +44,8 @@ export declare const CartoonParams: {
     aspectRatio: PD.Numeric;
     arrowFactor: PD.Numeric;
     tubularHelices: PD.BooleanParam;
-    helixProfile: PD.Select<"square" | "elliptical" | "rounded">;
-    nucleicProfile: PD.Select<"square" | "elliptical" | "rounded">;
+    helixProfile: PD.Select<"elliptical" | "rounded" | "square">;
+    nucleicProfile: PD.Select<"elliptical" | "rounded" | "square">;
     linearSegments: PD.Numeric;
 };
 export type CartoonParams = typeof CartoonParams;
@@ -53,7 +53,7 @@ export declare function getCartoonParams(ctx: ThemeRegistryContext, structure: S
     sizeFactor: PD.Numeric;
     visuals: PD.MultiSelect<"polymer-trace" | "polymer-gap" | "nucleotide-ring" | "nucleotide-block" | "direction-wedge">;
     bumpFrequency: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -85,8 +85,8 @@ export declare function getCartoonParams(ctx: ThemeRegistryContext, structure: S
     aspectRatio: PD.Numeric;
     arrowFactor: PD.Numeric;
     tubularHelices: PD.BooleanParam;
-    helixProfile: PD.Select<"square" | "elliptical" | "rounded">;
-    nucleicProfile: PD.Select<"square" | "elliptical" | "rounded">;
+    helixProfile: PD.Select<"elliptical" | "rounded" | "square">;
+    nucleicProfile: PD.Select<"elliptical" | "rounded" | "square">;
     linearSegments: PD.Numeric;
 };
 export type CartoonRepresentation = StructureRepresentation<CartoonParams>;
@@ -95,7 +95,7 @@ export declare const CartoonRepresentationProvider: StructureRepresentationProvi
     sizeFactor: PD.Numeric;
     visuals: PD.MultiSelect<"polymer-trace" | "polymer-gap" | "nucleotide-ring" | "nucleotide-block" | "direction-wedge">;
     bumpFrequency: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -127,7 +127,7 @@ export declare const CartoonRepresentationProvider: StructureRepresentationProvi
     aspectRatio: PD.Numeric;
     arrowFactor: PD.Numeric;
     tubularHelices: PD.BooleanParam;
-    helixProfile: PD.Select<"square" | "elliptical" | "rounded">;
-    nucleicProfile: PD.Select<"square" | "elliptical" | "rounded">;
+    helixProfile: PD.Select<"elliptical" | "rounded" | "square">;
+    nucleicProfile: PD.Select<"elliptical" | "rounded" | "square">;
     linearSegments: PD.Numeric;
 }, "cartoon">;

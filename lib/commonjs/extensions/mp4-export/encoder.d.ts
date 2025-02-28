@@ -20,5 +20,11 @@ export interface Mp4EncoderParams<A extends PluginStateAnimation = PluginStateAn
     fps?: number;
     /** Number from 10 (best quality, slowest) to 51 (worst, fastest) */
     quantizationParameter?: number;
+    /** Export each frame as a PNG */
+    exportPngFrames?: boolean;
 }
-export declare function encodeMp4Animation<A extends PluginStateAnimation>(plugin: PluginContext, ctx: RuntimeContext, params: Mp4EncoderParams<A>): Promise<Uint8Array>;
+export interface Mp4EncoderResult {
+    movie: Uint8Array;
+    pngFrames?: Uint8Array[];
+}
+export declare function encodeMp4Animation<A extends PluginStateAnimation>(plugin: PluginContext, ctx: RuntimeContext, params: Mp4EncoderParams<A>): Promise<Mp4EncoderResult>;

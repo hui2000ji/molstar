@@ -103,15 +103,15 @@ declare const StructureFromModel: StateTransformer<SO.Molecule.Model, SO.Molecul
         dynamicBonds: any;
     }>, "model"> | PD.NamedParams<PD.Normalize<{
         dynamicBonds: any;
+        ijkMin: any;
+        ijkMax: any;
+    }>, "symmetry"> | PD.NamedParams<PD.Normalize<{
+        dynamicBonds: any;
         id: any;
     }>, "assembly"> | PD.NamedParams<PD.Normalize<{
         dynamicBonds: any;
         radius: any;
     }>, "symmetry-mates"> | PD.NamedParams<PD.Normalize<{
-        dynamicBonds: any;
-        ijkMin: any;
-        ijkMax: any;
-    }>, "symmetry"> | PD.NamedParams<PD.Normalize<{
         dynamicBonds: any;
         generators: any;
     }>, "symmetry-assembly">;
@@ -119,13 +119,13 @@ declare const StructureFromModel: StateTransformer<SO.Molecule.Model, SO.Molecul
 type TransformStructureConformation = typeof TransformStructureConformation;
 declare const TransformStructureConformation: StateTransformer<SO.Molecule.Structure, SO.Molecule.Structure, PD.Normalize<{
     transform: PD.NamedParams<PD.Normalize<{
-        data: any;
-        transpose: any;
-    }>, "matrix"> | PD.NamedParams<PD.Normalize<{
         axis: any;
         angle: any;
         translation: any;
-    }>, "components">;
+    }>, "components"> | PD.NamedParams<PD.Normalize<{
+        data: any;
+        transpose: any;
+    }>, "matrix">;
 }>>;
 type StructureSelectionFromExpression = typeof StructureSelectionFromExpression;
 declare const StructureSelectionFromExpression: StateTransformer<SO.Molecule.Structure, SO.Molecule.Structure, PD.Normalize<{
@@ -169,11 +169,11 @@ export declare const StructureComplexElementTypes: {
 export type StructureComplexElementTypes = keyof typeof StructureComplexElementTypes;
 type StructureComplexElement = typeof StructureComplexElement;
 declare const StructureComplexElement: StateTransformer<SO.Molecule.Structure, SO.Molecule.Structure, PD.Normalize<{
-    type: "water" | "protein" | "spheres" | "polymer" | "nucleic" | "branched" | "ligand" | "non-standard" | "coarse" | "atomic-sequence" | "atomic-het";
+    type: "polymer" | "water" | "branched" | "ligand" | "protein" | "spheres" | "nucleic" | "non-standard" | "coarse" | "atomic-sequence" | "atomic-het";
 }>>;
 type StructureComponent = typeof StructureComponent;
 declare const StructureComponent: StateTransformer<SO.Molecule.Structure, SO.Molecule.Structure, PD.Normalize<{
-    type: PD.NamedParams<Script, "script"> | PD.NamedParams<"all" | "water" | "ion" | "protein" | "polymer" | "nucleic" | "lipid" | "branched" | "ligand" | "non-standard" | "coarse", "static"> | PD.NamedParams<Expression, "expression"> | PD.NamedParams<StructureElement.Bundle, "bundle">;
+    type: PD.NamedParams<"polymer" | "water" | "branched" | "ligand" | "ion" | "protein" | "all" | "lipid" | "nucleic" | "non-standard" | "coarse", "static"> | PD.NamedParams<Script, "script"> | PD.NamedParams<Expression, "expression"> | PD.NamedParams<StructureElement.Bundle, "bundle">;
     nullIfEmpty: boolean | undefined;
     label: string;
 }>>;

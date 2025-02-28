@@ -18,7 +18,7 @@ export declare const GaussianVolumeParams: {
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
     smoothness: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     ignoreLight: PD.BooleanParam;
     xrayShaded: PD.Select<boolean | "inverted">;
     controlPoints: PD.LineGraph;
@@ -53,7 +53,7 @@ export declare function getGaussianVolumeParams(ctx: ThemeRegistryContext, struc
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
     smoothness: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     ignoreLight: PD.BooleanParam;
     xrayShaded: PD.Select<boolean | "inverted">;
     controlPoints: PD.LineGraph;
@@ -89,7 +89,7 @@ export declare const GaussianVolumeRepresentationProvider: StructureRepresentati
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
     smoothness: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     ignoreLight: PD.BooleanParam;
     xrayShaded: PD.Select<boolean | "inverted">;
     controlPoints: PD.LineGraph;

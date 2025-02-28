@@ -5,6 +5,7 @@
  */
 
 import * as HME from 'h264-mp4-encoder';
+import { PNG } from 'pngjs';
 import { Viewport } from '../../mol-canvas3d/camera/util';
 import { ImagePass } from '../../mol-canvas3d/passes/image';
 import { PluginStateAnimation } from '../../mol-plugin-state/animation/model';
@@ -22,10 +23,17 @@ export interface Mp4EncoderParams<A extends PluginStateAnimation = PluginStateAn
     /** default is 30 */
     fps?: number,
     /** Number from 10 (best quality, slowest) to 51 (worst, fastest) */
-    quantizationParameter?: number
+    quantizationParameter?: number,
+    /** Export each frame as a PNG */
+    exportPngFrames?: boolean
 }
 
-export async function encodeMp4Animation<A extends PluginStateAnimation>(plugin: PluginContext, ctx: RuntimeContext, params: Mp4EncoderParams<A>) {
+export interface Mp4EncoderResult {
+    movie: Uint8Array,
+    pngFrames?: Uint8Array[]
+}
+
+export async function encodeMp4Animation<A extends PluginStateAnimation>(plugin: PluginContext, ctx: RuntimeContext, params: Mp4EncoderParams<A>): Promise<Mp4EncoderResult> {
     await ctx.update({ message: 'Initializing...', isIndeterminate: true });
 
     validateViewport(params);
@@ -56,6 +64,9 @@ export async function encodeMp4Animation<A extends PluginStateAnimation>(plugin:
     const wasAnimating = loop.isAnimating;
     let stoppedAnimation = true, finalized = false;
 
+    // Store PNG frames if requested
+    const pngFrames: Uint8Array[] = [];
+
     try {
         loop.stop();
         loop.resetTime(0);
@@ -79,6 +90,24 @@ export async function encodeMp4Animation<A extends PluginStateAnimation>(plugin:
             const image = params.pass.getImageData(width, height, normalizedViewport);
             encoder.addFrameRgba(image.data);
 
+            // If PNG frames are requested, encode the image data directly to PNG
+            if (params.exportPngFrames) {
+                // Create a new PNG using pngjs
+                const png = new PNG({
+                    width: vw,
+                    height: vh,
+                    inputHasAlpha: true
+                });
+
+                // Copy the RGBA data to the PNG
+                // Note: pngjs uses array buffer that needs to be filled with image data
+                png.data = Buffer.from(image.data.buffer);
+
+                // Convert PNG to binary data
+                const pngBuffer = PNG.sync.write(png);
+                pngFrames.push(new Uint8Array(pngBuffer));
+            }
+
             if (ctx.shouldUpdate) {
                 await ctx.update({ current: i + 1 });
             }
@@ -88,7 +117,10 @@ export async function encodeMp4Animation<A extends PluginStateAnimation>(plugin:
         stoppedAnimation = true;
         encoder.finalize();
         finalized = true;
-        return encoder.FS.readFile(encoder.outputFilename);
+        return {
+            movie: encoder.FS.readFile(encoder.outputFilename),
+            pngFrames: params.exportPngFrames ? pngFrames : undefined
+        };
     } finally {
         if (finalized) encoder.delete();
         if (params.customBackground !== void 0) {

@@ -15,12 +15,12 @@ export declare const MeshServerTransformer: StateTransformer<PluginStateObject.R
 }>>;
 export declare const MeshStreamingTransformer: StateTransformer<MeshServerInfo, MeshStreaming, PD.Normalize<{
     view: PD.NamedParams<PD.Normalize<unknown>, "off"> | PD.NamedParams<PD.Normalize<{
-        detail: any;
-    }>, "all"> | PD.NamedParams<PD.Normalize<{
         baseDetail: any;
         focusDetail: any;
         selectedSegment: any;
-    }>, "select">;
+    }>, "select"> | PD.NamedParams<PD.Normalize<{
+        detail: any;
+    }>, "all">;
 }>>;
 export declare const MeshVisualGroupTransformer: StateTransformer<MeshStreaming, PluginStateObject.Group, PD.Normalize<{
     label: string;

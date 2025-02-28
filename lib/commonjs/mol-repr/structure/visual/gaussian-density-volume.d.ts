@@ -14,7 +14,7 @@ export declare const GaussianDensityVolumeParams: {
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
     smoothness: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     ignoreLight: PD.BooleanParam;
     xrayShaded: PD.Select<boolean | "inverted">;
     controlPoints: PD.LineGraph;
@@ -49,7 +49,7 @@ export declare const UnitsGaussianDensityVolumeParams: {
     resolution: PD.Numeric;
     radiusOffset: PD.Numeric;
     smoothness: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     ignoreLight: PD.BooleanParam;
     xrayShaded: PD.Select<boolean | "inverted">;
     controlPoints: PD.LineGraph;

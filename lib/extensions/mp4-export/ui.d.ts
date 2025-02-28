@@ -11,6 +11,8 @@ interface State {
     data?: {
         movie: Uint8Array;
         filename: string;
+        pngFrames?: Uint8Array[];
+        pngFilenamePrefix?: string;
     };
 }
 export declare class Mp4EncoderUI extends CollapsableControls<{}, State> {
@@ -22,6 +24,7 @@ export declare class Mp4EncoderUI extends CollapsableControls<{}, State> {
     componentDidMount(): void;
     componentWillUnmount(): void;
     save: () => void;
+    savePngFrames: () => void;
     generate: () => Promise<void>;
 }
 export {};

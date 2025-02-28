@@ -27,7 +27,7 @@ export { ImportJson };
 export { ParseJson };
 export { LazyVolume };
 type Download = typeof Download;
-declare const Download: StateTransformer<SO.Root, SO.Data.String | SO.Data.Binary, PD.Normalize<{
+declare const Download: StateTransformer<SO.Root, SO.Data.Binary | SO.Data.String, PD.Normalize<{
     url: string | Asset.Url;
     label: string | undefined;
     isBinary: boolean | undefined;
@@ -43,12 +43,12 @@ declare const DownloadBlob: StateTransformer<SO.Root, SO.Data.Blob, PD.Normalize
     maxConcurrency: number | undefined;
 }>>;
 type RawData = typeof RawData;
-declare const RawData: StateTransformer<SO.Root, SO.Data.String | SO.Data.Binary, PD.Normalize<{
+declare const RawData: StateTransformer<SO.Root, SO.Data.Binary | SO.Data.String, PD.Normalize<{
     data: string | number[] | Uint8Array | ArrayBuffer;
     label: string | undefined;
 }>>;
 type ReadFile = typeof ReadFile;
-declare const ReadFile: StateTransformer<SO.Root, SO.Data.String | SO.Data.Binary, PD.Normalize<{
+declare const ReadFile: StateTransformer<SO.Root, SO.Data.Binary | SO.Data.String, PD.Normalize<{
     file: Asset.File | null;
     label: string | undefined;
     isBinary: boolean | undefined;
@@ -61,7 +61,7 @@ declare const ParseBlob: StateTransformer<SO.Data.Blob, SO.Format.Blob, PD.Norma
     }>[];
 }>>;
 type ParseCif = typeof ParseCif;
-declare const ParseCif: StateTransformer<SO.Data.String | SO.Data.Binary, SO.Format.Cif, PD.Normalize<{}>>;
+declare const ParseCif: StateTransformer<SO.Data.Binary | SO.Data.String, SO.Format.Cif, PD.Normalize<{}>>;
 type ParseCube = typeof ParseCube;
 declare const ParseCube: StateTransformer<SO.Data.String, SO.Format.Cube, PD.Normalize<{}>>;
 type ParsePsf = typeof ParsePsf;
@@ -77,7 +77,7 @@ declare const ParseCcp4: StateTransformer<SO.Data.Binary, SO.Format.Ccp4, PD.Nor
 type ParseDsn6 = typeof ParseDsn6;
 declare const ParseDsn6: StateTransformer<SO.Data.Binary, SO.Format.Dsn6, PD.Normalize<{}>>;
 type ParseDx = typeof ParseDx;
-declare const ParseDx: StateTransformer<SO.Data.String | SO.Data.Binary, SO.Format.Dx, PD.Normalize<{}>>;
+declare const ParseDx: StateTransformer<SO.Data.Binary | SO.Data.String, SO.Format.Dx, PD.Normalize<{}>>;
 type ImportString = typeof ImportString;
 declare const ImportString: StateTransformer<SO.Root, SO.Data.String, PD.Normalize<{
     data: string;

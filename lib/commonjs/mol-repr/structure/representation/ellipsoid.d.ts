@@ -11,15 +11,15 @@ import { StructureRepresentation, StructureRepresentationProvider } from '../../
 export declare const EllipsoidParams: {
     includeParent: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     linkCap: PD.BooleanParam;
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "ellipsoid-mesh">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -66,15 +66,15 @@ export type EllipsoidParams = typeof EllipsoidParams;
 export declare function getEllipsoidParams(ctx: ThemeRegistryContext, structure: Structure): {
     includeParent: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     linkCap: PD.BooleanParam;
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "ellipsoid-mesh">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -122,15 +122,15 @@ export declare function EllipsoidRepresentation(ctx: RepresentationContext, getP
 export declare const EllipsoidRepresentationProvider: StructureRepresentationProvider<{
     includeParent: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     sizeFactor: PD.Numeric;
     sizeAspectRatio: PD.Numeric;
     linkCap: PD.BooleanParam;
     visuals: PD.MultiSelect<"intra-bond" | "inter-bond" | "ellipsoid-mesh">;
     bumpFrequency: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;

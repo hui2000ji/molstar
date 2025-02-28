@@ -13,7 +13,7 @@ export declare const PlyProvider: {
     description: string;
     category: string;
     stringExtensions: string[];
-    parse: (plugin: PluginContext, data: StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>) => Promise<{
+    parse: (plugin: PluginContext, data: StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>) => Promise<{
         format: import("../../mol-state").StateObjectSelector<PluginStateObject.Format.Ply, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Data.String, PluginStateObject.Format.Ply, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         shape: import("../../mol-state").StateObjectSelector<PluginStateObject.Shape.Provider, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Format.Ply, PluginStateObject.Shape.Provider, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
     }>;
@@ -26,7 +26,7 @@ export declare const BuiltInShapeFormats: readonly [readonly ["ply", {
     description: string;
     category: string;
     stringExtensions: string[];
-    parse: (plugin: PluginContext, data: StateObjectRef<PluginStateObject.Data.String | PluginStateObject.Data.Binary>) => Promise<{
+    parse: (plugin: PluginContext, data: StateObjectRef<PluginStateObject.Data.Binary | PluginStateObject.Data.String>) => Promise<{
         format: import("../../mol-state").StateObjectSelector<PluginStateObject.Format.Ply, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Data.String, PluginStateObject.Format.Ply, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         shape: import("../../mol-state").StateObjectSelector<PluginStateObject.Shape.Provider, import("../../mol-state/transformer").StateTransformer<PluginStateObject.Format.Ply, PluginStateObject.Shape.Provider, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
     }>;

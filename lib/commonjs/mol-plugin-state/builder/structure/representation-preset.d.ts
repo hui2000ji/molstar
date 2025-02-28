@@ -31,12 +31,12 @@ export declare namespace StructureRepresentationPresetProvider {
         ignoreHydrogens: PD.Base<boolean | undefined>;
         ignoreHydrogensVariant: PD.Base<"all" | "non-polar" | undefined>;
         ignoreLight: PD.Base<boolean | undefined>;
-        quality: PD.Base<"auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined>;
+        quality: PD.Base<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined>;
         theme: PD.Base<PD.Normalize<{
-            globalName: "atom-id" | "uniform" | "carbohydrate-symbol" | "molecule-type" | "chain-id" | "entity-id" | "entity-source" | "model-index" | "structure-index" | "secondary-structure" | "residue-name" | "element-symbol" | "unit-index" | "operator-name" | "cartoon" | "element-index" | "hydrophobicity" | "illustrative" | "occupancy" | "operator-hkl" | "partial-charge" | "polymer-id" | "polymer-index" | "sequence-id" | "shape-group" | "trajectory-index" | "uncertainty" | "volume-segment" | "volume-value" | "external-volume" | undefined;
+            globalName: "chain-id" | "unit-index" | "entity-id" | "entity-source" | "operator-name" | "model-index" | "structure-index" | "uniform" | "atom-id" | "carbohydrate-symbol" | "molecule-type" | "secondary-structure" | "residue-name" | "element-symbol" | "cartoon" | "element-index" | "hydrophobicity" | "illustrative" | "occupancy" | "operator-hkl" | "partial-charge" | "polymer-id" | "polymer-index" | "sequence-id" | "shape-group" | "trajectory-index" | "uncertainty" | "volume-segment" | "volume-value" | "external-volume" | undefined;
             globalColorParams: any;
-            carbonColor: "chain-id" | "element-symbol" | "operator-name" | undefined;
-            symmetryColor: "atom-id" | "uniform" | "carbohydrate-symbol" | "molecule-type" | "chain-id" | "entity-id" | "entity-source" | "model-index" | "structure-index" | "secondary-structure" | "residue-name" | "element-symbol" | "unit-index" | "operator-name" | "cartoon" | "element-index" | "hydrophobicity" | "illustrative" | "occupancy" | "operator-hkl" | "partial-charge" | "polymer-id" | "polymer-index" | "sequence-id" | "shape-group" | "trajectory-index" | "uncertainty" | "volume-segment" | "volume-value" | "external-volume" | undefined;
+            carbonColor: "chain-id" | "operator-name" | "element-symbol" | undefined;
+            symmetryColor: "chain-id" | "unit-index" | "entity-id" | "entity-source" | "operator-name" | "model-index" | "structure-index" | "uniform" | "atom-id" | "carbohydrate-symbol" | "molecule-type" | "secondary-structure" | "residue-name" | "element-symbol" | "cartoon" | "element-index" | "hydrophobicity" | "illustrative" | "occupancy" | "operator-hkl" | "partial-charge" | "polymer-id" | "polymer-index" | "sequence-id" | "shape-group" | "trajectory-index" | "uncertainty" | "volume-segment" | "volume-value" | "external-volume" | undefined;
             symmetryColorParams: any;
             focus: PD.Normalize<{
                 name: any;
@@ -48,22 +48,18 @@ export declare namespace StructureRepresentationPresetProvider {
     function reprBuilder(plugin: PluginContext, params: CommonParams, structure?: Structure): {
         update: import("../../../mol-state/state/builder").StateBuilder.Root;
         builder: import("./representation").StructureRepresentationBuilder;
-        color: "atom-id" | "uniform" | "carbohydrate-symbol" | "molecule-type" | "chain-id" | "entity-id" | "entity-source" | "model-index" | "structure-index" | "secondary-structure" | "residue-name" | "element-symbol" | "unit-index" | "operator-name" | "cartoon" | "element-index" | "hydrophobicity" | "illustrative" | "occupancy" | "operator-hkl" | "partial-charge" | "polymer-id" | "polymer-index" | "sequence-id" | "shape-group" | "trajectory-index" | "uncertainty" | "volume-segment" | "volume-value" | "external-volume" | undefined;
-        symmetryColor: "atom-id" | "uniform" | "carbohydrate-symbol" | "molecule-type" | "chain-id" | "entity-id" | "entity-source" | "model-index" | "structure-index" | "secondary-structure" | "residue-name" | "element-symbol" | "unit-index" | "operator-name" | "cartoon" | "element-index" | "hydrophobicity" | "illustrative" | "occupancy" | "operator-hkl" | "partial-charge" | "polymer-id" | "polymer-index" | "sequence-id" | "shape-group" | "trajectory-index" | "uncertainty" | "volume-segment" | "volume-value" | "external-volume" | undefined;
+        color: "chain-id" | "unit-index" | "entity-id" | "entity-source" | "operator-name" | "model-index" | "structure-index" | "uniform" | "atom-id" | "carbohydrate-symbol" | "molecule-type" | "secondary-structure" | "residue-name" | "element-symbol" | "cartoon" | "element-index" | "hydrophobicity" | "illustrative" | "occupancy" | "operator-hkl" | "partial-charge" | "polymer-id" | "polymer-index" | "sequence-id" | "shape-group" | "trajectory-index" | "uncertainty" | "volume-segment" | "volume-value" | "external-volume" | undefined;
+        symmetryColor: "chain-id" | "unit-index" | "entity-id" | "entity-source" | "operator-name" | "model-index" | "structure-index" | "uniform" | "atom-id" | "carbohydrate-symbol" | "molecule-type" | "secondary-structure" | "residue-name" | "element-symbol" | "cartoon" | "element-index" | "hydrophobicity" | "illustrative" | "occupancy" | "operator-hkl" | "partial-charge" | "polymer-id" | "polymer-index" | "sequence-id" | "shape-group" | "trajectory-index" | "uncertainty" | "volume-segment" | "volume-value" | "external-volume" | undefined;
         symmetryColorParams: any;
         globalColorParams: any;
         typeParams: {
-            quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
+            quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest";
             ignoreHydrogens: boolean;
             ignoreHydrogensVariant: "all" | "non-polar";
             ignoreLight: boolean;
         };
         ballAndStickColor: Partial<PD.Values<{
             carbonColor: PD.Mapped<PD.NamedParams<PD.Normalize<{
-                value: import("../../../mol-util/color").Color;
-                saturation: number;
-                lightness: number;
-            }>, "uniform"> | PD.NamedParams<PD.Normalize<{
                 palette: PD.NamedParams<PD.Normalize<{
                     maxCount: any;
                     hue: any;
@@ -78,6 +74,19 @@ export declare namespace StructureRepresentationPresetProvider {
                 }>, "colors">;
                 asymId: "label" | "auth";
             }>, "chain-id"> | PD.NamedParams<PD.Normalize<{
+                palette: PD.NamedParams<PD.Normalize<{
+                    maxCount: any;
+                    hue: any;
+                    chroma: any;
+                    luminance: any;
+                    sort: any;
+                    clusteringStepCount: any;
+                    minSampleCount: any;
+                    sampleCountFactor: any;
+                }>, "generate"> | PD.NamedParams<PD.Normalize<{
+                    list: any;
+                }>, "colors">;
+            }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
                 palette: PD.NamedParams<PD.Normalize<{
                     maxCount: any;
                     hue: any;
@@ -116,6 +125,19 @@ export declare namespace StructureRepresentationPresetProvider {
                 }>, "generate"> | PD.NamedParams<PD.Normalize<{
                     list: any;
                 }>, "colors">;
+            }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+                palette: PD.NamedParams<PD.Normalize<{
+                    maxCount: any;
+                    hue: any;
+                    chroma: any;
+                    luminance: any;
+                    sort: any;
+                    clusteringStepCount: any;
+                    minSampleCount: any;
+                    sampleCountFactor: any;
+                }>, "generate"> | PD.NamedParams<PD.Normalize<{
+                    list: any;
+                }>, "colors">;
             }>, "model-index"> | PD.NamedParams<PD.Normalize<{
                 palette: PD.NamedParams<PD.Normalize<{
                     maxCount: any;
@@ -130,59 +152,37 @@ export declare namespace StructureRepresentationPresetProvider {
                     list: any;
                 }>, "colors">;
             }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
-                palette: PD.NamedParams<PD.Normalize<{
-                    maxCount: any;
-                    hue: any;
-                    chroma: any;
-                    luminance: any;
-                    sort: any;
-                    clusteringStepCount: any;
-                    minSampleCount: any;
-                    sampleCountFactor: any;
-                }>, "generate"> | PD.NamedParams<PD.Normalize<{
-                    list: any;
-                }>, "colors">;
-            }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
-                palette: PD.NamedParams<PD.Normalize<{
-                    maxCount: any;
-                    hue: any;
-                    chroma: any;
-                    luminance: any;
-                    sort: any;
-                    clusteringStepCount: any;
-                    minSampleCount: any;
-                    sampleCountFactor: any;
-                }>, "generate"> | PD.NamedParams<PD.Normalize<{
-                    list: any;
-                }>, "colors">;
-            }>, "operator-name"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol"> | PD.NamedParams<PD.Normalize<{
+                value: import("../../../mol-util/color").Color;
+                saturation: number;
+                lightness: number;
+            }>, "uniform"> | PD.NamedParams<PD.Normalize<{
                 'CDR def.': string;
                 'VH/V\u03B1 FR': import("../../../mol-util/color").Color;
                 'VL/V\u03B2 FR': import("../../../mol-util/color").Color;
                 'VH/V\u03B1 CDR': import("../../../mol-util/color").Color;
                 'VL/V\u03B2 CDR': import("../../../mol-util/color").Color;
                 'Other polymer': PD.NamedParams<PD.Normalize<{
-                    value: any;
-                    saturation: any;
-                    lightness: any;
-                }>, "uniform"> | PD.NamedParams<PD.Normalize<{
                     palette: any;
                     asymId: any;
                 }>, "chain-id"> | PD.NamedParams<PD.Normalize<{
+                    palette: any;
+                }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
                     palette: any;
                 }>, "entity-id"> | PD.NamedParams<PD.Normalize<{
                     palette: any;
                 }>, "entity-source"> | PD.NamedParams<PD.Normalize<{
                     palette: any;
+                }>, "operator-name"> | PD.NamedParams<PD.Normalize<{
+                    palette: any;
                 }>, "model-index"> | PD.NamedParams<PD.Normalize<{
                     palette: any;
                 }>, "structure-index"> | PD.NamedParams<PD.Normalize<{
-                    palette: any;
-                }>, "unit-index"> | PD.NamedParams<PD.Normalize<{
-                    palette: any;
-                }>, "operator-name">;
+                    value: any;
+                    saturation: any;
+                    lightness: any;
+                }>, "uniform">;
                 'Non-polymer': import("../../../mol-util/color").Color;
-            }>, "antibody-coloring-residue">>;
+            }>, "antibody-coloring-residue"> | PD.NamedParams<PD.Normalize<unknown>, "element-symbol">>;
             saturation: PD.Numeric;
             lightness: PD.Numeric;
             colors: PD.Mapped<PD.NamedParams<PD.Normalize<unknown>, "default"> | PD.NamedParams<PD.Normalize<{
@@ -325,7 +325,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -358,7 +358,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -383,7 +383,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -407,7 +407,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -446,7 +446,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -472,7 +472,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;
@@ -499,7 +499,7 @@ export declare const PresetStructureRepresentations: {
         ignoreHydrogens: boolean | undefined;
         ignoreHydrogensVariant: "all" | "non-polar" | undefined;
         ignoreLight: boolean | undefined;
-        quality: "auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
+        quality: "custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest" | undefined;
         theme: PD.Normalize<{
             globalName: any;
             globalColorParams: any;

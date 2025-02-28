@@ -18,7 +18,7 @@ export type PolymerGapCylinderProps = typeof DefaultPolymerGapCylinderProps;
 export declare const PolymerGapParams: {
     sizeFactor: PD.Numeric;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

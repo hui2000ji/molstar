@@ -18,7 +18,8 @@ export interface Mp4AnimationInfo {
 }
 
 export const Mp4AnimationParams = {
-    quantization: PD.Numeric(18, { min: 10, max: 51 }, { description: 'Lower is better, but slower.' })
+    quantization: PD.Numeric(18, { min: 10, max: 51 }, { description: 'Lower is better, but slower.' }),
+    exportPngFrames: PD.Boolean(false, { description: 'Export each frame as a PNG file' })
 };
 
 export class Mp4Controls extends PluginComponent {
@@ -60,7 +61,7 @@ export class Mp4Controls extends PluginComponent {
             try {
                 const resolution = this.plugin.helpers.viewportScreenshot?.getSizeAndViewport()!;
                 const anim = this.current!;
-                const movie = await encodeMp4Animation(this.plugin, ctx, {
+                const result = await encodeMp4Animation(this.plugin, ctx, {
                     animation: {
                         definition: anim.anim,
                         params: anim.values,
@@ -68,10 +69,17 @@ export class Mp4Controls extends PluginComponent {
                     ...resolution,
                     quantizationParameter: this.behaviors.params.value.quantization,
                     pass: this.plugin.helpers.viewportScreenshot?.imagePass!,
+                    exportPngFrames: this.behaviors.params.value.exportPngFrames
                 });
 
                 const filename = anim.anim.display.name.toLowerCase().replace(/\s/g, '-').replace(/[^a-z0-9_\-]/g, '');
-                return { movie, filename: `${this.plugin.helpers.viewportScreenshot?.getFilename('')}_${filename}.mp4` };
+                const baseFilename = `${this.plugin.helpers.viewportScreenshot?.getFilename('')}_${filename}`;
+                return {
+                    movie: result.movie,
+                    filename: `${baseFilename}.mp4`,
+                    pngFrames: result.pngFrames,
+                    pngFilenamePrefix: baseFilename
+                };
             } catch (e) {
                 this.plugin.log.error('Error during animation export');
                 throw e;

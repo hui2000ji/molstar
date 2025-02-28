@@ -11,7 +11,7 @@ declare const PsfProvider: {
     description: string;
     category: string;
     stringExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<{
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<{
         format: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Format.Psf, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Data.String, import("../objects").PluginStateObject.Format.Psf, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         topology: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Format.Psf, import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
     }>;
@@ -23,7 +23,7 @@ declare const PrmtopProvider: {
     description: string;
     category: string;
     stringExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<{
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<{
         format: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Format.Prmtop, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Data.String, import("../objects").PluginStateObject.Format.Prmtop, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         topology: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Format.Prmtop, import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
     }>;
@@ -35,7 +35,7 @@ declare const TopProvider: {
     description: string;
     category: string;
     stringExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<{
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<{
         format: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Format.Top, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Data.String, import("../objects").PluginStateObject.Format.Top, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         topology: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Format.Top, import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
     }>;
@@ -47,7 +47,7 @@ export declare const BuiltInTopologyFormats: readonly [readonly ["psf", {
     description: string;
     category: string;
     stringExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<{
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<{
         format: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Format.Psf, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Data.String, import("../objects").PluginStateObject.Format.Psf, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         topology: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Format.Psf, import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
     }>;
@@ -56,7 +56,7 @@ export declare const BuiltInTopologyFormats: readonly [readonly ["psf", {
     description: string;
     category: string;
     stringExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<{
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<{
         format: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Format.Prmtop, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Data.String, import("../objects").PluginStateObject.Format.Prmtop, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         topology: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Format.Prmtop, import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
     }>;
@@ -65,7 +65,7 @@ export declare const BuiltInTopologyFormats: readonly [readonly ["psf", {
     description: string;
     category: string;
     stringExtensions: string[];
-    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.String | import("../objects").PluginStateObject.Data.Binary>) => Promise<{
+    parse: (plugin: import("../../mol-plugin/context").PluginContext, data: import("../../mol-state").StateObjectRef<import("../objects").PluginStateObject.Data.Binary | import("../objects").PluginStateObject.Data.String>) => Promise<{
         format: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Format.Top, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Data.String, import("../objects").PluginStateObject.Format.Top, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
         topology: import("../../mol-state").StateObjectSelector<import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-state/transformer").StateTransformer<import("../objects").PluginStateObject.Format.Top, import("../objects").PluginStateObject.Molecule.Topology, import("../../mol-util/param-definition").ParamDefinition.Normalize<{}>>>;
     }>;

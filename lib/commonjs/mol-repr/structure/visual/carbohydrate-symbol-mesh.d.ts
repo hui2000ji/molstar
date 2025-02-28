@@ -8,7 +8,7 @@ import { ComplexVisual } from '../representation';
 export declare const CarbohydrateSymbolParams: {
     detail: PD.Numeric;
     sizeFactor: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

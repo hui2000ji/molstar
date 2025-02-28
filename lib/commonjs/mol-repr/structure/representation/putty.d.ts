@@ -13,7 +13,7 @@ export declare const PuttyParams: {
     visuals: PD.MultiSelect<"polymer-gap" | "polymer-tube">;
     bumpFrequency: PD.Numeric;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -49,7 +49,7 @@ export declare function getPuttyParams(ctx: ThemeRegistryContext, structure: Str
     visuals: PD.MultiSelect<"polymer-gap" | "polymer-tube">;
     bumpFrequency: PD.Numeric;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -86,7 +86,7 @@ export declare const PuttyRepresentationProvider: StructureRepresentationProvide
     visuals: PD.MultiSelect<"polymer-gap" | "polymer-tube">;
     bumpFrequency: PD.Numeric;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

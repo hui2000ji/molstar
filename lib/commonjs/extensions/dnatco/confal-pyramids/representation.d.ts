@@ -10,7 +10,7 @@ import { StructureRepresentation, StructureRepresentationProvider } from '../../
 import { ParamDefinition as PD } from '../../../mol-util/param-definition';
 import { ThemeRegistryContext } from '../../../mol-theme/theme';
 export declare const ConfalPyramidsParams: {
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -41,7 +41,7 @@ export declare const ConfalPyramidsParams: {
 };
 export type ConfalPyramidsParams = typeof ConfalPyramidsParams;
 export declare function getConfalPyramidsParams(ctx: ThemeRegistryContext, structure: Structure): {
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -73,7 +73,7 @@ export declare function getConfalPyramidsParams(ctx: ThemeRegistryContext, struc
 export type ConfalPyramidsRepresentation = StructureRepresentation<ConfalPyramidsParams>;
 export declare function ConfalPyramidsRepresentation(ctx: RepresentationContext, getParams: RepresentationParamsGetter<Structure, ConfalPyramidsParams>): ConfalPyramidsRepresentation;
 export declare const ConfalPyramidsRepresentationProvider: StructureRepresentationProvider<{
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

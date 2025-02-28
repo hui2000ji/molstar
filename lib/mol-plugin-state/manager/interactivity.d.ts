@@ -37,7 +37,7 @@ declare class InteractivityManager extends StatefulPluginComponent<Interactivity
 }
 declare namespace InteractivityManager {
     const Params: {
-        granularity: PD.Select<"residue" | "element" | "chain" | "entity" | "model" | "operator" | "structure" | "elementInstances" | "residueInstances" | "chainInstances">;
+        granularity: PD.Select<"residue" | "model" | "entity" | "chain" | "element" | "structure" | "operator" | "elementInstances" | "residueInstances" | "chainInstances">;
     };
     type Params = typeof Params;
     type Props = PD.Values<Params>;

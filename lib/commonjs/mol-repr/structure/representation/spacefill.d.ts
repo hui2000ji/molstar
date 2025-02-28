@@ -17,7 +17,7 @@ export declare const SpacefillParams: {
     traceOnly: PD.BooleanParam;
     tryUseImpostor: PD.BooleanParam;
     stride: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
@@ -59,7 +59,7 @@ export declare function getSpacefillParams(ctx: ThemeRegistryContext, structure:
     traceOnly: PD.BooleanParam;
     tryUseImpostor: PD.BooleanParam;
     stride: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
@@ -102,7 +102,7 @@ export declare const SpacefillRepresentationProvider: StructureRepresentationPro
     traceOnly: PD.BooleanParam;
     tryUseImpostor: PD.BooleanParam;
     stride: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;

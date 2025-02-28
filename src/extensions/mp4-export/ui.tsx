@@ -4,6 +4,7 @@
  * @author David Sehnal <david.sehnal@gmail.com>
  */
 
+import JSZip from 'jszip';
 import { merge } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { CollapsableControls, CollapsableState } from '../../mol-plugin-ui/base';
@@ -15,7 +16,12 @@ import { Mp4AnimationParams, Mp4Controls } from './controls';
 
 interface State {
     busy?: boolean,
-    data?: { movie: Uint8Array, filename: string };
+    data?: {
+        movie: Uint8Array,
+        filename: string,
+        pngFrames?: Uint8Array[],
+        pngFilenamePrefix?: string
+    };
 }
 
 export class Mp4EncoderUI extends CollapsableControls<{}, State> {
@@ -41,6 +47,11 @@ export class Mp4EncoderUI extends CollapsableControls<{}, State> {
                 </div>
             </div>
             <Button icon={GetAppSvg} onClick={this.save} style={{ marginTop: 1 }}>Save Animation</Button>
+            {this.state.data?.pngFrames && this.state.data.pngFrames.length > 0 && (
+                <Button icon={GetAppSvg} onClick={this.savePngFrames} style={{ marginTop: 1 }}>
+                    Save PNG Frames ({this.state.data.pngFrames.length})
+                </Button>
+            )}
             <Button onClick={() => this.setState({ data: void 0 })} style={{ marginTop: 6 }}>Clear</Button>
         </>;
     }
@@ -109,6 +120,23 @@ export class Mp4EncoderUI extends CollapsableControls<{}, State> {
 
     save = () => {
         download(new Blob([this.state.data!.movie]), this.state.data!.filename);
+    };
+
+    savePngFrames = () => {
+        if (!this.state.data?.pngFrames || !this.state.data.pngFilenamePrefix) return;
+
+        const zip = new JSZip();
+        this.state.data.pngFrames.forEach((frame, index) => {
+            // Use padded frame numbering (e.g., 001, 002, etc.)
+            const paddedIndex = String(index).padStart(
+                String(this.state.data!.pngFrames!.length).length,
+                '0'
+            );
+            zip.file(`${this.state.data!.pngFilenamePrefix}_frame${paddedIndex}.png`, frame);
+        });
+        zip.generateAsync({ type: 'blob' }).then((blob: Blob) => {
+            download(blob, `${this.state.data!.pngFilenamePrefix}_frames.zip`);
+        });
     };
 
     generate = async () => {

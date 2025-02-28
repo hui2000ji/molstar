@@ -62,7 +62,7 @@ declare class StructureComponentManager extends StatefulPluginComponent<Structur
 declare namespace StructureComponentManager {
     const OptionsParams: {
         hydrogens: PD.Select<"all" | "hide-all" | "only-polar">;
-        visualQuality: PD.Select<"auto" | "custom" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
+        visualQuality: PD.Select<"custom" | "auto" | "highest" | "higher" | "high" | "medium" | "low" | "lower" | "lowest">;
         ignoreLight: PD.BooleanParam;
         materialStyle: PD.Group<PD.Normalize<{
             metalness: number;
@@ -124,16 +124,16 @@ declare namespace StructureComponentManager {
         action: PD.Mapped<PD.NamedParams<PD.Normalize<{
             color: import("../../../mol-util/color").Color;
         }>, "color"> | PD.NamedParams<PD.Normalize<{
-            value: number;
-        }>, "transparency"> | PD.NamedParams<PD.Normalize<{
-            excludeGroups: ("one" | "two" | "three" | "four" | "five" | "six")[];
-        }>, "clipping"> | PD.NamedParams<PD.Normalize<{
             material: PD.Normalize<{
                 metalness: number;
                 roughness: number;
                 bumpiness: number;
             }>;
-        }>, "material"> | PD.NamedParams<PD.Normalize<unknown>, "resetColor"> | PD.NamedParams<PD.Normalize<unknown>, "resetMaterial">>;
+        }>, "material"> | PD.NamedParams<PD.Normalize<{
+            value: number;
+        }>, "transparency"> | PD.NamedParams<PD.Normalize<{
+            excludeGroups: ("one" | "two" | "three" | "four" | "five" | "six")[];
+        }>, "clipping"> | PD.NamedParams<PD.Normalize<unknown>, "resetColor"> | PD.NamedParams<PD.Normalize<unknown>, "resetMaterial">>;
         representations: PD.MultiSelect<string>;
     };
     type ThemeParams = PD.Values<ReturnType<typeof getThemeParams>>;

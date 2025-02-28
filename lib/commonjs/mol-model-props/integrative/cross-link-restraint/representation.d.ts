@@ -23,7 +23,7 @@ export declare const CrossLinkRestraintCylinderParams: {
     dashCap: PD.BooleanParam;
     stubCap: PD.BooleanParam;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -67,7 +67,7 @@ export declare const CrossLinkRestraintParams: {
     dashCap: PD.BooleanParam;
     stubCap: PD.BooleanParam;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -110,7 +110,7 @@ export declare function getCrossLinkRestraintParams(ctx: ThemeRegistryContext, s
     dashCap: PD.BooleanParam;
     stubCap: PD.BooleanParam;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -154,7 +154,7 @@ export declare const CrossLinkRestraintRepresentationProvider: StructureRepresen
     dashCap: PD.BooleanParam;
     stubCap: PD.BooleanParam;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

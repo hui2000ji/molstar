@@ -11,7 +11,7 @@ export declare const PolymerBackboneSphereParams: {
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
@@ -49,7 +49,7 @@ export declare function PolymerBackboneSphereVisual(materialId: number, structur
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
     tryUseImpostor: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;

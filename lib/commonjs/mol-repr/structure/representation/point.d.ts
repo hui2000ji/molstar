@@ -14,7 +14,7 @@ export declare const PointParams: {
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     traceOnly: PD.BooleanParam;
     stride: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
@@ -44,7 +44,7 @@ export declare function getPointParams(ctx: ThemeRegistryContext, structure: Str
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     traceOnly: PD.BooleanParam;
     stride: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;
@@ -75,7 +75,7 @@ export declare const PointRepresentationProvider: StructureRepresentationProvide
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     traceOnly: PD.BooleanParam;
     stride: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     sizeFactor: PD.Numeric;
     pointStyle: PD.Select<"square" | "circle" | "fuzzy">;

@@ -13,8 +13,8 @@ export declare const InterUnitBondCylinderParams: {
     tryUseImpostor: PD.BooleanParam;
     includeParent: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -30,7 +30,7 @@ export declare const InterUnitBondCylinderParams: {
     dashCap: PD.BooleanParam;
     stubCap: PD.BooleanParam;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     doubleSided: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
     xrayShaded: PD.Select<boolean | "inverted">;
@@ -66,8 +66,8 @@ export declare function InterUnitBondCylinderVisual(materialId: number, structur
     tryUseImpostor: PD.BooleanParam;
     includeParent: PD.BooleanParam;
     adjustCylinderLength: PD.BooleanParam;
-    includeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
-    excludeTypes: PD.MultiSelect<"covalent" | "metal-coordination" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    includeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
+    excludeTypes: PD.MultiSelect<"metal-coordination" | "covalent" | "hydrogen-bond" | "disulfide" | "aromatic" | "computed">;
     ignoreHydrogens: PD.BooleanParam;
     ignoreHydrogensVariant: PD.Select<"all" | "non-polar">;
     aromaticBonds: PD.BooleanParam;
@@ -83,7 +83,7 @@ export declare function InterUnitBondCylinderVisual(materialId: number, structur
     dashCap: PD.BooleanParam;
     stubCap: PD.BooleanParam;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     doubleSided: PD.BooleanParam;
     ignoreLight: PD.BooleanParam;
     xrayShaded: PD.Select<boolean | "inverted">;

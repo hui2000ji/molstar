@@ -13,6 +13,7 @@ export interface Mp4AnimationInfo {
 }
 export declare const Mp4AnimationParams: {
     quantization: PD.Numeric;
+    exportPngFrames: PD.BooleanParam;
 };
 export declare class Mp4Controls extends PluginComponent {
     private plugin;
@@ -29,6 +30,7 @@ export declare class Mp4Controls extends PluginComponent {
         info: import("rxjs").BehaviorSubject<Mp4AnimationInfo>;
         params: import("rxjs").BehaviorSubject<PD.Values<{
             quantization: PD.Numeric;
+            exportPngFrames: PD.BooleanParam;
         }>>;
     };
     setCurrent(name?: string): void;
@@ -41,6 +43,8 @@ export declare class Mp4Controls extends PluginComponent {
     render(): Promise<{
         movie: Uint8Array;
         filename: string;
+        pngFrames: Uint8Array[] | undefined;
+        pngFilenamePrefix: string;
     }>;
     private get manager();
     private syncInfo;

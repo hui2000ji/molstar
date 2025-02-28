@@ -18,7 +18,7 @@ export declare const CarbohydrateTerminalLinkParams: {
     dashCap: PD.BooleanParam;
     stubCap: PD.BooleanParam;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

@@ -13,7 +13,7 @@ export declare const EllipsoidMeshParams: {
     sizeFactor: PD.Numeric;
     detail: PD.Numeric;
     ignoreHydrogens: PD.BooleanParam;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;

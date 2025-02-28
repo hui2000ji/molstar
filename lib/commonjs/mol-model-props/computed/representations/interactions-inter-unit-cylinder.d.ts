@@ -22,7 +22,7 @@ export declare const InteractionsInterUnitParams: {
     dashCap: PD.BooleanParam;
     stubCap: PD.BooleanParam;
     radialSegments: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
     flatShaded: PD.BooleanParam;

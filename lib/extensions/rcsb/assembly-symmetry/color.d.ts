@@ -13,7 +13,7 @@ export declare const AssemblySymmetryClusterColorThemeParams: {
         hue: [number, number];
         chroma: [number, number];
         luminance: [number, number];
-        sort: "contrast" | "none";
+        sort: "none" | "contrast";
         clusteringStepCount: number;
         minSampleCount: number;
         sampleCountFactor: number;
@@ -31,7 +31,7 @@ export declare function getAssemblySymmetryClusterColorThemeParams(ctx: ThemeDat
         hue: [number, number];
         chroma: [number, number];
         luminance: [number, number];
-        sort: "contrast" | "none";
+        sort: "none" | "contrast";
         clusteringStepCount: number;
         minSampleCount: number;
         sampleCountFactor: number;

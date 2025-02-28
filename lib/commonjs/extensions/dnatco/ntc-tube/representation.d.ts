@@ -14,7 +14,7 @@ export declare const NtCTubeParams: {
     radialSegments: PD.Numeric;
     residueMarkerWidth: PD.Numeric;
     segmentBoundaryWidth: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -49,7 +49,7 @@ export declare function getNtCTubeParams(ctx: ThemeRegistryContext, structure: S
     radialSegments: PD.Numeric;
     residueMarkerWidth: PD.Numeric;
     segmentBoundaryWidth: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
@@ -85,7 +85,7 @@ export declare const NtCTubeRepresentationProvider: StructureRepresentationProvi
     radialSegments: PD.Numeric;
     residueMarkerWidth: PD.Numeric;
     segmentBoundaryWidth: PD.Numeric;
-    unitKinds: PD.MultiSelect<"spheres" | "atomic" | "gaussians">;
+    unitKinds: PD.MultiSelect<"atomic" | "spheres" | "gaussians">;
     includeParent: PD.BooleanParam;
     doubleSided: PD.BooleanParam;
     flipSided: PD.BooleanParam;
